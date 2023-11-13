@@ -1,0 +1,1 @@
+export {bgMainHeader} from './bgMainHeader.png'

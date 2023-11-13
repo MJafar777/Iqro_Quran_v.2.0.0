@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MainHeader } from '@/entities/Main';
+import  { MainHeader,ListOfSurah } from '@/entities/Main';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -12,7 +12,8 @@ const MainPage = () => {
 
     return (
         <div data-testid="MainPage">
-         <MainHeader/>     
+         <MainHeader/>  
+         <ListOfSurah/>   
          </div>
     );
 };

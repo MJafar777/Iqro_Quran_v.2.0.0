@@ -6,8 +6,14 @@
 
 @font-face {
     font-family: 'Helvetica Neue';
-    src: url('../../shared/assets/font/HelveticaNeue/HelveticaNeueBlackCondensed.ttf') format('truetype');
+    src: url('../../shared/assets/font/HelveticaNeue/HelveticaNeueCyr-Italic.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'surah_names';
+  src: url('../../shared/assets/font/surah_name/sura_names.ttf') format('truetype');
+}
+
 
 
 // USAGE
