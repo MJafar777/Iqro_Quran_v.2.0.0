@@ -1,0 +1,33 @@
+.OyatList {
+  margin: 20px 0;
+  width: 90px;
+  height: calc(100vh - 150px);
+  overflow-y: scroll;
+
+  &__item {
+    display: flex;
+    padding: 10px 13px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--input-bg-color);
+    }
+  }
+
+  &__oyatNumber {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-left: 10px;
+    font-family: var(--font-family-main);
+    font-size: var(--font-size-m);
+  }
+
+  .active {
+    &__oyatNumber {
+      font-weight: 600;
+      background: var(--input-bg-color);
+    }
+  }
+}

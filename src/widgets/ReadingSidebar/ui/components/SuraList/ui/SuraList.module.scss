@@ -1,0 +1,40 @@
+.SuraList {
+  margin: 20px 0;
+  width: 200px;
+  height: calc(100vh - 150px);
+  overflow-y: scroll;
+
+  &__item {
+    display: flex;
+    cursor: pointer;
+    padding: 10px 13px;
+    border-radius: 5px;
+
+    &:hover {
+      background: var(--input-bg-color);
+    }
+  }
+
+  p {
+    font-family: var(--font-family-main);
+    font-size: var(--font-size-m);
+  }
+
+  &__suraNumber {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 40px;
+  }
+
+  &__suraName {
+    font-weight: 400;
+  }
+
+  .active {
+    p {
+      font-weight: 600;
+      background: var(--input-bg-color);
+    }
+  }
+}

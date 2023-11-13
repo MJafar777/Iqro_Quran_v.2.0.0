@@ -1,9 +1,16 @@
 .Icon {
-    fill: var(--primary-color);
-    color: var(--primary-color);
+  color: var(--icon-redesigned);
 }
 
-.inverted {
-    fill: var(--inverted-primary-color);
-    color: var(--inverted-primary-color);
+.button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+.button:hover .Icon {
+  color: var(--accent-redesigned);
 }
