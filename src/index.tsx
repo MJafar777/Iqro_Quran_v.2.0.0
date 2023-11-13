@@ -11,24 +11,24 @@ import { ForceUpdateProvider } from '@/shared/lib/render/forceUpdate';
 const container = document.getElementById('root');
 
 if (!container) {
-    throw new Error(
-        'Контейнер root не найден. НЕ удалось вмонтировать реакт приложение',
-    );
+  throw new Error(
+    'Контейнер root не найден. НЕ удалось вмонтировать реакт приложение',
+  );
 }
 
 const root = createRoot(container);
 
 root.render(
-    <BrowserRouter>
-        <StoreProvider>
-            <ErrorBoundary>
-                <ForceUpdateProvider>
-                    <ThemeProvider>
-                        <App />
-                    </ThemeProvider>
-                </ForceUpdateProvider>
-            </ErrorBoundary>
-        </StoreProvider>
-    </BrowserRouter>,
+  <BrowserRouter>
+    <StoreProvider>
+      <ErrorBoundary>
+        <ForceUpdateProvider>
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
+        </ForceUpdateProvider>
+      </ErrorBoundary>
+    </StoreProvider>
+  </BrowserRouter>,
 );
 export { Theme } from '@/shared/const/theme';
