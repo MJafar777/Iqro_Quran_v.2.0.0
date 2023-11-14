@@ -1,19 +1,6 @@
-import React, { useState } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './SuraList.module.scss';
+import { SuraSchema } from '../types/selectedSuraSchema';
 
-interface SuraListProps {
-  className?: string;
-}
-
-interface SurahDataData {
-  suraId: number;
-  nameLotin: string;
-  nameKril: string;
-  numberOfOyat: number;
-}
-
-export const SurahData: SurahDataData[] = [
+export const SurahData: SuraSchema[] = [
   {
     suraId: 1,
     nameLotin: 'Fotiha',
@@ -255,38 +242,3 @@ export const SurahData: SurahDataData[] = [
     numberOfOyat: 85,
   },
 ];
-
-const SuraList = ({ className }: SuraListProps) => {
-  const [selectedSura, setSelectedSura] = useState<SurahDataData>({
-    suraId: 1,
-    nameLotin: 'Fotiha',
-    nameKril: '',
-    numberOfOyat: 7,
-  });
-
-  return (
-    <div className={classNames(cls.SuraList, {}, [className])}>
-      {SurahData?.map((element) => (
-        <div
-          key={element.suraId}
-          className={classNames(
-            cls.SuraList__item,
-            { [cls.active]: element.suraId === selectedSura?.suraId },
-            [className],
-          )}
-          onClick={() => setSelectedSura(element)}
-        >
-          <p className={classNames(cls.SuraList__suraNumber, {}, [])}>
-            {element.suraId}
-          </p>
-
-          <p className={classNames(cls.SuraList__suraName, {}, [])}>
-            {element.nameLotin}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default SuraList;

@@ -5,9 +5,7 @@ import cls from './ReadingSidebar.module.scss';
 
 // ----------- |Elements |----------- //
 import { Searchinput } from '@/shared/ui/searchInput';
-import { SuraList } from '../components/SuraList';
-import { OyatList } from '../components/OyatList';
-// import { OyatList } from '../components/OyatList';
+import { OyatList, SuraList } from '@/entities/Surah';
 
 interface ReadingSidebarProps {
   className?: string;
