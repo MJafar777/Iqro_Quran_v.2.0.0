@@ -2,7 +2,7 @@
 /* eslint-disable react/self-closing-comp */
 import { Link } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import OrderWrapper from '@/shared/ui/OrderWrapper/OrderWrapper';
+import {OrderWrapper} from '@/shared/ui/OrderWrapper/OrderWrapper';
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { Text } from '@/shared/ui/Text'
 import cls from './OneItemSurah.module.scss'
@@ -26,9 +26,7 @@ const OneItemSurah = (prop:OneItemSuraProp) => {
           <OrderWrapper orderOfOyat={orderOfSura} />
           <VStack>
             <Text title={title}/>
-            {/* <Text text={nameOfMean}/> */}
             <p className='numberOfOyat'>{numberOfOyat} Ayahs</p>
-
           </VStack>
         </HStack>
       </HStack>

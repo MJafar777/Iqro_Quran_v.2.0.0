@@ -6,11 +6,9 @@ interface OrderWrapperProp{
   orderOfOyat:number;
 }
 
-const OrderWrapper = (prop:OrderWrapperProp) => {
+export const OrderWrapper = (prop:OrderWrapperProp) => {
   const {className,orderOfOyat} =prop
   return (
     <div className={classNames(cls.orderWrapper,{},[className])}>{orderOfOyat}</div>
   )
 }
-
-export default OrderWrapper
