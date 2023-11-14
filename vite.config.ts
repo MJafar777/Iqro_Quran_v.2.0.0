@@ -13,7 +13,7 @@ export default defineConfig({
     // __API__: JSON.stringify('http://localhost:8000'),
 
     // ---------- Real server ----------
-    __API__: JSON.stringify('https://advanced-frontend-server-m2ul.vercel.app'),
+    __API__: JSON.stringify('http://iqro-quran.uz/backend/api/v2'),
     __PROJECT__: JSON.stringify('frontend'),
   },
 });
