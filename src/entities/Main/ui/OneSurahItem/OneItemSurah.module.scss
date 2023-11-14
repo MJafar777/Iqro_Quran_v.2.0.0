@@ -1,6 +1,7 @@
 .oneItemSura{
   width: 408px;
   height: 74px;
+  display: flex;
   border: #ebeef0 1px solid;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius:5px ;
@@ -12,10 +13,15 @@
       color: #258c91;
     }
   }
+
 }
 
 
 .numberOfOyat{
   font-family:'Helvetica Neue';
   color:#666;
+}
+
+.hovered{
+  background-color: #258c91;
 }

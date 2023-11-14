@@ -7,8 +7,10 @@ interface OrderWrapperProp{
 }
 
 export const OrderWrapper = (prop:OrderWrapperProp) => {
-  const {className,orderOfOyat} =prop
+  const {className,orderOfOyat} =prop;
+  
   return (
-    <div className={classNames(cls.orderWrapper,{},[className])}>{orderOfOyat}</div>
+    <div 
+     className={classNames(cls.orderWrapper,{},[className])}>{orderOfOyat}</div>
   )
 }

@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/self-closing-comp */
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import {OrderWrapper} from '@/shared/ui/OrderWrapper/OrderWrapper';
 import { HStack, VStack } from '@/shared/ui/Stack'
@@ -17,13 +18,28 @@ interface OneItemSuraProp{
 }
 const OneItemSurah = (prop:OneItemSuraProp) => {
  const {title,nameOfMean,numberOfOyat,arabic,orderOfSura=1} =prop
+  const [whichOrderHovered,setWhichOrderHovered]=useState(0)
+ const whichSurahIn=(order:number)=>{
+  setWhichOrderHovered(order)
+  console.log(order,'kirdi');
   
+ }
+
+ const whichSurahOut=(order:number)=>{
+  setWhichOrderHovered(order)
+  console.log(order,'kirdi');
+  
+ }
+
   return (
-    <Link style={{textDecoration:'none',color:'black'}} to={`/orderOfSura/${orderOfSura}`}>
+    <Link 
+    onMouseMove={()=>whichSurahIn(orderOfSura)} 
+    onMouseLeave={()=>whichSurahOut(0)}
+    style={{textDecoration:'none',color:'black'}} to={`/orderOfSura/${orderOfSura}`}>
     <HStack max justify='between' align='center' className={classNames(cls.oneItemSura,{})}>
       <HStack>
         <HStack>
-          <OrderWrapper orderOfOyat={orderOfSura} />
+          <OrderWrapper className={classNames(whichOrderHovered===orderOfSura?cls.hovered:'')} orderOfOyat={orderOfSura}/>
           <VStack>
             <Text title={title}/>
             <p className='numberOfOyat'>{numberOfOyat} Ayahs</p>
