@@ -8,10 +8,14 @@ import { CombinedState } from 'redux';
 import { AxiosInstance } from 'axios';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { SelectedSuraSchema } from '@/entities/Surah';
+import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 
 export interface StateSchema {
   selectedSura: SelectedSuraSchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
+
+  // Asynchronous reducers
+  readingArabic?: ReadingArabicSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

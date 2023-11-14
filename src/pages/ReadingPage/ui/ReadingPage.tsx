@@ -6,6 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 // ---------- | | ---------- //
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
+import { ReadingArabic } from '@/entities/ReadingArabic';
 
 interface ReadingPageProps {
   className?: string;
@@ -25,6 +26,8 @@ const ReadingPage = (props: ReadingPageProps) => {
       <Sidebar>
         <ReadingSidebar />
       </Sidebar>
+
+      <ReadingArabic />
     </div>
   );
 };
