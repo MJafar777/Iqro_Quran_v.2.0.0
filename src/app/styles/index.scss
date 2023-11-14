@@ -4,6 +4,23 @@
 @import 'themes/dark';
 @import 'themes/orange';
 
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../../shared/assets/font/HelveticaNeue/HelveticaNeueCyr-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'surah_names';
+  src: url('../../shared/assets/font/surah_name/sura_names.ttf') format('truetype');
+}
+
+
+
+// USAGE
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .app {
   font: var(--font-m);
   color: var(--primary-color);
