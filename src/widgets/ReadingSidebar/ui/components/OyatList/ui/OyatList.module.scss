@@ -6,6 +6,7 @@
 
   &__item {
     display: flex;
+    margin: 1px 0;
     padding: 10px 13px;
     border-radius: 5px;
     cursor: pointer;
@@ -19,15 +20,18 @@
     display: flex;
     align-items: center;
     text-align: center;
-    margin-left: 10px;
+    justify-content: center;
+    width: 100%;
     font-family: var(--font-family-main);
     font-size: var(--font-size-m);
+    font-weight: 400;
   }
 
   .active {
-    &__oyatNumber {
+    background: var(--input-bg-color);
+
+    p {
       font-weight: 600;
-      background: var(--input-bg-color);
     }
   }
 }

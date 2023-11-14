@@ -7,6 +7,7 @@
   &__item {
     display: flex;
     cursor: pointer;
+    margin: 1px 0;
     padding: 10px 13px;
     border-radius: 5px;
 
@@ -24,17 +25,20 @@
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
     width: 40px;
   }
 
   &__suraName {
     font-weight: 400;
+    margin-left: 10px;
   }
 
   .active {
+    background: var(--input-bg-color);
+
     p {
-      font-weight: 600;
-      background: var(--input-bg-color);
+      font-weight: 550;
     }
   }
 }
