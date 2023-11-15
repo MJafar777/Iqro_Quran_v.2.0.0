@@ -1,20 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { MainHeader, ListOfSurah, MobileAppView } from '@/entities/Main';
+import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import {  SurahListSliceReducer } from '../model/slice/sliceSurahList';
+
+const reducers: ReducersList = {
+    mainPage: SurahListSliceReducer,
+  };
+
 
 const MainPage = () => {
-    const { t } = useTranslation();
-    const [value, setValue] = useState('');
+  const { t } = useTranslation();
+  const [value, setValue] = useState('');
+  const onChange = (val: string) => {
+    setValue(val);
+  };
+  // const listOfSurah=useSearchByQuranQuery()
+  useEffect(() => {}, []);
+  
 
-    const onChange = (val: string) => {
-        setValue(val);
-    };
+  const content = (
+    <div data-testid="MainPage">
+      <MainHeader />
+      <ListOfSurah />
+      <MobileAppView />
+    </div>
+  );
 
-    return (
-        <div data-testid="MainPage">
-            <div>123123123123123123</div>
-            {t('Главная страница')}
-        </div>
-    );
+  return <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>{content}</DynamicModuleLoader>;
 };
 
 export default MainPage;
