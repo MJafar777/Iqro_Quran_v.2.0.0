@@ -10,6 +10,8 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { fetchReadingArabic } from '@/entities/ReadingArabic';
 import { fetchReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { getSelectedSura } from '../../model/selectors/getSelectedSura/getSelectedSura';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { getReadingArabicData } from '@/entities/ReadingArabic/model/selectors/readingArabic';
 
 interface SuraListProps {
   className?: string;
@@ -17,6 +19,7 @@ interface SuraListProps {
 
 const SuraList = ({ className }: SuraListProps) => {
   const dispatch = useAppDispatch();
+  const readingArabicDataInRedux = useSelector(getReadingArabicData);
   const selectedSura = useSelector(getSelectedSura);
   const { currentSura } = useSelectedSuraActions();
 
@@ -28,6 +31,25 @@ const SuraList = ({ className }: SuraListProps) => {
         limitOfPage: 1,
       }),
     );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (
+      readingArabicDataInRedux &&
+      !readingArabicDataInRedux[selectedSura.suraId]
+    ) {
+      dispatch(
+        fetchReadingArabic({
+          suraId: selectedSura.suraId,
+          pageNumber: 1,
+          limitOfPage: 1,
+        }),
+      );
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, selectedSura.suraId]);
 
   useEffect(() => {
