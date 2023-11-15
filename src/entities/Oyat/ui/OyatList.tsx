@@ -1,8 +1,8 @@
 import React from 'react';
 import cls from './OyatList.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { useSelectedSuraValue } from '../../model/selectors/getSelectedSuraValue/getSelectedSuraValue';
-import { useSelectedSuraActions } from '../../model/slice/selectedSuraSlice';
+import { useSelectedSuraValue, useSelectedSuraActions } from '@/entities/Surah';
+import { useSelectedOyatActions } from '../model/slice/seletedOyatSlice';
 
 interface OyatListProps {
   className?: string;
@@ -10,7 +10,14 @@ interface OyatListProps {
 
 const OyatList = ({ className }: OyatListProps) => {
   const selectedSura = useSelectedSuraValue();
-  const { currentOyat } = useSelectedSuraActions();
+  const { currentSurahOyat } = useSelectedSuraActions();
+  const { currentOyat } = useSelectedOyatActions();
+
+  const handleClickOyat = (oyatNumber: number) => {
+    currentSurahOyat(oyatNumber);
+
+    currentOyat(oyatNumber);
+  };
 
   return (
     <div className={classNames(cls.OyatList, {}, [className])}>
@@ -20,7 +27,7 @@ const OyatList = ({ className }: OyatListProps) => {
       ).map((element: number) => (
         <div
           key={element}
-          onClick={() => currentOyat(element)}
+          onClick={() => handleClickOyat(element)}
           className={classNames(
             cls.OyatList__item,
             { [cls.active]: element === selectedSura.selectedOyat },

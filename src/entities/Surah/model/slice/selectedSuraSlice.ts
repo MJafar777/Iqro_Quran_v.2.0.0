@@ -25,7 +25,7 @@ export const SelectedSuraSlice = buildSlice({
       Object.assign(state, payload);
     },
 
-    currentOyat: (state, { payload }: PayloadAction<number>) => {
+    currentSurahOyat: (state, { payload }: PayloadAction<number>) => {
       state.selectedOyat = payload;
     },
   },

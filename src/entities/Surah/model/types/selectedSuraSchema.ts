@@ -12,3 +12,11 @@ export interface SuraSchema {
   nameKril: string;
   numberOfOyat: number;
 }
+
+export interface SurahPageOyatSchema {
+  [surahNumber: string]: Array<{
+    start: string;
+    end: string;
+    page: string;
+  }>;
+}

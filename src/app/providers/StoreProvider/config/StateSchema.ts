@@ -9,11 +9,14 @@ import { AxiosInstance } from 'axios';
 import { rtkApi } from '@/shared/api/rtkApi';
 
 import { SelectedSuraSchema } from '@/entities/Surah';
+import { SelectedOyatSchema } from '@/entities/Oyat';
 import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 
 export interface StateSchema {
   selectedSura: SelectedSuraSchema;
+  selectedOyat: SelectedOyatSchema;
+  // selectedPage: SelectedSuraSchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers

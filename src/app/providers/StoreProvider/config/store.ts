@@ -6,6 +6,7 @@ import { createReducerManager } from './reducerManager';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 
 import { selectedSuraReducer } from '@/entities/Surah';
+import { selectedOyatReducer } from '@/entities/Oyat';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -14,6 +15,7 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     selectedSura: selectedSuraReducer,
+    selectedOyat: selectedOyatReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 

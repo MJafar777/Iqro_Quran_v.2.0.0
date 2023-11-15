@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import cls from './SuraList.module.scss';
-import { SurahData } from '../../model/consts/SurahData';
+import { SurahData } from '../model/consts/SurahData';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { useSelectedSuraActions } from '../../model/slice/selectedSuraSlice';
+import { useSelectedSuraActions } from '../model/slice/selectedSuraSlice';
 // import { useSelectedSuraValue } from '../../model/selectors/getSelectedSuraValue/getSelectedSuraValue';
-import { SuraSchema } from '../../model/types/selectedSuraSchema';
+import { SuraSchema } from '../model/types/selectedSuraSchema';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchReadingArabic } from '@/entities/ReadingArabic';
-import { fetchReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
-import { getSelectedSura } from '../../model/selectors/getSelectedSura/getSelectedSura';
+// import { fetchReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
+import { getSelectedSura } from '../model/selectors/getSelectedSura/getSelectedSura';
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
 import { getReadingArabicData } from '@/entities/ReadingArabic/model/selectors/readingArabic';
 
@@ -22,6 +22,8 @@ const SuraList = ({ className }: SuraListProps) => {
   const readingArabicDataInRedux = useSelector(getReadingArabicData);
   const selectedSura = useSelector(getSelectedSura);
   const { currentSura } = useSelectedSuraActions();
+
+  // console.log(SurahPageOyah[selectedSura.suraId]);
 
   useEffect(() => {
     dispatch(
@@ -52,15 +54,15 @@ const SuraList = ({ className }: SuraListProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, selectedSura.suraId]);
 
-  useEffect(() => {
-    dispatch(
-      fetchReadingTranskriptLotin({
-        suraId: selectedSura.suraId,
-        pageNumber: 1,
-        limitOfPage: 1,
-      }),
-    );
-  }, [dispatch, selectedSura.suraId]);
+  // useEffect(() => {
+  //   dispatch(
+  //     fetchReadingTranskriptLotin({
+  //       suraId: selectedSura.suraId,
+  //       pageNumber: 1,
+  //       limitOfPage: 1,
+  //     }),
+  //   );
+  // }, [dispatch, selectedSura.suraId]);
 
   return (
     <div className={classNames(cls.SuraList, {}, [className])}>

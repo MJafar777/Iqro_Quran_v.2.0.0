@@ -8,13 +8,11 @@ interface BookBoxProps {
 
 const BookBox = ({ className, imgUrl }: BookBoxProps) => {
   return (
-    <div className={classNames(cls.BookContainer, {}, [className])}>
-      <img
-        src={imgUrl}
-        alt="Reading book"
-        className={classNames(cls.BookContainer__box, {}, [className])}
-      />
-    </div>
+    <img
+      src={imgUrl}
+      alt="Reading book"
+      className={classNames(cls.BookContainer, {}, [className])}
+    />
   );
 };
 
