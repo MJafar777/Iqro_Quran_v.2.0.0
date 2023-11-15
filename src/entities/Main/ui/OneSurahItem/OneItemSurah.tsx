@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import {OrderWrapper} from '@/shared/ui/OrderWrapper/OrderWrapper';
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { Text } from '@/shared/ui/Text'
 import cls from './OneItemSurah.module.scss'
 
 interface OneItemSuraProp{
@@ -41,7 +40,7 @@ const OneItemSurah = (prop:OneItemSuraProp) => {
         <HStack>
           <OrderWrapper className={classNames(whichOrderHovered===orderOfSura?cls.hovered:'')} orderOfOyat={orderOfSura}/>
           <VStack>
-            <Text title={title}/>
+            <p className={cls.text}>{title}</p>
             <p className='numberOfOyat'>{numberOfOyat} Ayahs</p>
           </VStack>
         </HStack>

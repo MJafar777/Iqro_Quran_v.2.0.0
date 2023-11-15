@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MainHeader, ListOfSurah, MobileAppView } from '@/entities/Main';
 import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { articleDetailsReducer } from '../model/slice/sliceSurahList';
+import {  SurahListSliceReducer } from '../model/slice/sliceSurahList';
 
 const reducers: ReducersList = {
-    mainPage: articleDetailsReducer,
+    mainPage: SurahListSliceReducer,
   };
 
 

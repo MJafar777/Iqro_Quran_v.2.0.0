@@ -10,7 +10,7 @@ const initialState: SurahListSchema = {
   results: 0
 };
 
-export const articleDetailsSlice = createSlice({
+export const SurahListSlice = createSlice({
   name: 'articleDetails',
   initialState,
   reducers: {},
@@ -34,5 +34,5 @@ export const articleDetailsSlice = createSlice({
   },
 });
 
-export const { actions: articleDetailsActions } = articleDetailsSlice;
-export const { reducer: articleDetailsReducer } = articleDetailsSlice;
+export const { actions: SurahListSliceActions } = SurahListSlice;
+export const { reducer: SurahListSliceReducer } = SurahListSlice;
