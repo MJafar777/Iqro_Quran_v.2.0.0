@@ -7,6 +7,7 @@
   border: 1.5px solid #ebeef0;
   border-radius: 2px;
   transition: all 0.5s;
+  z-index: var(--sidebar-z-index);
 
   .closeBtn {
     position: absolute;
@@ -17,6 +18,7 @@
     height: 40px;
     padding: 12px;
     border-radius: 5px;
+    background: var(--bg-color);
     border: 1px solid var(--icon-hover-bg-color);
     transition: background-color 0.2s;
 

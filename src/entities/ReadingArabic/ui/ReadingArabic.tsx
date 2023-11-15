@@ -7,45 +7,88 @@ import {
   getReadingArabicError,
   getReadingArabicIsLoading,
 } from '../model/selectors/readingArabic';
+
 import {
-  DynamicModuleLoader,
   ReducersList,
+  DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { readingArabicReducer } from '../model/slice/readingArabicSlice';
 
+import BookBox from '@/shared/ui/BookBox/BookBox';
+import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
+import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
+
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { useSelectedSuraValue } from '@/entities/Surah/model/selectors/getSelectedSuraValue/getSelectedSuraValue';
+
+import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
+
 interface ReadingArabicProps {
   className?: string;
+  disabled?: boolean;
 }
 
 const reducers: ReducersList = {
   readingArabic: readingArabicReducer,
 };
 
-export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
-  const data = useSelector(getReadingArabicData);
-  const isLoading = useSelector(getReadingArabicIsLoading);
-  const isError = useSelector(getReadingArabicError);
+export const ReadingArabic = memo(
+  ({ className, disabled }: ReadingArabicProps) => {
+    const currentSura = useSelectedSuraValue();
+    const data = useSelector(getReadingArabicData);
+    const isLoading = useSelector(getReadingArabicIsLoading);
+    const isError = useSelector(getReadingArabicError);
 
-  // if (data) {
-  //   console.log(data);
-  // }
+    if (isError) {
+      console.log(isError);
+    }
 
-  // if (isLoading) {
-  //   console.log(isLoading);
-  // }
+    return (
+      <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
+        <div
+          data-testid="reading-arabic"
+          className={classNames(cls.ReadingArabic, {}, [className])}
+        >
+          <div
+            className={classNames(cls.ReadingArabic__readBox, {}, [className])}
+          >
+            <div
+              className={classNames(cls.ReadingArabic__prevBtn, {}, [
+                className,
+              ])}
+            >
+              <ArrowBottom
+                className={classNames(cls.ReadingArabic__prevBtnIcon, {}, [])}
+              />
+            </div>
 
-  // if (isError) {
-  //   console.log(isError);
-  // }
+            {isLoading ? (
+              <BookBoxSkeleton />
+            ) : data && data[currentSura.suraId]?.data.resourse ? (
+              <BookBox imgUrl={`${data[currentSura.suraId]?.data.resourse}`} />
+            ) : isError ? (
+              <ReadingQuranErrorDialog
+                isErrorProps={!false}
+                errorProps={isError}
+              />
+            ) : (
+              ''
+            )}
 
-  return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div
-        data-testid="reading-arabic"
-        className={classNames(cls.ReadingArabic, {}, [className])}
-      >
-        {}
-      </div>
-    </DynamicModuleLoader>
-  );
-});
+            <div
+              className={classNames(
+                cls.ReadingArabic__nextBtn,
+                { [cls.disabled]: false },
+                [className],
+              )}
+            >
+              <ArrowBottom
+                className={classNames(cls.ReadingArabic__nextBtnIcon, {}, [])}
+              />
+            </div>
+          </div>
+        </div>
+      </DynamicModuleLoader>
+    );
+  },
+);

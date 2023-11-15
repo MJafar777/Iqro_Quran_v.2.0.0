@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const pageAyah = [
   // page-surah-oyatboshlanishi-oyattugashi
   '1-1-1-7',
@@ -784,3 +786,30 @@ const surahPage = [
   '113-5-606',
   '114-6-606',
 ];
+
+const myResult = {};
+// console.log(JSON.parse(myResult));
+// eslint-disable-next-line array-callback-return
+const myJson = pageAyah.map((element) => {
+  // console.log(element);
+  // eslint-disable-next-line no-empty
+const [page, surah, start, end] = element.split('-');
+  // console.log(page, surah);
+  if (myResult[surah]) {
+    myResult[surah].push({
+      start,
+      end,
+      page,
+    });
+  } else {
+    myResult[surah] = [];
+    myResult[surah].push({
+      start,
+      end,
+      page,
+    });
+  }
+  return myResult;
+});
+console.log(myJson);
+fs.writeFileSync('result.json', JSON.stringify(myJson));

@@ -23,33 +23,33 @@ export const readingArabicSlice = createSlice({
         fetchReadingArabic.fulfilled,
         (state, action: PayloadAction<ReadingQuranData>) => {
           state.isLoading = false;
-          console.log(action.payload.data[0].quran_order);
 
-          if (state.data && state.data[action.payload.data[0].quran_order]) {
+          if (state.data && state.data[action.payload.data[0]?.quran_order]) {
             if (
               !state.data[
-                action.payload.data[0].quran_order
-              ].data.resourse.includes(
-                action.payload.resourse.length > 0
+                action.payload.data[0]?.quran_order
+              ]?.data?.resourse?.includes(
+                action.payload?.resourse?.length > 0
                   ? action.payload?.resourse[0]
                   : '',
               )
             ) {
-              state.data[action.payload.data[0].quran_order].data.resourse = [
-                ...(state.data[action.payload.data[0].quran_order].data
-                  .resourse || []),
+              state.data[action.payload.data[0]?.quran_order].data.resourse = [
+                ...(state.data[action.payload.data[0]?.quran_order].data
+                  ?.resourse || []),
                 ...(action.payload.resourse || []),
               ];
             } else {
-              state.data[action.payload.data[0].quran_order].data.resourse = [
-                ...state.data[action.payload.data[0].quran_order].data.resourse,
+              state.data[action.payload.data[0]?.quran_order].data.resourse = [
+                ...state.data[action.payload.data[0]?.quran_order].data
+                  .resourse,
               ];
             }
           } else {
             if (!state.data) state.data = {};
 
-            state.data[action.payload.data[0].quran_order] = {
-              quran_order: action.payload.data[0].quran_order,
+            state.data[action.payload.data[0]?.quran_order] = {
+              quran_order: action.payload.data[0]?.quran_order,
               data: action.payload,
             };
           }
