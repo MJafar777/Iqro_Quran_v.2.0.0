@@ -16,6 +16,62 @@ export const ListOfSurah = () => {
         arabic='001' />} 
       {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
         arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
+
+{<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={1}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={2}
+        arabic='001' />} 
+      {<OneItemSurah title='Al-Fatihah' nameOfMean='The Opener' numberOfOyat='7' orderOfSura={3}
+        arabic='001' />} 
     
     </HStack>
   )

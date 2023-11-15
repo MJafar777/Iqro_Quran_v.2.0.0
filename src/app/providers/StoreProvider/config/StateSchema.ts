@@ -7,9 +7,11 @@ import {
 import { CombinedState } from 'redux';
 import { AxiosInstance } from 'axios';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { SurahListSchema } from '@/pages/MainPage';
 
 export interface StateSchema {
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
+    mainPage:SurahListSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

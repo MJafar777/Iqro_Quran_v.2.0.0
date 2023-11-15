@@ -23,5 +23,7 @@
 }
 
 .hovered{
+  transition: all 0.5s linear;
   background-color: #258c91;
+  color: white;
 }

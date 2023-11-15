@@ -45,9 +45,9 @@ export const MobileAppView = (prop:MobileApp) => {
       </HStack>
       </VStack>
       </HStack>
-      <HStack justify='end' >
-      <AppImage style={{width:'60%'}} src={RightHomeImg}/>
+      <HStack gap='32' style={{paddingLeft:'100px'}}>
       <AppImage style={{width:'40%'}} src={LeftHomeImg}/>
+      <AppImage style={{width:'60%'}} src={RightHomeImg}/>
       </HStack>
      </HStack>
      </BrowserView>
