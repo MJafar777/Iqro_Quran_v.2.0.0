@@ -20,24 +20,25 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
 
   return (
     <Link
-      style={{ textDecoration: 'none', color: 'black' }}
+      style={{
+        textDecoration: 'none',
+        color: 'black',
+      }}
       to={`/orderOfSura/${orderOfSura}`}
       className={classNames(cls.oneItemSura, {}, [className])}
     >
-      <HStack max justify="between" align="center">
-        <HStack>
-          <HStack>
-            <OrderWrapper
-              className={classNames(
-                whichOrderHovered === orderOfSura ? cls.hovered : '',
-              )}
-              orderOfOyat={orderOfSura}
-            />
-            <VStack>
-              <p className={cls.text}>{title}</p>
-              <p className="numberOfOyat">{numberOfOyat} Ayahs</p>
-            </VStack>
-          </HStack>
+      <HStack max align="center">
+        <HStack style={{ width: '60%' }} align="center" justify="start">
+          <OrderWrapper
+            className={classNames(
+              whichOrderHovered === orderOfSura ? cls.hovered : '',
+            )}
+            orderOfOyat={orderOfSura}
+          />
+          <VStack style={{ margin: 0 }}>
+            <p className={cls.text}>{title}</p>
+            <p className={cls.numberOfOyat}>{numberOfOyat} Ayahs</p>
+          </VStack>
         </HStack>
         <HStack>
           <VStack gap="8">

@@ -1,16 +1,17 @@
 import { classNames } from '@/shared/lib/classNames/classNames';
-import  cls from './OrderWrapper.module.scss'
+import cls from './OrderWrapper.module.scss';
 
-interface OrderWrapperProp{
-  className?:string;
-  orderOfOyat:number;
+interface OrderWrapperProp {
+  className?: string;
+  orderOfOyat: number;
 }
 
-export const OrderWrapper = (prop:OrderWrapperProp) => {
-  const {className,orderOfOyat} =prop;
-  
+export const OrderWrapper = (prop: OrderWrapperProp) => {
+  const { className, orderOfOyat } = prop;
+
   return (
-    <div 
-     className={classNames(cls.orderWrapper,{},[className])}>{orderOfOyat}</div>
-  )
-}
+    <div className={classNames(cls.orderWrapper, {}, [className])}>
+      {orderOfOyat}
+    </div>
+  );
+};
