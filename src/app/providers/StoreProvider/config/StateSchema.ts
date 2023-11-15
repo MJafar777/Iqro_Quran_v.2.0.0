@@ -10,13 +10,15 @@ import { rtkApi } from '@/shared/api/rtkApi';
 
 import { SelectedSuraSchema } from '@/entities/Surah';
 import { SelectedOyatSchema } from '@/entities/Oyat';
+import { SelectedPageSchema } from '@/entities/Page';
 import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 
 export interface StateSchema {
   selectedSura: SelectedSuraSchema;
   selectedOyat: SelectedOyatSchema;
-  // selectedPage: SelectedSuraSchema;
+  selectedPage: SelectedPageSchema;
+
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers

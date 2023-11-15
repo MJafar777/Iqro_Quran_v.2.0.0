@@ -1,5 +1,15 @@
 import OyatList from './ui/OyatList';
-import { selectedOyatReducer } from './model/slice/seletedOyatSlice';
-import type { SelectedOyatSchema } from './model/types/selectedOyatSchema';
+import { getSelectedOyat } from './model/selectors/getSelectedOyat';
+import {
+  selectedOyatReducer,
+  useSelectedOyatActions,
+} from './model/slice/seletedOyatSlice';
 
-export { OyatList, SelectedOyatSchema, selectedOyatReducer };
+export type { SelectedOyatSchema } from './model/types/selectedOyatSchema';
+
+export {
+  OyatList,
+  getSelectedOyat,
+  selectedOyatReducer,
+  useSelectedOyatActions,
+};

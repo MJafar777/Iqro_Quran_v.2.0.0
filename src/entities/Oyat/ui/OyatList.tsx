@@ -1,8 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import cls from './OyatList.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { useSelectedSuraValue, useSelectedSuraActions } from '@/entities/Surah';
+import { useSelectedSuraValue } from '@/entities/Surah';
 import { useSelectedOyatActions } from '../model/slice/seletedOyatSlice';
+import { getSelectedOyat } from '../model/selectors/getSelectedOyat';
 
 interface OyatListProps {
   className?: string;
@@ -10,12 +12,11 @@ interface OyatListProps {
 
 const OyatList = ({ className }: OyatListProps) => {
   const selectedSura = useSelectedSuraValue();
-  const { currentSurahOyat } = useSelectedSuraActions();
+
+  const selectedOyat = useSelector(getSelectedOyat);
   const { currentOyat } = useSelectedOyatActions();
 
   const handleClickOyat = (oyatNumber: number) => {
-    currentSurahOyat(oyatNumber);
-
     currentOyat(oyatNumber);
   };
 
@@ -30,7 +31,7 @@ const OyatList = ({ className }: OyatListProps) => {
           onClick={() => handleClickOyat(element)}
           className={classNames(
             cls.OyatList__item,
-            { [cls.active]: element === selectedSura.selectedOyat },
+            { [cls.active]: element === selectedOyat.oyatNumber },
             [className],
           )}
         >

@@ -3,7 +3,6 @@ export interface SelectedSuraSchema {
   nameLotin: string;
   nameKril: string;
   numberOfOyat: number;
-  selectedOyat: number;
 }
 
 export interface SuraSchema {

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import cls from './SuraList.module.scss';
-import { SurahData } from '../model/consts/SurahData';
+import { SurahData, SurahPageOyah } from '../model/consts/SurahData';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useSelectedSuraActions } from '../model/slice/selectedSuraSlice';
 // import { useSelectedSuraValue } from '../../model/selectors/getSelectedSuraValue/getSelectedSuraValue';
@@ -12,18 +12,45 @@ import { fetchReadingArabic } from '@/entities/ReadingArabic';
 import { getSelectedSura } from '../model/selectors/getSelectedSura/getSelectedSura';
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
 import { getReadingArabicData } from '@/entities/ReadingArabic/model/selectors/readingArabic';
+import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { getSelectedOyat } from '@/entities/Oyat/model/selectors/getSelectedOyat';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { useSelectedOyatActions } from '@/entities/Oyat/model/slice/seletedOyatSlice';
+// import { getSelectedOyat, useSelectedOyatActions } from '@/entities/Oyat';
 
 interface SuraListProps {
   className?: string;
 }
 
-const SuraList = ({ className }: SuraListProps) => {
+const SuraList = memo(({ className }: SuraListProps) => {
   const dispatch = useAppDispatch();
   const readingArabicDataInRedux = useSelector(getReadingArabicData);
+
   const selectedSura = useSelector(getSelectedSura);
   const { currentSura } = useSelectedSuraActions();
 
-  // console.log(SurahPageOyah[selectedSura.suraId]);
+  const selectedOyat = useSelector(getSelectedOyat);
+  const { currentOyat } = useSelectedOyatActions();
+
+  const selectedPage = useSelector(getSelectedPage);
+  const { currentPage } = useSelectedPageActions();
+
+  useEffect(() => {
+    currentOyat(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSura.suraId]);
+
+  if (SurahPageOyah[selectedSura.suraId]) {
+    SurahPageOyah[selectedSura.suraId].forEach((element) => {
+      if (
+        Number(element.start) <= selectedOyat.oyatNumber &&
+        Number(element.end) >= selectedOyat.oyatNumber
+      ) {
+        currentPage(Number(element.page));
+      }
+    });
+  }
 
   useEffect(() => {
     dispatch(
@@ -33,7 +60,6 @@ const SuraList = ({ className }: SuraListProps) => {
         limitOfPage: 1,
       }),
     );
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -87,6 +113,6 @@ const SuraList = ({ className }: SuraListProps) => {
       ))}
     </div>
   );
-};
+});
 
 export default SuraList;
