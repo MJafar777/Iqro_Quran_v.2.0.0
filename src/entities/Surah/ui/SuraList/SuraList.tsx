@@ -7,6 +7,7 @@ import { useSelectedSuraValue } from '../../model/selectors/getSelectedSuraValue
 import { SuraSchema } from '../../model/types/selectedSuraSchema';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchReadingArabic } from '@/entities/ReadingArabic';
+import { fetchReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
 interface SuraListProps {
   className?: string;
@@ -20,6 +21,16 @@ const SuraList = ({ className }: SuraListProps) => {
   useEffect(() => {
     dispatch(
       fetchReadingArabic({
+        suraId: selectedSura.suraId,
+        pageNumber: 1,
+        limitOfPage: 1,
+      }),
+    );
+  }, [dispatch, selectedSura.suraId]);
+
+  useEffect(() => {
+    dispatch(
+      fetchReadingTranskriptLotin({
         suraId: selectedSura.suraId,
         pageNumber: 1,
         limitOfPage: 1,

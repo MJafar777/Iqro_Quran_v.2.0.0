@@ -16,6 +16,7 @@ export interface StateSchema {
 
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
+  readingTranskriptLotin?: ReadingArabicSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
