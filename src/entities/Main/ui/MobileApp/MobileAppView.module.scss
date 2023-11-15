@@ -1,9 +1,61 @@
-.MobileApp{
+.MobileApp {
+  max-width: 1366px;
+  margin: 0 auto;
   margin-top: 40px;
-
 }
 
-.icon{
+.icon {
   width: 500px;
   height: 500px;
+}
+
+.wrapperMobile {
+  @media screen and (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.MobileView {
+  display: flex;
+  @media screen and (max-width: 1200px) {
+    display: flex;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.AppLink {
+  @media screen and (max-width: 1200px) {
+    margin: 20px 0;
+  }
+}
+
+.leftHomeImg {
+  padding-left: 40px;
+  width: 40%;
+}
+
+.rightHomeImg {
+  width: 50%;
+}
+
+.textofQuran {
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.socialMedia {
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
+}
+
+.textWithLogo {
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
 }

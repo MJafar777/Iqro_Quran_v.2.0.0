@@ -15,8 +15,17 @@ export interface OneSuraInListSchema {
 
 export interface SurahListSchema {
   status: string;
-  isLoading?:boolean;
-  error?:string
+  isLoading?: boolean;
+  error?: string;
   results: number;
-  data: OneSuraInListSchema[];
+  data?: OneSuraInListSchema[];
+}
+
+export interface ResponseOfBacend {
+  config?: {};
+  data?: SurahListSchema;
+  headers?: {};
+  request?: XMLHttpRequest;
+  status?: number;
+  statusText?: '';
 }

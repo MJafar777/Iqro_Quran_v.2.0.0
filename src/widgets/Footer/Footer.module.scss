@@ -1,0 +1,117 @@
+.footer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.title {
+  color: #272727;
+  text-align: left;
+  font-family: Proxima Vara;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.firstRowOfFooter {
+  width: 30%;
+  text-align: start;
+  margin: 0;
+  @media screen and (max-width: 992px) {
+    width: 70%;
+    padding: 0 30px;
+    margin-bottom: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    padding: 0 30px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+  }
+}
+
+.secondRowOfFooter {
+  @media screen and (max-width: 992px) {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 0 30px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 40%;
+    align-items: start;
+    margin: 0;
+    margin-bottom: 12px;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}
+
+.thirdRowOfFooter {
+  @media screen and (max-width: 992px) {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 0 30px;
+    order: 4;
+  }
+  @media screen and (max-width: 768px) {
+    width: 40%;
+    padding: 0 30px;
+    margin: 0;
+    align-items: start;
+    order: 3;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}
+
+.fourthRowOfFooter {
+  @media screen and (max-width: 992px) {
+    width: 70%;
+    margin-bottom: 20px;
+    padding: 0 30px;
+    order: 3;
+  }
+  @media screen and (max-width: 768px) {
+    width: 40%;
+    padding: 0 30px;
+    margin: 0;
+    order: 4;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+  font-family: Proxima Vara;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  transition: all 0.3s linear;
+
+  &:hover {
+    color: #2ca4ab;
+    text-decoration-line: underline;
+  }
+}
+
+.iconOfFooter {
+  color: black;
+}

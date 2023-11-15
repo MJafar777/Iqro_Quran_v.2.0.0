@@ -1,36 +1,23 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { OneSuraInListSchema, SurahListSchema } from '../types/surahType';
+import { createSlice } from '@reduxjs/toolkit';
+import {  SurahListSchema } from '../types/surahType';
 import { fetchSurahlesList } from '../service/fetchSurahList/fetchSurahList';
 
 const initialState: SurahListSchema = {
-  isLoading: false,
-  error: undefined,
-  data: [],
-  status: '',
-  results: 0
+    data: [],
+    status: '',
+    results: 0
 };
 
 export const SurahListSlice = createSlice({
-  name: 'articleDetails',
+  name: 'SurahListSlice',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchSurahlesList.pending, (state) => {
-        state.error = undefined;
-        state.isLoading = true;
-      })
-      .addCase(
-        fetchSurahlesList.fulfilled,
-        (state, action: PayloadAction<OneSuraInListSchema[]>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-        },
-      )
-      .addCase(fetchSurahlesList.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+    builder.addCase(fetchSurahlesList.fulfilled,(state,action)=>{
+      console.log(action,'action');
+      
+      // state.data=[...action.payload.data?.data]
+    })
   },
 });
 
