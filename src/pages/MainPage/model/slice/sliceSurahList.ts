@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {  SurahListSchema } from '../types/surahType';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ResponseOfBacend, SurahListSchema } from '../types/surahType';
 import { fetchSurahlesList } from '../service/fetchSurahList/fetchSurahList';
 
 const initialState: SurahListSchema = {
-    data: [],
-    status: '',
-    results: 0
+  isLoading: false,
+  error: undefined,
+  data: undefined,
 };
 
 export const SurahListSlice = createSlice({
@@ -13,11 +13,25 @@ export const SurahListSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchSurahlesList.fulfilled,(state,action)=>{
-      console.log(action,'action');
-      
-      // state.data=[...action.payload.data?.data]
-    })
+    builder
+      .addCase(fetchSurahlesList.pending, (state) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(
+        fetchSurahlesList.fulfilled,
+        (state, action: PayloadAction<ResponseOfBacend>) => {
+          state.isLoading = false;
+
+          if (action.payload.data) {
+            state.data = action.payload.data;
+          }
+        },
+      )
+      .addCase(fetchSurahlesList.rejected, (state, action) => {
+        state.error = 'err';
+        state.isLoading = false;
+      });
   },
 });
 

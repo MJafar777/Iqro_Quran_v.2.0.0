@@ -10,7 +10,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 
 import { SelectedSuraSchema  } from '@/entities/Surah';
 import { ReadingArabicSchema } from '@/entities/ReadingArabic';
-import { SurahList } from '@/entities/Main';
+import { SurahListSchema } from '@/pages/MainPage';
 
 export interface StateSchema {
   selectedSura: SelectedSuraSchema;
@@ -18,7 +18,7 @@ export interface StateSchema {
 
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
-  mainPage?:SurahList;
+  mainPage?:SurahListSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
