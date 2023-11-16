@@ -14,7 +14,7 @@ import {
   thir,
 } from '@/shared/assets/icons/navbar';
 import { AppImage } from '@/shared/ui/AppImage';
-import { Sidebar } from '@/widgets/Sidebar';
+import { RightSidebar } from '@/widgets/RightSidebar';
 
 interface NavbarProp {
   className?: string;
@@ -22,17 +22,22 @@ interface NavbarProp {
 
 export const Navbar = memo((prop: NavbarProp) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+  const [whichSidebar, setWhichSidebar] = useState('settings');
 
-  const toogleSidebar = () => {
-    setIsOpenSidebar((pre) => !pre);
+  const toogleSidebarSettings = () => {
+    setIsOpenSidebar(false);
+    setWhichSidebar('settings');
   };
 
-  const sidebarContent = <div>jdjd</div>;
+  const toogleSidebarSearch = () => {
+    setIsOpenSidebar(false);
+    setWhichSidebar('Search');
+  };
 
   return (
     <div className={classNames(cls.nabar)}>
       <HStack className={classNames(cls.burger)} justify="start" gap="16">
-        <div onClick={toogleSidebar}>
+        <div>
           <Icon className={classNames(cls.icon)} Svg={burger} />
         </div>
         <AppImage src={Logo} className={classNames(cls.logo)} />
@@ -48,11 +53,20 @@ export const Navbar = memo((prop: NavbarProp) => {
 
       <HStack className={classNames(cls.iconWrapper)} justify="end" gap="8">
         <Icon className={classNames(cls.icon)} Svg={fir} />
-        <Icon className={classNames(cls.icon)} Svg={sec} />
-        <Icon className={classNames(cls.icon)} Svg={thir} />
+        <div onClick={toogleSidebarSettings}>
+          <Icon className={classNames(cls.icon)} Svg={sec} />
+        </div>
+        <div onClick={toogleSidebarSearch}>
+          <Icon className={classNames(cls.icon)} Svg={thir} />
+        </div>
       </HStack>
 
-      <Sidebar children={sidebarContent} toogleBurger={isOpenSidebar} />
+      <RightSidebar
+        children={<>k</>}
+        isOpenSidebar={isOpenSidebar}
+        whichSidebar={whichSidebar}
+        setIsOpenSidebar={setIsOpenSidebar}
+      />
     </div>
   );
 });
