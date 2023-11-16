@@ -7,7 +7,6 @@ const initialState: SelectedSuraSchema = {
   nameKril: '',
   nameLotin: 'Fotiha',
   numberOfOyat: 7,
-  selectedOyat: 1,
 };
 
 export const SelectedSuraSlice = buildSlice({
@@ -23,10 +22,6 @@ export const SelectedSuraSlice = buildSlice({
       // Object.assign(state, payload) qismi, payload obyektining barcha xususiyatlari state obyektiga nusxalanadi
       // Yuqoridagi vazifani bajaradi
       Object.assign(state, payload);
-    },
-
-    currentOyat: (state, { payload }: PayloadAction<number>) => {
-      state.selectedOyat = payload;
     },
   },
 });

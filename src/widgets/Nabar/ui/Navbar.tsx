@@ -52,7 +52,7 @@ export const Navbar = memo((prop: NavbarProp) => {
         <Icon className={classNames(cls.icon)} Svg={thir} />
       </HStack>
 
-      <Sidebar children={sidebarContent} toogleBurger={isOpenSidebar} />
+      <Sidebar children={sidebarContent} toogleBurger={isOpenSidebar} left />
     </div>
   );
 });
