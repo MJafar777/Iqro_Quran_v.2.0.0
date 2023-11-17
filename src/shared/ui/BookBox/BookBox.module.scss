@@ -1,0 +1,15 @@
+.BookContainer {
+  width: 1654px;
+  height: 2339px;
+  user-select: none;
+
+  @media only screen and (max-width: 1680px) {
+    width: 1000px;
+    height: calc(2339px * 1000px / 1654px);
+  }
+
+  @media only screen and (max-width: 1000px) {
+    width: calc(100vw);
+    height: calc(100vw * 2339px / 1654px);
+  }
+}

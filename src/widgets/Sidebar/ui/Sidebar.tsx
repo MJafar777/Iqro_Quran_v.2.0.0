@@ -47,5 +47,5 @@ export const Sidebar = memo(
         {children}
       </aside>
     );
-  }
+  },
 );
