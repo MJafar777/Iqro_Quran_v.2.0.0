@@ -5,6 +5,8 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Icon } from '@/shared/ui/Icon/Icon';
 import { Setting } from '@/widgets/Setting';
 import { Search } from '@/widgets/Search';
+import { HStack } from '@/shared/ui/Stack';
+import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 
 interface SidebarProps {
   className?: string;
@@ -36,14 +38,30 @@ export const RightSidebar = memo(
           className,
         ])}
       >
-        <Icon
-          data-testid="sidebar-toggle"
-          onClick={onToggle}
-          className={cls.closeBtn}
-          Svg={CloseIcon}
-          height={0}
-          clickable
-        />
+        <HStack className={cls.headerOfSidebar}>
+          {whichSidebar !== 'settings' ? (
+            <>
+              {' '}
+              <Icon Svg={SearchSmall} className={cls.icon} />
+              <input
+                type="text"
+                placeholder="Search something"
+                className={cls.input}
+              />
+            </>
+          ) : (
+            <p className={cls.titleOfHeader}> Sozlamlar</p>
+          )}
+          <Icon
+            data-testid="sidebar-toggle"
+            onClick={onToggle}
+            className={cls.closeBtn}
+            Svg={CloseIcon}
+            height={0}
+            clickable
+          />
+        </HStack>
+
         {whichSidebar === 'settings' ? <Setting /> : <Search />}
         {children}
       </aside>

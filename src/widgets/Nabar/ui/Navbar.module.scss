@@ -4,8 +4,8 @@
   top: 0;
   left: 0;
   background-color: white;
-  height: (--navbar-height);
-  padding: 0 12px;
+  height: var(--navbar-height);
+  padding: 0 40px;
   display: flex;
   align-items: center;
   z-index: 1000;

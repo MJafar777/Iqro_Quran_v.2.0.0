@@ -42,7 +42,6 @@ export const Navbar = memo((prop: NavbarProp) => {
         </div>
         <AppImage src={Logo} className={classNames(cls.logo)} />
       </HStack>
-
       <HStack className={classNames(cls.wrapperTime)} max justify="center">
         <div className={classNames(cls.timeOfArrabic)}>15 Shavvol 1444-yil</div>
 

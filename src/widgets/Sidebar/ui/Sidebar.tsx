@@ -1,4 +1,4 @@
-import { ReactNode, memo, useEffect, useState } from 'react';
+import { ReactNode, memo, useState } from 'react';
 import cls from './Sidebar.module.scss';
 import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -7,49 +7,31 @@ import { Icon } from '@/shared/ui/Icon';
 interface SidebarProps {
   className?: string;
   children: ReactNode;
-  toogleBurger?: boolean;
-  left?: boolean;
 }
 
-export const Sidebar = memo(
-  ({ className, children, toogleBurger, left }: SidebarProps) => {
-    const [collapsed, setCollapsed] = useState(false);
+export const Sidebar = memo(({ className, children }: SidebarProps) => {
+  const [collapsed, setCollapsed] = useState(false);
 
-    const onToggle = () => {
-      setCollapsed((prev) => !prev);
-    };
+  const onToggle = () => {
+    setCollapsed((prev) => !prev);
+  };
 
-    useEffect(() => {
-      // setCollapsed(toogleBurger?toogleBurger:false);
-    }, [toogleBurger]);
-
-    const leftSidebarStyle = {
-      right: 0,
-      transform: 'translateX(-100%)',
-    };
-
-    return (
-      <aside
-        data-testid="sidebar"
-        style={left ? leftSidebarStyle : {}}
-        className={classNames(cls.Sidebar, { [cls.collapsed]: toogleBurger }, [
-          className,
-        ])}
-      >
-        <Icon
-          data-testid="sidebar-toggle"
-          onClick={onToggle}
-          className={cls.closeBtn}
-          Svg={CloseIcon}
-          height={0}
-          clickable
-        />
-        {children}
-      </aside>
-    );
-  }
-<<<<<<< HEAD
-);
-=======
-);
->>>>>>> 0ef75b06aca356424b8fa617bce8a34e04d85cfc
+  return (
+    <aside
+      data-testid="sidebar"
+      className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [
+        className,
+      ])}
+    >
+      <Icon
+        data-testid="sidebar-toggle"
+        onClick={onToggle}
+        className={cls.closeBtn}
+        Svg={CloseIcon}
+        height={0}
+        clickable
+      />
+      {children}
+    </aside>
+  );
+});
