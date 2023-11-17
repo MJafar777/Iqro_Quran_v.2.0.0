@@ -1,0 +1,1 @@
+export {default as SearchSmall} from './searchSmall.svg'

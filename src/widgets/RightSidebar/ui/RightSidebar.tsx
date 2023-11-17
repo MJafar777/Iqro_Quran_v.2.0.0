@@ -4,6 +4,7 @@ import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Icon } from '@/shared/ui/Icon/Icon';
 import { Setting } from '@/widgets/Setting';
+import { Search } from '@/widgets/Search';
 
 interface SidebarProps {
   className?: string;
@@ -28,9 +29,6 @@ export const RightSidebar = memo(
       setIsOpenSidebar(!isOpenSidebar);
     };
 
-    // const contentSetting = <Setting />;
-    const contentSearch = 'search';
-
     return (
       <aside
         data-testid="sidebar"
@@ -46,7 +44,7 @@ export const RightSidebar = memo(
           height={0}
           clickable
         />
-        {whichSidebar === 'settings' ? <Setting /> : contentSearch}
+        {whichSidebar === 'settings' ? <Setting /> : <Search />}
         {children}
       </aside>
     );
