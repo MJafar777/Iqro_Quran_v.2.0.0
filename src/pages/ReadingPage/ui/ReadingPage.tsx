@@ -4,9 +4,11 @@ import cls from './ReadingPage.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 // ---------- | | ---------- //
+import { Navbar } from '@/widgets/Nabar';
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingArabic } from '@/entities/ReadingArabic';
+import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 // import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
 interface ReadingPageProps {
@@ -22,7 +24,9 @@ const ReadingPage = (props: ReadingPageProps) => {
       data-testid="ReadingPage"
       className={classNames(cls.ReadingPage, {}, [className])}
     >
-      {t('')}
+      <Navbar />
+
+      <ReadingNavbar />
 
       <Sidebar>
         <ReadingSidebar />

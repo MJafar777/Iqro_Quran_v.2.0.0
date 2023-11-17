@@ -1,0 +1,13 @@
+.ReadingNavbarLeft {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  p {
+    font-size: calc(var(--font-size-l) - 2px);
+  }
+
+  .collapseBtn {
+    font-size: 36px;
+  }
+}

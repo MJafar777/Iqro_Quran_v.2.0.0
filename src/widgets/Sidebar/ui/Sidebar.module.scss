@@ -3,7 +3,7 @@
   height: calc(100vh - var(--navbar-height));
   width: var(--sidebar-width);
   background: white;
-  top: var(--navbar-height);
+  top: calc(var(--navbar-height) * 2);
   border: 1.5px solid #ebeef0;
   border-radius: 2px;
   transition: all 0.5s;
