@@ -42,7 +42,12 @@ export const Navbar = memo((prop: NavbarProp) => {
   return (
     <div className={classNames(cls.nabar)}>
       <HStack className={classNames(cls.burger)} justify="start" gap="16">
-        <Icon className={classNames(cls.icon)} Svg={burger} />
+        <Icon
+          className={classNames(cls.icon)}
+          Svg={burger}
+          onClick={() => console.log('ll')}
+          clickable
+        />
         <Link to="/">
           <Icon Svg={Logo} className={cls.logo} />
         </Link>
