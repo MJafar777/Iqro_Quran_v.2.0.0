@@ -11,18 +11,32 @@ interface SearchProp {
 
 const listOfMostRead = [
   { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Fotiha' },
+  { to: '/', title: 'Al-Baqarah' },
+  { to: '/', title: "Al-An'am" },
+  { to: '/', title: 'Yusuf' },
+  { to: '/', title: 'Hud' },
+];
+
+const lastReadSurahList = [
+  { to: '/', title: "Al-An'am" },
+  { to: '/', title: 'Yusuf' },
+  { to: '/', title: 'Hud' },
 ];
 
 export const Search = memo((prop: SearchProp) => {
   const itemsOfMostRead = useMemo(
     () =>
       listOfMostRead.map((item) => (
+        <Li to={item.to} key={item.to}>
+          {item.title}
+        </Li>
+      )),
+    [],
+  );
+
+  const itemsLastRead = useMemo(
+    () =>
+      lastReadSurahList.map((item) => (
         <Li to={item.to} key={item.to} close>
           {item.title}
         </Li>
@@ -35,7 +49,7 @@ export const Search = memo((prop: SearchProp) => {
       <SerchTile>Ko‘p ko‘rilganlar</SerchTile>
       {itemsOfMostRead}
       <SerchTile>So‘ngi ko‘rilganlar</SerchTile>
-      {itemsOfMostRead}
+      {itemsLastRead}
       <SerchTile>Qidirib ko‘ring</SerchTile>
       {itemsOfMostRead}
     </div>

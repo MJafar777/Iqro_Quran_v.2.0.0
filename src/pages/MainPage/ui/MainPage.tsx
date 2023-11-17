@@ -10,9 +10,8 @@ import {
 import { fetchSurahlesList } from '../model/service/fetchSurahList/fetchSurahList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getReadingArabicData } from '../model/selectors/ListSurah';
-import { Footer } from '@/widgets/Footer';
 import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
-import { Navbar } from '@/widgets/Nabar';
+// import { Navbar } from '@/widgets/Nabar';
 
 const reducers: ReducersList = {
   mainPage: SurahListSliceReducer,
@@ -30,11 +29,9 @@ const MainPage = () => {
 
   const content = (
     <div data-testid="MainPage">
-      <Navbar />
       <MainHeader />
       <ListOfSurah data={listOfSurah} />
       <MobileAppView />
-      <Footer />
     </div>
   );
 
