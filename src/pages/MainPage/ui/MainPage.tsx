@@ -26,12 +26,11 @@ const MainPage = () => {
     dispatch(fetchSurahlesList({}));
   }, [dispatch]);
 
-
   console.log(listOfSurah);
 
   const content = (
     <div data-testid="MainPage">
-      <Navbar/>
+      <Navbar />
       <MainHeader />
       <ListOfSurah data={listOfSurah} />
       <MobileAppView />
@@ -40,9 +39,7 @@ const MainPage = () => {
   );
 
   return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
-      {content}
-    </DynamicModuleLoader>
+    <DynamicModuleLoader reducers={reducers}>{content}</DynamicModuleLoader>
   );
 };
 

@@ -1,0 +1,26 @@
+.li {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border: #27272731 0.1px solid;
+  padding: 6px 12px;
+  gap: 16px;
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #272727;
+  transition: all 0.2s linear;
+  &:hover {
+    color: #74a2b2;
+  }
+}
+
+.icon {
+  color: black;
+  width: 20px;
+  height: 20px;
+}

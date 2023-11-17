@@ -47,6 +47,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
+    'i18next/no-literal-string': 'off',
     // 'i18next/no-literal-string': [
     //   'error',
     //   {
@@ -67,11 +68,10 @@ module.exports = {
     //       'variant',
     //       'size',
     //       'wrap',
+    //       'src',
     //     ],
     //   },
     // ],
-    'i18next/no-literal-string': 'off',
-    'no-nested-ternary': 'off',
     'max-len': [
       'error',
       {

@@ -7,7 +7,7 @@ import oyat from '../../../../shared/assets/icons/oyat.svg';
 import { Icon } from '@/shared/ui/Icon';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text, TextAlign } from '@/shared/ui/Text';
-import { Button, ButtonSize } from '@/shared/ui/Button';
+import { Button, ButtonSize } from '@/shared/ui/Button/Button';
 
 interface MainHeaderComponentProps {
   className?: string;
