@@ -1,0 +1,9 @@
+.ReadingNavbarRgiht {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    font-size: calc(var(--font-size-l) - 2px);
+  }
+}
