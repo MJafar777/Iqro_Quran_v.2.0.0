@@ -7,45 +7,163 @@ import {
   getReadingArabicError,
   getReadingArabicIsLoading,
 } from '../model/selectors/readingArabic';
+
 import {
-  DynamicModuleLoader,
   ReducersList,
+  DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { readingArabicReducer } from '../model/slice/readingArabicSlice';
+import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
+
+import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
+
+import BookBox from '@/shared/ui/BookBox/BookBox';
+import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
+import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
+
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { useSelectedSuraValue } from '@/entities/Surah/model/selectors/getSelectedSuraValue/getSelectedSuraValue';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { SurahPageOyah } from '@/entities/Surah/model/consts/SurahData';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { getSelectedSura } from '@/entities/Surah/model/selectors/getSelectedSura/getSelectedSura';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import {
+  // selectedOyatActions,
+  useSelectedOyatActions,
+} from '@/entities/Oyat/model/slice/seletedOyatSlice';
+// eslint-disable-next-line ulbi-tv-plugin/public-api-imports
+import { getSelectedOyat } from '@/entities/Oyat/model/selectors/getSelectedOyat';
 
 interface ReadingArabicProps {
   className?: string;
+  disabled?: boolean;
 }
 
 const reducers: ReducersList = {
   readingArabic: readingArabicReducer,
 };
 
-export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
-  const data = useSelector(getReadingArabicData);
-  const isLoading = useSelector(getReadingArabicIsLoading);
-  const isError = useSelector(getReadingArabicError);
+export const ReadingArabic = memo(
+  ({ className, disabled }: ReadingArabicProps) => {
+    const currentSura = useSelectedSuraValue();
 
-  // if (data) {
-  //   console.log(data);
-  // }
+    const data = useSelector(getReadingArabicData);
+    const isLoading = useSelector(getReadingArabicIsLoading);
+    const isError = useSelector(getReadingArabicError);
 
-  // if (isLoading) {
-  //   console.log(isLoading);
-  // }
+    const currentPage = useSelector(getSelectedPage);
+    const { setSelectedPage, incrementCurrentPage, decrementCurrentPage } =
+      useSelectedPageActions();
 
-  // if (isError) {
-  //   console.log(isError);
-  // }
+    const selectedSura = useSelector(getSelectedSura);
 
-  return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div
-        data-testid="reading-arabic"
-        className={classNames(cls.ReadingArabic, {}, [className])}
-      >
-        {}
-      </div>
-    </DynamicModuleLoader>
-  );
-});
+    const currentOyat = useSelector(getSelectedOyat);
+    const { setSelectedtOyat } = useSelectedOyatActions();
+
+    if (isError) {
+      console.log(isError);
+    }
+
+    if (data) {
+      console.log(data[currentSura.suraId]?.data);
+      // console.log(data[currentSura.suraId]?.data?.data[0]?.pages[0]);
+
+      // console.log(currentPage.pageNumber);
+
+      // console.log(data[currentSura.suraId]?.data.resourse);
+    }
+
+    const handleClickNextPagebBtn = () => {
+      SurahPageOyah[selectedSura.suraId].forEach((element) => {
+        if (Number(element.page) === currentPage.pageNumber + 1) {
+          console.log(element, currentPage.pageNumber + 1, 'ikkisi teng');
+          setSelectedtOyat(Number(element.start));
+        } else if (Number(element.page) < currentPage.pageNumber + 1) {
+          console.log(element, currentPage.pageNumber + 1, 'currentPage katta');
+        } else if (Number(element.page) > currentPage.pageNumber + 1) {
+          console.log(
+            element,
+            currentPage.pageNumber + 1,
+            'currentPage kichik',
+          );
+        }
+      });
+    };
+
+    const handleClickPrevPagebBtn = () => {
+      SurahPageOyah[selectedSura.suraId].forEach((element) => {
+        if (Number(element.page) === currentPage.pageNumber - 1) {
+          console.log(element, currentPage.pageNumber + 1, 'ikkisi teng');
+          setSelectedtOyat(Number(element.start));
+        } else if (Number(element.page) < currentPage.pageNumber + 1) {
+          console.log(element, currentPage.pageNumber + 1, 'currentPage katta');
+        } else if (Number(element.page) > currentPage.pageNumber + 1) {
+          console.log(
+            element,
+            currentPage.pageNumber + 1,
+            'currentPage kichik',
+          );
+        }
+      });
+    };
+
+    return (
+      <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
+        <div
+          data-testid="reading-arabic"
+          className={classNames(cls.ReadingArabic, {}, [className])}
+        >
+          <div
+            className={classNames(cls.ReadingArabic__readBox, {}, [className])}
+          >
+            <div
+              onClick={handleClickPrevPagebBtn}
+              className={classNames(cls.ReadingArabic__prevBtn, {}, [
+                className,
+              ])}
+            >
+              <ArrowBottom
+                className={classNames(cls.ReadingArabic__prevBtnIcon, {}, [])}
+              />
+            </div>
+
+            {isLoading ? (
+              <BookBoxSkeleton />
+            ) : data && data[currentSura.suraId]?.data.resourse ? (
+              <BookBox
+                imgUrl={`${
+                  data[currentSura.suraId]?.data.resourse[
+                    Number(data[currentSura.suraId]?.data?.data[0]?.pages[0]) -
+                      currentPage.pageNumber -
+                      1
+                  ]
+                }`}
+              />
+            ) : isError ? (
+              <ReadingQuranErrorDialog
+                isErrorProps={!false}
+                errorProps={isError}
+              />
+            ) : (
+              ''
+            )}
+
+            <div
+              onClick={handleClickNextPagebBtn}
+              className={classNames(
+                cls.ReadingArabic__nextBtn,
+                { [cls.disabled]: false },
+                [className],
+              )}
+            >
+              <ArrowBottom
+                className={classNames(cls.ReadingArabic__nextBtnIcon, {}, [])}
+              />
+            </div>
+          </div>
+        </div>
+      </DynamicModuleLoader>
+    );
+  },
+);

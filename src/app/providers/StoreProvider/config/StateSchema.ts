@@ -8,17 +8,23 @@ import { CombinedState } from 'redux';
 import { AxiosInstance } from 'axios';
 import { rtkApi } from '@/shared/api/rtkApi';
 
-import { SelectedSuraSchema  } from '@/entities/Surah';
+import { SelectedSuraSchema } from '@/entities/Surah';
+import { SelectedOyatSchema } from '@/entities/Oyat';
+import { SelectedPageSchema } from '@/entities/Page';
 import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 
 export interface StateSchema {
-  selectedSura: SelectedSuraSchema;
+  currentSura: SelectedSuraSchema;
+  currentOyat: SelectedOyatSchema;
+  currentPage: SelectedPageSchema;
+
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
-  mainPage?:SurahListSchema;
+  readingTranskriptLotin?: ReadingArabicSchema;
+  mainPage?: SurahListSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
