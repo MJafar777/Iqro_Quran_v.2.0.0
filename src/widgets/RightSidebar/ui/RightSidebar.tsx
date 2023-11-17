@@ -3,8 +3,6 @@ import cls from './RightSidebar.module.scss';
 import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Icon } from '@/shared/ui/Icon/Icon';
-import { Setting } from '@/widgets/Setting';
-import { Search } from '@/widgets/Search';
 import { HStack } from '@/shared/ui/Stack';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 
@@ -61,8 +59,6 @@ export const RightSidebar = memo(
             clickable
           />
         </HStack>
-
-        {whichSidebar === 'settings' ? <Setting /> : <Search />}
         {children}
       </aside>
     );

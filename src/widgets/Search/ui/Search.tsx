@@ -27,7 +27,7 @@ export const Search = memo((prop: SearchProp) => {
   const itemsOfMostRead = useMemo(
     () =>
       listOfMostRead.map((item) => (
-        <Li to={item.to} key={item.to}>
+        <Li search to={item.to} key={item.to}>
           {item.title}
         </Li>
       )),
@@ -37,7 +37,7 @@ export const Search = memo((prop: SearchProp) => {
   const itemsLastRead = useMemo(
     () =>
       lastReadSurahList.map((item) => (
-        <Li to={item.to} key={item.to} close>
+        <Li to={item.to} key={item.to} close search>
           {item.title}
         </Li>
       )),

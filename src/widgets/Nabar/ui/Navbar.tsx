@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable i18next/no-literal-string */
 import React, { memo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack } from '@/shared/ui/Stack';
 import cls from './Navbar.module.scss';
@@ -15,6 +16,10 @@ import {
 } from '@/shared/assets/icons/navbar';
 import { AppImage } from '@/shared/ui/AppImage';
 import { RightSidebar } from '@/widgets/RightSidebar';
+import { ListOfPages } from '@/widgets/ListOfPages';
+import { Setting } from '@/widgets/Setting';
+import { Search } from '@/widgets/Search';
+import { Sidebar } from '@/widgets/Sidebar';
 
 interface NavbarProp {
   className?: string;
@@ -37,10 +42,10 @@ export const Navbar = memo((prop: NavbarProp) => {
   return (
     <div className={classNames(cls.nabar)}>
       <HStack className={classNames(cls.burger)} justify="start" gap="16">
-        <div>
-          <Icon className={classNames(cls.icon)} Svg={burger} />
-        </div>
-        <AppImage src={Logo} className={classNames(cls.logo)} />
+        <Icon className={classNames(cls.icon)} Svg={burger} />
+        <Link to="/">
+          <Icon Svg={Logo} className={cls.logo} />
+        </Link>
       </HStack>
       <HStack className={classNames(cls.wrapperTime)} max justify="center">
         <div className={classNames(cls.timeOfArrabic)}>15 Shavvol 1444-yil</div>
@@ -61,11 +66,12 @@ export const Navbar = memo((prop: NavbarProp) => {
       </HStack>
 
       <RightSidebar
-        children={<>k</>}
+        children={whichSidebar === 'settings' ? <Setting /> : <Search />}
         isOpenSidebar={isOpenSidebar}
         whichSidebar={whichSidebar}
         setIsOpenSidebar={setIsOpenSidebar}
       />
+      <Sidebar children={<ListOfPages />} />
     </div>
   );
 });
