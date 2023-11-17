@@ -1,7 +1,7 @@
 .Sidebar {
   position: fixed;
-  height: calc(100vh - var(--navbar-height));
   width: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height));
   background: white;
   top: calc(var(--navbar-height) * 2);
   border: 1.5px solid #ebeef0;
@@ -12,7 +12,7 @@
   .closeBtn {
     position: absolute;
     cursor: pointer;
-    top: -1px;
+    top: 20px;
     right: -40px;
     width: 40px;
     height: 40px;

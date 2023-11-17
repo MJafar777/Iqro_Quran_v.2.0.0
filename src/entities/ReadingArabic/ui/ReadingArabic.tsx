@@ -15,8 +15,6 @@ import {
 import { readingArabicReducer } from '../model/slice/readingArabicSlice';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 
-import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
-
 import BookBox from '@/shared/ui/BookBox/BookBox';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
@@ -117,17 +115,6 @@ export const ReadingArabic = memo(
           <div
             className={classNames(cls.ReadingArabic__readBox, {}, [className])}
           >
-            <div
-              onClick={handleClickPrevPagebBtn}
-              className={classNames(cls.ReadingArabic__prevBtn, {}, [
-                className,
-              ])}
-            >
-              <ArrowBottom
-                className={classNames(cls.ReadingArabic__prevBtnIcon, {}, [])}
-              />
-            </div>
-
             {isLoading ? (
               <BookBoxSkeleton />
             ) : data && data[currentSura.suraId]?.data.resourse ? (
@@ -148,19 +135,6 @@ export const ReadingArabic = memo(
             ) : (
               ''
             )}
-
-            <div
-              onClick={handleClickNextPagebBtn}
-              className={classNames(
-                cls.ReadingArabic__nextBtn,
-                { [cls.disabled]: false },
-                [className],
-              )}
-            >
-              <ArrowBottom
-                className={classNames(cls.ReadingArabic__nextBtnIcon, {}, [])}
-              />
-            </div>
           </div>
         </div>
       </DynamicModuleLoader>

@@ -1,8 +1,8 @@
-import { ReactNode, memo, useState } from 'react';
+import { ReactNode, memo, useContext } from 'react';
 import cls from './Sidebar.module.scss';
 import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Icon } from '@/shared/ui/Icon';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface SidebarProps {
   className?: string;
@@ -10,27 +10,29 @@ interface SidebarProps {
 }
 
 export const Sidebar = memo(({ className, children }: SidebarProps) => {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const onToggle = () => {
-    setCollapsed((prev) => !prev);
-  };
+  const { readingSidebarActive, setReadingSidebarActive } =
+    useContext(ButtonsContext);
 
   return (
     <aside
       data-testid="sidebar"
-      className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [
-        className,
-      ])}
+      className={classNames(
+        cls.Sidebar,
+        { [cls.collapsed]: !readingSidebarActive },
+        [className],
+      )}
     >
-      <Icon
-        data-testid="sidebar-toggle"
-        onClick={onToggle}
-        className={cls.closeBtn}
-        Svg={CloseIcon}
-        height={0}
-        clickable
-      />
+      {readingSidebarActive ? (
+        <CloseIcon
+          className={cls.closeBtn}
+          onClick={() =>
+            setReadingSidebarActive && setReadingSidebarActive(false)
+          }
+        />
+      ) : (
+        ''
+      )}
+
       {children}
     </aside>
   );

@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  user-select: none;
 
   p {
     font-size: calc(var(--font-size-l) - 2px);
@@ -9,5 +10,11 @@
 
   .collapseBtn {
     font-size: 36px;
+    transform: rotate(0deg);
+    transition: all 0.5s;
+  }
+
+  .collapsed {
+    transform: rotate(180deg);
   }
 }
