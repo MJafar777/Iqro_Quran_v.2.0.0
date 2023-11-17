@@ -1,8 +1,8 @@
 import { ReactNode, memo, useEffect, useState } from 'react';
 import cls from './Sidebar.module.scss';
-import CloseIcon from '@/shared/assets/icons/close-icon.svg';
+// import { Icon } from '@/shared/ui/Icon';
+// import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Icon } from '@/shared/ui/Icon';
 
 interface SidebarProps {
   className?: string;
@@ -11,7 +11,7 @@ interface SidebarProps {
   left?: boolean;
 }
 
-export const Sidebar = memo(
+export const SidebarRight = memo(
   ({ className, children, toogleBurger, left }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(false);
 
@@ -36,16 +36,16 @@ export const Sidebar = memo(
           className,
         ])}
       >
-        <Icon
+        {/* <Icon
           data-testid="sidebar-toggle"
           onClick={onToggle}
           className={cls.closeBtn}
           Svg={CloseIcon}
           height={0}
           clickable
-        />
+        /> */}
         {children}
       </aside>
     );
-  }
+  },
 );

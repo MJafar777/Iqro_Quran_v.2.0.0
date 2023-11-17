@@ -8,7 +8,7 @@
   border-radius: 2px;
   transition: all 0.5s;
   z-index: var(--sidebar-z-index);
-
+  right: 0;
   .closeBtn {
     position: absolute;
     cursor: pointer;
@@ -30,5 +30,5 @@
 
 .collapsed {
   // width: var(--sidebar-width-collapsed);
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
