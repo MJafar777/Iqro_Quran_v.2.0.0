@@ -15,7 +15,7 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
   // return 'http://localhost:8000';
 
   // ---------- Real server ----------
-  return 'http://iqro-quran.uz/backend/api/v2';
+  return 'http://iqro-quran.uz/developmentBackend/api/v2';
 }
 
 export default (env: BuildEnv) => {

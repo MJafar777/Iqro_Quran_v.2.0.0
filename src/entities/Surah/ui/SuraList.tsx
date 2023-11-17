@@ -28,26 +28,26 @@ const SuraList = memo(({ className }: SuraListProps) => {
   const readingArabicDataInRedux = useSelector(getReadingArabicData);
 
   const selectedSura = useSelector(getSelectedSura);
-  const { currentSura } = useSelectedSuraActions();
+  const { setSelectedSura } = useSelectedSuraActions();
 
-  const selectedOyat = useSelector(getSelectedOyat);
-  const { currentOyat } = useSelectedOyatActions();
+  const currentOyat = useSelector(getSelectedOyat);
+  const { setSelectedtOyat } = useSelectedOyatActions();
 
-  const selectedPage = useSelector(getSelectedPage);
-  const { currentPage } = useSelectedPageActions();
+  const currentPage = useSelector(getSelectedPage);
+  const { setSelectedPage, incrementCurrentPage } = useSelectedPageActions();
 
   useEffect(() => {
-    currentOyat(1);
+    setSelectedtOyat(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSura.suraId]);
 
   if (SurahPageOyah[selectedSura.suraId]) {
     SurahPageOyah[selectedSura.suraId].forEach((element) => {
       if (
-        Number(element.start) <= selectedOyat.oyatNumber &&
-        Number(element.end) >= selectedOyat.oyatNumber
+        Number(element.start) <= currentOyat.oyatNumber &&
+        Number(element.end) >= currentOyat.oyatNumber
       ) {
-        currentPage(Number(element.page));
+        setSelectedPage(Number(element.page));
       }
     });
   }
@@ -64,21 +64,14 @@ const SuraList = memo(({ className }: SuraListProps) => {
   }, []);
 
   useEffect(() => {
-    if (
-      readingArabicDataInRedux &&
-      !readingArabicDataInRedux[selectedSura.suraId]
-    ) {
-      dispatch(
-        fetchReadingArabic({
-          suraId: selectedSura.suraId,
-          pageNumber: 1,
-          limitOfPage: 1,
-        }),
-      );
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, selectedSura.suraId]);
+    dispatch(
+      fetchReadingArabic({
+        suraId: selectedSura.suraId,
+        pageNumber: Number(currentPage.pageNumber),
+        limitOfPage: 1,
+      }),
+    );
+  }, [dispatch, currentPage.pageNumber, selectedSura.suraId]);
 
   // useEffect(() => {
   //   dispatch(
@@ -100,7 +93,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
             { [cls.active]: element.suraId === selectedSura?.suraId },
             [className],
           )}
-          onClick={() => currentSura(element)}
+          onClick={() => setSelectedSura(element)}
         >
           <p className={classNames(cls.SuraList__suraNumber, {}, [])}>
             {element.suraId}

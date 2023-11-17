@@ -10,7 +10,7 @@ export const SelectedOyatSlice = buildSlice({
   name: 'Selected Oyat',
   initialState,
   reducers: {
-    currentOyat: (state, { payload }: PayloadAction<number>) => {
+    setSelectedtOyat: (state, { payload }: PayloadAction<number>) => {
       state.oyatNumber = payload;
     },
   },

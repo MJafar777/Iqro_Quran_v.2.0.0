@@ -15,9 +15,9 @@ import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 
 export interface StateSchema {
-  selectedSura: SelectedSuraSchema;
-  selectedOyat: SelectedOyatSchema;
-  selectedPage: SelectedPageSchema;
+  currentSura: SelectedSuraSchema;
+  currentOyat: SelectedOyatSchema;
+  currentPage: SelectedPageSchema;
 
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 

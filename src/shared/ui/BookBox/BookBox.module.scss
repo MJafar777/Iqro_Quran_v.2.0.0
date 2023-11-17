@@ -9,7 +9,7 @@
   }
 
   @media only screen and (max-width: 1000px) {
-    width: calc(100vw - 50px);
-    height: calc((100vw - 50px) * 2339px / 1654px);
+    width: calc(100vw);
+    height: calc(100vw * 2339px / 1654px);
   }
 }
