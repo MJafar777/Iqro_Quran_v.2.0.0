@@ -13,7 +13,7 @@ export const SelectedSuraSlice = buildSlice({
   name: 'Selected Sura',
   initialState,
   reducers: {
-    currentSura: (state, { payload }: PayloadAction<SuraSchema>) => {
+    setSelectedSura: (state, { payload }: PayloadAction<SuraSchema>) => {
       // state.suraId = payload.suraId;
       // state.nameKril = payload.nameKril;
       // state.nameLotin = payload.nameLotin;

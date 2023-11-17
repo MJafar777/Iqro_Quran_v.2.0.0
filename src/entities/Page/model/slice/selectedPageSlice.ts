@@ -10,8 +10,18 @@ export const SelectedPageSlice = buildSlice({
   name: 'Selected Page',
   initialState,
   reducers: {
-    currentPage: (state, { payload }: PayloadAction<number>) => {
+    setSelectedPage: (state, { payload }: PayloadAction<number>) => {
       state.pageNumber = payload;
+    },
+
+    incrementCurrentPage: (state) => {
+      state.pageNumber += 1;
+    },
+
+    decrementCurrentPage: (state) => {
+      if (state.pageNumber > 1) {
+        state.pageNumber -= 1;
+      }
     },
   },
 });

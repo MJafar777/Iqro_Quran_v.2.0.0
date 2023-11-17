@@ -13,11 +13,11 @@ interface OyatListProps {
 const OyatList = ({ className }: OyatListProps) => {
   const selectedSura = useSelectedSuraValue();
 
-  const selectedOyat = useSelector(getSelectedOyat);
-  const { currentOyat } = useSelectedOyatActions();
+  const currentOyat = useSelector(getSelectedOyat);
+  const { setSelectedtOyat } = useSelectedOyatActions();
 
   const handleClickOyat = (oyatNumber: number) => {
-    currentOyat(oyatNumber);
+    setSelectedtOyat(oyatNumber);
   };
 
   return (
@@ -31,7 +31,7 @@ const OyatList = ({ className }: OyatListProps) => {
           onClick={() => handleClickOyat(element)}
           className={classNames(
             cls.OyatList__item,
-            { [cls.active]: element === selectedOyat.oyatNumber },
+            { [cls.active]: element === currentOyat.oyatNumber },
             [className],
           )}
         >

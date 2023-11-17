@@ -15,9 +15,9 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
-    selectedSura: selectedSuraReducer,
-    selectedOyat: selectedOyatReducer,
-    selectedPage: selectedPageReducer,
+    currentSura: selectedSuraReducer,
+    currentOyat: selectedOyatReducer,
+    currentPage: selectedPageReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
