@@ -9,7 +9,8 @@ import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import ReadingPrevNextBtn from '@/shared/ui/ReadingPrevNextBtn/ui/ReadingPrevNextBtn';
+import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
+import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 
 // import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
@@ -41,11 +42,11 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <ReadingPrevNextBtn prevIcon prev />
-
         <ReadingArabic />
 
-        <ReadingPrevNextBtn nextIcon next />
+        <ReadingPrevNextBtnGroup />
+
+        <ReadingPrevNextSuraBtnGroup />
       </div>
 
       {/* <ReadingTranskriptLotin /> */}
