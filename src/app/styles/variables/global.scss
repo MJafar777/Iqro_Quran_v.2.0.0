@@ -1,3 +1,12 @@
 :root {
-    --font-family-main: consolas, "Times New Roman", serif;
+  --font-family-main: consolas, "Times New Roman", serif;
+
+  // size
+  --navbar-height: 50px;
+  --sidebar-width: 300px;
+  --sidebar-width-collapsed: 80px;
+
+  // colors
+  --inverted-bg-color: #343a40;
+  --title-primary-color: #fff;
 }
