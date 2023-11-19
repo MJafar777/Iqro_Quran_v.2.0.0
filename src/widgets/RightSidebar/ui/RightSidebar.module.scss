@@ -1,10 +1,9 @@
 .Sidebar {
   position: fixed;
-  height: calc(100vh - var(--navbar-height));
-  width: var(--sidebar-width);
+  height: 100vh;
+  width: 342px;
   background: white;
-  top: var(--navbar-height);
-  border: 1.5px solid #ebeef0;
+  top: 0;
   border-radius: 2px;
   transition: all 0.5s;
   right: 0;
@@ -17,9 +16,7 @@
     height: 40px;
     padding: 12px;
     border-radius: 5px;
-    border: 1px solid var(--icon-hover-bg-color);
     transition: background-color 0.2s;
-
     &:hover {
       background-color: var(--icon-hover-bg-color);
     }

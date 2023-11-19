@@ -1,0 +1,10 @@
+.ReadingNavbarProgress {
+  width: 50%;
+  height: 5px;
+  background-color: #fff;
+
+  &__bar {
+    height: 5px;
+    background: #2ca4ab;
+  }
+}

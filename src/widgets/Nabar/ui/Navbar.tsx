@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable i18next/no-literal-string */
-import React, { memo, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack } from '@/shared/ui/Stack';
@@ -19,7 +19,8 @@ import { RightSidebar } from '@/widgets/RightSidebar';
 import { ListOfPages } from '@/widgets/ListOfPages';
 import { Setting } from '@/widgets/Setting';
 import { Search } from '@/widgets/Search';
-import { Sidebar } from '@/widgets/Sidebar';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { SidebarMain } from '@/widgets/SidebarMain';
 
 interface NavbarProp {
   className?: string;
@@ -28,6 +29,8 @@ interface NavbarProp {
 export const Navbar = memo((prop: NavbarProp) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [whichSidebar, setWhichSidebar] = useState('settings');
+
+  const { isSidebarActive, setIsSidebarActive } = useContext(ButtonsContext);
 
   const toogleSidebarSettings = () => {
     setIsOpenSidebar(false);
@@ -45,7 +48,7 @@ export const Navbar = memo((prop: NavbarProp) => {
         <Icon
           className={classNames(cls.icon)}
           Svg={burger}
-          onClick={() => console.log('ll')}
+          onClick={() => setIsSidebarActive(!isSidebarActive)}
           clickable
         />
         <Link to="/">
@@ -59,7 +62,6 @@ export const Navbar = memo((prop: NavbarProp) => {
 
         <div className={classNames(cls.time)}>06 May 2023-yil</div>
       </HStack>
-
       <HStack className={classNames(cls.iconWrapper)} justify="end" gap="8">
         <Icon className={classNames(cls.icon)} Svg={fir} />
         <div onClick={toogleSidebarSettings}>
@@ -69,14 +71,13 @@ export const Navbar = memo((prop: NavbarProp) => {
           <Icon className={classNames(cls.icon)} Svg={thir} />
         </div>
       </HStack>
-
       <RightSidebar
         children={whichSidebar === 'settings' ? <Setting /> : <Search />}
         isOpenSidebar={isOpenSidebar}
         whichSidebar={whichSidebar}
         setIsOpenSidebar={setIsOpenSidebar}
       />
-      <Sidebar children={<ListOfPages />} />
+      <SidebarMain children={<ListOfPages />} />
     </div>
   );
 });

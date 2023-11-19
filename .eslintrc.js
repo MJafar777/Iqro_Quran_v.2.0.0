@@ -28,6 +28,7 @@ module.exports = {
     'unused-imports',
   ],
   rules: {
+    'no-nested-ternary': 'off',
     'no-console': 'off',
     'react/jsx-props-no-spreading': 'off',
     'unused-imports/no-unused-imports': 'error',
