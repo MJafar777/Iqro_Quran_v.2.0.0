@@ -36,8 +36,6 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   const toogleSidebarSettings = () => {
     setIsRightsidebarActive(false);
-    console.log('dfghj');
-
     setWhichSidebar('settings');
   };
 
@@ -46,7 +44,6 @@ export const Navbar = memo((prop: NavbarProp) => {
     setWhichSidebar('Search');
   };
 
-  console.log(whichSidebar);
 
   return (
     <div className={classNames(cls.nabar)}>

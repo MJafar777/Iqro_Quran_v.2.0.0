@@ -30,7 +30,6 @@ const MainPage = () => {
     dispatch(fetchSurahlesList({}));
   }, [dispatch]);
 
-  console.log(listOfSurah);
 
   const content = (
     <div data-testid="MainPage">

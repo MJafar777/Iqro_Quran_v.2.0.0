@@ -1,9 +1,11 @@
-import React, { ReactNode, memo } from 'react';
+import React, { ReactNode, memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './li.module.scss';
 import { Icon } from '../Icon';
 import { Close, SearchSmall } from '@/shared/assets/icons/sidebarSearch';
+import { useSelectedSuraActions } from '@/entities/Surah';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface LiProp {
   className?: string;
@@ -11,17 +13,39 @@ interface LiProp {
   children: ReactNode;
   close?: boolean;
   search: boolean;
+  suraId?: number;
+  numberOfOyat?: number;
 }
 
 export const Li = memo((prop: LiProp) => {
-  const { to, className, children, close, search } = prop;
+  const { to, className, children, close, search, suraId, numberOfOyat } = prop;
+  const { setSelectedSura } = useSelectedSuraActions();
+  const {
+    isRightsidebarActive,
+    setIsRightsidebarActive,
+    setIsSidebarActive,
+    isSidebarActive,
+  } = useContext(ButtonsContext);
 
   const onToggle = () => {
-    alert('are you Sure remove this search');
+    console.log('log');
   };
 
   return (
-    <Link to={to} className={classNames(cls.li)}>
+    <Link
+      to={to}
+      className={classNames(cls.li)}
+      onClick={() => {
+        setSelectedSura({
+          suraId: suraId || 1,
+          nameLotin: '',
+          nameKril: '',
+          numberOfOyat: numberOfOyat || 7,
+        });
+        setIsRightsidebarActive(true);
+        setIsSidebarActive(true);
+      }}
+    >
       <div>
         {search ? (
           <Icon

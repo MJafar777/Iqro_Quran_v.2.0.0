@@ -23,7 +23,6 @@ export const Setting = memo((prop: SettingsProp) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onToggle = () => {
     setIsRightsidebarActive(!isRightsidebarActive);
-    console.log('ggggg');
   };
 
   const setting = useMemo(

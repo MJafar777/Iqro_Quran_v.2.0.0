@@ -15,17 +15,17 @@ interface SearchProp {
 }
 
 const listOfMostRead = [
-  { to: '/', title: 'Fotiha' },
-  { to: '/', title: 'Al-Baqarah' },
-  { to: '/', title: "Al-An'am" },
-  { to: '/', title: 'Yusuf' },
-  { to: '/', title: 'Hud' },
+  { to: '/reading', title: 'Fotiha', suraId: 1, numberOfOyat: 7 },
+  { to: '/reading', title: 'Al-Baqarah', suraId: 1, numberOfOyat: 7 },
+  { to: '/reading', title: "Al-An'am", suraId: 6, numberOfOyat: 115 },
+  { to: '/reading', title: 'Yusuf', suraId: 12, numberOfOyat: 111 },
+  { to: '/reading', title: 'Hud', suraId: 11, numberOfOyat: 123 },
 ];
 
 const lastReadSurahList = [
-  { to: '/', title: "Al-An'am" },
-  { to: '/', title: 'Yusuf' },
-  { to: '/', title: 'Hud' },
+  { to: '/reading', title: "Al-An'am", suraId: 6, numberOfOyat: 115 },
+  { to: '/reading', title: 'Yusuf', suraId: 12, numberOfOyat: 111 },
+  { to: '/reading', title: 'Hud', suraId: 11, numberOfOyat: 123 },
 ];
 
 export const Search = memo((prop: SearchProp) => {
@@ -39,7 +39,13 @@ export const Search = memo((prop: SearchProp) => {
   const itemsOfMostRead = useMemo(
     () =>
       listOfMostRead.map((item) => (
-        <Li search to={item.to} key={item.to}>
+        <Li
+          search
+          to={item.to}
+          key={item.title}
+          suraId={item.suraId}
+          numberOfOyat={item.numberOfOyat}
+        >
           {item.title}
         </Li>
       )),

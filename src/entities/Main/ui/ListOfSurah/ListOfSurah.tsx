@@ -29,9 +29,10 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
     >
       {isLoading
         ? skeletonList
-        : data?.map((oneSurah: OneSuraInListSchema) => {
+        : data?.map((oneSurah: OneSuraInListSchema,index:number) => {
             return (
               <OneItemSurah
+                key={index}
                 title={oneSurah.name_simple}
                 numberOfOyat={oneSurah.count_verse}
                 orderOfSura={oneSurah.quran_order}

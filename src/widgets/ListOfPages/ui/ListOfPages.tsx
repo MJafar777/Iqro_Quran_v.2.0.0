@@ -19,10 +19,13 @@ const listOfPage = [
 ];
 
 export const ListOfPages = () => {
+
+
+
   const itemListOfPage = useMemo(
     () =>
       listOfPage.map((item) => (
-        <Li search={false} to={item.path}>
+        <Li search={false} key={item.title} to={item.path} >
           {item.icon} {item.title}
         </Li>
       )),
