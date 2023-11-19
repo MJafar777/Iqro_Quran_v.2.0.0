@@ -4,6 +4,7 @@ import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Loader } from '@/widgets/Loader';
 
 const App = memo(() => {
   const { theme } = useTheme();
@@ -11,7 +12,7 @@ const App = memo(() => {
 
   return (
     <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <AppRouter />
       </Suspense>
     </div>
