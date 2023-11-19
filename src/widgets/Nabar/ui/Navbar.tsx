@@ -28,19 +28,25 @@ interface NavbarProp {
 
 export const Navbar = memo((prop: NavbarProp) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+
   const [whichSidebar, setWhichSidebar] = useState('settings');
 
-  const { isSidebarActive, setIsSidebarActive } = useContext(ButtonsContext);
+  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } =
+    useContext(ButtonsContext);
 
   const toogleSidebarSettings = () => {
-    setIsOpenSidebar(false);
+    setIsRightsidebarActive(false);
+    console.log('dfghj');
+
     setWhichSidebar('settings');
   };
 
   const toogleSidebarSearch = () => {
-    setIsOpenSidebar(false);
+    setIsRightsidebarActive(false);
     setWhichSidebar('Search');
   };
+
+  console.log(whichSidebar);
 
   return (
     <div className={classNames(cls.nabar)}>
@@ -73,9 +79,6 @@ export const Navbar = memo((prop: NavbarProp) => {
       </HStack>
       <RightSidebar
         children={whichSidebar === 'settings' ? <Setting /> : <Search />}
-        isOpenSidebar={isOpenSidebar}
-        whichSidebar={whichSidebar}
-        setIsOpenSidebar={setIsOpenSidebar}
       />
       <SidebarMain children={<ListOfPages />} />
     </div>

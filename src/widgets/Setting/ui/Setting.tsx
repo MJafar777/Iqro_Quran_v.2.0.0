@@ -1,13 +1,14 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable i18next/no-literal-string */
-import React, { memo, useState, useCallback } from 'react';
-import { Button } from '@mui/material';
+import React, { memo, useState, useContext, useMemo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './Setting.module.scss';
 import { ThemeSwitcher } from '@/shared/ui/ThemeSwitcher';
 import { Icon } from '@/shared/ui/Icon';
-import { back } from '@/shared/assets/icons/sidebarSetting';
+import CloseIcon from '@/shared/assets/icons/close-icon.svg';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { ChangeFontSize } from '@/shared/ui/ChangeFontSize/ChangeFontSize';
 
 interface SettingsProp {
   className?: string;
@@ -16,49 +17,40 @@ interface SettingsProp {
 export const Setting = memo((prop: SettingsProp) => {
   const [fontSize, setFontSize] = useState(3);
 
-  const decrease = useCallback(() => {
-    if (fontSize > 1) setFontSize((pre: number) => pre - 1);
-  }, [fontSize]);
+  const { isRightsidebarActive, setIsRightsidebarActive } =
+    useContext(ButtonsContext);
 
-  const increase = useCallback(() => {
-    if (fontSize < 5) setFontSize((pre: number) => pre + 1);
-  }, [fontSize]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onToggle = () => {
+    setIsRightsidebarActive(!isRightsidebarActive);
+    console.log('ggggg');
+  };
 
-  const backSize = useCallback(() => {
-    setFontSize(3);
-  }, []);
-
-  return (
-    <div className={classNames(cls.setting)}>
-      <VStack gap="32">
-        <p className={classNames(cls.title)}>Mavzular</p>
-        <HStack max className={classNames(cls.buttonWrapper)}>
-          <ThemeSwitcher />
+  const setting = useMemo(
+    () => (
+      <div className={classNames(cls.setting)}>
+        <HStack className={cls.headerOfSidebar}>
+          <p className={cls.titleOfHeader}> Sozlamlar</p>
+          <Icon
+            data-testid="sidebar-toggle"
+            onClick={onToggle}
+            className={cls.closeBtn}
+            Svg={CloseIcon}
+            height={0}
+            clickable
+          />
         </HStack>
-
-        <HStack
-          justify="between"
-          align="center"
-          className={cls.changeFiontSize}
-          max
-        >
-          <p className={cls.title}>Shrift hajmi</p>
-          <HStack className={classNames(cls.wrapperSize)} align="center">
-            <button className={cls.button} onClick={decrease}>
-              -
-            </button>
-            <button className={cls.button}>{fontSize}</button>
-            <button className={cls.button} onClick={increase}>
-              +
-            </button>
+        <VStack gap="32">
+          <p className={classNames(cls.title)}>Mavzular</p>
+          <HStack max className={classNames(cls.buttonWrapper)}>
+            <ThemeSwitcher />
           </HStack>
-        </HStack>
-        <HStack>
-          <Button className={classNames(cls.restore)} onClick={backSize}>
-            <Icon Svg={back} className={cls.back} /> Qaytarish
-          </Button>
-        </HStack>
-      </VStack>
-    </div>
+          <ChangeFontSize  />
+        </VStack>
+      </div>
+    ),
+    [onToggle],
   );
+
+  return setting;
 });

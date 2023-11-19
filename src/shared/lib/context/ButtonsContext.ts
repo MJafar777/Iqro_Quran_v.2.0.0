@@ -5,6 +5,8 @@ export interface ButtonsClickedProps {
   setReadingSidebarActive?: (isActive: boolean) => void;
   isSidebarActive: boolean;
   setIsSidebarActive: (active: boolean) => void;
+  isRightsidebarActive: boolean;
+  setIsRightsidebarActive: (active: boolean) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -12,4 +14,6 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setReadingSidebarActive: () => {},
   isSidebarActive: false,
   setIsSidebarActive: () => {},
+  isRightsidebarActive: false,
+  setIsRightsidebarActive: () => {},
 });

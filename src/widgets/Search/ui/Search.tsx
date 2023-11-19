@@ -1,9 +1,14 @@
 /* eslint-disable react/no-children-prop */
-import React, { memo, useMemo } from 'react';
+import React, { memo, useContext, useMemo } from 'react';
 import { Li } from '@/shared/ui/li/li';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Search.module.scss';
 import { SerchTile } from '@/shared/ui/SearchTitle';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import CloseIcon from '@/shared/assets/icons/close-icon.svg';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Icon } from '@/shared/ui/Icon/Icon';
+import { HStack } from '@/shared/ui/Stack';
+import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 
 interface SearchProp {
   className?: string;
@@ -24,6 +29,13 @@ const lastReadSurahList = [
 ];
 
 export const Search = memo((prop: SearchProp) => {
+  const { isRightsidebarActive, setIsRightsidebarActive } =
+    useContext(ButtonsContext);
+
+  const onToggle = () => {
+    setIsRightsidebarActive(!isRightsidebarActive);
+  };
+
   const itemsOfMostRead = useMemo(
     () =>
       listOfMostRead.map((item) => (
@@ -46,6 +58,23 @@ export const Search = memo((prop: SearchProp) => {
 
   return (
     <div className={classNames(cls.wrapperListSearch)}>
+      <HStack className={cls.headerOfSidebar} max>
+        <Icon Svg={SearchSmall} className={cls.icon} />
+        <input
+          type="text"
+          placeholder="Search something"
+          className={cls.input}
+        />
+
+        <Icon
+          data-testid="sidebar-toggle"
+          onClick={onToggle}
+          className={cls.closeBtn}
+          Svg={CloseIcon}
+          height={0}
+          clickable
+        />
+      </HStack>
       <SerchTile>Ko‘p ko‘rilganlar</SerchTile>
       {itemsOfMostRead}
       <SerchTile>So‘ngi ko‘rilganlar</SerchTile>

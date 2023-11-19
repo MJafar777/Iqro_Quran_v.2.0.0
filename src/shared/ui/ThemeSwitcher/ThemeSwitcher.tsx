@@ -11,6 +11,7 @@ interface ThemeSwitcherProp {
 }
 export const ThemeSwitcher = memo((prop: ThemeSwitcherProp) => {
   const [active, setActive] = useState(1);
+
   return (
     <div className={classNames(cls.containerButtonTheme)}>
       <Button
