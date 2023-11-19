@@ -9,7 +9,11 @@ import {
 // import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
 import { fetchSurahlesList } from '../model/service/fetchSurahList/fetchSurahList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getReadingArabicData } from '../model/selectors/ListSurah';
+import {
+  getError,
+  getIsLoading,
+  getListOfSurahs,
+} from '../model/selectors/ListSurah';
 import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
 // import { Navbar } from '@/widgets/Nabar';
 
@@ -19,8 +23,9 @@ const reducers: ReducersList = {
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const listOfSurah = useSelector(getReadingArabicData);
-
+  const listOfSurah = useSelector(getListOfSurahs);
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
   useEffect(() => {
     dispatch(fetchSurahlesList({}));
   }, [dispatch]);
@@ -30,7 +35,11 @@ const MainPage = () => {
   const content = (
     <div data-testid="MainPage">
       <MainHeader />
-      <ListOfSurah data={listOfSurah} />
+      <ListOfSurah
+        isLoading={isLoading || false}
+        data={listOfSurah}
+        error={error || ''}
+      />
       <MobileAppView />
     </div>
   );

@@ -8,6 +8,7 @@ import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { selectedSuraReducer } from '@/entities/Surah';
 import { selectedOyatReducer } from '@/entities/Oyat';
 import { selectedPageReducer } from '@/entities/Page';
+import { SurahListSliceReducer } from '@/pages/MainPage';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -18,6 +19,8 @@ export function createReduxStore(
     currentSura: selectedSuraReducer,
     currentOyat: selectedOyatReducer,
     currentPage: selectedPageReducer,
+    mainPage:SurahListSliceReducer,
+
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 

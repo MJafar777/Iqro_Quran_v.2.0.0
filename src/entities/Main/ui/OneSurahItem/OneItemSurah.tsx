@@ -6,6 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { OrderWrapper } from '@/shared/ui/OrderWrapper/OrderWrapper';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './OneItemSurah.module.scss';
+import { useSelectedSuraActions } from '@/entities/Surah';
 
 interface OneItemSuraProp {
   title?: string;
@@ -17,6 +18,9 @@ interface OneItemSuraProp {
 const OneItemSurah = memo((prop: OneItemSuraProp) => {
   const { title, numberOfOyat, arabic, orderOfSura = 1, className } = prop;
   const [whichOrderHovered, setWhichOrderHovered] = useState(0);
+  const { setSelectedSura } = useSelectedSuraActions();
+
+  const readOneSurah = (id: string) => {};
 
   return (
     <Link
@@ -24,8 +28,16 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
         textDecoration: 'none',
         color: 'black',
       }}
-      to={`/orderOfSura/${orderOfSura}`}
+      to="/reading"
       className={classNames(cls.oneItemSura, {}, [className])}
+      onClick={() =>
+        setSelectedSura({
+          suraId: orderOfSura,
+          nameLotin: '',
+          nameKril: '',
+          numberOfOyat: numberOfOyat || 1,
+        })
+      }
     >
       <HStack max align="center">
         <HStack style={{ width: '60%' }} align="center" justify="start">

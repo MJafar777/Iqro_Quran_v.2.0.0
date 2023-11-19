@@ -24,7 +24,7 @@ export interface StateSchema {
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
-  mainPage?: SurahListSchema;
+  mainPage: SurahListSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
