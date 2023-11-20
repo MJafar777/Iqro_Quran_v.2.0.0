@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { MainLayout } from '@/shared/layouts/MainLayout';
 import { Navbar } from '@/widgets/Nabar';
 // import { Sidebar } from '@/widgets/Sidebar';
+import { Loader } from '@/widgets/Loader';
 
 const App = memo(() => {
   const { theme } = useTheme();
@@ -14,9 +15,9 @@ const App = memo(() => {
 
   return (
     <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-          <Suspense fallback="">
+          <Suspense fallback={<Loader />}>
             <MainLayout
               header={<Navbar />}
               content={<AppRouter />}
@@ -25,6 +26,7 @@ const App = memo(() => {
             />
           </Suspense>
         </div>
+        <AppRouter />
       </Suspense>
     </div>
   );
