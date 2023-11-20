@@ -10,6 +10,7 @@ import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
+import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
 
 // import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
@@ -46,6 +47,8 @@ const ReadingPage = (props: ReadingPageProps) => {
             className={classNames(cls.ReadingPage__prevBtnIcon, {}, [])}
           />
         </div>
+
+        <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
 
         <ReadingArabic />
 
