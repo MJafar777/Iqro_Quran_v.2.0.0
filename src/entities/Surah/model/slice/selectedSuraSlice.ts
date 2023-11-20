@@ -1,26 +1,30 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { buildSlice } from '@/shared/lib/store';
-import { SelectedSuraSchema, SuraSchema } from '../types/selectedSuraSchema';
+import { SelectedSuraSchema } from '../types/selectedSuraSchema';
 
 const initialState: SelectedSuraSchema = {
-  suraId: 1,
-  nameKril: '',
-  nameLotin: 'Fotiha',
-  numberOfOyat: 7,
+  _id: '',
+  revelation_place: '',
+  revelation_order: 0,
+  bismillah_pre: false,
+  name_complex: '',
+  name_arabic: '',
+  pages: [1, 1],
+  quran_order: 0,
+  count_verse: 0,
+  name_simple: '',
+  telegram_file_id: '',
+  id: '',
 };
 
 export const SelectedSuraSlice = buildSlice({
   name: 'Selected Sura',
   initialState,
   reducers: {
-    setSelectedSura: (state, { payload }: PayloadAction<SuraSchema>) => {
-      // state.suraId = payload.suraId;
-      // state.nameKril = payload.nameKril;
-      // state.nameLotin = payload.nameLotin;
-      // state.numberOfOyat = payload.numberOfOyat;
-
-      // Object.assign(state, payload) qismi, payload obyektining barcha xususiyatlari state obyektiga nusxalanadi
-      // Yuqoridagi vazifani bajaradi
+    setSelectedSura: (
+      state,
+      { payload }: PayloadAction<SelectedSuraSchema>,
+    ) => {
       Object.assign(state, payload);
     },
   },

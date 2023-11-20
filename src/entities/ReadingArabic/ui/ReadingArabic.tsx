@@ -15,14 +15,14 @@ import {
 import { readingArabicReducer } from '../model/slice/readingArabicSlice';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 
-import BookBox from '@/shared/ui/BookBox/BookBox';
-import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
-import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
+// import BookBox from '@/shared/ui/BookBox/BookBox';
+// import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
+// import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
 import { useSelectedSuraValue } from '@/entities/Surah/model/selectors/getSelectedSuraValue/getSelectedSuraValue';
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
-import { SurahPageOyah } from '@/entities/Surah/model/consts/SurahData';
+// import { SurahPageOyah } from '@/entities/Surah/model/consts/SurahData';
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
 import { getSelectedSura } from '@/entities/Surah/model/selectors/getSelectedSura/getSelectedSura';
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
@@ -63,48 +63,48 @@ export const ReadingArabic = memo(
       console.log(isError);
     }
 
-    if (data) {
-      console.log(data[currentSura.suraId]?.data);
-      // console.log(data[currentSura.suraId]?.data?.data[0]?.pages[0]);
+    // if (data) {
+    //   console.log(data[currentSura.suraId]?.data);
+    //   // console.log(data[currentSura.suraId]?.data?.data[0]?.pages[0]);
 
-      // console.log(currentPage.pageNumber);
+    //   // console.log(currentPage.pageNumber);
 
-      // console.log(data[currentSura.suraId]?.data.resourse);
-    }
+    //   // console.log(data[currentSura.suraId]?.data.resourse);
+    // }
 
-    const handleClickNextPagebBtn = () => {
-      SurahPageOyah[selectedSura.suraId].forEach((element) => {
-        if (Number(element.page) === currentPage.pageNumber + 1) {
-          console.log(element, currentPage.pageNumber + 1, 'ikkisi teng');
-          setSelectedtOyat(Number(element.start));
-        } else if (Number(element.page) < currentPage.pageNumber + 1) {
-          console.log(element, currentPage.pageNumber + 1, 'currentPage katta');
-        } else if (Number(element.page) > currentPage.pageNumber + 1) {
-          console.log(
-            element,
-            currentPage.pageNumber + 1,
-            'currentPage kichik',
-          );
-        }
-      });
-    };
+    // const handleClickNextPagebBtn = () => {
+    //   SurahPageOyah[selectedSura.suraId].forEach((element) => {
+    //     if (Number(element.page) === currentPage.pageNumber + 1) {
+    //       console.log(element, currentPage.pageNumber + 1, 'ikkisi teng');
+    //       setSelectedtOyat(Number(element.start));
+    //     } else if (Number(element.page) < currentPage.pageNumber + 1) {
+    //       console.log(element, currentPage.pageNumber + 1, 'currentPage katta');
+    //     } else if (Number(element.page) > currentPage.pageNumber + 1) {
+    //       console.log(
+    //         element,
+    //         currentPage.pageNumber + 1,
+    //         'currentPage kichik',
+    //       );
+    //     }
+    //   });
+    // };
 
-    const handleClickPrevPagebBtn = () => {
-      SurahPageOyah[selectedSura.suraId].forEach((element) => {
-        if (Number(element.page) === currentPage.pageNumber - 1) {
-          console.log(element, currentPage.pageNumber + 1, 'ikkisi teng');
-          setSelectedtOyat(Number(element.start));
-        } else if (Number(element.page) < currentPage.pageNumber + 1) {
-          console.log(element, currentPage.pageNumber + 1, 'currentPage katta');
-        } else if (Number(element.page) > currentPage.pageNumber + 1) {
-          console.log(
-            element,
-            currentPage.pageNumber + 1,
-            'currentPage kichik',
-          );
-        }
-      });
-    };
+    // const handleClickPrevPagebBtn = () => {
+    //   SurahPageOyah[selectedSura.suraId].forEach((element) => {
+    //     if (Number(element.page) === currentPage.pageNumber - 1) {
+    //       console.log(element, currentPage.pageNumber + 1, 'ikkisi teng');
+    //       setSelectedtOyat(Number(element.start));
+    //     } else if (Number(element.page) < currentPage.pageNumber + 1) {
+    //       console.log(element, currentPage.pageNumber + 1, 'currentPage katta');
+    //     } else if (Number(element.page) > currentPage.pageNumber + 1) {
+    //       console.log(
+    //         element,
+    //         currentPage.pageNumber + 1,
+    //         'currentPage kichik',
+    //       );
+    //     }
+    //   });
+    // };
 
     return (
       <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
@@ -115,7 +115,7 @@ export const ReadingArabic = memo(
           <div
             className={classNames(cls.ReadingArabic__readBox, {}, [className])}
           >
-            {isLoading ? (
+            {/* {isLoading ? (
               <BookBoxSkeleton />
             ) : data && data[currentSura.suraId]?.data.resourse ? (
               <BookBox
@@ -134,7 +134,7 @@ export const ReadingArabic = memo(
               />
             ) : (
               ''
-            )}
+            )} */}
           </div>
         </div>
       </DynamicModuleLoader>

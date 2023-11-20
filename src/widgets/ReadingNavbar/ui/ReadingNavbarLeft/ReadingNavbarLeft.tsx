@@ -22,7 +22,7 @@ const ReadingNavbarLeft = memo(({ className }: ReadingNavbarLeftProps) => {
       }
       className={classNames(cls.ReadingNavbarLeft, {}, [className])}
     >
-      <p>{currentSura.nameLotin}</p>
+      <p>{currentSura?.name_complex}</p>
 
       <ArrowIcon
         className={classNames(
