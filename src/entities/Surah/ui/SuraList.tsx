@@ -17,6 +17,7 @@ import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 import { getSelectedOyat } from '@/entities/Oyat/model/selectors/getSelectedOyat';
 // eslint-disable-next-line ulbi-tv-plugin/public-api-imports
 import { useSelectedOyatActions } from '@/entities/Oyat/model/slice/seletedOyatSlice';
+import { fetchSurahlesList } from '@/pages/MainPage';
 // import { getSelectedOyat, useSelectedOyatActions } from '@/entities/Oyat';
 
 interface SuraListProps {
@@ -32,6 +33,10 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
   const currentOyat = useSelector(getSelectedOyat);
   const { setSelectedtOyat } = useSelectedOyatActions();
+  
+  useEffect(() => {
+    dispatch(fetchSurahlesList({}));
+  }, [dispatch]);
 
   const currentPage = useSelector(getSelectedPage);
   const { setSelectedPage, incrementCurrentPage } = useSelectedPageActions();
