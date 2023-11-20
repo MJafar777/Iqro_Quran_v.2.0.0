@@ -10,7 +10,7 @@ export const fetchSurahlesList = createAsyncThunk<
   const { extra, rejectWithValue } = thunkApi;
 
   try {
-    const response = await extra.api.get<ResponseOfBacend>('/chapter');
+    const response = await extra.api.get<ResponseOfBacend>('/chapter/by_quran');
 
     if (!response.data) {
       throw new Error();
