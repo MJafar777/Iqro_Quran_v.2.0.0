@@ -33,13 +33,13 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
   const currentOyat = useSelector(getSelectedOyat);
   const { setSelectedtOyat } = useSelectedOyatActions();
-  
-  useEffect(() => {
-    dispatch(fetchSurahlesList({}));
-  }, [dispatch]);
 
   const currentPage = useSelector(getSelectedPage);
   const { setSelectedPage, incrementCurrentPage } = useSelectedPageActions();
+
+  useEffect(() => {
+    dispatch(fetchSurahlesList({}));
+  }, [dispatch]);
 
   useEffect(() => {
     setSelectedtOyat(1);
