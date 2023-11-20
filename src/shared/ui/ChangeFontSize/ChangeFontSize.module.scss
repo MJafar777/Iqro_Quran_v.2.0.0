@@ -1,0 +1,73 @@
+.changeFiontSize {
+  display: flex;
+  width: 100%;
+  border-top: #e1e0e0 solid 0.1px;
+  border-bottom: #272727 solid 0.1px;
+  padding-bottom: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 12px 6px 12px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #272727;
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 24wpx;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.title {
+  color: #272727;
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 18px 12px 6px 12px;
+}
+
+.wrapperSize {
+  color: black;
+}
+
+.restore {
+  border-radius: 5px;
+  background: #272727 !important;
+  color: #fff !important;
+  cursor: pointer;
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: white !important;
+    border: solid 1px rgb(206, 204, 204);
+    color: black !important;
+    .back {
+      color: black;
+    }
+  }
+}
+
+.back {
+  width: 24px;
+  height: 24px;
+  color: white;
+  margin-right: 12px;
+}

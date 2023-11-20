@@ -12,12 +12,20 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
   const [readingSidebarActive, setReadingSidebarActive] =
     useState<boolean>(true);
 
+  const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
+
+  const [isRightsidebarActive, setIsRightsidebarActive] = useState(true);
+
   const defaultProps = useMemo(
     () => ({
       readingSidebarActive,
       setReadingSidebarActive,
+      isSidebarActive,
+      setIsSidebarActive,
+      isRightsidebarActive,
+      setIsRightsidebarActive
     }),
-    [readingSidebarActive],
+    [isRightsidebarActive, isSidebarActive, readingSidebarActive],
   );
 
   return (

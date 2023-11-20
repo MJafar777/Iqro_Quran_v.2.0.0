@@ -10,7 +10,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = memo(({ className, children }: SidebarProps) => {
-  const { readingSidebarActive, setReadingSidebarActive } =
+  const { readingSidebarActive, setReadingSidebarActive, isSidebarActive } =
     useContext(ButtonsContext);
 
   return (
@@ -18,11 +18,11 @@ export const Sidebar = memo(({ className, children }: SidebarProps) => {
       data-testid="sidebar"
       className={classNames(
         cls.Sidebar,
-        { [cls.collapsed]: !readingSidebarActive },
+        { [cls.collapsed]: !readingSidebarActive || isSidebarActive },
         [className],
       )}
     >
-      {readingSidebarActive ? (
+      {readingSidebarActive && !isSidebarActive ? (
         <CloseIcon
           className={cls.closeBtn}
           onClick={() =>

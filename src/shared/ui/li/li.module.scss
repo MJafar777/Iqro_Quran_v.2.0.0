@@ -1,14 +1,15 @@
 .li {
   width: 100%;
+  cursor: pointer;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   border: #27272731 0.1px solid;
   padding: 6px 12px;
   gap: 16px;
   text-align: center;
   font-family: Proxima Vara;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -23,4 +24,14 @@
   color: black;
   width: 20px;
   height: 20px;
+  margin-right: 12px;
+}
+
+.closeBtn {
+  color: black;
+  width: 16px;
+  height: 16px;
+  &:hover {
+    // color: red !important;
+  }
 }

@@ -11,23 +11,24 @@ interface ThemeSwitcherProp {
 }
 export const ThemeSwitcher = memo((prop: ThemeSwitcherProp) => {
   const [active, setActive] = useState(1);
+
   return (
     <div className={classNames(cls.containerButtonTheme)}>
       <Button
         onClick={() => setActive(1)}
-        className={classNames(cls.buttonTheme, { active: active === 1 })}
+        className={active === 1 ? cls.buttonThemeActive : cls.buttonTheme}
       >
         Avto
       </Button>
       <Button
         onClick={() => setActive(2)}
-        className={classNames(cls.buttonTheme, { active: active === 2 })}
+        className={active === 2 ? cls.buttonThemeActive : cls.buttonTheme}
       >
         Yorqin
       </Button>
       <Button
         onClick={() => setActive(3)}
-        className={classNames(cls.buttonTheme, { active: active === 3 })}
+        className={active === 3 ? cls.buttonThemeActive : cls.buttonTheme}
       >
         Qorong‘i
       </Button>
