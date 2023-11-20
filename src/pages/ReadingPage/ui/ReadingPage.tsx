@@ -6,13 +6,12 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Navbar } from '@/widgets/Nabar';
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
-import { ReadingArabic } from '@/entities/ReadingArabic';
+// import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
-
-// import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
+import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
 interface ReadingPageProps {
   className?: string;
@@ -42,7 +41,9 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <ReadingArabic />
+        {/* <ReadingArabic /> */}
+
+        <ReadingTranskriptLotin />
 
         <ReadingPrevNextBtnGroup />
 

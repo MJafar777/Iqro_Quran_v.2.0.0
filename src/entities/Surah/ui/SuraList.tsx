@@ -13,6 +13,7 @@ import { Skeleton } from '@/shared/ui/Skeleton';
 import { useSelectedSuraActions } from '../model/slice/selectedSuraSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getSelectedSura } from '../model/selectors/getSelectedSura/getSelectedSura';
+import { useSelectedPageActions } from '@/entities/Page';
 
 interface SuraListProps {
   className?: string;
@@ -23,6 +24,8 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
   const currentSura = useSelector(getSelectedSura);
   const { setSelectedSura } = useSelectedSuraActions();
+
+  const { setSelectedPage } = useSelectedPageActions();
 
   const listOfSurah = useSelector(getListOfSurahs);
   const isLoading = useSelector(getIsLoading);
@@ -38,6 +41,11 @@ const SuraList = memo(({ className }: SuraListProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, listOfSurah]);
+
+  useEffect(() => {
+    setSelectedPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSura]);
 
   return (
     <div className={classNames(cls.SuraList, {}, [className])}>
