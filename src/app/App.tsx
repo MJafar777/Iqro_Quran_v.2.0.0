@@ -17,16 +17,13 @@ const App = memo(() => {
     <div id="app" className={classNames('app_redesigned', {}, [theme])}>
       <Suspense fallback={<Loader />}>
         <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-          <Suspense fallback={<Loader />}>
-            <MainLayout
-              header={<Navbar />}
-              content={<AppRouter />}
-              // sidebar={<Sidebar />}
-              // toolbar={toolbar}
-            />
-          </Suspense>
+          <MainLayout
+            header={<Navbar />}
+            content={<AppRouter />}
+            // sidebar={<Sidebar />}
+            // toolbar={toolbar}
+          />
         </div>
-        <AppRouter />
       </Suspense>
     </div>
   );

@@ -10,6 +10,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Icon } from '@/shared/ui/Icon/Icon';
 import { HStack } from '@/shared/ui/Stack';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
+import { LAST_READ_SURAH } from '@/shared/const/localstorage';
 
 interface SearchProp {
   className?: string;
@@ -37,7 +38,7 @@ export const Search = memo((prop: SearchProp) => {
     setIsRightsidebarActive(!isRightsidebarActive);
   };
 
-  const getList = JSON.parse(localStorage.getItem('listLastRead') || '');
+  const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH) || '');
 
   const itemsOfMostRead = useMemo(
     () =>
