@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import cls from './SwitchButton.module.scss';
+import cls from './ThemeSwitchButton.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface ButtonsNames {
@@ -15,16 +15,16 @@ const ThemeSwtichButton = (props: ButtonsNames) => {
     if (divRef.current && index === 1) {
       divRef.current.style.left = '0';
     } else if (divRef.current && index === 2) {
-      divRef.current.style.left = '130px';
+      divRef.current.style.left = '110px';
     } else if (divRef.current && index === 3) {
-      divRef.current.style.left = '260px';
+      divRef.current.style.left = '220px';
     } else if (divRef.current && index === 4) {
-      divRef.current.style.left = '390px';
+      divRef.current.style.left = '340px';
     }
   };
 
   return (
-    <div className={classNames(cls.SwtichButton, {}, [])}>
+    <div className={classNames(cls.ThemeSwtichButton, {}, [])}>
       <div className={classNames(cls.buttonBox, {}, [])}>
         <div
           ref={divRef}

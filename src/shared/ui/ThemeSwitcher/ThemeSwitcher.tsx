@@ -3,7 +3,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { memo, useState } from 'react';
 // import { Button } from '../Button';
-import SwtichButton from '../SwitchButton/SwtichButton';
+import ThemeSwtichButton from '../ThemeSwitchButton/ThemeSwtichButton';
 
 interface ThemeSwitcherProp {
   className?: string;
@@ -11,5 +11,9 @@ interface ThemeSwitcherProp {
 export const ThemeSwitcher = memo((prop: ThemeSwitcherProp) => {
   const [active, setActive] = useState(1);
 
-  return <SwtichButton buttonsNames={['Avto', 'Yorqin', 'Qorong‘i']} />;
+  return (
+    <div style={{ transform: 'scale(0.9)' }}>
+      <ThemeSwtichButton buttonsNames={['Avto', 'Yorqin', 'Qorong‘i']} />
+    </div>
+  );
 });

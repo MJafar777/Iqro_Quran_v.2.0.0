@@ -1,7 +1,7 @@
-.SwtichButton {
+.ThemeSwtichButton {
   width: 100%;
   display: flex;
-  margin: 30px auto;
+  margin: 0 auto;
   align-items: center;
   justify-content: center;
 
@@ -21,7 +21,7 @@
     left: 0;
     top: 0;
     position: absolute;
-    width: 120px;
+    width: 100px;
     height: 85%;
     border-radius: 30px;
     background-color: #f0f0f0;
@@ -33,7 +33,7 @@
   }
 
   .toggleBtn {
-    width: 120px;
+    width: 100px;
     padding: 15px 10px;
     cursor: pointer;
     background-color: transparent;
