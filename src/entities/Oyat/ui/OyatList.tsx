@@ -2,12 +2,17 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './OyatList.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { useSelectedSuraValue } from '@/entities/Surah';
+import {
+  useSelectedSuraValue,
+  SurahPageOyah,
+  getSelectedSura,
+} from '@/entities/Surah';
 import { useSelectedOyatActions } from '../model/slice/seletedOyatSlice';
 import { getSelectedOyat } from '../model/selectors/getSelectedOyat';
 
 import { getError, getIsLoading } from '@/pages/MainPage';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { getSelectedPage } from '@/entities/Page';
 
 interface OyatListProps {
   className?: string;
@@ -18,8 +23,12 @@ const OyatList = ({ className }: OyatListProps) => {
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
 
+  const currentSura = useSelector(getSelectedSura);
+
   const currentOyat = useSelector(getSelectedOyat);
   const { setSelectedtOyat } = useSelectedOyatActions();
+
+  const currentPage = useSelector(getSelectedPage);
 
   const handleClickOyat = (oyatNumber: number) => {
     setSelectedtOyat(oyatNumber);
@@ -29,6 +38,18 @@ const OyatList = ({ className }: OyatListProps) => {
     setSelectedtOyat(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSura]);
+
+  useEffect(() => {
+    SurahPageOyah[currentSura.quran_order]?.forEach((element: any) => {
+      if (
+        Number(element.page) ===
+        Number(currentSura.pages[0] + currentPage.pageNumber - 1)
+      ) {
+        setSelectedtOyat(Number(element.start));
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   return (
     <div className={classNames(cls.OyatList, {}, [className])}>
