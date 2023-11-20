@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable i18next/no-literal-string */
-import React, { memo, useState, useContext, useMemo } from 'react';
+import React, { memo, useContext, useMemo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './Setting.module.scss';
@@ -15,7 +15,6 @@ interface SettingsProp {
 }
 
 export const Setting = memo((prop: SettingsProp) => {
-  const [fontSize, setFontSize] = useState(3);
 
   const { isRightsidebarActive, setIsRightsidebarActive } =
     useContext(ButtonsContext);

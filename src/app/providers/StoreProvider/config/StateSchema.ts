@@ -14,6 +14,7 @@ import { SelectedPageSchema } from '@/entities/Page';
 import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
+import { SearchData } from '@/entities/Main';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -26,7 +27,8 @@ export interface StateSchema {
   readingArabic?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   mainPage: SurahListSchema;
-  timeData:DataTimeScheme
+  timeData:DataTimeScheme;
+  search:SearchData
 }
 
 export type StateSchemaKey = keyof StateSchema;
