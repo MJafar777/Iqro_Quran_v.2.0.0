@@ -46,7 +46,7 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
         }) => {
           if (oneSuraData.suraId != orderOfSura) {
             localStorage.setItem(
-              'listLastRead',
+              LAST_READ_SURAH,
               JSON.stringify([...getList, newRead]),
             );
           }
