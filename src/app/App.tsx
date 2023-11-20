@@ -16,14 +16,12 @@ const App = memo(() => {
   return (
     <div id="app" className={classNames('app_redesigned', {}, [theme])}>
       <Suspense fallback={<Loader />}>
-        <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-          <MainLayout
-            header={<Navbar />}
-            content={<AppRouter />}
-            // sidebar={<Sidebar />}
-            // toolbar={toolbar}
-          />
-        </div>
+        <MainLayout
+          header={<Navbar />}
+          content={<AppRouter />}
+          // sidebar={<Sidebar />}
+          // toolbar={toolbar}
+        />
       </Suspense>
     </div>
   );
