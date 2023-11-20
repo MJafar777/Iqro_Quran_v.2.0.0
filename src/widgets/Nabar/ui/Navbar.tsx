@@ -1,7 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-children-prop */
 /* eslint-disable i18next/no-literal-string */
-import React, { memo, useContext, useState } from 'react';
+import React, {
+  memo, useContext, useEffect, useState,
+} from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack } from '@/shared/ui/Stack';
 import cls from './Navbar.module.scss';
@@ -21,6 +25,10 @@ import { Setting } from '@/widgets/Setting';
 import { Search } from '@/widgets/Search';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { SidebarMain } from '@/widgets/SidebarMain';
+import { fetchTime } from '../model/service/fetchTime';
+import { getTimeArrabic } from '../model/selector/getSelecterTime';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { fullMoth } from '../model/const/moth';
 
 interface NavbarProp {
   className?: string;
@@ -33,6 +41,8 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
 
+  const dispatch = useAppDispatch();
+
   const toogleSidebarSettings = () => {
     setIsRightsidebarActive(false);
     setWhichSidebar('settings');
@@ -42,6 +52,13 @@ export const Navbar = memo((prop: NavbarProp) => {
     setIsRightsidebarActive(false);
     setWhichSidebar('Search');
   };
+
+  useEffect(() => {
+    dispatch(fetchTime({}));
+  }, [dispatch]);
+
+  const getTimeData = useSelector(getTimeArrabic);
+  const data = new Date();
 
   return (
     <div className={classNames(cls.nabar)}>
@@ -57,11 +74,16 @@ export const Navbar = memo((prop: NavbarProp) => {
         </Link>
       </HStack>
       <HStack className={classNames(cls.wrapperTime)} max justify="center">
-        <div className={classNames(cls.timeOfArrabic)}>15 Shavvol 1444-yil</div>
+        <div className={classNames(cls.timeOfArrabic)}>
+          {getTimeData?.dayOfMonth} - {getTimeData?.uz?.monthText}{' '}
+          {getTimeData?.year}-yil
+        </div>
 
         <AppImage className={classNames(cls.bismillah)} src={Bismillah} />
 
-        <div className={classNames(cls.time)}>06 May 2023-yil</div>
+        <div className={classNames(cls.time)}>
+          {data.getDate()} {fullMoth[data?.getMonth()]} {data.getFullYear()}-yil
+        </div>
       </HStack>
       <HStack className={classNames(cls.iconWrapper)} justify="end" gap="8">
         <Icon className={classNames(cls.icon)} Svg={fir} />

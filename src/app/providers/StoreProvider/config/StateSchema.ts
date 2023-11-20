@@ -13,6 +13,7 @@ import { SelectedOyatSchema } from '@/entities/Oyat';
 import { SelectedPageSchema } from '@/entities/Page';
 import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
+import { DataTimeScheme } from '@/widgets/Nabar';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -25,6 +26,7 @@ export interface StateSchema {
   readingArabic?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   mainPage: SurahListSchema;
+  timeData:DataTimeScheme
 }
 
 export type StateSchemaKey = keyof StateSchema;
