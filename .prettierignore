@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # # Ignore artifacts:
 # build
 # coverage
@@ -6,3 +7,12 @@
 # *.css
 # *.scss
 
+=======
+# Ignore artifacts:
+build
+coverage
+node_modules
+*.html
+# *.css
+# *.scss
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72

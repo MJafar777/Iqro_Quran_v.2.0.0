@@ -7,7 +7,11 @@
     "start": "webpack serve --env port=3000",
     "start:vite": "vite",
     "build:prod": "webpack  --env mode=production",
+<<<<<<< HEAD
     "build:dev": "webpack  --env mode=development apiUrl=http://iqro-quran.uz/developmentBackend/api/v2",
+=======
+    "build:dev": "webpack  --env mode=development",
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
     "prettier": "npx prettier --write **/*.{ts,tsx,json}",
     "lint:ts": "eslint \"./src/**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
@@ -33,6 +37,12 @@
       "prettier --list-different",
       "eslint"
     ]
+<<<<<<< HEAD
+=======
+  },
+  "prettier": {
+    "singleQuote": true
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
   },
   "keywords": [],
   "author": "",
@@ -121,11 +131,15 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.6.6",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+=======
+    "@headlessui/react": "^1.6.6",
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
     "@react-spring/web": "^9.5.2",
     "@reduxjs/toolkit": "^1.9.0",
     "@use-gesture/react": "^10.2.19",
@@ -139,8 +153,12 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.3",
     "react-redux": "^8.0.5",
+<<<<<<< HEAD
     "react-router-dom": "^6.2.1",
     "react-virtuoso": "^4.6.2"
+=======
+    "react-router-dom": "^6.2.1"
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
   },
   "loki": {
     "configurations": {

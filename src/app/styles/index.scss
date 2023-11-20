@@ -4,6 +4,7 @@
 @import 'themes/dark';
 @import 'themes/orange';
 
+<<<<<<< HEAD
 @font-face {
   font-family: 'Helvetica Neue';
   src: url('../../shared/assets/font/HelveticaNeue/HelveticaNeueCyr-Italic.ttf')
@@ -26,6 +27,20 @@ body {
   color: var(--primary-color);
   background: var(--bg-color);
   min-height: 100vh;
+=======
+.app {
+  font: var(--font-m);
+  color: var(--primary-color);
+  background: var(--bg-color);
+  min-height: 100vh;
+}
+
+.app_redesigned {
+  background: var(--bg-redesigned);
+  min-height: 100vh;
+  font: var(--font-m-redesigned);
+  color: var(--text-redesigned);
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
 }
 
 .content-page {
@@ -38,22 +53,39 @@ body {
 }
 
 *::-webkit-scrollbar-track {
+<<<<<<< HEAD
   background: var(--light-bg-redesigned);
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--icon-redesigned);
   border-radius: 20px;
+=======
+  background: var(--light-bg-redesigned); /* цвет дорожки */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--icon-redesigned); /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
   border: 1px solid var(--accent-redesigned); /* padding вокруг плашки */
 }
 
 .app *::-webkit-scrollbar {
+<<<<<<< HEAD
   width: 12px;
+=======
+  width: 12px; /* ширина scrollbar */
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
   height: 8px;
 }
 
 .app *::-webkit-scrollbar-track {
+<<<<<<< HEAD
   background: var(--card-bg);
+=======
+  background: var(--card-bg); /* цвет дорожки */
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
 }
 
 .app *::-webkit-scrollbar-thumb {

@@ -1,4 +1,5 @@
 :root {
+<<<<<<< HEAD
   --font-family-main: Arial, Helvetica, sans-serif;
   --font-family-text-redesigned: 'Nunito Sans', sans-serif;
   --font-family-header-redesigned: 'Roboto', sans-serif;
@@ -34,4 +35,16 @@
   --sidebar-z-index: 999;
   --navbar-z-index: 998;
   --overlay-z-index: 100;
+=======
+  --font-family-main: consolas, "Times New Roman", serif;
+
+  // size
+  --navbar-height: 50px;
+  --sidebar-width: 300px;
+  --sidebar-width-collapsed: 80px;
+
+  // colors
+  --inverted-bg-color: #343a40;
+  --title-primary-color: #fff;
+>>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
 }
