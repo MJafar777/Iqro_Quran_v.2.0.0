@@ -43,9 +43,9 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <ReadingArabic />
-
         <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
+
+        <ReadingArabic />
 
         <ReadingPrevNextBtnGroup />
 
