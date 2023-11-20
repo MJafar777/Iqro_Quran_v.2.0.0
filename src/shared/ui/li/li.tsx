@@ -6,6 +6,7 @@ import { Icon } from '../Icon';
 import { Close, SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { useSelectedSuraActions } from '@/entities/Surah';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { LAST_READ_SURAH } from '@/shared/const/localstorage';
 
 interface LiProp {
   className?: string;
@@ -26,10 +27,17 @@ export const Li = memo((prop: LiProp) => {
     setIsSidebarActive,
     isSidebarActive,
   } = useContext(ButtonsContext);
-const listLatsReadSurah=localStorage.getItem('')
-  const onToggle = () => {
+  // @ts-ignore
+  const listLatsReadSurah =   JSON.parse(localStorage.getItem(LAST_READ_SURAH)) || [];
 
-    console.log('log');
+  const onToggle = (id: number) => {
+    const newSurahList = listLatsReadSurah.filter(
+      (item: { suraId: number }) => item.suraId !== id,
+    );
+
+    localStorage.setItem(LAST_READ_SURAH, JSON.stringify(newSurahList));
+
+    console.log('newSurahList', newSurahList, id);
   };
 
   return (
@@ -43,7 +51,7 @@ const listLatsReadSurah=localStorage.getItem('')
           nameKril: '',
           numberOfOyat: numberOfOyat || 7,
         });
-        setIsRightsidebarActive(false);
+        setIsRightsidebarActive(!isRightsidebarActive);
         setIsSidebarActive(true);
       }}
     >
@@ -65,7 +73,7 @@ const listLatsReadSurah=localStorage.getItem('')
         {close ? (
           <Icon
             data-testid="sidebar-toggle"
-            onClick={onToggle}
+            onClick={() => onToggle(suraId || 1)}
             className={cls.closeBtn}
             Svg={Close}
             height={0}

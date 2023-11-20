@@ -81,7 +81,7 @@ export const Navbar = memo((prop: NavbarProp) => {
         <AppImage className={classNames(cls.bismillah)} src={Bismillah} />
 
         <div className={classNames(cls.time)}>
-          {data.getDate()} {fullMoth[data?.getMonth()]} {data.getFullYear()}-yil
+          {data.getDate()} - {fullMoth[data?.getMonth()]} {data.getFullYear()}-yil
         </div>
       </HStack>
       <HStack className={classNames(cls.iconWrapper)} justify="end" gap="8">

@@ -3,10 +3,8 @@ import { useEffect } from 'react';
 import { MainHeader, ListOfSurah, MobileAppView } from '@/entities/Main';
 import {
   DynamicModuleLoader,
-  // DynamicModuleLoader,
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-// import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
 import { fetchSurahlesList } from '../model/service/fetchSurahList/fetchSurahList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import {
@@ -15,7 +13,6 @@ import {
   getListOfSurahs,
 } from '../model/selectors/ListSurah';
 import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
-// import { Navbar } from '@/widgets/Nabar';
 
 const reducers: ReducersList = {
   mainPage: SurahListSliceReducer,
