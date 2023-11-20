@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
 import React, { memo, useContext, useMemo } from 'react';
 import { Li } from '@/shared/ui/li/li';
@@ -36,6 +37,8 @@ export const Search = memo((prop: SearchProp) => {
     setIsRightsidebarActive(!isRightsidebarActive);
   };
 
+  const getList = JSON.parse(localStorage.getItem('listLastRead') || '');
+
   const itemsOfMostRead = useMemo(
     () =>
       listOfMostRead.map((item) => (
@@ -54,12 +57,16 @@ export const Search = memo((prop: SearchProp) => {
 
   const itemsLastRead = useMemo(
     () =>
-      lastReadSurahList.map((item) => (
-        <Li to={item.to} key={item.to} close search>
-          {item.title}
-        </Li>
-      )),
-    [],
+      // eslint-disable-next-line array-callback-return
+      getList?.reverse().map((item: any, index: number) => {
+        if (index < 4)
+          return (
+            <Li to="/reading" key={item.title} close search>
+              {item.title}
+            </Li>
+          );
+      }),
+    [getList],
   );
 
   return (
@@ -71,7 +78,6 @@ export const Search = memo((prop: SearchProp) => {
           placeholder="Search something"
           className={cls.input}
         />
-
         <Icon
           data-testid="sidebar-toggle"
           onClick={onToggle}

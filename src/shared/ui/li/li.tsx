@@ -26,8 +26,9 @@ export const Li = memo((prop: LiProp) => {
     setIsSidebarActive,
     isSidebarActive,
   } = useContext(ButtonsContext);
-
+const listLatsReadSurah=localStorage.getItem('')
   const onToggle = () => {
+
     console.log('log');
   };
 
@@ -42,7 +43,7 @@ export const Li = memo((prop: LiProp) => {
           nameKril: '',
           numberOfOyat: numberOfOyat || 7,
         });
-        setIsRightsidebarActive(true);
+        setIsRightsidebarActive(false);
         setIsSidebarActive(true);
       }}
     >

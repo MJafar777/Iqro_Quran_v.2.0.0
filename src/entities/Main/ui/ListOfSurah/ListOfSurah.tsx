@@ -37,8 +37,7 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
                 numberOfOyat={oneSurah.count_verse}
                 orderOfSura={oneSurah.quran_order}
                 arabic={`00${oneSurah.quran_order}`}
-                className={classNames(cls.oneSurah)}
-              />
+                className={classNames(cls.oneSurah)} suraId={0}              />
             );
           })}
     </HStack>
