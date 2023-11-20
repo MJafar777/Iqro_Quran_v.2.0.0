@@ -22,7 +22,7 @@ export const SurahListSlice = createSlice({
         fetchSurahlesList.fulfilled,
         (state, action: PayloadAction<ResponseOfBacend>) => {
           state.isLoading = false;
-
+         
           if (action.payload.data) {
             state.data = action.payload.data;
           }
