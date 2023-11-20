@@ -25,13 +25,9 @@ root.render(
       <ErrorBoundary>
         <ForceUpdateProvider>
           <ThemeProvider>
-<<<<<<< HEAD
             <ButtonsProvider>
               <App />
             </ButtonsProvider>
-=======
-            <App />
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
           </ThemeProvider>
         </ForceUpdateProvider>
       </ErrorBoundary>

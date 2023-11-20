@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Icon.module.scss';
 
-<<<<<<< HEAD
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>;
 
 interface IconBaseProps extends SvgProps {
@@ -53,27 +52,6 @@ export const Icon = memo((props: IconProps) => {
       </button>
     );
   }
-
+  
   return icon;
-=======
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  className?: string;
-  Svg: React.VFC<React.SVGProps<SVGSVGElement>>;
-  inverted?: boolean;
-}
-
-export const Icon = memo((props: IconProps) => {
-  const {
-    className, Svg, inverted, ...otherProps
-  } = props;
-
-  return (
-    <Svg
-      className={classNames(inverted ? cls.inverted : cls.Icon, {}, [
-        className,
-      ])}
-      {...otherProps}
-    />
-  );
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
 });

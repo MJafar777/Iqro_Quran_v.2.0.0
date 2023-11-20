@@ -2,15 +2,7 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "indentation": [2],
-<<<<<<< HEAD
-    "alpha-value-notation": null,
     "selector-class-pattern": null,
-    "color-function-notation": null,
-    "property-no-vendor-prefix": null,
-    "declaration-empty-line-before": null,
-=======
-    "selector-class-pattern": null,
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
     "no-eol-whitespace": [true, { "ignore": ["empty-lines"] }]
   }
 }

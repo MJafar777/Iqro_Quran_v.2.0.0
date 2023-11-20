@@ -10,10 +10,7 @@ module.exports = {
     'plugin:i18next/recommended',
     'plugin:storybook/recommended',
     'prettier',
-<<<<<<< HEAD
-=======
     'airbnb-base',
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -32,10 +29,6 @@ module.exports = {
     'unused-imports',
   ],
   rules: {
-<<<<<<< HEAD
-    'no-nested-ternary': 'off',
-=======
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
     'no-console': 'off',
     'react/jsx-props-no-spreading': 'off',
     'unused-imports/no-unused-imports': 'error',
@@ -55,7 +48,6 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
-<<<<<<< HEAD
     'i18next/no-literal-string': 'off',
     // 'i18next/no-literal-string': [
     //   'error',
@@ -81,40 +73,11 @@ module.exports = {
     //     ],
     //   },
     // ],
-=======
-    'i18next/no-literal-string': [
-      'error',
-      {
-        markupOnly: true,
-        ignoreAttribute: [
-          'as',
-          'role',
-          'data-testid',
-          'to',
-          'target',
-          'justify',
-          'align',
-          'border',
-          'direction',
-          'gap',
-          'feature',
-          'color',
-          'variant',
-          'size',
-          'wrap',
-        ],
-      },
-    ],
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
     'max-len': [
       'error',
       {
         ignoreComments: true,
-<<<<<<< HEAD
-        code: 125,
-=======
         code: 145,
->>>>>>> 7f8242471f42c7799e2cd0706f15ec49ff09cd72
       },
     ],
     'jsx-a11y/no-static-element-interactions': 'off',

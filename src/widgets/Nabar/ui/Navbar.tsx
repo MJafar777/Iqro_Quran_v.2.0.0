@@ -31,8 +31,7 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   const [whichSidebar, setWhichSidebar] = useState('settings');
 
-  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
 
   const toogleSidebarSettings = () => {
     setIsRightsidebarActive(false);
@@ -43,7 +42,6 @@ export const Navbar = memo((prop: NavbarProp) => {
     setIsRightsidebarActive(false);
     setWhichSidebar('Search');
   };
-
 
   return (
     <div className={classNames(cls.nabar)}>
