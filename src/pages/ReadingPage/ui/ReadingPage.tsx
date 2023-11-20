@@ -5,13 +5,13 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 // ---------- | | ---------- //
 import { Navbar } from '@/widgets/Nabar';
 import { Sidebar } from '@/widgets/Sidebar';
+import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 // import { ReadingArabic } from '@/entities/ReadingArabic';
-import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
-import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
 interface ReadingPageProps {
   className?: string;
@@ -49,8 +49,6 @@ const ReadingPage = (props: ReadingPageProps) => {
 
         <ReadingPrevNextSuraBtnGroup />
       </div>
-
-      {/* <ReadingTranskriptLotin /> */}
     </div>
   );
 };

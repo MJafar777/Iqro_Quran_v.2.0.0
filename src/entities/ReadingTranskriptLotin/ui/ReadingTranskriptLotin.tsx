@@ -7,21 +7,19 @@ import {
   ReducersList,
   DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { readingTranskriptLotinReducer } from '../model/slice/readingTranskriptLotin';
-import { getSelectedPage } from '@/entities/Page';
-import { getSelectedSura } from '@/entities/Surah';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { fetchReadingTranskriptLotin } from '../model/services/fetchReadingTranskriptLotin';
-
 import {
   getReadingTranskriptLotinData,
   getReadingTranskriptLotinError,
   getReadingTranskriptLotinIsLoading,
 } from '../model/selectors/readingTranskriptLotin';
-
+import { getSelectedPage } from '@/entities/Page';
+import { getSelectedSura } from '@/entities/Surah';
 import BookBox from '@/shared/ui/BookBox/BookBox';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { readingTranskriptLotinReducer } from '../model/slice/readingTranskriptLotin';
+import { fetchReadingTranskriptLotin } from '../model/services/fetchReadingTranskriptLotin';
 
 interface ReadingTranskriptLotinProps {
   className?: string;

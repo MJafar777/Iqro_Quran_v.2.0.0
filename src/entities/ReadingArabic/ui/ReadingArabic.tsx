@@ -16,29 +16,27 @@ import { readingArabicReducer } from '../model/slice/readingArabicSlice';
 
 interface ReadingArabicProps {
   className?: string;
-  disabled?: boolean;
 }
 
 const reducers: ReducersList = {
   readingArabic: readingArabicReducer,
 };
 
-export const ReadingArabic = memo(
-  ({ className, disabled }: ReadingArabicProps) => {
-    const data = useSelector(getReadingArabicData);
-    const isLoading = useSelector(getReadingArabicIsLoading);
-    const isError = useSelector(getReadingArabicError);
+export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
+  const data = useSelector(getReadingArabicData);
+  const isLoading = useSelector(getReadingArabicIsLoading);
+  const isError = useSelector(getReadingArabicError);
 
-    return (
-      <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
+  return (
+    <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
+      <div
+        data-testid="reading-arabic"
+        className={classNames(cls.ReadingArabic, {}, [className])}
+      >
         <div
-          data-testid="reading-arabic"
-          className={classNames(cls.ReadingArabic, {}, [className])}
+          className={classNames(cls.ReadingArabic__readBox, {}, [className])}
         >
-          <div
-            className={classNames(cls.ReadingArabic__readBox, {}, [className])}
-          >
-            {/* {isLoading ? (
+          {/* {isLoading ? (
               <BookBoxSkeleton />
             ) : data && data[currentSura.suraId]?.data.resourse ? (
               <BookBox
@@ -58,9 +56,8 @@ export const ReadingArabic = memo(
             ) : (
               ''
             )} */}
-          </div>
         </div>
-      </DynamicModuleLoader>
-    );
-  },
-);
+      </div>
+    </DynamicModuleLoader>
+  );
+});
