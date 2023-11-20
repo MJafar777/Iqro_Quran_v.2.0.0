@@ -1,52 +1,35 @@
-import { ReactNode, memo, useState } from 'react';
+import { ReactNode, memo, useContext, useMemo } from 'react';
 import cls from './RightSidebar.module.scss';
-import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Icon } from '@/shared/ui/Icon/Icon';
-import { Setting } from '@/widgets/Setting';
-import { Search } from '@/widgets/Search';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface SidebarProps {
   className?: string;
-  children: ReactNode;
-  isOpenSidebar?: boolean;
-  whichSidebar?: string;
-  setIsOpenSidebar: (isOpenSidebar: boolean) => void;
+  children?: ReactNode;
 }
 
 export const RightSidebar = memo(
-  ({
-    className,
-    children,
-    isOpenSidebar,
-    whichSidebar,
-    setIsOpenSidebar,
-  }: SidebarProps) => {
-    const [collapsed, setCollapsed] = useState(false);
-    console.log(whichSidebar);
+  // eslint-disable-next-line react/prop-types
+  ({ className, children }: SidebarProps) => {
+    const { isRightsidebarActive } =
+      useContext(ButtonsContext);
 
-    const onToggle = () => {
-      setIsOpenSidebar(!isOpenSidebar);
-    };
-
-    return (
-      <aside
-        data-testid="sidebar"
-        className={classNames(cls.Sidebar, { [cls.collapsed]: isOpenSidebar }, [
-          className,
-        ])}
-      >
-        <Icon
-          data-testid="sidebar-toggle"
-          onClick={onToggle}
-          className={cls.closeBtn}
-          Svg={CloseIcon}
-          height={0}
-          clickable
-        />
-        {whichSidebar === 'settings' ? <Setting /> : <Search />}
-        {children}
-      </aside>
+    const rightSidebar = useMemo(
+      () => (
+        <aside
+          data-testid="sidebar"
+          className={classNames(
+            cls.Sidebar,
+            { [cls.collapsed]: isRightsidebarActive },
+            [className],
+          )}
+        >
+          {children}
+        </aside>
+      ),
+      [children, className, isRightsidebarActive],
     );
+
+    return rightSidebar;
   },
 );

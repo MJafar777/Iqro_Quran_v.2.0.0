@@ -9,8 +9,9 @@ import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
 import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
+import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
+import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 
 // import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
@@ -42,27 +43,13 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <div className={classNames(cls.ReadingPage__prevBtn, {}, [className])}>
-          <ArrowBottom
-            className={classNames(cls.ReadingPage__prevBtnIcon, {}, [])}
-          />
-        </div>
+        <ReadingArabic />
 
         <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
 
-        <ReadingArabic />
+        <ReadingPrevNextBtnGroup />
 
-        <div
-          className={classNames(
-            cls.ReadingPage__nextBtn,
-            { [cls.disabled]: false },
-            [className],
-          )}
-        >
-          <ArrowBottom
-            className={classNames(cls.ReadingPage__nextBtnIcon, {}, [])}
-          />
-        </div>
+        <ReadingPrevNextSuraBtnGroup />
       </div>
 
       {/* <ReadingTranskriptLotin /> */}

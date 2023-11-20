@@ -1,25 +1,25 @@
-
-
 .MainHeader {
   width: 100%;
-  height: 300px;
+  margin-top: 50px;
+  height: fit-content;
   background: rgba(44, 164, 171, 1);
-} 
+  padding: 12px 0;
+}
 
-.icon{
+.icon {
   width: 70%;
   height: 80px;
   margin: 20px 0;
   color: white !important;
 }
 
-.containerOfIput{
+.containerOfIput {
   width: 50%;
   height: 60px;
   position: relative;
   border-radius: 50px !important;
   background-color: white;
-  .input{
+  .input {
     width: 100%;
     outline: none;
     border: none;
@@ -27,7 +27,7 @@
     color: rgb(120, 118, 118);
   }
 
-  .buttons{
+  .buttons {
     border-radius: 20px;
     color: white;
     font-size: 16px;
@@ -35,15 +35,12 @@
   }
 }
 
-.text{
+.text {
   color: white;
 }
 
-.search{
+.search {
   font-size: 34px;
   width: 7%;
   margin-left: 12px;
 }
-
-
-
