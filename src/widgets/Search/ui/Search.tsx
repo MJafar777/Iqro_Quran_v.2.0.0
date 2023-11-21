@@ -1,6 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
-import React, { memo, useContext, useMemo } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Li } from '@/shared/ui/li/li';
 import cls from './Search.module.scss';
 import { SerchTile } from '@/shared/ui/SearchTitle';
@@ -11,6 +19,10 @@ import { Icon } from '@/shared/ui/Icon/Icon';
 import { HStack } from '@/shared/ui/Stack';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
+import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
+import { useSetSearchActions } from '@/entities/Main';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { MostSearchButton } from '@/shared/ui/MostSearchButton/MostSearchButton';
 
 interface SearchProp {
   className?: string;
@@ -33,12 +45,30 @@ const lastReadSurahList = [
 export const Search = memo((prop: SearchProp) => {
   const { isRightsidebarActive, setIsRightsidebarActive } =
     useContext(ButtonsContext);
+  const [searchSurah, setSearchSurah] = useState('');
+  const [length, setLength] = useState(1);
+  const [chapterCode, setChapterCode] = useState(1);
+
+  const [dataWhichLang, setDataWhichLang] = useState(
+    chapterCode >= 65 || chapterCode <= 90 ? surahNameList : surahNameListRu,
+  );
+
+  const dispatch = useAppDispatch();
+
+  const { setSearchSidebar } = useSetSearchActions();
 
   const onToggle = () => {
     setIsRightsidebarActive(!isRightsidebarActive);
   };
 
-  const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH) || '');
+  const getSearch = (e: any) => {
+    setSearchSurah(e.target.value);
+    setLength(searchSurah.length + 1);
+    setChapterCode(e.target.value.toUpperCase().charCodeAt(0));
+  };
+
+  // @ts-ignore
+  const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH));
 
   const itemsOfMostRead = useMemo(
     () =>
@@ -70,11 +100,44 @@ export const Search = memo((prop: SearchProp) => {
     [getList],
   );
 
+  const filter = useCallback(() => {
+    return dataWhichLang?.filter(
+      (sura) =>
+        sura.nom.toLocaleUpperCase().slice(0, length) ===
+        searchSurah.toUpperCase(),
+    );
+  }, [dataWhichLang, length, searchSurah]);
+
+  const result = filter();
+
+  useEffect(() => {
+    dispatch(setSearchSidebar({ search: searchSurah, data: [...result] }));
+  }, [dispatch, filter, result, searchSurah]);
+
+  useEffect(() => {
+    if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
+    else setDataWhichLang(surahNameListRu);
+  }, [chapterCode]);
+
+  const mostSearchSurah = useMemo(
+    () =>
+      result.map((oneSurah) => (
+        <MostSearchButton
+          className={classNames(cls.buttonMostSearch)}
+          key={oneSurah.nom}
+          children={oneSurah.nom}
+          suraId={oneSurah.nomer}
+          numberOfOyat={oneSurah.oyatlarSoni}
+        />
+      )),
+    [result],
+  );
   return (
     <div className={classNames(cls.wrapperListSearch)}>
       <HStack className={cls.headerOfSidebar} max>
         <Icon Svg={SearchSmall} className={cls.icon} />
         <input
+          onChange={getSearch}
           type="text"
           placeholder="Search something"
           className={cls.input}
@@ -87,6 +150,9 @@ export const Search = memo((prop: SearchProp) => {
           height={0}
           clickable
         />
+      </HStack>
+      <HStack gap="8" className={cls.mostSearchButtonWrapper}>
+        {mostSearchSurah}
       </HStack>
       <SerchTile>Ko‘p ko‘rilganlar</SerchTile>
       {itemsOfMostRead}

@@ -29,15 +29,17 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
     >
       {isLoading
         ? skeletonList
-        : data?.map((oneSurah: OneSuraInListSchema,index:number) => {
+        : data?.map((oneSurah: OneSuraInListSchema, index: number) => {
             return (
               <OneItemSurah
                 key={index}
-                title={oneSurah.name_simple}
+                title={oneSurah.translated_names.filter(item=>item?.lang_id?.iso_code==="uz")[0].name}
                 numberOfOyat={oneSurah.count_verse}
                 orderOfSura={oneSurah.quran_order}
                 arabic={`00${oneSurah.quran_order}`}
-                className={classNames(cls.oneSurah)} suraId={0}              />
+                className={classNames(cls.oneSurah)}
+                suraId={0}
+              />
             );
           })}
     </HStack>

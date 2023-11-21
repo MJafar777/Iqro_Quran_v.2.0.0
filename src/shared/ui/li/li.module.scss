@@ -1,23 +1,30 @@
-.li {
+.wrapper {
   width: 100%;
   cursor: pointer;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: #27272731 0.1px solid;
+  border-bottom: #27272731 0.1px solid;
+  border-left: #27272731 0.1px solid;
+  border-top: #27272731 0.1px solid;
   padding: 6px 12px;
   gap: 16px;
-  text-align: center;
+
+  transition: all 0.2s linear;
+  &:hover {
+    color: #74a2b2;
+  }
+}
+
+.li {
+  text-align: left;
   font-family: Proxima Vara;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   color: #272727;
-  transition: all 0.2s linear;
-  &:hover {
-    color: #74a2b2;
-  }
 }
 
 .icon {
@@ -31,6 +38,10 @@
   color: black;
   width: 16px;
   height: 16px;
+  z-index: 1000;
+  position: absolute;
+  top: 8px;
+  right: 0;
   &:hover {
     // color: red !important;
   }
