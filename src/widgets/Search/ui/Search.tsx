@@ -18,7 +18,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Icon } from '@/shared/ui/Icon/Icon';
 import { HStack } from '@/shared/ui/Stack';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
-// import { LAST_READ_SURAH } from '@/shared/const/localstorage';
+import { LAST_READ_SURAH } from '@/shared/const/localstorage';
 import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
 import { useSetSearchActions } from '@/entities/Main';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -67,7 +67,8 @@ export const Search = memo((prop: SearchProp) => {
     setChapterCode(e.target.value.toUpperCase().charCodeAt(0));
   };
 
-  // const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH)?);
+  // @ts-ignore
+  const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH));
 
   const itemsOfMostRead = useMemo(
     () =>
@@ -85,19 +86,19 @@ export const Search = memo((prop: SearchProp) => {
     [],
   );
 
-  // const itemsLastRead = useMemo(
-  //   () =>
-  //     // eslint-disable-next-line array-callback-return
-  //     getList?.reverse().map((item: any, index: number) => {
-  //       if (index < 4)
-  //         return (
-  //           <Li to="/reading" key={item.title} close search>
-  //             {item.title}
-  //           </Li>
-  //         );
-  //     }),
-  //   [getList],
-  // );
+  const itemsLastRead = useMemo(
+    () =>
+      // eslint-disable-next-line array-callback-return
+      getList?.reverse().map((item: any, index: number) => {
+        if (index < 4)
+          return (
+            <Li to="/reading" key={item.title} close search>
+              {item.title}
+            </Li>
+          );
+      }),
+    [getList],
+  );
 
   const filter = useCallback(() => {
     return dataWhichLang?.filter(
@@ -150,13 +151,13 @@ export const Search = memo((prop: SearchProp) => {
           clickable
         />
       </HStack>
-      <HStack gap="8"  className={cls.mostSearchButtonWrapper}>
+      <HStack gap="8" className={cls.mostSearchButtonWrapper}>
         {mostSearchSurah}
       </HStack>
       <SerchTile>Ko‘p ko‘rilganlar</SerchTile>
       {itemsOfMostRead}
       <SerchTile>So‘ngi ko‘rilganlar</SerchTile>
-      {/* {itemsLastRead} */}
+      {itemsLastRead}
       <SerchTile>Qidirib ko‘ring</SerchTile>
       {itemsOfMostRead}
     </div>
