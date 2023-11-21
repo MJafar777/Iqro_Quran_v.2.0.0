@@ -12,7 +12,7 @@ import { getSelectedOyat } from '../model/selectors/getSelectedOyat';
 
 import { getError, getIsLoading } from '@/pages/MainPage';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import { getSelectedPage } from '@/entities/Page';
+import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 
 interface OyatListProps {
   className?: string;
@@ -29,6 +29,7 @@ const OyatList = ({ className }: OyatListProps) => {
   const { setSelectedtOyat } = useSelectedOyatActions();
 
   const currentPage = useSelector(getSelectedPage);
+  const { setSelectedPage } = useSelectedPageActions();
 
   const handleClickOyat = (oyatNumber: number) => {
     setSelectedtOyat(oyatNumber);
@@ -50,6 +51,18 @@ const OyatList = ({ className }: OyatListProps) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
+  // useEffect(() => {
+  //   SurahPageOyah[currentSura.quran_order]?.forEach((element: any) => {
+  //     if (
+  //       Number(element.start) <= currentOyat.oyatNumber &&
+  //       Number(element.end) >= currentOyat.oyatNumber
+  //     ) {
+  //       setSelectedPage(element.page - currentSura.pages[0] + 1);
+  //     }
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [currentOyat]);
 
   return (
     <div className={classNames(cls.OyatList, {}, [className])}>
