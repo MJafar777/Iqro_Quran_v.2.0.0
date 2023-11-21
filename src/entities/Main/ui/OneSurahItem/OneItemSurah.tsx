@@ -4,12 +4,14 @@
 /* eslint-disable react/self-closing-comp */
 import { Link } from 'react-router-dom';
 import { memo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { OrderWrapper } from '@/shared/ui/OrderWrapper/OrderWrapper';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './OneItemSurah.module.scss';
 import { useSelectedSuraActions } from '@/entities/Surah';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
+import { getListOfSurahs } from '@/pages/MainPage';
 
 interface OneItemSuraProp {
   suraId?: number;
@@ -23,6 +25,9 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
   const { title, numberOfOyat, arabic, orderOfSura = 1, className } = prop;
   const [whichOrderHovered, setWhichOrderHovered] = useState(0);
   const { setSelectedSura } = useSelectedSuraActions();
+  const listOfSurahs = useSelector(getListOfSurahs);
+
+  // listOfSurahs?.filter((item) => console.log(item, 'item'));
 
   const readLastSurahInLocalStorage = () => {
     const newRead = {
@@ -57,6 +62,13 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
     }
   };
 
+  const toggleOneItemSurah = () => {
+    // setSelectedSura({});
+    console.log(orderOfSura);
+
+    readLastSurahInLocalStorage();
+  };
+
   return (
     <Link
       style={{
@@ -65,15 +77,7 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
       }}
       to="/reading"
       className={classNames(cls.oneItemSura, {}, [className])}
-      onClick={() => {
-        setSelectedSura({
-          suraId: orderOfSura,
-          nameLotin: '',
-          nameKril: '',
-          numberOfOyat: numberOfOyat || 1,
-        });
-        readLastSurahInLocalStorage();
-      }}
+      onClick={() => toggleOneItemSurah()}
     >
       <HStack max align="center">
         <HStack style={{ width: '60%' }} align="center" justify="start">

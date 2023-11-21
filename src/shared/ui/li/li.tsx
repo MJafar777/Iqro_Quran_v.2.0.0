@@ -46,12 +46,12 @@ export const Li = memo((prop: LiProp) => {
       <Link
         to={to}
         onClick={() => {
-          setSelectedSura({
-            suraId: suraId || 1,
-            nameLotin: '',
-            nameKril: '',
-            numberOfOyat: numberOfOyat || 7,
-          });
+          // setSelectedSura({
+          //   suraId: suraId || 1,
+          //   nameLotin: '',
+          //   nameKril: '',
+          //   numberOfOyat: numberOfOyat || 7,
+          // });
           setIsRightsidebarActive(!isRightsidebarActive);
           setIsSidebarActive(true);
         }}

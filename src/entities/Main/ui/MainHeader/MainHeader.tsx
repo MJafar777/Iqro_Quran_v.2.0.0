@@ -59,6 +59,7 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
   }, [dataWhichLang, length, searchSurah]);
 
   const result = filter();
+  console.log(dataWhichLang, chapterCode, result);
 
   useEffect(() => {
     dispatch(setSearch({ search: searchSurah, data: [...result] }));

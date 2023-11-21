@@ -1,6 +1,7 @@
 export {default as AppStore} from './appStorre.png'
 export {default as GooglePlay} from './googlePlay.png'
 export {default as LeftHomeImg} from './leftHomeImg.png'
+export {default as LeftHomeImgSvg} from './leftHomeImg.svg'
 export {default as RightHomeImg} from './rightHomeImg.png'
 export {default as TextofQuran} from './textofQuran.png'
 export {default as TextWithLogo} from './textWithLogo.png'

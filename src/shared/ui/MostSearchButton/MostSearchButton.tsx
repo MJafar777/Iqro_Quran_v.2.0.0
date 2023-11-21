@@ -17,14 +17,14 @@ export const MostSearchButton = memo((prop: MostSearchButtonProp) => {
 
   return (
     <Link
-      onClick={() =>
-        setSelectedSura({
-          suraId,
-          nameLotin: '',
-          nameKril: '',
-          numberOfOyat: numberOfOyat || 7,
-        })
-      }
+      // onClick={() =>
+      //   setSelectedSura({
+      //     suraId,
+      //     nameLotin: '',
+      //     nameKril: '',
+      //     numberOfOyat: numberOfOyat || 7,
+      //   })
+      // }
       to="/reading"
       className={classNames(cls.mostSearchButton, {}, [className])}
     >
