@@ -2,17 +2,19 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/self-closing-comp */
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { memo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { OrderWrapper } from '@/shared/ui/OrderWrapper/OrderWrapper';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './OneItemSurah.module.scss';
 import { useSelectedSuraActions } from '@/entities/Surah';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
+import { getListOfSurahs } from '@/pages/MainPage';
 
 interface OneItemSuraProp {
-  suraId: number;
+  suraId?: number;
   title?: string;
   numberOfOyat?: number;
   arabic?: string;
@@ -23,6 +25,8 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
   const { title, numberOfOyat, arabic, orderOfSura = 1, className } = prop;
   const [whichOrderHovered, setWhichOrderHovered] = useState(0);
   const { setSelectedSura } = useSelectedSuraActions();
+  const listOfSurahs = useSelector(getListOfSurahs);
+  const navigate = useNavigate();
 
   const readLastSurahInLocalStorage = () => {
     const newRead = {
@@ -32,9 +36,9 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
       numberOfOyat: numberOfOyat || 1,
       title: title || 'Fotiha',
     };
-
+    localStorage.setItem(LAST_READ_SURAH, JSON.stringify([newRead]));
     // @ts-ignore
-    const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH)) || [];
+    const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH));
     if (getList) {
       getList.map(
         (oneSuraData: {
@@ -57,23 +61,24 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
     }
   };
 
+  const toggleOneItemSurah = (id: number) => {
+    const data = listOfSurahs?.filter((sura) => sura.quran_order == id)[0];
+    if (data) {
+      setSelectedSura(data);
+      readLastSurahInLocalStorage();
+      navigate('/reading');
+    }
+  };
+
   return (
-    <Link
+    <div
       style={{
         textDecoration: 'none',
         color: 'black',
       }}
-      to="/reading"
+      // to="/reading"
       className={classNames(cls.oneItemSura, {}, [className])}
-      // onClick={() => {
-      //   setSelectedSura({
-      //     suraId: orderOfSura,
-      //     nameLotin: '',
-      //     nameKril: '',
-      //     numberOfOyat: numberOfOyat || 1,
-      //   });
-      //   readLastSurahInLocalStorage();
-      // }}
+      onClick={() => toggleOneItemSurah(orderOfSura)}
     >
       <HStack max align="center">
         <HStack style={{ width: '60%' }} align="center" justify="start">
@@ -96,7 +101,7 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
           </VStack>
         </HStack>
       </HStack>
-    </Link>
+    </div>
   );
 });
 

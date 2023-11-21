@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import React, { memo, useCallback, useContext, useState } from 'react';
+import React, { memo, useCallback, useContext } from 'react';
 import cls from './ChangeFontSize.module.scss';
 import { back } from '@/shared/assets/icons/sidebarSetting';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -9,22 +9,24 @@ import { Icon } from '../Icon/Icon';
 import { Button } from '../Button';
 
 export const ChangeFontSize = memo(() => {
-  const [fontSize, setFontSize] = useState(3);
-
-  const { isRightsidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  const {
+    isRightsidebarActive,
+    setFontSize,
+    fontSize,
+    setIsRightsidebarActive,
+  } = useContext(ButtonsContext);
 
   const decrease = useCallback(() => {
-    if (fontSize > 1) setFontSize((pre: number) => pre - 1);
-  }, [fontSize]);
+    if (fontSize > 1) setFontSize(fontSize - 1);
+  }, [fontSize, setFontSize]);
 
   const increase = useCallback(() => {
-    if (fontSize < 5) setFontSize((pre: number) => pre + 1);
-  }, [fontSize]);
+    if (fontSize < 5) setFontSize(fontSize + 1);
+  }, [fontSize, setFontSize]);
 
   const backSize = useCallback(() => {
     setFontSize(3);
-  }, []);
+  }, [setFontSize]);
 
   return (
     <VStack max align="center">

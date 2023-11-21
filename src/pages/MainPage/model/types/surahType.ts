@@ -1,4 +1,4 @@
-interface TranslatedName {
+export interface OneSurahWhichLang {
   chapter_id: string;
   lang_id: {
     direction: string;
@@ -6,15 +6,11 @@ interface TranslatedName {
     iso_code: string;
     name: string;
     native: string;
-    __v: number;
+    __v: 0;
     _id: string;
   };
-  id: string;
   name: string;
-  __v: number;
-  _id: string;
 }
-
 export interface OneSuraInListSchema {
   _id: string;
   revelation_place: string;
@@ -27,8 +23,8 @@ export interface OneSuraInListSchema {
   count_verse: number;
   name_simple: string;
   telegram_file_id: string;
-  translated_names: TranslatedName[];
   id: string;
+  translated_names: OneSurahWhichLang[];
 }
 
 export interface SurahListSchema {
