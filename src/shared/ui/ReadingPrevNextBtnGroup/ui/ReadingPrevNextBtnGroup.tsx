@@ -10,11 +10,11 @@ const ReadingPrevNextBtnGroup = memo(() => {
 
   return (
     <>
-      {currentPage.pageNumber > 1 && <ReadingPrevNextBtn prevIcon prev />}
-
       {currentSura.pages[1] - currentSura.pages[0] > currentPage.pageNumber && (
-        <ReadingPrevNextBtn nextIcon next />
+        <ReadingPrevNextBtn prevIcon prev />
       )}
+
+      {currentPage.pageNumber > 1 && <ReadingPrevNextBtn nextIcon next />}
     </>
   );
 });

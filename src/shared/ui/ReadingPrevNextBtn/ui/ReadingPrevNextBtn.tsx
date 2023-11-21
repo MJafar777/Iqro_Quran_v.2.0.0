@@ -19,11 +19,11 @@ const ReadingPrevNextBtn = memo(
 
     const handlePageClick = () => {
       if (prev) {
-        decrementCurrentPage();
+        incrementCurrentPage();
       }
 
       if (next) {
-        incrementCurrentPage();
+        decrementCurrentPage();
       }
     };
 

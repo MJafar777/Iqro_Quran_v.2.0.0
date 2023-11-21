@@ -25,9 +25,11 @@ const reducers: ReducersList = {
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
+
   const listOfSurah = useSelector(getListOfSurahs);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
+
   useEffect(() => {
     if (!listOfSurah) dispatch(fetchSurahlesList({}));
   }, [dispatch, listOfSurah]);

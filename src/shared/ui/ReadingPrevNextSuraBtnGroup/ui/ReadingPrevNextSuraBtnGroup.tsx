@@ -17,12 +17,12 @@ const ReadingPrevNextSuraBtnGroup = memo(
       <div
         className={classNames(cls.ReadingPrevNextSuraBtnGroup, {}, [className])}
       >
-        {currentSura?.quran_order > 1 && (
-          <ReadingPrevNextSuraBtn prevIcon prev text="Oldingi Sura" />
+        {currentSura?.quran_order < 114 && (
+          <ReadingPrevNextSuraBtn prevIcon prev text="Keyingi Sura" />
         )}
 
-        {currentSura?.quran_order < 114 && (
-          <ReadingPrevNextSuraBtn nextIcon next text="Keyingi Sura" />
+        {currentSura?.quran_order > 1 && (
+          <ReadingPrevNextSuraBtn nextIcon next text="Oldingi Sura" />
         )}
       </div>
     );
