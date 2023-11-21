@@ -2,23 +2,23 @@
 /* eslint-disable react/no-children-prop */
 import React, {
   memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
+  // useCallback,
+  // useContext,
+  // useEffect,
+  // useMemo,
 } from 'react';
-import { Li } from '@/shared/ui/li/li';
+// import { Li } from '@/shared/ui/li/li';
 import cls from './Search.module.scss';
 import { SerchTile } from '@/shared/ui/SearchTitle';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import CloseIcon from '@/shared/assets/icons/close-icon.svg';
+// import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+// import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Icon } from '@/shared/ui/Icon/Icon';
 import { HStack } from '@/shared/ui/Stack';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
-import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
-import { MostSearchButton } from '@/shared/ui/MostSearchButton/MostSearchButton';
+// import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
+// import { MostSearchButton } from '@/shared/ui/MostSearchButton/MostSearchButton';
 
 interface SearchProp {
   className?: string;
@@ -79,113 +79,113 @@ const lastReadSurahList = [
 ];
 
 export const Search = memo((prop: SearchProp) => {
-  const { isRightsidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  // const { isRightsidebarActive, setIsRightsidebarActive } =
+  //   useContext(ButtonsContext);
 
-  const onToggle = () => {
-    setIsRightsidebarActive(!isRightsidebarActive);
-  };
+  // const onToggle = () => {
+  //   setIsRightsidebarActive(!isRightsidebarActive);
+  // };
 
-  const getSearch = (e: any) => {
-    setSearchSurah(e.target.value);
-    setLength(searchSurah.length + 1);
-    setChapterCode(e.target.value.toUpperCase().charCodeAt(0));
-  };
+  // const getSearch = (e: any) => {
+  //   setSearchSurah(e.target.value);
+  //   setLength(searchSurah.length + 1);
+  //   setChapterCode(e.target.value.toUpperCase().charCodeAt(0));
+  // };
 
   const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH) || '');
 
-  const itemsOfMostRead = useMemo(
-    () =>
-      listOfMostRead.map((item) => (
-        <Li
-          search
-          to={item.to}
-          key={item.title}
-          suraId={item.suraId}
-          numberOfOyat={item.numberOfOyat}
-        >
-          {item.title}
-        </Li>
-      )),
-    [],
-  );
+  // const itemsOfMostRead = useMemo(
+  //   () =>
+  //     listOfMostRead.map((item) => (
+  //       <Li
+  //         search
+  //         to={item.to}
+  //         key={item.title}
+  //         suraId={item.suraId}
+  //         numberOfOyat={item.numberOfOyat}
+  //       >
+  //         {item.title}
+  //       </Li>
+  //     )),
+  //   [],
+  // );
 
-  const itemsLastRead = useMemo(
-    () =>
-      // eslint-disable-next-line array-callback-return
-      getList?.reverse().map((item: any, index: number) => {
-        if (index < 4) {
-          return (
-            <Li to="/reading" key={item.title} close search>
-              {item.title}
-            </Li>
-          );
-        }
-      }),
-    [getList],
-  );
+  // const itemsLastRead = useMemo(
+  //   () =>
+  //     // eslint-disable-next-line array-callback-return
+  //     getList?.reverse().map((item: any, index: number) => {
+  //       if (index < 4) {
+  //         return (
+  //           <Li to="/reading" key={item.title} close search>
+  //             {item.title}
+  //           </Li>
+  //         );
+  //       }
+  //     }),
+  //   [getList],
+  // );
 
-  const filter = useCallback(() => {
-    return dataWhichLang?.filter(
-      (sura) =>
-        sura.nom.toLocaleUpperCase().slice(0, length) ===
-        searchSurah.toUpperCase(),
-    );
-  }, [dataWhichLang, length, searchSurah]);
+  // const filter = useCallback(() => {
+  //   return dataWhichLang?.filter(
+  //     (sura) =>
+  //       sura.nom.toLocaleUpperCase().slice(0, length) ===
+  //       searchSurah.toUpperCase(),
+  //   );
+  // }, [dataWhichLang, length, searchSurah]);
 
-  const result = filter();
+  // const result = filter();
 
-  useEffect(() => {
-    dispatch(setSearchSidebar({ search: searchSurah, data: [...result] }));
-  }, [dispatch, filter, result, searchSurah]);
+  // useEffect(() => {
+  //   dispatch(setSearchSidebar({ search: searchSurah, data: [...result] }));
+  // }, [dispatch, filter, result, searchSurah]);
 
-  useEffect(() => {
-    if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
-    else setDataWhichLang(surahNameListRu);
-  }, [chapterCode]);
+  // useEffect(() => {
+  //   if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
+  //   else setDataWhichLang(surahNameListRu);
+  // }, [chapterCode]);
 
-  console.log(result, 'result');
-  const mostSearchSurah = useMemo(
-    () =>
-      result.map((oneSurah) => (
-        <MostSearchButton
-          className={classNames(cls.buttonMostSearch)}
-          key={oneSurah.nom}
-          children={oneSurah.nom}
-          suraId={oneSurah.nomer}
-          numberOfOyat={oneSurah.oyatlarSoni}
-        />
-      )),
-    [result],
-  );
+  // console.log(result, 'result');
+  // const mostSearchSurah = useMemo(
+  //   () =>
+  //     result.map((oneSurah) => (
+  //       <MostSearchButton
+  //         className={classNames(cls.buttonMostSearch)}
+  //         key={oneSurah.nom}
+  //         children={oneSurah.nom}
+  //         suraId={oneSurah.nomer}
+  //         numberOfOyat={oneSurah.oyatlarSoni}
+  //       />
+  //     )),
+  //   [result],
+  // );
   return (
     <div className={classNames(cls.wrapperListSearch)}>
       <HStack className={cls.headerOfSidebar} max>
         <Icon Svg={SearchSmall} className={cls.icon} />
         <input
-          onChange={getSearch}
+          // onChange={getSearch}
           type="text"
           placeholder="Search something"
           className={cls.input}
         />
-        <Icon
+        {/* <Icon
           data-testid="sidebar-toggle"
-          onClick={onToggle}
+          // onClick={onToggle}
           className={cls.closeBtn}
           Svg={CloseIcon}
           height={0}
           clickable
-        />
+        /> */}
       </HStack>
       <HStack gap="8" className={cls.mostSearchButtonWrapper}>
-        {mostSearchSurah}
+        {/* {mostSearchSurah} */}
       </HStack>
       <SerchTile>Ko‘p ko‘rilganlar</SerchTile>
-      {itemsOfMostRead}
+      {/* {itemsOfMostRead} */}
       <SerchTile>So‘ngi ko‘rilganlar</SerchTile>
-      {itemsLastRead}
+      {/* {itemsLastRead} */}
       <SerchTile>Qidirib ko‘ring</SerchTile>
-      {itemsOfMostRead}
+      {/* {itemsOfMostRead} */}
     </div>
   );
 });

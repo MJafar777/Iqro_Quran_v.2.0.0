@@ -19,9 +19,7 @@ interface LiProp {
 }
 
 export const Li = memo((prop: LiProp) => {
-  const {
-    to, className, children, close, search, suraId, numberOfOyat,
-  } = prop;
+  const { to, className, children, close, search, suraId, numberOfOyat } = prop;
   const { setSelectedSura } = useSelectedSuraActions();
   const {
     isRightsidebarActive,
@@ -48,12 +46,12 @@ export const Li = memo((prop: LiProp) => {
       <Link
         to={to}
         onClick={() => {
-          setSelectedSura({
-            suraId: suraId || 1,
-            nameLotin: '',
-            nameKril: '',
-            numberOfOyat: numberOfOyat || 7,
-          });
+          // setSelectedSura({
+          // suraId: suraId || 1,
+          // nameLotin: '',
+          // nameKril: '',
+          // numberOfOyat: numberOfOyat || 7,
+          // });
           setIsRightsidebarActive(!isRightsidebarActive);
           setIsSidebarActive(true);
         }}
