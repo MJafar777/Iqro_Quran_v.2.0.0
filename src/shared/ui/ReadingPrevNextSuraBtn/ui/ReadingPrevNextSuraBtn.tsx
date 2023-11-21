@@ -30,10 +30,11 @@ const ReadingPrevNexSuratBtn = memo(
 
     const handlePageClick = () => {
       if (prev && suraList) {
-        setSelectedSura(suraList[currentSura.quran_order - 2]);
-      }
-      if (next && suraList) {
         setSelectedSura(suraList[currentSura.quran_order]);
+      }
+
+      if (next && suraList) {
+        setSelectedSura(suraList[currentSura.quran_order - 2]);
       }
     };
 
