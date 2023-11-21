@@ -38,3 +38,8 @@
   text-align: left;
   color: black !important;
 }
+
+.skeleton {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  border-radius: 12px;
+}

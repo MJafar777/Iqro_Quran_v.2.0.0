@@ -12,7 +12,7 @@ import { useSelectedSuraActions } from '@/entities/Surah';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
 
 interface OneItemSuraProp {
-  suraId: number;
+  suraId?: number;
   title?: string;
   numberOfOyat?: number;
   arabic?: string;

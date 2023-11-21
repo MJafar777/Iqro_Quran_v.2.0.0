@@ -7,6 +7,9 @@ export interface ButtonsClickedProps {
   setIsSidebarActive: (active: boolean) => void;
   isRightsidebarActive: boolean;
   setIsRightsidebarActive: (active: boolean) => void;
+  fontSize:number;
+  setFontSize:(pro:number)=>void
+
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -16,4 +19,6 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setIsSidebarActive: () => {},
   isRightsidebarActive: false,
   setIsRightsidebarActive: () => {},
+  fontSize:3,
+  setFontSize:()=>{}
 });
