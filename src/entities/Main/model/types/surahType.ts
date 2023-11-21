@@ -5,7 +5,18 @@ export interface Surah {
   nomer: number;
 }
 
+
+
+export interface DataSearchSidebar{
+  data:Surah[];
+  search:string
+}
+export interface DataSearch{
+  data:Surah[];
+  search:string
+}
+
 export interface SearchData { 
-  search: string;
-  data: Surah[];
+  data?: DataSearch;
+  dataSidebar?:DataSearchSidebar
 }

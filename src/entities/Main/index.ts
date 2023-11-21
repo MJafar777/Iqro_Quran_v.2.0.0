@@ -11,3 +11,5 @@ export { setSearchReducer } from './model/slice/sliceSearch';
 export { getSelectorSearch } from './model/selector/getSelectorSerach';
 
 export { Search } from './ui/Search/Search';
+
+export {useSetSearchActions} from './model/slice/sliceSearch'

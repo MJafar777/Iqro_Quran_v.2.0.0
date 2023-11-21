@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { getSelectorSearch } from '../../model/selector/getSelectorSerach';
 import { HStack } from '@/shared/ui/Stack';
 import OneItemSurah from '../OneSurahItem/OneItemSurah';
 
-export const Search = () => {
+export const Search = memo(() => {
   const dataSearch = useSelector(getSelectorSearch);
 
   return (
@@ -33,4 +33,4 @@ export const Search = () => {
       </HStack>
     </>
   );
-};
+});

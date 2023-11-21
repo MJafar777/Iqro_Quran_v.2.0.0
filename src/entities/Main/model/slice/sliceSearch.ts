@@ -1,19 +1,27 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { buildSlice } from '@/shared/lib/store';
-import { SearchData } from '../types/surahType';
+import { DataSearch, DataSearchSidebar, SearchData } from '../types/surahType';
 
 const initialState: SearchData = {
-  search: '',
-  data: [],
+  data: {
+    data: [],
+    search: '',
+  },
+  dataSidebar: {
+    data: [],
+    search: '',
+  },
 };
 
 export const SearchSlice = buildSlice({
   name: 'search',
   initialState,
   reducers: {
-    setSearch: (state, { payload }: PayloadAction<SearchData>) => {
-      state.data = payload.data;
-      state.search = payload.search;
+    setSearch: (state, { payload }: PayloadAction<DataSearch>) => {
+      state.data = payload;
+    },
+    setSearchSidebar: (state, { payload }: PayloadAction<DataSearchSidebar>) => {
+      state.dataSidebar = payload;
     },
   },
 });

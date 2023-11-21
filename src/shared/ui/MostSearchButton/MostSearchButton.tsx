@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import cls from './MostSearchButton.module.scss';
 import { useSelectedSuraActions } from '@/entities/Surah';
+import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface MostSearchButtonProp {
   className?: string;
@@ -11,7 +12,7 @@ interface MostSearchButtonProp {
 }
 
 export const MostSearchButton = memo((prop: MostSearchButtonProp) => {
-  const { children ,suraId,numberOfOyat} = prop;
+  const { children, suraId, numberOfOyat, className } = prop;
   const { setSelectedSura } = useSelectedSuraActions();
 
   return (
@@ -25,7 +26,7 @@ export const MostSearchButton = memo((prop: MostSearchButtonProp) => {
         })
       }
       to="/reading"
-      className={cls.mostSearchButton}
+      className={classNames(cls.mostSearchButton, {}, [className])}
     >
       {children}
     </Link>

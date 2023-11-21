@@ -12,7 +12,7 @@ import { Text, TextAlign } from '@/shared/ui/Text';
 import { Button, ButtonSize } from '@/shared/ui/Button/Button';
 import { MostSearchButton } from '@/shared/ui/MostSearchButton/MostSearchButton';
 import { getListOfSurahs } from '@/pages/MainPage';
-import { surahNameList } from '@/shared/const/listOfSurah';
+import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSetSearchActions } from '../../model/slice/sliceSearch';
 
@@ -32,27 +32,36 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
   const { className } = prop;
   const [searchSurah, setSearchSurah] = useState('');
   const [length, setLength] = useState(1);
+  const [chapterCode, setChapterCode] = useState(1);
+  const [dataWhichLang, setDataWhichLang] = useState(
+    chapterCode >= 65 || chapterCode <= 90 ? surahNameList : surahNameListRu,
+  );
   const dispatch = useAppDispatch();
   const { setSearch } = useSetSearchActions();
   const getSearch = (e: any) => {
     setSearchSurah(e.target.value);
     setLength(searchSurah.length + 1);
+    setChapterCode(e.target.value.toUpperCase().charCodeAt(0));
   };
-  const listOfSurah = useSelector(getListOfSurahs);
 
+  useEffect(() => {
+    if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
+    else setDataWhichLang(surahNameListRu);
+  }, [chapterCode]);
+
+  const listOfSurah = useSelector(getListOfSurahs);
   const filter = useCallback(() => {
-    return surahNameList?.filter(
+    return dataWhichLang?.filter(
       (sura) =>
         sura.nom.toLocaleUpperCase().slice(0, length) ===
         searchSurah.toUpperCase(),
     );
-  }, [length, searchSurah]);
+  }, [dataWhichLang, length, searchSurah]);
 
   const result = filter();
 
   useEffect(() => {
     dispatch(setSearch({ search: searchSurah, data: [...result] }));
-    console.log('jjj');
   }, [dispatch, filter, result, searchSurah, setSearch]);
 
   const mostSearchSurah = useMemo(
