@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/no-children-prop */
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import iconSearch from '../../../../shared/assets/icons/icon-Search.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -36,19 +36,24 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
   const { setSearch } = useSetSearchActions();
   const getSearch = (e: any) => {
     setSearchSurah(e.target.value);
-    setLength((pre) => pre + 1);
+    setLength(searchSurah.length + 1);
   };
   const listOfSurah = useSelector(getListOfSurahs);
 
-  const filter = surahNameList?.filter(
-    (sura) =>
-      sura.nom.toLocaleUpperCase().slice(0, 3) === searchSurah.toUpperCase(),
-  );
-  console.log(filter);
+  const filter = useCallback(() => {
+    return surahNameList?.filter(
+      (sura) =>
+        sura.nom.toLocaleUpperCase().slice(0, length) ===
+        searchSurah.toUpperCase(),
+    );
+  }, [length, searchSurah]);
+
+  const result = filter();
 
   useEffect(() => {
-    dispatch(setSearch({ search: searchSurah, data: [...filter] }));
-  }, [dispatch, filter, searchSurah, setSearch]);
+    dispatch(setSearch({ search: searchSurah, data: [...result] }));
+    console.log('jjj');
+  }, [dispatch, filter, result, searchSurah, setSearch]);
 
   const mostSearchSurah = useMemo(
     () =>

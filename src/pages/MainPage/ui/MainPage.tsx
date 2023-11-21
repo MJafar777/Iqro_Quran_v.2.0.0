@@ -1,6 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { MainHeader, ListOfSurah, MobileAppView } from '@/entities/Main';
+import {
+  MainHeader,
+  ListOfSurah,
+  MobileAppView,
+  Search,
+} from '@/entities/Main';
 import {
   DynamicModuleLoader,
   ReducersList,
@@ -30,6 +35,7 @@ const MainPage = () => {
   const content = (
     <div data-testid="MainPage">
       <MainHeader />
+      <Search />
       <ListOfSurah
         isLoading={isLoading || false}
         data={listOfSurah}

@@ -12,7 +12,6 @@ export const SearchSlice = buildSlice({
   initialState,
   reducers: {
     setSearch: (state, { payload }: PayloadAction<SearchData>) => {
-      console.log(payload, 'kkkk');
       state.data = payload.data;
       state.search = payload.search;
     },
