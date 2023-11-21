@@ -9,6 +9,7 @@ import { selectedSuraReducer } from '@/entities/Surah';
 import { selectedOyatReducer } from '@/entities/Oyat';
 import { selectedPageReducer } from '@/entities/Page';
 import { SurahListSliceReducer } from '@/pages/MainPage';
+import { TimeDataReducer } from '@/widgets/Nabar';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -20,7 +21,7 @@ export function createReduxStore(
     currentOyat: selectedOyatReducer,
     currentPage: selectedPageReducer,
     mainPage:SurahListSliceReducer,
-
+    timeData:TimeDataReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 

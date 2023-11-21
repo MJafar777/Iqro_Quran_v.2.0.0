@@ -27,9 +27,8 @@ const MainPage = () => {
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
   useEffect(() => {
-    dispatch(fetchSurahlesList({}));
-  }, [dispatch]);
-
+    if (!listOfSurah) dispatch(fetchSurahlesList({}));
+  }, [dispatch, listOfSurah]);
 
   const content = (
     <div data-testid="MainPage">

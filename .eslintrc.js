@@ -10,6 +10,7 @@ module.exports = {
     'plugin:i18next/recommended',
     'plugin:storybook/recommended',
     'prettier',
+    'airbnb-base',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -28,7 +29,6 @@ module.exports = {
     'unused-imports',
   ],
   rules: {
-    'no-nested-ternary': 'off',
     'no-console': 'off',
     'react/jsx-props-no-spreading': 'off',
     'unused-imports/no-unused-imports': 'error',
@@ -77,7 +77,7 @@ module.exports = {
       'error',
       {
         ignoreComments: true,
-        code: 125,
+        code: 145,
       },
     ],
     'jsx-a11y/no-static-element-interactions': 'off',

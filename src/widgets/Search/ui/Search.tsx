@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
 import React, { memo, useContext, useMemo } from 'react';
@@ -17,22 +18,61 @@ interface SearchProp {
 }
 
 const listOfMostRead = [
-  { to: '/reading', title: 'Fotiha', suraId: 1, numberOfOyat: 7 },
-  { to: '/reading', title: 'Al-Baqarah', suraId: 1, numberOfOyat: 7 },
-  { to: '/reading', title: "Al-An'am", suraId: 6, numberOfOyat: 115 },
-  { to: '/reading', title: 'Yusuf', suraId: 12, numberOfOyat: 111 },
-  { to: '/reading', title: 'Hud', suraId: 11, numberOfOyat: 123 },
+  {
+    to: '/reading',
+    title: 'Fotiha',
+    suraId: 1,
+    numberOfOyat: 7,
+  },
+  {
+    to: '/reading',
+    title: 'Al-Baqarah',
+    suraId: 1,
+    numberOfOyat: 7,
+  },
+  {
+    to: '/reading',
+    title: "Al-An'am",
+    suraId: 6,
+    numberOfOyat: 115,
+  },
+  {
+    to: '/reading',
+    title: 'Yusuf',
+    suraId: 12,
+    numberOfOyat: 111,
+  },
+  {
+    to: '/reading',
+    title: 'Hud',
+    suraId: 11,
+    numberOfOyat: 123,
+  },
 ];
 
 const lastReadSurahList = [
-  { to: '/reading', title: "Al-An'am", suraId: 6, numberOfOyat: 115 },
-  { to: '/reading', title: 'Yusuf', suraId: 12, numberOfOyat: 111 },
-  { to: '/reading', title: 'Hud', suraId: 11, numberOfOyat: 123 },
+  {
+    to: '/reading',
+    title: "Al-An'am",
+    suraId: 6,
+    numberOfOyat: 115,
+  },
+  {
+    to: '/reading',
+    title: 'Yusuf',
+    suraId: 12,
+    numberOfOyat: 111,
+  },
+  {
+    to: '/reading',
+    title: 'Hud',
+    suraId: 11,
+    numberOfOyat: 123,
+  },
 ];
 
 export const Search = memo((prop: SearchProp) => {
-  const { isRightsidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  const { isRightsidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
 
   const onToggle = () => {
     setIsRightsidebarActive(!isRightsidebarActive);
@@ -41,8 +81,7 @@ export const Search = memo((prop: SearchProp) => {
   const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH) || '');
 
   const itemsOfMostRead = useMemo(
-    () =>
-      listOfMostRead.map((item) => (
+    () => listOfMostRead.map((item) => (
         <Li
           search
           to={item.to}
@@ -52,7 +91,7 @@ export const Search = memo((prop: SearchProp) => {
         >
           {item.title}
         </Li>
-      )),
+    )),
     [],
   );
 
@@ -60,12 +99,13 @@ export const Search = memo((prop: SearchProp) => {
     () =>
       // eslint-disable-next-line array-callback-return
       getList?.reverse().map((item: any, index: number) => {
-        if (index < 4)
+        if (index < 4) {
           return (
             <Li to="/reading" key={item.title} close search>
               {item.title}
             </Li>
           );
+        }
       }),
     [getList],
   );

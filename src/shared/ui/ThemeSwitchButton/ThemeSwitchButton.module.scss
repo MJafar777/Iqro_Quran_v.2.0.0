@@ -1,0 +1,47 @@
+.ThemeSwtichButton {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  .buttonBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: #e7e7e7;
+    border-radius: 30px;
+    padding: 5px;
+    overflow: visible;
+  }
+
+  .btn {
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100px;
+    height: 85%;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    transition: 0.5s;
+    margin: 5px;
+    -webkit-box-shadow: 0 0 10px 3px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0 0 10px 3px rgba(34, 60, 80, 0.2);
+    box-shadow: 0 0 10px 3px rgba(34, 60, 80, 0.2);
+  }
+
+  .toggleBtn {
+    width: 100px;
+    padding: 15px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    text-align: center;
+    user-select: none;
+    font-size: 16px;
+  }
+}

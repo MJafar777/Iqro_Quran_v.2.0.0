@@ -12,10 +12,12 @@ import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 // import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
+import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 
 interface ReadingPageProps {
   className?: string;
@@ -46,6 +48,10 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
+        <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
+
+        <SurahInfoAndAudio />
+
         {/* <ReadingArabic /> */}
 
         {isLoading ? (
