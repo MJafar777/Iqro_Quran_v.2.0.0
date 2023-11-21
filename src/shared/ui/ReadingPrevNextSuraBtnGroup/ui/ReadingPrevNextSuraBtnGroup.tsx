@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { useSelector } from 'react-redux';
+import { getSelectedSura } from '@/entities/Surah';
 import cls from './ReadingPrevNextSuraBtnGroup.module.scss';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import { ReadingPrevNextSuraBtn } from '../../ReadingPrevNextSuraBtn';
 
 interface ReadingPrevNextSuraBtnGroupProps {
@@ -9,13 +11,19 @@ interface ReadingPrevNextSuraBtnGroupProps {
 
 const ReadingPrevNextSuraBtnGroup = memo(
   ({ className }: ReadingPrevNextSuraBtnGroupProps) => {
+    const currentSura = useSelector(getSelectedSura);
+
     return (
       <div
         className={classNames(cls.ReadingPrevNextSuraBtnGroup, {}, [className])}
       >
-        <ReadingPrevNextSuraBtn prevIcon prev text="Oldingi Sura" />
+        {currentSura?.quran_order > 1 && (
+          <ReadingPrevNextSuraBtn prevIcon prev text="Oldingi Sura" />
+        )}
 
-        <ReadingPrevNextSuraBtn nextIcon next text="Keyingi Sura" />
+        {currentSura?.quran_order < 114 && (
+          <ReadingPrevNextSuraBtn nextIcon next text="Keyingi Sura" />
+        )}
       </div>
     );
   },

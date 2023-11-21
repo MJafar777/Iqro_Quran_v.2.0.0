@@ -11,19 +11,19 @@ interface MostSearchButtonProp {
 }
 
 export const MostSearchButton = memo((prop: MostSearchButtonProp) => {
-  const { children ,suraId,numberOfOyat} = prop;
+  const { children, suraId, numberOfOyat } = prop;
   const { setSelectedSura } = useSelectedSuraActions();
 
   return (
     <Link
-      onClick={() =>
-        setSelectedSura({
-          suraId,
-          nameLotin: '',
-          nameKril: '',
-          numberOfOyat: numberOfOyat || 7,
-        })
-      }
+      // onClick={() =>
+      //   setSelectedSura({
+      //     suraId,
+      //     nameLotin: '',
+      //     nameKril: '',
+      //     numberOfOyat: numberOfOyat || 7,
+      //   })
+      // }
       to="/reading"
       className={cls.mostSearchButton}
     >

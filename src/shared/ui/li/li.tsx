@@ -26,9 +26,8 @@ export const Li = memo((prop: LiProp) => {
     setIsSidebarActive,
     isSidebarActive,
   } = useContext(ButtonsContext);
-const listLatsReadSurah=localStorage.getItem('')
+  const listLatsReadSurah = localStorage.getItem('');
   const onToggle = () => {
-
     console.log('log');
   };
 
@@ -36,16 +35,16 @@ const listLatsReadSurah=localStorage.getItem('')
     <Link
       to={to}
       className={classNames(cls.li)}
-      onClick={() => {
-        setSelectedSura({
-          suraId: suraId || 1,
-          nameLotin: '',
-          nameKril: '',
-          numberOfOyat: numberOfOyat || 7,
-        });
-        setIsRightsidebarActive(false);
-        setIsSidebarActive(true);
-      }}
+      // onClick={() => {
+      //   setSelectedSura({
+      //     suraId: suraId || 1,
+      //     nameLotin: '',
+      //     nameKril: '',
+      //     numberOfOyat: numberOfOyat || 7,
+      //   });
+      //   setIsRightsidebarActive(false);
+      //   setIsSidebarActive(true);
+      // }}
     >
       <div>
         {search ? (

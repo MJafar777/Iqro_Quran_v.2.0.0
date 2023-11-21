@@ -65,15 +65,15 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
       }}
       to="/reading"
       className={classNames(cls.oneItemSura, {}, [className])}
-      onClick={() => {
-        setSelectedSura({
-          suraId: orderOfSura,
-          nameLotin: '',
-          nameKril: '',
-          numberOfOyat: numberOfOyat || 1,
-        });
-        readLastSurahInLocalStorage();
-      }}
+      // onClick={() => {
+      //   setSelectedSura({
+      //     suraId: orderOfSura,
+      //     nameLotin: '',
+      //     nameKril: '',
+      //     numberOfOyat: numberOfOyat || 1,
+      //   });
+      //   readLastSurahInLocalStorage();
+      // }}
     >
       <HStack max align="center">
         <HStack style={{ width: '60%' }} align="center" justify="start">
