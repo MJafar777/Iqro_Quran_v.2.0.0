@@ -1,3 +1,43 @@
-.InfoSurahPage {
+.InfoSurahPageWrapperParent {
+  margin-top: 100px;
+}
+
+.TitleData {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.DataName {
+  user-select: none;
+}
+
+.Data {
+  margin: 0 1rem;
+}
+
+.MainText {
+  letter-spacing: 2px;
+  line-height: 20px;
+}
+
+.imgLeft {
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+  margin-top: 5px;
+  float: left;
+}
+
+.Block {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 2rem 0;
+
+  h4 {
+    margin: 1rem 0;
+    font-size: 18px;
+  }
 }

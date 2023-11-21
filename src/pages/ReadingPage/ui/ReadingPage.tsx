@@ -12,6 +12,7 @@ import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
+import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 
 // import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 
@@ -44,6 +45,8 @@ const ReadingPage = (props: ReadingPageProps) => {
         )}
       >
         <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
+
+        <SurahInfoAndAudio />
 
         <ReadingArabic />
 
