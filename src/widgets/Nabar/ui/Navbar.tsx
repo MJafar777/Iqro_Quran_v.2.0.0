@@ -1,9 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react/no-children-prop */
 /* eslint-disable i18next/no-literal-string */
-import React, {
-  memo, useContext, useEffect, useState,
-} from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -13,7 +11,7 @@ import { Icon } from '@/shared/ui/Icon';
 import {
   Bismillah,
   Logo,
-  burger,
+  Burger,
   fir,
   sec,
   thir,
@@ -39,7 +37,8 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   const [whichSidebar, setWhichSidebar] = useState('settings');
 
-  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
+  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } =
+    useContext(ButtonsContext);
 
   const dispatch = useAppDispatch();
 
@@ -63,12 +62,11 @@ export const Navbar = memo((prop: NavbarProp) => {
   return (
     <div className={classNames(cls.nabar)}>
       <HStack className={classNames(cls.burger)} justify="start" gap="16">
-        <Icon
+        <Burger
           className={classNames(cls.icon)}
-          Svg={burger}
           onClick={() => setIsSidebarActive(!isSidebarActive)}
-          clickable
         />
+
         <Link to="/">
           <Icon Svg={Logo} className={cls.logo} />
         </Link>
