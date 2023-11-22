@@ -15,7 +15,6 @@ interface SettingsProp {
 }
 
 export const Setting = memo((prop: SettingsProp) => {
-
   const { isRightsidebarActive, setIsRightsidebarActive } =
     useContext(ButtonsContext);
 
@@ -29,13 +28,11 @@ export const Setting = memo((prop: SettingsProp) => {
       <div className={classNames(cls.setting)}>
         <HStack className={cls.headerOfSidebar}>
           <p className={cls.titleOfHeader}> Sozlamlar</p>
-          <Icon
+          {/* <Icon Svg={CloseIcon} height={0} clickable /> */}
+          <CloseIcon
             data-testid="sidebar-toggle"
             onClick={onToggle}
             className={cls.closeBtn}
-            Svg={CloseIcon}
-            height={0}
-            clickable
           />
         </HStack>
         <VStack gap="32">
@@ -43,7 +40,7 @@ export const Setting = memo((prop: SettingsProp) => {
           <HStack max className={classNames(cls.buttonWrapper)}>
             <ThemeSwitcher />
           </HStack>
-          <ChangeFontSize  />
+          <ChangeFontSize />
         </VStack>
       </div>
     ),

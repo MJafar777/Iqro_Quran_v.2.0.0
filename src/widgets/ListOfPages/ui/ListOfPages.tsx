@@ -1,4 +1,5 @@
 import React, { memo, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import cls from './ListOfPages.module.scss';
 import {
   Book,
@@ -7,7 +8,6 @@ import {
   Listining,
   Book2,
 } from '@/shared/assets/icons/SidebarListOfPages';
-import { Li } from '@/shared/ui/li';
 
 const listOfPage = [
   { path: '/reading', title: 'Qur’on o‘qish', icon: <Book2 /> },
@@ -26,9 +26,9 @@ export const ListOfPages = memo(() => {
   const itemListOfPage = useMemo(
     () =>
       listOfPage.map((item) => (
-        <Li search={false} key={item.title} to={item.path}>
+        <Link className={cls.li} key={item.title} to={item.path}>
           {item.icon} {item.title}
-        </Li>
+        </Link>
       )),
     [],
   );
@@ -36,7 +36,7 @@ export const ListOfPages = memo(() => {
   return (
     <div className={cls.listOfPage}>
       <p className={cls.title}>Menu</p>
-      {itemListOfPage}
+      <div className={cls.wrapper}>{itemListOfPage}</div>
     </div>
   );
 });
