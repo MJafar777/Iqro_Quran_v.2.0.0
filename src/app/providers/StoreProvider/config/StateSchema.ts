@@ -27,6 +27,8 @@ export interface StateSchema {
   readingArabic?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;
+  readingTranslateLotin?: ReadingArabicSchema;
+  readingTranslateKril?: ReadingArabicSchema;
   mainPage: SurahListSchema;
   timeData: DataTimeScheme;
   search: SearchData;

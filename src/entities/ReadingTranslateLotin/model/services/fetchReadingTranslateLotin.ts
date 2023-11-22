@@ -2,12 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { ReadingQuranData } from '../..';
 
-export const fetchReadingTranskriptLotin = createAsyncThunk<
+export const fetchReadingTranslateLotin = createAsyncThunk<
   ReadingQuranData,
   { suraId: number; pageNumber: number; limitOfPage: number },
   ThunkConfig<string>
 >(
-  'readingTranskriptLotin',
+  'readingTranslateLotin',
   async ({ suraId = 1, pageNumber = 1, limitOfPage = 1 }, thunkApi) => {
     const { extra, rejectWithValue } = thunkApi;
 
@@ -17,7 +17,7 @@ export const fetchReadingTranskriptLotin = createAsyncThunk<
 
     try {
       const response = await extra.api.get<ReadingQuranData>(
-        `verse/by_chapter/page/transcript?chapter=${suraId}&verses=false&page=${pageNumber}&limit=${limitOfPage}`,
+        `verse/by_chapter/page/lotin?chapter=${suraId}&page=${pageNumber}&limit=${limitOfPage}`,
       );
 
       if (!response.data) {
