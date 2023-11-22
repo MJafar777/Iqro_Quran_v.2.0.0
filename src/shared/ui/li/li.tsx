@@ -21,7 +21,9 @@ interface LiProp {
 }
 
 export const Li = memo((prop: LiProp) => {
-  const { to, className, children, close, search, suraId, numberOfOyat } = prop;
+  const {
+    to, className, children, close, search, suraId, numberOfOyat,
+  } = prop;
   const { setSelectedSura } = useSelectedSuraActions();
   const {
     isRightsidebarActive,

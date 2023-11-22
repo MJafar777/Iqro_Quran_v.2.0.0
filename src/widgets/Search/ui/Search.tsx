@@ -83,8 +83,7 @@ const lastReadSurahList = [
 ];
 
 export const Search = memo((prop: SearchProp) => {
-  const { isRightsidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  const { isRightsidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
   const [searchSurah, setSearchSurah] = useState('');
   const [length, setLength] = useState(1);
   const [chapterCode, setChapterCode] = useState(1);
@@ -144,8 +143,7 @@ export const Search = memo((prop: SearchProp) => {
   const filter = useCallback(() => {
     return dataWhichLang?.filter(
       (sura) =>
-        sura.nom.toLocaleUpperCase().slice(0, length) ===
-        searchSurah.toUpperCase(),
+        sura.nom.toLocaleUpperCase().slice(0, length) === searchSurah.toUpperCase(),
     );
   }, [dataWhichLang, length, searchSurah]);
 
