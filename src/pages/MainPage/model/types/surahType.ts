@@ -11,6 +11,7 @@ export interface OneSurahWhichLang {
   };
   name: string;
 }
+
 export interface OneSuraInListSchema {
   _id: string;
   revelation_place: string;

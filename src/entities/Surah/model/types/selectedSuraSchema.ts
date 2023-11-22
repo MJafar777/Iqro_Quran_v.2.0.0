@@ -1,4 +1,5 @@
 export interface SelectedSuraSchema {
+  translated_names: any;
   _id: string;
   revelation_place: string;
   revelation_order: number;

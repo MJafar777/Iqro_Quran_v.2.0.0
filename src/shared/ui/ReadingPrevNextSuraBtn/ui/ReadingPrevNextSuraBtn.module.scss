@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 13px 27px;
+  padding: 10px 20px;
   border: 1px solid #000;
   cursor: pointer;
   background-color: var(--bg-color);
@@ -27,11 +27,11 @@
   }
 
   .prevIcon {
-    transform: scale(2.5) rotate(90deg);
+    transform: scale(2) rotate(90deg);
   }
 
   .nextIcon {
-    transform: scale(2.5) rotate(-90deg);
+    transform: scale(2) rotate(-90deg);
   }
 
   .disabled {
