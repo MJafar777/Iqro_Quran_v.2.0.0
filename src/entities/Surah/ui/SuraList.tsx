@@ -106,7 +106,13 @@ const SuraList = memo(({ className }: SuraListProps) => {
                     {oneSurah.quran_order}
                   </p>
 
-                  <p className={classNames(cls.SuraList__suraName, {}, [])}>
+                  <p
+                    className={classNames(
+                      cls.SuraList__suraName,
+                      { [cls.top]: Number(index) === 10 },
+                      [],
+                    )}
+                  >
                     {
                       oneSurah.translated_names.find(
                         (name) => name.lang_id?.iso_code === 'uz',

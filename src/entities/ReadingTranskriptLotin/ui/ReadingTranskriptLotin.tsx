@@ -40,6 +40,27 @@ export const ReadingTranskriptLotin = memo(
     const isError = useSelector(getReadingTranskriptLotinError);
 
     useEffect(() => {
+      if (currentSura?.quran_order && data && !data[currentSura?.quran_order]) {
+        dispatch(
+          fetchReadingTranskriptLotin({
+            suraId: currentSura?.quran_order,
+            pageNumber: currentPage.pageNumber,
+            limitOfPage: 1,
+          }),
+        );
+      } else if (currentSura?.quran_order && !data) {
+        dispatch(
+          fetchReadingTranskriptLotin({
+            suraId: currentSura?.quran_order,
+            pageNumber: currentPage.pageNumber,
+            limitOfPage: 1,
+          }),
+        );
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentSura?.quran_order, dispatch]);
+
+    useEffect(() => {
       if (currentSura?.quran_order) {
         dispatch(
           fetchReadingTranskriptLotin({
@@ -49,7 +70,8 @@ export const ReadingTranskriptLotin = memo(
           }),
         );
       }
-    }, [currentPage, currentSura?.quran_order, dispatch]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPage, dispatch]);
 
     return (
       <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>

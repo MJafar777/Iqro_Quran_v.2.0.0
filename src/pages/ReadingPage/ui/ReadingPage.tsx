@@ -18,6 +18,7 @@ import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
+// import { ReadingTabBtn } from '@/shared/ui/ReadingTabBtn';
 
 interface ReadingPageProps {
   className?: string;
@@ -48,7 +49,9 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
+        <SwtichButton buttonsNames={["O'qilishi", 'Tarjimasi', 'Kitob']} />
+
+        {/* <ReadingTabBtn /> */}
 
         <SurahInfoAndAudio />
 
