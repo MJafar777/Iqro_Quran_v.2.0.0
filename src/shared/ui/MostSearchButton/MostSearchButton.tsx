@@ -14,7 +14,9 @@ interface MostSearchButtonProp {
 }
 
 export const MostSearchButton = memo((prop: MostSearchButtonProp) => {
-  const { children, suraId, numberOfOyat, className } = prop;
+  const {
+    children, suraId, numberOfOyat, className,
+  } = prop;
   const { setSelectedSura } = useSelectedSuraActions();
   const listOfSurahs = useSelector(getListOfSurahs);
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export const MostSearchButton = memo((prop: MostSearchButtonProp) => {
     const data = listOfSurahs?.filter((sura) => sura.quran_order === suraId)[0];
     if (data) {
       setSelectedSura(data);
-      navigate(`/reading`);
+      navigate('/reading');
     }
   };
   return (
