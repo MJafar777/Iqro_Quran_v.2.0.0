@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
@@ -96,6 +97,7 @@ export const Search = memo((prop: SearchProp) => {
               {item.title}
             </Li>
           );
+        }
       }),
     [getList],
   );
