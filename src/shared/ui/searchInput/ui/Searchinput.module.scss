@@ -3,8 +3,8 @@
   font-family: var(--font-family-main);
   background: var(--input-bg-color);
   font-size: var(--font-size-m);
-  border-radius: 10px;
-  padding: 11px 14px;
+  border-radius: var(--suraList-item-border-radius);
+  padding: 8px 14px;
   outline: none;
   width: 100%;
 
