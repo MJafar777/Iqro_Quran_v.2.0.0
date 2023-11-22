@@ -128,7 +128,7 @@ export const Search = memo((prop: SearchProp) => {
   const itemsLastRead = useMemo(
     () =>
       // eslint-disable-next-line array-callback-return
-      getList?.reverse().map((item: any, index: number) => {
+      getList?.reverse()?.map((item: any, index: number) => {
         if (index < 4) {
           return (
             <Li to="/reading" key={item.title} close search>
