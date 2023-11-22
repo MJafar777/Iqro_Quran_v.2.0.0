@@ -1,3 +1,8 @@
+import {
+  getError,
+  getIsLoading,
+  getListOfSurahs,
+} from './model/selectors/ListSurah';
 import { MainPageAsync } from './ui/MainPage.async';
 
 export type {
@@ -10,9 +15,6 @@ export { MainPageAsync as MainPage };
 
 export { SurahListSliceReducer } from './model/slice/sliceSurahList';
 
-export {
-  getListOfSurahs,
-  getIsLoading,
-  getError,
-} from './model/selectors/ListSurah';
 export { fetchSurahlesList } from './model/service/fetchSurahList/fetchSurahList';
+
+export { getError, getIsLoading, getListOfSurahs };

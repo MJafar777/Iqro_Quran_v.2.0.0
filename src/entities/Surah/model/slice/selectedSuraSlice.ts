@@ -15,6 +15,7 @@ const initialState: SelectedSuraSchema = {
   name_simple: '',
   telegram_file_id: '',
   id: '',
+  translated_names: undefined,
 };
 
 export const SelectedSuraSlice = buildSlice({

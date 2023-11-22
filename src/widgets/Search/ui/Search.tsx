@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
 import React, {
@@ -89,8 +89,8 @@ export const Search = memo((prop: SearchProp) => {
   const itemsLastRead = useMemo(
     () =>
       // eslint-disable-next-line array-callback-return
-      getList?.reverse().map((item: any, index: number) => {
-        if (index < 4)
+      getList?.reverse()?.map((item: any, index: number) => {
+        if (index < 4) {
           return (
             <Li to="/reading" key={item.title} close search>
               {item.title}
@@ -142,14 +142,8 @@ export const Search = memo((prop: SearchProp) => {
           placeholder="Search something"
           className={cls.input}
         />
-        <Icon
-          data-testid="sidebar-toggle"
-          onClick={onToggle}
-          className={cls.closeBtn}
-          Svg={CloseIcon}
-          height={0}
-          clickable
-        />
+
+        <CloseIcon className={cls.closeBtn} onClick={onToggle} />
       </HStack>
       <HStack gap="8" className={cls.mostSearchButtonWrapper}>
         {mostSearchSurah}

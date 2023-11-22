@@ -3,11 +3,11 @@
   flex-direction: column;
 }
 
-.icon {
-  color: black;
-  width: 32px;
-  height: 32px;
-}
+// .icon {
+//   color: black;
+//   width: 32px;
+//   height: 32px;
+// }
 
 .headerOfSidebar {
   position: relative;
@@ -36,6 +36,8 @@
   padding: 12px;
   border-radius: 5px;
   transition: background-color 0.2s;
+  cursor: pointer;
+
   &:hover {
     background-color: var(--icon-hover-bg-color);
   }

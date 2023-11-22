@@ -1,7 +1,6 @@
 import React, { ReactNode, memo, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import cls from './SidebarMain.module.scss';
-import { Icon } from '@/shared/ui/Icon';
 import { Close } from '@/shared/assets/icons/sidebarSearch';
 import { HStack } from '@/shared/ui/Stack';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
@@ -21,10 +20,9 @@ export const SidebarMain = memo((prop: SidebarMainProp) => {
         <Link to="/" className={cls.logo}>
           Iqro-Quran
         </Link>
-        <Icon
-          Svg={Close}
-          className={cls.close}
-          clickable
+
+        <Close
+          className={cls.closebtn}
           onClick={() => setIsSidebarActive(!isSidebarActive)}
         />
       </HStack>
