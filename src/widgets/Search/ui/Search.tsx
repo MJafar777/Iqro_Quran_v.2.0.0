@@ -110,37 +110,6 @@ export const Search = memo((prop: SearchProp) => {
   // @ts-ignore
   const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH));
 
-  const itemsOfMostRead = useMemo(
-    () =>
-      listOfMostRead.map((item) => (
-        <Li
-          search
-          to={item.to}
-          key={item.title}
-          suraId={item.suraId}
-          numberOfOyat={item.numberOfOyat}
-        >
-          {item.title}
-        </Li>
-      )),
-    [],
-  );
-
-  const itemsLastRead = useMemo(
-    () =>
-      // eslint-disable-next-line array-callback-return
-      getList?.reverse()?.map((item: any, index: number) => {
-        if (index < 4) {
-          return (
-            <Li to="/reading" key={item.title} close search>
-              {item.title}
-            </Li>
-          );
-        }
-      }),
-    [getList],
-  );
-
   const filter = useCallback(() => {
     return dataWhichLang?.filter(
       (sura) =>
@@ -159,6 +128,43 @@ export const Search = memo((prop: SearchProp) => {
     if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
     else setDataWhichLang(surahNameListRu);
   }, [chapterCode]);
+
+  const itemsOfMostRead = useMemo(
+    () =>
+      listOfMostRead.map((item) => (
+        <Li
+          search
+          to="/reading"
+          key={item.title}
+          suraId={item.suraId}
+          numberOfOyat={item.numberOfOyat}
+        >
+          {item.title}
+        </Li>
+      )),
+    [],
+  );
+
+  const itemsLastRead = useMemo(
+    () =>
+      // eslint-disable-next-line array-callback-return
+      getList?.reverse()?.map((item: any, index: number) => {
+        if (index < 4) {
+          return (
+            <Li
+              to="/reading"
+              key={item.title}
+              suraId={item.suraId}
+              close
+              search
+            >
+              {item.title}
+            </Li>
+          );
+        }
+      }),
+    [getList],
+  );
 
   const mostSearchSurah = useMemo(
     () =>
