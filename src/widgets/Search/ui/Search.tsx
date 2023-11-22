@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
 import React, {
@@ -29,22 +29,61 @@ interface SearchProp {
 }
 
 const listOfMostRead = [
-  { to: '/reading', title: 'Fotiha', suraId: 1, numberOfOyat: 7 },
-  { to: '/reading', title: 'Al-Baqarah', suraId: 1, numberOfOyat: 7 },
-  { to: '/reading', title: "Al-An'am", suraId: 6, numberOfOyat: 115 },
-  { to: '/reading', title: 'Yusuf', suraId: 12, numberOfOyat: 111 },
-  { to: '/reading', title: 'Hud', suraId: 11, numberOfOyat: 123 },
+  {
+    to: '/reading',
+    title: 'Fotiha',
+    suraId: 1,
+    numberOfOyat: 7,
+  },
+  {
+    to: '/reading',
+    title: 'Al-Baqarah',
+    suraId: 1,
+    numberOfOyat: 7,
+  },
+  {
+    to: '/reading',
+    title: "Al-An'am",
+    suraId: 6,
+    numberOfOyat: 115,
+  },
+  {
+    to: '/reading',
+    title: 'Yusuf',
+    suraId: 12,
+    numberOfOyat: 111,
+  },
+  {
+    to: '/reading',
+    title: 'Hud',
+    suraId: 11,
+    numberOfOyat: 123,
+  },
 ];
 
 const lastReadSurahList = [
-  { to: '/reading', title: "Al-An'am", suraId: 6, numberOfOyat: 115 },
-  { to: '/reading', title: 'Yusuf', suraId: 12, numberOfOyat: 111 },
-  { to: '/reading', title: 'Hud', suraId: 11, numberOfOyat: 123 },
+  {
+    to: '/reading',
+    title: "Al-An'am",
+    suraId: 6,
+    numberOfOyat: 115,
+  },
+  {
+    to: '/reading',
+    title: 'Yusuf',
+    suraId: 12,
+    numberOfOyat: 111,
+  },
+  {
+    to: '/reading',
+    title: 'Hud',
+    suraId: 11,
+    numberOfOyat: 123,
+  },
 ];
 
 export const Search = memo((prop: SearchProp) => {
-  const { isRightsidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  const { isRightsidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
   const [searchSurah, setSearchSurah] = useState('');
   const [length, setLength] = useState(1);
   const [chapterCode, setChapterCode] = useState(1);
@@ -90,12 +129,13 @@ export const Search = memo((prop: SearchProp) => {
     () =>
       // eslint-disable-next-line array-callback-return
       getList?.reverse().map((item: any, index: number) => {
-        if (index < 4)
+        if (index < 4) {
           return (
             <Li to="/reading" key={item.title} close search>
               {item.title}
             </Li>
           );
+        }
       }),
     [getList],
   );
@@ -103,8 +143,7 @@ export const Search = memo((prop: SearchProp) => {
   const filter = useCallback(() => {
     return dataWhichLang?.filter(
       (sura) =>
-        sura.nom.toLocaleUpperCase().slice(0, length) ===
-        searchSurah.toUpperCase(),
+        sura.nom.toLocaleUpperCase().slice(0, length) === searchSurah.toUpperCase(),
     );
   }, [dataWhichLang, length, searchSurah]);
 
@@ -112,7 +151,7 @@ export const Search = memo((prop: SearchProp) => {
 
   useEffect(() => {
     dispatch(setSearchSidebar({ search: searchSurah, data: [...result] }));
-  }, [dispatch, filter, result, searchSurah]);
+  }, [dispatch, filter, result, searchSurah, setSearchSidebar]);
 
   useEffect(() => {
     if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);

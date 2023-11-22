@@ -52,6 +52,6 @@ export const Icon = memo((props: IconProps) => {
       </button>
     );
   }
-
+  
   return icon;
 });

@@ -9,9 +9,11 @@ import {
   getRouteAbout,
   getRouteForbidden,
   getRouteReading,
+  getRouteInfoSurah,
 } from '@/shared/const/router';
 
 import { AppRoutesProps } from '@/shared/types/router';
+import { InfoSurahPage } from '@/pages/InformationPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -29,5 +31,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.READING]: {
     path: getRouteReading(),
     element: <ReadingPage />,
+  },
+  [AppRoutes.INFOSURAH]: {
+    path: getRouteInfoSurah(),
+    element: <InfoSurahPage />,
   },
 };

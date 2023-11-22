@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable react/no-children-prop */
 /* eslint-disable i18next/no-literal-string */
-import React, { memo, useContext, useEffect, useState } from 'react';
+import React, {
+  memo, useContext, useEffect, useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -37,8 +39,7 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   const [whichSidebar, setWhichSidebar] = useState('settings');
 
-  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } =
-    useContext(ButtonsContext);
+  const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
 
   const dispatch = useAppDispatch();
 
