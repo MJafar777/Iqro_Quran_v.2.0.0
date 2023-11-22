@@ -5,6 +5,7 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Footer.module.scss';
@@ -19,18 +20,13 @@ import {
 import { Icon } from '@/shared/ui/Icon';
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <HStack align="start" wrap="wrap" className={classNames(cls.footer)}>
       <VStack className={classNames(cls.firstRowOfFooter)} gap="16">
-        <p className={classNames(cls.title)}>
-          Qur'oni Karimni o'qing, o'rganing va o'rgating.
-        </p>
-        <p className="paraph">
-          Umid qilamizki, hamma uchun Qur'oni Karimni o'qish, o'rganish va
-          o'rgatish oson bo'ladi. Qur'oni Karimning ko'plab nomlari bor,
-          jumladan, Qur'on al-Karim, Al-Kitob, Al-Furqon, Al-Mavisa, Al-Zikr va
-          Al-Nur.
-        </p>
+        <p className={classNames(cls.title)}>{t('footerTitle')}</p>
+        <p className="paraph">{t('footerSubtitle')}</p>
         <AppImage src={logo} />
         <HStack max gap="32">
           <p>Sitemap</p>
@@ -44,53 +40,72 @@ export const Footer = () => {
           All Rights Reserved
         </p>
       </VStack>
-      <VStack className={classNames(cls.secondRowOfFooter)} justify="start" align="start" gap="16">
-        <p className={classNames(cls.title)}>Sayt xaritasi:</p>
+      <VStack
+        className={classNames(cls.secondRowOfFooter)}
+        justify="start"
+        align="start"
+        gap="16"
+      >
+        <p className={classNames(cls.title)}>{t('siteMap')}:</p>
         <Link className={classNames(cls.link)} to={'/tafsir'}>
-          Tafsir
+          {t('Tafsir')}
         </Link>
         <Link className={classNames(cls.link)} to={'/qidirish'}>
-          Qidirish
+          {t('Qidirish')}
         </Link>
         <Link className={classNames(cls.link)} to={'about-us'}>
-          Biz haqimizda
+          {t('aboutUs')}
         </Link>
         <Link className={classNames(cls.link)} to={'listining-quran'}>
-          Qur’on tinglash
+          {t('listiningQuran')}
         </Link>
         <Link className={classNames(cls.link)} to={'-reading-quran-tarnlation'}>
-          Qur’on ma’nolari
+          {t('meaningQuran')}
         </Link>
       </VStack>
-      <VStack className={classNames(cls.thirdRowOfFooter)} justify="start" align="start" gap="16">
+      <VStack
+        className={classNames(cls.thirdRowOfFooter)}
+        justify="start"
+        align="start"
+        gap="16"
+      >
         <p className={classNames(cls.title)}>Hamkorlar:</p>
         <Link target="_blank" to={'https://quran.com/'} className={cls.link}>
           Quran.com
         </Link>
       </VStack>
-      <VStack className={classNames(cls.fourthRowOfFooter)} justify="start" align="start" gap="16">
+      <VStack
+        className={classNames(cls.fourthRowOfFooter)}
+        justify="start"
+        align="start"
+        gap="16"
+      >
         <p className={classNames(cls.title)}>Biz bilan bog`lanish:</p>
         <p>
-          Email:
+          {t('Email')}:
           <Link to="https://mail.google.com/" className={cls.link}>
             {' '}
             sardorxon1977@gmail.com
           </Link>
         </p>
         <p>
-          Telegram:
+          {t('Telegram')}:
           <Link to="https://t.me/Sardorxon1977" className={cls.link}>
             sardorxon1977
           </Link>{' '}
         </p>
         <p>
-          Tel:
+          {t('Tel')}:
           <Link to="/" type="tel:+998 97 123 45 67" className={cls.link}>
             +998 97 123 45 67
           </Link>
         </p>
         <HStack gap="32" justify="start" max>
-          <Link to={'https://www.youtobe.com/'} target="_blank" className={cls.link}>
+          <Link
+            to={'https://www.youtobe.com/'}
+            target="_blank"
+            className={cls.link}
+          >
             <Icon className={cls.iconOfFooter} Svg={youtobe} />
           </Link>
           <Link to={'https://www.'} target="_blank" className={cls.link}>
@@ -99,7 +114,11 @@ export const Footer = () => {
           <Link to={'https://www.'} target="_blank" className={cls.link}>
             <Icon className={cls.iconOfFooter} Svg={telegram} />
           </Link>
-          <Link to={'https://www.instagram.com/'} target="_blank" className={cls.link}>
+          <Link
+            to={'https://www.instagram.com/'}
+            target="_blank"
+            className={cls.link}
+          >
             <Icon className={cls.iconOfFooter} Svg={instagram} />{' '}
           </Link>
         </HStack>

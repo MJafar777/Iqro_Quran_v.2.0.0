@@ -38,14 +38,12 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
     };
     const getListRead = localStorage.getItem(LAST_READ_SURAH);
     if (getListRead) {
-      console.log(getListRead, 'kk');
 
       if (
         JSON.parse(getListRead).map(
           (surah: OneItemSuraProp) => surah.suraId == orderOfSura,
         )
       ) {
-        console.log(orderOfSura);
 
         localStorage.setItem(
           LAST_READ_SURAH,
