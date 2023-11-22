@@ -2,6 +2,7 @@
 /* eslint-disable react/no-children-prop */
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import iconSearch from '../../../../shared/assets/icons/icon-Search.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './MainHeader.tsx.module.scss';
@@ -21,15 +22,16 @@ interface MainHeaderComponentProps {
 }
 
 const arrMostSearchSurah = [
-  { name: 'Fatihah', suraId: 1, numberOfOyat: 7 },
-  { name: 'Mulk', suraId: 67, numberOfOyat: 30 },
-  { name: 'Ya-Sin', suraId: 36, numberOfOyat: 83 },
-  { name: 'Kahf', suraId: 18, numberOfOyat: 110 },
-  { name: "Waqi'ah", suraId: 56, numberOfOyat: 96 },
+  { name: 'Fatihah', nameKr: 'Фатиҳаҳ', suraId: 1, numberOfOyat: 7 },
+  { name: 'Mulk', nameKr: 'Мулк', suraId: 67, numberOfOyat: 30 },
+  { name: 'Ya-Sin', nameKr: 'Я-Син', suraId: 36, numberOfOyat: 83 },
+  { name: 'Kahf', nameKr: 'Каҳф', suraId: 18, numberOfOyat: 110 },
+  { name: "Waqi'ah", nameKr: 'Вақиъаҳ', suraId: 56, numberOfOyat: 96 },
 ];
 
 export const MainHeader = memo((prop: MainHeaderComponentProps) => {
   const { className } = prop;
+  const { t, i18n } = useTranslation();
   const [searchSurah, setSearchSurah] = useState('');
   const [length, setLength] = useState(1);
   const [chapterCode, setChapterCode] = useState(1);
@@ -59,7 +61,6 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
   }, [dataWhichLang, length, searchSurah]);
 
   const result = filter();
-  console.log(dataWhichLang, chapterCode, result);
 
   useEffect(() => {
     dispatch(setSearch({ search: searchSurah, data: [...result] }));
@@ -70,12 +71,12 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
       arrMostSearchSurah.map((oneSurah) => (
         <MostSearchButton
           key={oneSurah.suraId}
-          children={oneSurah.name}
+          children={i18n.language === 'uz' ? oneSurah.name : oneSurah.nameKr}
           suraId={oneSurah.suraId}
           numberOfOyat={oneSurah.numberOfOyat}
         />
       )),
-    [],
+    [i18n.language],
   );
 
   return (
@@ -85,15 +86,13 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
         <Text
           className={cls.text}
           align={TextAlign.CENTER}
-          text="Albatta, bu Qur'on eng to‘g‘ri yo‘lga 
-        hidoyat qilur va solih amallarni qiluvchi mo‘minlarga xushxabarini bеrurki,
-        albatta, o‘shalarga ulug‘ ajr bordi"
+          text={t('titleHeader')}
         />
         <HStack className={cls.containerOfIput} gap="8" justify="between">
           <Icon Svg={iconSearch} className={cls.search} />
           <input
             className={cls.input}
-            placeholder="Qur’ondan qidiring!"
+            placeholder={t('placeholderMainSearch')}
             onChange={(e) => getSearch(e)}
           />
           <Button
@@ -101,7 +100,7 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
             size={ButtonSize.M}
             className={cls.buttons}
           >
-            Qidirish
+            {t('Qidirish')}
           </Button>
         </HStack>
         <HStack justify="between" gap="16">

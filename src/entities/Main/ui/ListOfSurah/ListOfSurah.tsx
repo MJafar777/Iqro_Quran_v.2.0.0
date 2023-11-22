@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ListOfSuras.module.scss';
@@ -17,6 +18,8 @@ const skeletonList = Array.from({ length: 18 }, () => <OneItemSurahSkleton />);
 
 export const ListOfSurah = memo((prop: ListOfSurahProp) => {
   const { data, className, isLoading, error } = prop;
+  const { t, i18n } = useTranslation();
+
   return (
     <HStack
       className={classNames(cls.surahList, {}, [className])}
@@ -33,7 +36,11 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
             return (
               <OneItemSurah
                 key={index}
-                title={oneSurah.translated_names.filter(item=>item?.lang_id?.iso_code==="uz")[0].name}
+                title={
+                  oneSurah.translated_names.filter(
+                    (item) => item?.lang_id?.iso_code === 'uz',
+                  )[0].name
+                }
                 numberOfOyat={oneSurah.count_verse}
                 orderOfSura={oneSurah.quran_order}
                 arabic={`00${oneSurah.quran_order}`}
