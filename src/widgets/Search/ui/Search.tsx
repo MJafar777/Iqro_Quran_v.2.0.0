@@ -83,7 +83,8 @@ const lastReadSurahList = [
 ];
 
 export const Search = memo((prop: SearchProp) => {
-  const { isRightsidebarActive, setIsRightsidebarActive } = useContext(ButtonsContext);
+  const { isRightsidebarActive, setIsRightsidebarActive } =
+    useContext(ButtonsContext);
   const [searchSurah, setSearchSurah] = useState('');
   const [length, setLength] = useState(1);
   const [chapterCode, setChapterCode] = useState(1);
@@ -143,7 +144,8 @@ export const Search = memo((prop: SearchProp) => {
   const filter = useCallback(() => {
     return dataWhichLang?.filter(
       (sura) =>
-        sura.nom.toLocaleUpperCase().slice(0, length) === searchSurah.toUpperCase(),
+        sura.nom.toLocaleUpperCase().slice(0, length) ===
+        searchSurah.toUpperCase(),
     );
   }, [dataWhichLang, length, searchSurah]);
 
@@ -181,14 +183,8 @@ export const Search = memo((prop: SearchProp) => {
           placeholder="Search something"
           className={cls.input}
         />
-        <Icon
-          data-testid="sidebar-toggle"
-          onClick={onToggle}
-          className={cls.closeBtn}
-          Svg={CloseIcon}
-          height={0}
-          clickable
-        />
+
+        <CloseIcon className={cls.closeBtn} onClick={onToggle} />
       </HStack>
       <HStack gap="8" className={cls.mostSearchButtonWrapper}>
         {mostSearchSurah}
