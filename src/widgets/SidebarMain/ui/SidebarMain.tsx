@@ -23,7 +23,7 @@ export const SidebarMain = memo((prop: SidebarMainProp) => {
         </Link>
         <Icon
           Svg={Close}
-          className={cls.close}
+          className={cls.closebtn}
           clickable
           onClick={() => setIsSidebarActive(!isSidebarActive)}
         />
