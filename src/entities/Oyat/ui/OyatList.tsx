@@ -55,17 +55,28 @@ const OyatList = ({ className }: OyatListProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
-  // useEffect(() => {
-  //   SurahPageOyah[currentSura.quran_order]?.forEach((element: any) => {
-  //     if (
-  //       Number(element.start) <= currentOyat.oyatNumber &&
-  //       Number(element.end) >= currentOyat.oyatNumber
-  //     ) {
-  //       setSelectedPage(element.page - currentSura.pages[0] + 1);
-  //     }
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [currentOyat]);
+  useEffect(() => {
+    SurahPageOyah[currentSura.quran_order]?.forEach((element: any) => {
+      if (
+        Number(element.start) <= currentOyat.oyatNumber &&
+        Number(element.end) >= currentOyat.oyatNumber
+      ) {
+        setSelectedPage(element.page - currentSura.pages[0] + 1);
+      }
+    });
+
+    const selectedElement2 = document.getElementById(
+      `${currentOyat.oyatNumber}oyat`,
+    );
+
+    if (selectedElement2) {
+      selectedElement2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentOyat.oyatNumber]);
 
   const handleSearchOyatInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -96,6 +107,7 @@ const OyatList = ({ className }: OyatListProps) => {
               )
               .map((element: number) => (
                 <div
+                  id={`${element}oyat`}
                   key={element}
                   onClick={() => handleClickOyat(element)}
                   className={classNames(

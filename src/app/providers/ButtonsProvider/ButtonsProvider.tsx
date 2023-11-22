@@ -18,6 +18,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [fontSize, setFontSize] = useState(3);
 
+  const [readingPageTubBtn, setReadingPageTubBtn] = useState(1);
+
   const defaultProps = useMemo(
     () => ({
       readingSidebarActive,
@@ -28,8 +30,17 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setIsRightsidebarActive,
       fontSize,
       setFontSize,
+      readingPageTubBtn,
+      setReadingPageTubBtn,
     }),
-    [fontSize, isRightsidebarActive, isSidebarActive, readingSidebarActive],
+    [
+      fontSize,
+      isRightsidebarActive,
+      isSidebarActive,
+      readingSidebarActive,
+      readingPageTubBtn,
+      setReadingPageTubBtn,
+    ],
   );
 
   return (

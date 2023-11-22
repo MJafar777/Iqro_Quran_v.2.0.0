@@ -48,6 +48,15 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
   useEffect(() => {
     setSelectedPage(1);
+
+    const selectedElement = document.getElementById(
+      `${currentSura?.quran_order}sura`,
+    );
+
+    if (selectedElement) {
+      selectedElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSura]);
 
@@ -91,6 +100,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
               })
               ?.map((oneSurah: OneSuraInListSchema, index: number) => (
                 <div
+                  id={`${oneSurah.quran_order}sura`}
                   key={oneSurah.quran_order}
                   className={classNames(
                     cls.SuraList__item,

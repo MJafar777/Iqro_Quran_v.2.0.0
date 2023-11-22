@@ -10,14 +10,15 @@ import { Sidebar } from '@/widgets/Sidebar';
 import { getIsLoading } from '@/pages/MainPage';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
-// import { ReadingArabic } from '@/entities/ReadingArabic';
+import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
+// import { ReadingTranskriptKril } from '@/entities/ReadingTranskriptKril';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
-import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
+import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 // import { ReadingTabBtn } from '@/shared/ui/ReadingTabBtn';
 
 interface ReadingPageProps {
@@ -26,7 +27,9 @@ interface ReadingPageProps {
 
 const ReadingPage = (props: ReadingPageProps) => {
   const { className } = props;
-  const { readingSidebarActive } = useContext(ButtonsContext);
+  const { readingSidebarActive, readingPageTubBtn } =
+    useContext(ButtonsContext);
+
   const isLoading = useSelector(getIsLoading);
 
   return (
@@ -49,13 +52,11 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <SwtichButton buttonsNames={["O'qilishi", 'Tarjimasi', 'Kitob']} />
+        <SwtichButton buttonsNames={['Tarjimasi', "O'qilishi", 'Kitob']} />
 
         {/* <ReadingTabBtn /> */}
 
         <SurahInfoAndAudio />
-
-        {/* <ReadingArabic /> */}
 
         {isLoading ? (
           <div
@@ -71,7 +72,13 @@ const ReadingPage = (props: ReadingPageProps) => {
           </div>
         ) : (
           <>
-            <ReadingTranskriptLotin />
+            {readingPageTubBtn === 3 ? (
+              <ReadingArabic />
+            ) : readingPageTubBtn === 2 ? (
+              <ReadingTranskriptLotin />
+            ) : (
+              ''
+            )}
 
             <ReadingPrevNextBtnGroup />
 
