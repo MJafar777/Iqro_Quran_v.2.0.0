@@ -71,12 +71,31 @@ export const Search = memo((prop: SearchProp) => {
   // @ts-ignore
   const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH));
 
+  const filter = useCallback(() => {
+    return dataWhichLang?.filter(
+      (sura) =>
+        sura.nom.toLocaleUpperCase().slice(0, length) ===
+        searchSurah.toUpperCase(),
+    );
+  }, [dataWhichLang, length, searchSurah]);
+
+  const result = filter();
+
+  useEffect(() => {
+    dispatch(setSearchSidebar({ search: searchSurah, data: [...result] }));
+  }, [dispatch, filter, result, searchSurah, setSearchSidebar]);
+
+  useEffect(() => {
+    if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
+    else setDataWhichLang(surahNameListRu);
+  }, [chapterCode]);
+
   const itemsOfMostRead = useMemo(
     () =>
       listOfMostRead.map((item) => (
         <Li
           search
-          to={item.to}
+          to="/reading"
           key={item.title}
           suraId={item.suraId}
           numberOfOyat={item.numberOfOyat}
@@ -93,7 +112,13 @@ export const Search = memo((prop: SearchProp) => {
       getList?.reverse()?.map((item: any, index: number) => {
         if (index < 4) {
           return (
-            <Li to="/reading" key={item.title} close search>
+            <Li
+              to="/reading"
+              key={item.title}
+              suraId={item.suraId}
+              close
+              search
+            >
               {item.title}
             </Li>
           );
@@ -101,25 +126,6 @@ export const Search = memo((prop: SearchProp) => {
       }),
     [getList],
   );
-
-  const filter = useCallback(() => {
-    return dataWhichLang?.filter(
-      (sura) =>
-        sura.nom.toLocaleUpperCase().slice(0, length) ===
-        searchSurah.toUpperCase(),
-    );
-  }, [dataWhichLang, length, searchSurah]);
-
-  const result = filter();
-
-  useEffect(() => {
-    dispatch(setSearchSidebar({ search: searchSurah, data: [...result] }));
-  }, [dispatch, filter, result, searchSurah]);
-
-  useEffect(() => {
-    if (chapterCode >= 65 && chapterCode <= 90) setDataWhichLang(surahNameList);
-    else setDataWhichLang(surahNameListRu);
-  }, [chapterCode]);
 
   const mostSearchSurah = useMemo(
     () =>
