@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import cls from './li.module.scss';
 import { Icon } from '../Icon';
-import { Close, SearchSmall } from '@/shared/assets/icons/sidebarSearch';
+import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { useSelectedSuraActions } from '@/entities/Surah';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
@@ -21,10 +21,9 @@ interface LiProp {
 }
 
 export const Li = memo((prop: LiProp) => {
-  const {
-    to, className, children, close, search, suraId, numberOfOyat,
-  } = prop;
+  const { to, className, children, close, search, suraId, numberOfOyat } = prop;
   const { setSelectedSura } = useSelectedSuraActions();
+
   const {
     isRightsidebarActive,
     setIsRightsidebarActive,
@@ -50,6 +49,8 @@ export const Li = memo((prop: LiProp) => {
   const LatsReadSurah = JSON.parse(localStorage.getItem(LAST_READ_SURAH)) || [];
 
   const onToggle = (id: number) => {
+    console.log(id, 'id');
+
     const newSurahList = LatsReadSurah.filter(
       (item: { suraId: number }) => item.suraId !== id,
     );
@@ -74,10 +75,11 @@ export const Li = memo((prop: LiProp) => {
           {children}
         </div>
       </div>
-      {close ? (
+      {/* {close ? (
         <Icon
           data-testid="sidebar-toggle"
-          onClick={() => onToggle(suraId || 1)}
+          //@ts-ignore
+          onClick={() => onToggle(suraId)}
           className={cls.closeBtn}
           Svg={Close}
           height={0}
@@ -85,7 +87,7 @@ export const Li = memo((prop: LiProp) => {
         />
       ) : (
         ''
-      )}
+      )} */}
     </HStack>
   );
 });

@@ -36,28 +36,29 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
       numberOfOyat: numberOfOyat || 1,
       title: title || 'Fotiha',
     };
-    localStorage.setItem(LAST_READ_SURAH, JSON.stringify([newRead]));
-    // @ts-ignore
-    const getList = JSON.parse(localStorage.getItem(LAST_READ_SURAH));
-    if (getList) {
-      getList.map(
-        (oneSuraData: {
-          suraId: number;
-          nameLotin: '';
-          nameKril: '';
-          numberOfOyat: number;
-          title: '';
-        }) => {
-          if (oneSuraData.suraId != orderOfSura) {
-            localStorage.setItem(
-              LAST_READ_SURAH,
-              JSON.stringify([...getList, newRead]),
-            );
-          }
-        },
-      );
+    const getListRead = localStorage.getItem(LAST_READ_SURAH);
+    if (getListRead) {
+      console.log(getListRead, 'kk');
+
+      if (
+        JSON.parse(getListRead).map(
+          (surah: OneItemSuraProp) => surah.suraId == orderOfSura,
+        )
+      ) {
+        console.log(orderOfSura);
+
+        localStorage.setItem(
+          LAST_READ_SURAH,
+          JSON.stringify([...JSON.parse(getListRead), newRead]),
+        );
+      } else {
+        localStorage.setItem(
+          LAST_READ_SURAH,
+          JSON.stringify([...JSON.parse(getListRead), newRead]),
+        );
+      }
     } else {
-      localStorage.setItem('listLastRead', JSON.stringify([newRead]));
+      localStorage.setItem(LAST_READ_SURAH, JSON.stringify([newRead]));
     }
   };
 
