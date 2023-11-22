@@ -6,3 +6,45 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.wrapper {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  transition: all 0.2s linear;
+  &:hover {
+    color: #74a2b2;
+  }
+}
+
+.li {
+  width: 100%;
+  text-align: left;
+  font-family: Proxima Vara;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  gap: 16px;
+
+  line-height: normal;
+  color: #272727;
+  display: flex;
+  padding: 6px 12px;
+
+  align-items: center;
+  border-bottom: #27272731 0.1px solid;
+  border-left: #27272731 0.1px solid;
+  border-top: #27272731 0.1px solid;
+}
+
+.icon {
+  color: black;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}

@@ -6,7 +6,6 @@ import { Icon } from '../Icon';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { useSelectedSuraActions } from '@/entities/Surah';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import { LAST_READ_SURAH } from '@/shared/const/localstorage';
 import { HStack } from '../Stack';
 import { getListOfSurahs } from '@/pages/MainPage';
 
@@ -38,25 +37,9 @@ export const Li = memo((prop: LiProp) => {
     const data = listOfSurahs?.filter((sura) => sura.quran_order === suraId)[0];
     if (data) {
       setSelectedSura(data);
-      navigate(`${to}`);
+      navigate('/reading');
     }
-
-    setIsRightsidebarActive(!isRightsidebarActive);
-    setIsSidebarActive(true);
   };
-
-  // @ts-ignore
-  const LatsReadSurah = JSON.parse(localStorage.getItem(LAST_READ_SURAH)) || [];
-
-  const onToggle = (id: number) => {
-    console.log(id, 'id');
-
-    const newSurahList = LatsReadSurah.filter(
-      (item: { suraId: number }) => item.suraId !== id,
-    );
-    localStorage.setItem(LAST_READ_SURAH, JSON.stringify(newSurahList));
-  };
-
   return (
     <HStack max justify="between" align="center" className={cls.wrapper}>
       <div onClick={() => toggleOneItemSurah()} className={cls.li}>
@@ -75,19 +58,6 @@ export const Li = memo((prop: LiProp) => {
           {children}
         </div>
       </div>
-      {/* {close ? (
-        <Icon
-          data-testid="sidebar-toggle"
-          //@ts-ignore
-          onClick={() => onToggle(suraId)}
-          className={cls.closeBtn}
-          Svg={Close}
-          height={0}
-          clickable
-        />
-      ) : (
-        ''
-      )} */}
     </HStack>
   );
 });
