@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import cls from './ReadingPage.module.scss';
 import cls2 from '../../../entities/ReadingTranskriptLotin/ui/ReadingTranskriptLotin.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -19,6 +20,8 @@ import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
+import { krilLng, lotinLng } from '@/shared/config/i18n/i18n';
+import { ReadingTranskriptKril } from '@/entities/ReadingTranskriptKril';
 // import { ReadingTabBtn } from '@/shared/ui/ReadingTabBtn';
 
 interface ReadingPageProps {
@@ -26,6 +29,11 @@ interface ReadingPageProps {
 }
 
 const ReadingPage = (props: ReadingPageProps) => {
+  const { i18n } = useTranslation();
+
+  console.log(i18n.language === lotinLng, 'lotinLng');
+  console.log(i18n.language === krilLng, 'krilLng');
+
   const { className } = props;
   const { readingSidebarActive, readingPageTubBtn } =
     useContext(ButtonsContext);
@@ -74,8 +82,10 @@ const ReadingPage = (props: ReadingPageProps) => {
           <>
             {readingPageTubBtn === 3 ? (
               <ReadingArabic />
-            ) : readingPageTubBtn === 2 ? (
+            ) : readingPageTubBtn === 2 && i18n.language === lotinLng ? (
               <ReadingTranskriptLotin />
+            ) : readingPageTubBtn === 2 && i18n.language === krilLng ? (
+              <ReadingTranskriptKril />
             ) : (
               ''
             )}
