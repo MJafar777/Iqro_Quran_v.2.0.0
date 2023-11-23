@@ -10,16 +10,32 @@ import {
 } from '@/shared/assets/icons/SidebarListOfPages';
 
 const listOfPage = [
-  { path: '/reading', title: 'Qur’on o‘qish', icon: <Book2 /> },
-  { path: '/listining', title: 'Qur’on tinglash', icon: <Listining /> },
+  {
+    path: '/reading',
+    title: 'Qur’on o‘qish',
+    icon: <Book2 />,
+  },
+  {
+    path: '/listining',
+    title: 'Qur’on tinglash',
+    icon: <Listining />,
+  },
   { path: '/tafsir', title: 'Tafsir', icon: <Book /> },
   {
     path: '/meaning',
     title: "Qur’oning ma'nolar tarjimasi",
     icon: <Tarnslate />,
   },
-  { path: '/aboutUs', title: 'Biz haqimizda  ', icon: <Info /> },
-  { path: '/transcription', title: 'Transkripsiya', icon: <Book /> },
+  {
+    path: '/aboutUs',
+    title: 'Biz haqimizda  ',
+    icon: <Info />,
+  },
+  {
+    path: '/transcription',
+    title: 'Transkripsiya',
+    icon: <Book />,
+  },
 ];
 
 export const ListOfPages = memo(() => {
@@ -27,7 +43,8 @@ export const ListOfPages = memo(() => {
     () =>
       listOfPage.map((item) => (
         <Link className={cls.li} key={item.title} to={item.path}>
-          {item.icon} {item.title}
+          {item.icon}
+          {item.title}
         </Link>
       )),
     [],

@@ -1,11 +1,10 @@
-.listOfPage {
-}
 
 .title {
   padding: 12px;
   font-size: 20px;
   font-weight: 500;
   font-family: sans-serif;
+  color: var(--color-text);
 }
 
 .wrapper {
@@ -16,7 +15,6 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
-
   transition: all 0.2s linear;
   &:hover {
     color: #74a2b2;
@@ -31,22 +29,19 @@
   font-style: normal;
   font-weight: 400;
   gap: 16px;
-
   line-height: normal;
-  color: #272727;
+  color: var(--color-text);
   display: flex;
   padding: 6px 12px;
-
   align-items: center;
-  border-bottom: #27272731 0.1px solid;
-  border-left: #27272731 0.1px solid;
-  border-top: #27272731 0.1px solid;
+  border-bottom: var(--color-text) 0.1px solid;
+  // border-left: var(--color-text) 0.1px solid;
+  border-top: var(--color-text) 0.1px solid;
 }
 
 .icon {
-  color: black;
+  color: var(--color-text);
   width: 16px !important;
   height: 16px !important;
   margin-right: 8px;
-
 }
