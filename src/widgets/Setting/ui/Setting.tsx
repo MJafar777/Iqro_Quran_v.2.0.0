@@ -5,7 +5,6 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './Setting.module.scss';
 import { ThemeSwitcher } from '@/shared/ui/ThemeSwitcher';
-import { Icon } from '@/shared/ui/Icon';
 import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { ChangeFontSize } from '@/shared/ui/ChangeFontSize/ChangeFontSize';
