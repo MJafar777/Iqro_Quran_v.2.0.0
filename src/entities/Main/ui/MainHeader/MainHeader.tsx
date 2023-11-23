@@ -81,7 +81,7 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
 
   return (
     <div className={classNames(cls.MainHeader)}>
-      <VStack align="center" gap="16">
+      <VStack align="center">
         <Icon Svg={oyat} className={cls.icon} />
         <Text
           className={cls.text}

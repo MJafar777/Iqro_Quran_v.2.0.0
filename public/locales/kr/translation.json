@@ -4,18 +4,24 @@
   "Qidirish": "Қидириш",
 
   "Footer": "",
-  "footerTitle": "Qur'oni Karimni o'qing, o'rganing va o'rgating.",
-  "footerSubtitle": "Umid qilamizki, hamma uchun Qur'oni Karimni o'qish, o'rganish va o'rgatish oson bo'ladi. Qur'oni Karimning ko'plab nomlari bor, jumladan, Qur'on al-Karim, Al-Kitob, Al-Furqon, Al-Mavisa, Al-Zikr va Al-Nur.",
-  "siteMap": "Site Xaritasi",
-  "Tafsir": "Tafsir",
-  "aboutUs": "Biz Haqimiz",
-  "listiningQuran": "Qur’on tinglash",
-  "meaningQuran": "Qur’on ma’nolari",
-  "Hamkorlar": "Hamkorlar",
-  "contact":"Biz bilan bog`lanish:",
-  "Email":"Email",
-  "Telegram":"Telegram",
-  "Tel":"Tel"
+  "footerTitle": "Қуръони Каримни ўқинг, ўрганинг ва ўргатинг.",
+  "footerSubtitle": "Умид қиламизки, ҳамма учун Қуръони Каримни ўқиш, ўрганиш ва ўргатиш осон бўлади. Қуръони Каримнинг кўплаб номлари бор, жумладан, Қуръон ал-Карим, Ал-Китоб, Ал-Фурқон, Ал-Мависа, Ал-Зикр ва Ал-Нур.",
+  "siteMap": "Сите Харитаси:  ",
+  "Tafsir": "Тафсир",
+  "aboutUs": "Биз Ҳақимизда  ",
+  "listiningQuran": "Қуръон тинглаш",
+  "meaningQuran": "Қуръон маʼнолари",
+  "Hamkorlar": "Ҳамкорлар:",
+  "contact": "Биз билан боғланиш:",
+  "Email": "Эмаил",
+  "Telegram": "Телеграм",
+  "Tel": "Тел",
 
-  
+  "sidebarMain": "",
+  "menu": "Menu",
+  "meaningTranslate": "Quron ma'nolar tarjimasi",
+
+  "mostSearch": "Ko‘p ko‘rilganlar",
+  "lastRead": "So‘ngi ko‘rilganlar",
+  "mentionList": "Qidirib ko‘ring"
 }

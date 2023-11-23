@@ -61,14 +61,13 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   return (
     <div className={classNames(cls.nabar)}>
-      <HStack className={classNames(cls.burger)} justify="start" gap="16">
+      <HStack className={classNames(cls.burger)}  align='center'>
         <Burger
           className={classNames(cls.icon)}
           onClick={() => setIsSidebarActive(!isSidebarActive)}
         />
-
         <Link to="/">
-          <Icon Svg={Logo} className={cls.logo} />
+          <Logo className={cls.logo} />
         </Link>
       </HStack>
       <HStack className={classNames(cls.wrapperTime)} max justify="center">
