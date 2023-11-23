@@ -12,7 +12,6 @@ import {
   Bismillah,
   Logo,
   Burger,
-  fir,
   sec,
   thir,
 } from '@/shared/assets/icons/navbar';
@@ -27,6 +26,7 @@ import { fetchTime } from '../model/service/fetchTime';
 import { getTimeArrabic } from '../model/selector/getSelecterTime';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fullMoth } from '../model/const/moth';
+import { LangSwitcher } from '@/shared/ui/LangSwitcher';
 
 interface NavbarProp {
   className?: string;
@@ -61,14 +61,13 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   return (
     <div className={classNames(cls.nabar)}>
-      <HStack className={classNames(cls.burger)} justify="start" gap="16">
+      <HStack className={classNames(cls.burger)}  align='center'>
         <Burger
           className={classNames(cls.icon)}
           onClick={() => setIsSidebarActive(!isSidebarActive)}
         />
-
         <Link to="/">
-          <Icon Svg={Logo} className={cls.logo} />
+          <Logo className={cls.logo} />
         </Link>
       </HStack>
       <HStack className={classNames(cls.wrapperTime)} max justify="center">
@@ -85,7 +84,7 @@ export const Navbar = memo((prop: NavbarProp) => {
         </div>
       </HStack>
       <HStack className={classNames(cls.iconWrapper)} justify="end" gap="8">
-        <Icon className={classNames(cls.icon)} Svg={fir} />
+        <LangSwitcher />
         <div onClick={toogleSidebarSettings}>
           <Icon className={classNames(cls.icon)} Svg={sec} />
         </div>

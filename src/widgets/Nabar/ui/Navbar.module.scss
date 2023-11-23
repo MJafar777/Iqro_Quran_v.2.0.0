@@ -25,6 +25,8 @@
 
 .logo {
   width: 150px;
+  margin: 0;
+  margin-top: 6px;
   color: black;
   @media screen and (max-width: 484px) {
     display: none;
@@ -46,8 +48,18 @@
 }
 
 .icon {
-  color: black;
+  color: #272727;
   cursor: pointer;
-  width: 24px !important;
-  height: 24px !important;
+  width: 20px;
+  height: 20px;
+}
+
+.timeOfArrabic,
+.time {
+  color: #272727;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
