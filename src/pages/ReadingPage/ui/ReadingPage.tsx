@@ -31,9 +31,6 @@ interface ReadingPageProps {
 const ReadingPage = (props: ReadingPageProps) => {
   const { i18n } = useTranslation();
 
-  console.log(i18n.language === lotinLng, 'lotinLng');
-  console.log(i18n.language === krilLng, 'krilLng');
-
   const { className } = props;
   const { readingSidebarActive, readingPageTubBtn } =
     useContext(ButtonsContext);
@@ -105,20 +102,6 @@ const ReadingPage = (props: ReadingPageProps) => {
             )}
 
             {readingPageTubBtn === 3 ? <ReadingArabic /> : ''}
-
-            {/* {readingPageTubBtn === 3 ? (
-              <ReadingArabic />
-            ) : readingPageTubBtn === 2 && i18n.language === lotinLng ? (
-              <ReadingTranskriptLotin />
-            ) : readingPageTubBtn === 2 && i18n.language === krilLng ? (
-              <ReadingTranskriptKril />
-            ) : readingPageTubBtn === 1 && i18n.language === lotinLng ? (
-              <ReadingTranslateLotin />
-            ) : readingPageTubBtn === 1 && i18n.language === krilLng ? (
-              <ReadingTranslateKril />
-            ) : (
-              ''
-            )} */}
 
             <ReadingPrevNextBtnGroup />
 

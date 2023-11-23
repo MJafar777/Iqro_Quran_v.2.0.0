@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import cls from './SuraList.module.scss';
 import clsSearch from '../../../shared/ui/searchInput/ui/Searchinput.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -22,7 +23,7 @@ interface SuraListProps {
 
 const SuraList = memo(({ className }: SuraListProps) => {
   const dispatch = useAppDispatch();
-
+  const { i18n } = useTranslation();
   const currentSura = useSelector(getSelectedSura);
   const { setSelectedSura } = useSelectedSuraActions();
 
@@ -88,7 +89,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
                 const suraNumber: string = item.quran_order.toString();
 
                 const suraName = item.translated_names.find(
-                  (name) => name.lang_id?.iso_code === 'uz',
+                  (name) => name.lang_id?.iso_code === i18n.language,
                 )?.name;
 
                 const searchSuraNameText = searchSuraName.toLowerCase();
@@ -125,7 +126,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
                   >
                     {
                       oneSurah.translated_names.find(
-                        (name) => name.lang_id?.iso_code === 'uz',
+                        (name) => name.lang_id?.iso_code === i18n.language,
                       )?.name
                     }
                   </p>

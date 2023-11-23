@@ -23,13 +23,16 @@ export const readingTranslateLotinSlice = createSlice({
         (state, action: PayloadAction<ReadingQuranData>) => {
           state.isLoading = false;
 
+          console.log(action.payload);
           if (state.data && state.data[action.payload.data[0]?.quran_order]) {
             if (
               !state.data[
                 action.payload.data[0]?.quran_order
-              ]?.data?.resourse?.includes(
+              ]?.data?.resourse?.some((obj) =>
                 action.payload?.resourse?.length > 0
-                  ? action.payload?.resourse[0]
+                  ? Object.keys(obj).includes(
+                      String(Object.keys(action.payload?.resourse[0])),
+                    )
                   : '',
               )
             ) {
