@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingTranslateLotin.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -39,6 +39,8 @@ export const ReadingTranslateLotin = memo(
     const isLoading = useSelector(getReadingTranslateLotinIsLoading);
     const isError = useSelector(getReadingTranslateLotinError);
 
+    const [imageUrl, setImageUrl] = useState<string>();
+
     useEffect(() => {
       if (currentSura?.quran_order && data && !data[currentSura?.quran_order]) {
         dispatch(
@@ -73,6 +75,22 @@ export const ReadingTranslateLotin = memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage, dispatch]);
 
+    useEffect(() => {
+      if (data && data[currentSura?.quran_order]?.data.resourse) {
+        // eslint-disable-next-line no-restricted-syntax, no-unsafe-optional-chaining
+        for (const obj of data[currentSura?.quran_order]?.data.resourse) {
+          if (Object.keys(obj).includes(String(currentPage?.pageNumber))) {
+            // console.log(obj[currentPage?.pageNumber]);
+
+            if (obj[currentPage?.pageNumber]) {
+              setImageUrl(obj[currentPage?.pageNumber]);
+            }
+            break;
+          }
+        }
+      }
+    }, [data, currentPage.pageNumber, currentSura?.quran_order]);
+
     return (
       <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
         <div
@@ -87,13 +105,7 @@ export const ReadingTranslateLotin = memo(
             {isLoading ? (
               <BookBoxSkeleton />
             ) : data && data[currentSura?.quran_order]?.data.resourse ? (
-              <BookBox
-                imgUrl={`${
-                  data[currentSura?.quran_order]?.data.resourse[
-                    currentPage.pageNumber - 1
-                  ]
-                }`}
-              />
+              <BookBox imgUrl={`${imageUrl}`} />
             ) : isError ? (
               <ReadingQuranErrorDialog
                 isErrorProps={!false}

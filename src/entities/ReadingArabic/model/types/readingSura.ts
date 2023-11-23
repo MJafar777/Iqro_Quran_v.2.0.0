@@ -67,12 +67,15 @@ export interface ChapterData {
   number: number;
 }
 
+export interface ImageResource {
+  [key: number]: string;
+}
 export interface ReadingQuranData {
   quran_order: any;
   status: string;
   results: number;
   data: ChapterData[];
-  resourse: string[];
+  resourse: ImageResource[];
   nextpage: boolean;
 }
 
