@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import cls from './ReadingTranskriptLotin.module.scss';
+import cls from './ReadingTranslateKril.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 import {
@@ -8,41 +8,41 @@ import {
   DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import {
-  getReadingTranskriptLotinData,
-  getReadingTranskriptLotinError,
-  getReadingTranskriptLotinIsLoading,
-} from '../model/selectors/readingTranskriptLotin';
+  getReadingTranslateKrilData,
+  getReadingTranslateKrilError,
+  getReadingTranslateKrilIsLoading,
+} from '../model/selectors/readingTranslateKril';
 import { getSelectedPage } from '@/entities/Page';
 import { getSelectedSura } from '@/entities/Surah';
 import BookBox from '@/shared/ui/BookBox/BookBox';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { readingTranskriptLotinReducer } from '../model/slice/readingTranskriptLotin';
-import { fetchReadingTranskriptLotin } from '../model/services/fetchReadingTranskriptLotin';
+import { readingTranslateKrilReducer } from '../model/slice/readingTranslateKril';
+import { fetchReadingTranslateKril } from '../model/services/fetchReadingTranslateKril';
 
-interface ReadingTranskriptLotinProps {
+interface ReadingTranslateKrilProps {
   className?: string;
 }
 
 const reducers: ReducersList = {
-  readingTranskriptLotin: readingTranskriptLotinReducer,
+  readingTranslateKril: readingTranslateKrilReducer,
 };
 
-export const ReadingTranskriptLotin = memo(
-  ({ className }: ReadingTranskriptLotinProps) => {
+export const ReadingTranslateKril = memo(
+  ({ className }: ReadingTranslateKrilProps) => {
     const dispatch = useAppDispatch();
     const currentSura = useSelector(getSelectedSura);
     const currentPage = useSelector(getSelectedPage);
 
-    const data = useSelector(getReadingTranskriptLotinData);
-    const isLoading = useSelector(getReadingTranskriptLotinIsLoading);
-    const isError = useSelector(getReadingTranskriptLotinError);
+    const data = useSelector(getReadingTranslateKrilData);
+    const isLoading = useSelector(getReadingTranslateKrilIsLoading);
+    const isError = useSelector(getReadingTranslateKrilError);
 
     useEffect(() => {
       if (currentSura?.quran_order && data && !data[currentSura?.quran_order]) {
         dispatch(
-          fetchReadingTranskriptLotin({
+          fetchReadingTranslateKril({
             suraId: currentSura?.quran_order,
             pageNumber: currentPage.pageNumber,
             limitOfPage: 1,
@@ -50,7 +50,7 @@ export const ReadingTranskriptLotin = memo(
         );
       } else if (currentSura?.quran_order && !data) {
         dispatch(
-          fetchReadingTranskriptLotin({
+          fetchReadingTranslateKril({
             suraId: currentSura?.quran_order,
             pageNumber: currentPage.pageNumber,
             limitOfPage: 1,
@@ -63,7 +63,7 @@ export const ReadingTranskriptLotin = memo(
     useEffect(() => {
       if (currentSura?.quran_order) {
         dispatch(
-          fetchReadingTranskriptLotin({
+          fetchReadingTranslateKril({
             suraId: currentSura?.quran_order,
             pageNumber: currentPage.pageNumber,
             limitOfPage: 1,
@@ -77,10 +77,10 @@ export const ReadingTranskriptLotin = memo(
       <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
         <div
           data-testid="reading-arabic"
-          className={classNames(cls.ReadingTranskriptLotin, {}, [className])}
+          className={classNames(cls.ReadingTranslateKril, {}, [className])}
         >
           <div
-            className={classNames(cls.ReadingTranskriptLotin__readBox, {}, [
+            className={classNames(cls.ReadingTranslateKril__readBox, {}, [
               className,
             ])}
           >

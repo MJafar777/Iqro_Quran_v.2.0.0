@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 
 import cls from './SwitchButton.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface ButtonsNames {
   buttonsNames: string[];
@@ -10,6 +11,8 @@ interface ButtonsNames {
 const SwtichButton = (props: ButtonsNames) => {
   const { buttonsNames } = props;
   const divRef = useRef<HTMLDivElement>(null);
+
+  const { setReadingPageTubBtn } = useContext(ButtonsContext);
 
   const clickBtn = (index: number) => {
     if (divRef.current && index === 1) {
@@ -21,6 +24,8 @@ const SwtichButton = (props: ButtonsNames) => {
     } else if (divRef.current && index === 4) {
       divRef.current.style.left = '390px';
     }
+
+    setReadingPageTubBtn(index);
   };
 
   return (

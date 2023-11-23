@@ -1,0 +1,43 @@
+.ReadingTabBtn {
+  max-width: 800px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+
+  .readingTabBtnContainer {
+    border-radius: 33px;
+    width: 295px;
+    height: 55px;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 1px;
+
+    .tabButtonActive {
+      background: #fff;
+      box-shadow: 0px 0px 4px 0.10000000149011612px rgba(0, 0, 0, 0.3);
+    }
+
+    @media screen and (max-width: 576px) {
+      height: 30px !important;
+      padding: 0px;
+    }
+  }
+
+  .readingTabBtn {
+    border-radius: 22px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    p {
+      color: #272727;
+      text-align: center;
+      font-size: var(--font-size-m);
+      font-weight: 400;
+      user-select: none;
+    }
+  }
+}

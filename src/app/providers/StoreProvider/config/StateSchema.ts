@@ -26,9 +26,12 @@ export interface StateSchema {
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
+  readingTranskriptKril?: ReadingArabicSchema;
+  readingTranslateLotin?: ReadingArabicSchema;
+  readingTranslateKril?: ReadingArabicSchema;
   mainPage: SurahListSchema;
-  timeData:DataTimeScheme;
-  search:SearchData
+  timeData: DataTimeScheme;
+  search: SearchData;
 }
 
 export type StateSchemaKey = keyof StateSchema;

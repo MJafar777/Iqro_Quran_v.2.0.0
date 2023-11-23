@@ -1,31 +1,43 @@
 import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import cls from './ReadingPage.module.scss';
 import cls2 from '../../../entities/ReadingTranskriptLotin/ui/ReadingTranskriptLotin.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { krilLng, lotinLng } from '@/shared/config/i18n/i18n';
 
 // ---------- | | ---------- //
 import { Navbar } from '@/widgets/Nabar';
 import { Sidebar } from '@/widgets/Sidebar';
 import { getIsLoading } from '@/pages/MainPage';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
+import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
-// import { ReadingArabic } from '@/entities/ReadingArabic';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { ReadingTranslateKril } from '@/entities/ReadingTranslateKril';
+import { ReadingTranslateLotin } from '@/entities/ReadingTranslateLotin';
+import { ReadingTranskriptKril } from '@/entities/ReadingTranskriptKril';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
-import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
+import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 
 interface ReadingPageProps {
   className?: string;
 }
 
 const ReadingPage = (props: ReadingPageProps) => {
+  const { i18n } = useTranslation();
+
+  console.log(i18n.language === lotinLng, 'lotinLng');
+  console.log(i18n.language === krilLng, 'krilLng');
+
   const { className } = props;
-  const { readingSidebarActive } = useContext(ButtonsContext);
+  const { readingSidebarActive, readingPageTubBtn } =
+    useContext(ButtonsContext);
+
   const isLoading = useSelector(getIsLoading);
 
   return (
@@ -48,11 +60,11 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <SwtichButton buttonsNames={['Reading', 'Translate', 'Verbatim']} />
+        <SwtichButton buttonsNames={['Tarjimasi', "O'qilishi", 'Kitob']} />
+
+        {/* <ReadingTabBtn /> */}
 
         <SurahInfoAndAudio />
-
-        {/* <ReadingArabic /> */}
 
         {isLoading ? (
           <div
@@ -68,7 +80,45 @@ const ReadingPage = (props: ReadingPageProps) => {
           </div>
         ) : (
           <>
-            <ReadingTranskriptLotin />
+            {readingPageTubBtn === 1 && i18n.language === lotinLng ? (
+              <ReadingTranslateLotin />
+            ) : (
+              ''
+            )}
+
+            {readingPageTubBtn === 1 && i18n.language === krilLng ? (
+              <ReadingTranslateKril />
+            ) : (
+              ''
+            )}
+
+            {readingPageTubBtn === 2 && i18n.language === lotinLng ? (
+              <ReadingTranskriptLotin />
+            ) : (
+              ''
+            )}
+
+            {readingPageTubBtn === 2 && i18n.language === krilLng ? (
+              <ReadingTranskriptKril />
+            ) : (
+              ''
+            )}
+
+            {readingPageTubBtn === 3 ? <ReadingArabic /> : ''}
+
+            {/* {readingPageTubBtn === 3 ? (
+              <ReadingArabic />
+            ) : readingPageTubBtn === 2 && i18n.language === lotinLng ? (
+              <ReadingTranskriptLotin />
+            ) : readingPageTubBtn === 2 && i18n.language === krilLng ? (
+              <ReadingTranskriptKril />
+            ) : readingPageTubBtn === 1 && i18n.language === lotinLng ? (
+              <ReadingTranslateLotin />
+            ) : readingPageTubBtn === 1 && i18n.language === krilLng ? (
+              <ReadingTranslateKril />
+            ) : (
+              ''
+            )} */}
 
             <ReadingPrevNextBtnGroup />
 
