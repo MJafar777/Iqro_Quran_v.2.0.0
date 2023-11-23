@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 
 import cls from './ThemeSwitchButton.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
+import { Theme } from '@/shared/const/theme';
 
 interface ButtonsNames {
   buttonsNames: string[];
@@ -9,8 +11,10 @@ interface ButtonsNames {
 
 const ThemeSwtichButton = (props: ButtonsNames) => {
   const { buttonsNames } = props;
-  const divRef = useRef<HTMLDivElement>(null);
+  // const { themes, setTheme } = useContext(ThemeContext);
 
+  const divRef = useRef<HTMLDivElement>(null);
+  const { toggleTheme, theme } = useTheme();
   const clickBtn = (index: number) => {
     if (divRef.current && index === 1) {
       divRef.current.style.left = '0';
@@ -20,6 +24,13 @@ const ThemeSwtichButton = (props: ButtonsNames) => {
       divRef.current.style.left = '220px';
     } else if (divRef.current && index === 4) {
       divRef.current.style.left = '340px';
+    }
+    if (index === 1) {
+      toggleTheme(Theme.ORANGE);
+    } else if (index === 2) {
+      toggleTheme(Theme.LIGHT);
+    } else {
+      toggleTheme(Theme.DARK);
     }
   };
 
