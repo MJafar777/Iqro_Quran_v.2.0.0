@@ -10,9 +10,11 @@
 }
 
 .wrapperLogo {
-  margin-bottom: 42px;
+  margin-bottom: 22px;
   border-bottom: 0.1px solid rgba(161, 159, 159, 0.689);
-  padding-bottom: 20px;
+  padding-bottom: 15px;
+  padding-top: 8px;
+  align-items: center;
 }
 .logo {
   font-size: 24px;
@@ -20,6 +22,7 @@
   color: black;
   margin-left: 12px;
   margin-top: 12px;
+  width: 150px;
 }
 
 .closebtn {
@@ -33,9 +36,9 @@
   border-radius: 5px;
   margin-right: 12px;
   transition: background-color 0.2s;
-  &:hover {
-    background-color: var(--icon-hover-bg-color);
-  }
+  // &:hover {
+  //   background-color: var(--icon-hover-bg-color);
+  // }
 }
 
 .collapsed {

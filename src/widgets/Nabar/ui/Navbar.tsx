@@ -4,6 +4,7 @@
 import React, { memo, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack } from '@/shared/ui/Stack';
 import cls from './Navbar.module.scss';
@@ -25,7 +26,7 @@ import { SidebarMain } from '@/widgets/SidebarMain';
 import { fetchTime } from '../model/service/fetchTime';
 import { getTimeArrabic } from '../model/selector/getSelecterTime';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { fullMoth } from '../model/const/moth';
+import { fullMoth, fullMothRu } from '../model/const/moth';
 import { LangSwitcher } from '@/shared/ui/LangSwitcher';
 
 interface NavbarProp {
@@ -34,7 +35,7 @@ interface NavbarProp {
 
 export const Navbar = memo((prop: NavbarProp) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-
+  const { t, i18n } = useTranslation();
   const [whichSidebar, setWhichSidebar] = useState('settings');
 
   const { isSidebarActive, setIsSidebarActive, setIsRightsidebarActive } =
@@ -61,27 +62,32 @@ export const Navbar = memo((prop: NavbarProp) => {
 
   return (
     <div className={classNames(cls.nabar)}>
-      <HStack className={classNames(cls.burger)} justify="start" gap="16">
+      <HStack className={classNames(cls.burger)} align="center">
         <Burger
           className={classNames(cls.icon)}
           onClick={() => setIsSidebarActive(!isSidebarActive)}
         />
-
         <Link to="/">
-          <Icon Svg={Logo} className={cls.logo} />
+          <Logo className={cls.logo} />
         </Link>
       </HStack>
       <HStack className={classNames(cls.wrapperTime)} max justify="center">
         <div className={classNames(cls.timeOfArrabic)}>
-          {getTimeData?.dayOfMonth} - {getTimeData?.uz?.monthText}{' '}
-          {getTimeData?.year}-yil
+          {getTimeData?.dayOfMonth} -{' '}
+          {i18n.language === 'uz'
+            ? getTimeData?.uz?.monthText
+            : getTimeData?.uzCr?.monthText}{' '}
+          {getTimeData?.year}-{t('yil')}
         </div>
 
         <AppImage className={classNames(cls.bismillah)} src={Bismillah} />
 
         <div className={classNames(cls.time)}>
-          {data.getDate()} - {fullMoth[data?.getMonth()]} {data.getFullYear()}
-          -yil
+          {data.getDate()} -{' '}
+          {i18n.language === 'uz'
+            ? fullMoth[data?.getMonth()]
+            : fullMothRu[data?.getMonth()]}{' '}
+          {data.getFullYear()}-{t('yil')}
         </div>
       </HStack>
       <HStack className={classNames(cls.iconWrapper)} justify="end" gap="8">
