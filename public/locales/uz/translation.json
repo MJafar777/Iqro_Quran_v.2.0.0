@@ -2,8 +2,8 @@
   "titleHeader": "Albatta, bu Qur'on eng to‘g‘ri yo‘lga hidoyat qilur va solih amallarni qiluvchi mo‘minlarga xushxabarini bеrurki, albatta, o‘shalarga ulug‘ ajr bordi  ",
   "placeholderMainSearch": "Qur’ondan qidiring!",
   "Qidirish": "Qidirish",
-
- 
+  "Ayahs": "Ayahs",
+  "yil": "yil",
   "Footer": "",
   "footerTitle": "Qur'oni Karimni o'qing, o'rganing va o'rgating.",
   "footerSubtitle": "Umid qilamizki, hamma uchun Qur'oni Karimni o'qish, o'rganish va o'rgatish oson bo'ladi. Qur'oni Karimning ko'plab nomlari bor, jumladan, Qur'on al-Karim, Al-Kitob, Al-Furqon, Al-Mavisa, Al-Zikr va Al-Nur.",
@@ -13,14 +13,14 @@
   "listiningQuran": "Qur’on tinglash",
   "meaningQuran": "Qur’on ma’nolari",
   "Hamkorlar": "Hamkorlar",
-  "contact":"Biz bilan bog`lanish:",
-  "Email":"Email",
-  "Telegram":"Telegram",
-  "Tel":"Tel",
+  "contact": "Biz bilan bog`lanish:",
+  "Email": "Email",
+  "Telegram": "Telegram",
+  "Tel": "Tel",
 
   "sidebarMain": "",
-  "menu": "Мену",
-  "meaningTranslate": "Қуран маʼнолар таржимаси",
+  "menu": "Menu",
+  "meaningTranslate": "Quron ma'nolar tarjimasi",
 
   "mostSearch": "Ko‘p ko‘rilganlar",
   "lastRead": "So‘ngi ko‘rilganlar",

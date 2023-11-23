@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-children-prop */
@@ -9,6 +10,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Li } from '@/shared/ui/li/li';
 import cls from './Search.module.scss';
 import { SerchTile } from '@/shared/ui/SearchTitle';
@@ -23,66 +25,15 @@ import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
 import { useSetSearchActions } from '@/entities/Main';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { MostSearchButton } from '@/shared/ui/MostSearchButton/MostSearchButton';
+import { OneSuraInListSchema } from '@/pages/MainPage';
 
 interface SearchProp {
   className?: string;
 }
 
-const listOfMostRead = [
-  {
-    to: '/reading',
-    title: 'Fotiha',
-    suraId: 1,
-    numberOfOyat: 7,
-  },
-  {
-    to: '/reading',
-    title: 'Al-Baqarah',
-    suraId: 1,
-    numberOfOyat: 7,
-  },
-  {
-    to: '/reading',
-    title: "Al-An'am",
-    suraId: 6,
-    numberOfOyat: 115,
-  },
-  {
-    to: '/reading',
-    title: 'Yusuf',
-    suraId: 12,
-    numberOfOyat: 111,
-  },
-  {
-    to: '/reading',
-    title: 'Hud',
-    suraId: 11,
-    numberOfOyat: 123,
-  },
-];
-
-const lastReadSurahList = [
-  {
-    to: '/reading',
-    title: "Al-An'am",
-    suraId: 6,
-    numberOfOyat: 115,
-  },
-  {
-    to: '/reading',
-    title: 'Yusuf',
-    suraId: 12,
-    numberOfOyat: 111,
-  },
-  {
-    to: '/reading',
-    title: 'Hud',
-    suraId: 11,
-    numberOfOyat: 123,
-  },
-];
-
 export const Search = memo((prop: SearchProp) => {
+  const { t, i18n } = useTranslation();
+
   const { isRightsidebarActive, setIsRightsidebarActive } =
     useContext(ButtonsContext);
   const [searchSurah, setSearchSurah] = useState('');
@@ -131,39 +82,43 @@ export const Search = memo((prop: SearchProp) => {
 
   const itemsOfMostRead = useMemo(
     () =>
-      listOfMostRead.map((item) => (
-        <Li
-          search
-          to="/reading"
-          key={item.title}
-          suraId={item.suraId}
-          numberOfOyat={item.numberOfOyat}
-        >
-          {item.title}
-        </Li>
-      )),
-    [],
+      (i18n.language === 'uz' ? surahNameList : surahNameListRu).map(
+        (item, index) => {
+          if (index < 5) {
+            return (
+              <Li
+                search
+                to="/reading"
+                key={item.nom}
+                suraId={item.nomer}
+                numberOfOyat={item.oyatlarSoni}
+              >
+                {item.nom}
+              </Li>
+            );
+          }
+        },
+      ),
+    [i18n.language],
   );
 
   const itemsLastRead = useMemo(
     () =>
       // eslint-disable-next-line array-callback-return
-      getList?.reverse()?.map((item: any, index: number) => {
+      getList?.reverse()?.map((item: OneSuraInListSchema, index: number) => {
         if (index < 4) {
           return (
-            <Li
-              to="/reading"
-              key={item.title}
-              suraId={item.suraId}
-              close
-              search
-            >
-              {item.title}
+            <Li to="/reading" key={item?.id} suraId={item?.quran_order} search>
+              {
+                item?.translated_names?.filter(
+                  (lang) => lang?.lang_id?.iso_code === i18n?.language,
+                )[0]?.name
+              }
             </Li>
           );
         }
       }),
-    [getList],
+    [getList, i18n.language],
   );
 
   const mostSearchSurah = useMemo(
@@ -186,7 +141,7 @@ export const Search = memo((prop: SearchProp) => {
         <input
           onChange={getSearch}
           type="text"
-          placeholder="Search something"
+          placeholder={t('placeholderMainSearch')}
           className={cls.input}
         />
 
@@ -195,11 +150,11 @@ export const Search = memo((prop: SearchProp) => {
       <HStack gap="8" className={cls.mostSearchButtonWrapper}>
         {mostSearchSurah}
       </HStack>
-      <SerchTile>Ko‘p ko‘rilganlar</SerchTile>
+      <SerchTile>{t('mostSearch')}</SerchTile>
       {itemsOfMostRead}
-      <SerchTile>So‘ngi ko‘rilganlar</SerchTile>
+      <SerchTile>{t('lastRead')}</SerchTile>
       {itemsLastRead}
-      <SerchTile>Qidirib ko‘ring</SerchTile>
+      <SerchTile>{t('mentionList')}</SerchTile>
       {itemsOfMostRead}
     </div>
   );

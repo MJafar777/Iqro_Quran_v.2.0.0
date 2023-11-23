@@ -13,9 +13,14 @@ import { Text, TextAlign } from '@/shared/ui/Text';
 import { Button, ButtonSize } from '@/shared/ui/Button/Button';
 import { MostSearchButton } from '@/shared/ui/MostSearchButton/MostSearchButton';
 import { getListOfSurahs } from '@/pages/MainPage';
-import { surahNameList, surahNameListRu } from '@/shared/const/listOfSurah';
+import {
+  // Fotiha,
+  surahNameList,
+  surahNameListRu,
+} from '@/shared/const/listOfSurah';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSetSearchActions } from '../../model/slice/sliceSearch';
+// import { LAST_READ_SURAH } from '@/shared/const/localstorage';
 
 interface MainHeaderComponentProps {
   className?: string;
@@ -35,6 +40,7 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
   const [searchSurah, setSearchSurah] = useState('');
   const [length, setLength] = useState(1);
   const [chapterCode, setChapterCode] = useState(1);
+  // localStorage.setItem(LAST_READ_SURAH, JSON.stringify([Fotiha]));
   const [dataWhichLang, setDataWhichLang] = useState(
     chapterCode >= 65 || chapterCode <= 90 ? surahNameList : surahNameListRu,
   );
