@@ -10,17 +10,26 @@ const ListenParent = () => {
   console.log(pageSuraOrJuz);
 
   return (
-    <div style={{ marginTop: '30px' }}>
+    <div
+      style={{
+        maxWidth: '1366px',
+        margin: '60px auto',
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        WebkitBoxShadow: '4px 4px 19px 0px rgba(34, 60, 80, 0.1)',
+        MozBoxShadow: '4px 4px 19px 0px rgba(34, 60, 80, 0.1)',
+        boxShadow: '4px 4px 19px 0px rgba(34, 60, 80, 0.1)',
+      }}
+    >
       <div
         style={{
-          maxWidth: '1250px',
           width: '100%',
-          margin: '0rem auto',
+          margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
           gap: '1.5rem',
           justifyContent: 'flex-start',
-          marginTop: '70px',
         }}
       >
         <ListeningSwtichButton
@@ -28,13 +37,6 @@ const ListenParent = () => {
           pageSuraOrJuz={pageSuraOrJuz}
           buttonsNames={['Sura', 'Juz']}
         />
-        {/* <button type="button" onClick={() => setPageSuraOrJuz(true)}>
-          Sura
-        </button>
-
-        <button type="button" onClick={() => setPageSuraOrJuz(false)}>
-          Juz
-        </button> */}
       </div>
 
       <Suspense fallback={<div>Loading...</div>}>
