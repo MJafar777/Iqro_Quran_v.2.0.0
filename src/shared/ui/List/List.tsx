@@ -1,7 +1,7 @@
 import React, { ReactNode, memo, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import cls from './li.module.scss';
+import cls from './List.module.scss';
 import { Icon } from '../Icon';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { useSelectedSuraActions } from '@/entities/Surah';
