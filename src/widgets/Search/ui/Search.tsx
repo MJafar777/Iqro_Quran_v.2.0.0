@@ -17,7 +17,6 @@ import { SerchTile } from '@/shared/ui/SearchTitle';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Icon } from '@/shared/ui/Icon/Icon';
 import { HStack } from '@/shared/ui/Stack';
 import { SearchSmall } from '@/shared/assets/icons/sidebarSearch';
 import { LAST_READ_SURAH } from '@/shared/const/localstorage';
@@ -137,7 +136,7 @@ export const Search = memo((prop: SearchProp) => {
   return (
     <div className={classNames(cls.wrapperListSearch)}>
       <HStack className={cls.headerOfSidebar} max>
-        <Icon Svg={SearchSmall} className={cls.icon} />
+        <SearchSmall className={cls.icon} />
         <input
           onChange={getSearch}
           type="text"
