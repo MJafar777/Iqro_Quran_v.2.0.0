@@ -23,7 +23,7 @@ interface SuraListProps {
 
 const SuraList = memo(({ className }: SuraListProps) => {
   const dispatch = useAppDispatch();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const currentSura = useSelector(getSelectedSura);
   const { setSelectedSura } = useSelectedSuraActions();
 
@@ -71,7 +71,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
     <>
       <input
         type="text"
-        placeholder="Sura qidirish"
+        placeholder={t('searchSura')}
         onChange={handleSearchInputChange}
         className={classNames(clsSearch.SearchInput, {}, [className])}
       />
