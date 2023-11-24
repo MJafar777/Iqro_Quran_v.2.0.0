@@ -92,7 +92,7 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
         </HStack>
         <HStack>
           <VStack gap="8">
-            <p style={{ fontFamily: 'surah_names', fontSize: '32px' }}>
+            <p style={{  }} className={cls.arabic}>
               {arabic}
             </p>
           </VStack>

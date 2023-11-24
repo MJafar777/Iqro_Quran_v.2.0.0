@@ -43,3 +43,9 @@
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   border-radius: 12px;
 }
+
+.arabic {
+  font-family: 'surah_names';
+  font-size: 32px;
+  color: var(--color-text);
+}

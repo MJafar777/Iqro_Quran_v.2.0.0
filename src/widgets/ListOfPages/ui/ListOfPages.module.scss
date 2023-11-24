@@ -1,4 +1,3 @@
-
 .title {
   padding: 12px;
   font-size: 20px;
@@ -32,11 +31,10 @@
   line-height: normal;
   color: var(--color-text);
   display: flex;
-  padding: 6px 12px;
+  padding: 12px;
   align-items: center;
-  border-bottom: var(--color-text) 0.1px solid;
-  // border-left: var(--color-text) 0.1px solid;
-  border-top: var(--color-text) 0.1px solid;
+  border-bottom: var(--border-line) 0.1px solid;
+  border-top: var(--border-line) 0.1px solid;
 }
 
 .icon {
