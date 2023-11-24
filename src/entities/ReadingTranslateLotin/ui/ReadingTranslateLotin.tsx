@@ -80,8 +80,6 @@ export const ReadingTranslateLotin = memo(
         // eslint-disable-next-line no-restricted-syntax, no-unsafe-optional-chaining
         for (const obj of data[currentSura?.quran_order]?.data.resourse) {
           if (Object.keys(obj).includes(String(currentPage?.pageNumber))) {
-            // console.log(obj[currentPage?.pageNumber]);
-
             if (obj[currentPage?.pageNumber]) {
               setImageUrl(obj[currentPage?.pageNumber]);
             }

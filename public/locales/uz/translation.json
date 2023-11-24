@@ -27,5 +27,11 @@
   "mentionList": "Qidirib ko‘ring",
 
   "Sura": "Sura",
-  "Juz": "Juz"
+  "Juz": "Juz",
+  
+  "searchSura": "Sura qidirish",
+  "oyat": "Oyat",
+  "page": "Sahifa",
+  "nextSura": "Keyingi sura",
+  "prevSura": "Oldingi sura"
 }
