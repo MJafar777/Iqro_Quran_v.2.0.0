@@ -2,10 +2,10 @@
   position: fixed;
   height: 100vh;
   width: 342px;
-  background: white;
+  background: var(--bg-color);
   top: -10%;
   right: 0;
-  border: 1.5px solid #ebeef0;
+  border: 1.5px solid var(--color-border-card);
   border-radius: 2px;
   transition: all 0.5s;
   z-index: var(--sidebar-z-index);

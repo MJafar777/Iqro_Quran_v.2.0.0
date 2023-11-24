@@ -3,11 +3,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: var(--bg-color);
   height: var(--navbar-height);
   display: flex;
   align-items: center;
   z-index: 1000;
+  color: var(--color-text);
 }
 
 .wrapperTime {
@@ -27,7 +28,7 @@
   width: 150px;
   margin: 0;
   margin-top: 6px;
-  color: black;
+  color: var(--color-text);
   @media screen and (max-width: 484px) {
     display: none;
   }
@@ -48,7 +49,7 @@
 }
 
 .icon {
-  color: #272727;
+  color: var(--color-text);
   cursor: pointer;
   width: 20px;
   height: 20px;
@@ -56,7 +57,7 @@
 
 .timeOfArrabic,
 .time {
-  color: #272727;
+  color: var(--color-text);
   text-align: center;
   font-size: 24px;
   font-style: normal;

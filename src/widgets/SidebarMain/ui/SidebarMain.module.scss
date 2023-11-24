@@ -2,7 +2,7 @@
   width: 342px;
   height: 100vh;
   position: fixed;
-  background-color: white;
+  background-color: var(--bg-color);
   top: 0;
   left: 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -11,7 +11,7 @@
 
 .wrapperLogo {
   margin-bottom: 22px;
-  border-bottom: 0.1px solid rgba(161, 159, 159, 0.689);
+  border-bottom: 0.1px solid var(--color-border-card);
   padding-bottom: 15px;
   padding-top: 8px;
   align-items: center;
@@ -19,7 +19,7 @@
 .logo {
   font-size: 24px;
   font-weight: bold;
-  color: black;
+  color: var(--color-text);
   margin-left: 12px;
   margin-top: 12px;
   width: 150px;

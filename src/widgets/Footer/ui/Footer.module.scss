@@ -1,10 +1,10 @@
 .footer {
   margin-top: 50px;
   margin-bottom: 50px;
-
+  background-color: var(--bg-color);
 }
 .title {
-  color: #272727;
+  color: var(--color-text);
   text-align: left;
   font-family: sans-serif;
   font-size: 14px;
@@ -13,6 +13,8 @@
   line-height: normal;
 }
 .firstRowOfFooter {
+  color: var(--color-text);
+
   width: 30%;
   text-align: start;
   margin: 0;
@@ -34,6 +36,8 @@
 }
 
 .secondRowOfFooter {
+  color: var(--color-text);
+
   @media screen and (max-width: 992px) {
     width: 30%;
     margin-bottom: 20px;
@@ -55,6 +59,8 @@
 }
 
 .thirdRowOfFooter {
+  color: var(--color-text);
+
   @media screen and (max-width: 992px) {
     width: 30%;
     margin-bottom: 20px;
@@ -77,6 +83,8 @@
 }
 
 .fourthRowOfFooter {
+  color: var(--color-text);
+
   @media screen and (max-width: 992px) {
     width: 70%;
     margin-bottom: 20px;
@@ -99,14 +107,13 @@
 
 .link {
   text-decoration: none;
-  color: #000;
+  color: var(--color-text);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   transition: all 0.3s linear;
   font-family: sans-serif;
-
 
   &:hover {
     color: #2ca4ab;
@@ -115,5 +122,5 @@
 }
 
 .iconOfFooter {
-  color: black;
+  color: var(--color-text);
 }
