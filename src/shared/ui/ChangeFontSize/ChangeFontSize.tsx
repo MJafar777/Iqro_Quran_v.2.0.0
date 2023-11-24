@@ -30,7 +30,7 @@ export const ChangeFontSize = memo(() => {
 
   return (
     <VStack max align="center">
-      <div className={cls.changeFiontSize}>
+      <div className={cls.changeFontSize}>
         <p className={cls.title}>Shrift hajmi</p>
         <HStack className={classNames(cls.wrapperSize)} align="center">
           <button className={cls.button} onClick={decrease}>
