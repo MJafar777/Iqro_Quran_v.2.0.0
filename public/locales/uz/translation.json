@@ -24,5 +24,11 @@
 
   "mostSearch": "Ko‘p ko‘rilganlar",
   "lastRead": "So‘ngi ko‘rilganlar",
-  "mentionList": "Qidirib ko‘ring"
+  "mentionList": "Qidirib ko‘ring",
+
+  "searchSura": "Sura qidirish",
+  "oyat": "Oyat",
+  "page": "Sahifa",
+  "nextSura": "Keyingi sura",
+  "prevSura": "Oldingi sura"
 }

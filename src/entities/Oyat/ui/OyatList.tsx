@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import cls from './OyatList.module.scss';
 import clsSearch from '../../../shared/ui/searchInput/ui/Searchinput.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -8,11 +9,11 @@ import {
   SurahPageOyah,
   getSelectedSura,
 } from '@/entities/Surah';
-import { useSelectedOyatActions } from '../model/slice/seletedOyatSlice';
 import { getSelectedOyat } from '../model/selectors/getSelectedOyat';
+import { useSelectedOyatActions } from '../model/slice/seletedOyatSlice';
 
-import { getError, getIsLoading } from '@/pages/MainPage';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { getError, getIsLoading } from '@/pages/MainPage';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 
 interface OyatListProps {
@@ -20,6 +21,7 @@ interface OyatListProps {
 }
 
 const OyatList = ({ className }: OyatListProps) => {
+  const { t } = useTranslation();
   const selectedSura = useSelectedSuraValue();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
@@ -88,7 +90,7 @@ const OyatList = ({ className }: OyatListProps) => {
     <>
       <input
         type="text"
-        placeholder="Oyat"
+        placeholder={t('oyat')}
         value={searchOyatNumber}
         onChange={handleSearchOyatInputChange}
         className={classNames(clsSearch.SearchInput, {}, [className])}
