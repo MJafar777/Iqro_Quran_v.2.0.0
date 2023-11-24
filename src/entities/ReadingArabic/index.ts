@@ -10,3 +10,4 @@ export type {
 } from './model/types/readingSura';
 
 export type { ReadingArabicSchema } from './model/types/readingArabicSchema';
+export { getReadingArabicData } from './model/selectors/readingArabic';

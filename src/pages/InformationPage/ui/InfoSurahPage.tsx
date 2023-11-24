@@ -1,14 +1,17 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import cls from './InformationPage.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { makkah } from '@/shared/assets/SuraInfo';
+import { InformationPageSurah } from '../types/InfoSurah';
+// import { StateSchema, StateSchema } from '@/app/providers/StoreProvider';
 
 const InfoSurahPage = () => {
   interface Name {
     name: string;
   }
+  const param: any = useParams();
 
   interface Data {
     chapter_id: {
@@ -20,11 +23,16 @@ const InfoSurahPage = () => {
     text: string;
   }
 
-  interface GetInfoProps {
-    data: {
-      data: Data[];
-    };
-  }
+  const data = useSelector(
+    // (state: StateSchema) =>
+    (state: InformationPageSurah) =>
+      console.log(
+        state?.readingTranslateKril?.data[param?.id]?.data.data[0]
+          .chapter_id[0],
+      ),
+  );
+
+  console.log(data, 'info');
 
   return (
     <div style={{ marginTop: '30px', padding: '20px' }}>
@@ -36,7 +44,12 @@ const InfoSurahPage = () => {
         </div>
         <hr />
         <div className={classNames(cls.MainText)}>
-          <img src={makkah} width={200} className={classNames(cls.imgLeft)} />
+          <img
+            src={makkah}
+            width={200}
+            className={classNames(cls.imgLeft)}
+            alt=""
+          />
           <p className={classNames(cls.Block)}>
             Makkada nozil bo‘lgan, 7 oyatdan iborat.Bu suraning bir necha nomi
             bo‘lib, ulardan biri «Fotiha», yaʼni «ochuvchi» deganidir. Chunki
