@@ -6,12 +6,14 @@
 
   p {
     font-size: var(--font-size-m);
+    color: var(--color-text);
   }
 
   .collapseBtn {
     font-size: 32px;
     transform: rotate(0deg);
     transition: all 0.5s;
+    color: var(--color-text);
   }
 
   .collapsed {
