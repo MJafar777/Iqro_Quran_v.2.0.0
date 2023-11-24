@@ -26,16 +26,14 @@ const listOfPage = [
     title: "Qur’oning ma'nolar tarjimasi",
     icon: <Tarnslate />,
   },
-  {
-    path: '/aboutUs',
-    title: 'Biz haqimizda  ',
-    icon: <Info />,
-  },
+
   {
     path: '/transcription',
     title: 'Transkripsiya',
     icon: <Book />,
   },
+  { path: '/about', title: 'Biz haqimizda  ', icon: <Info /> },
+  { path: '/transcription', title: 'Transkripsiya', icon: <Book /> },
 ];
 
 export const ListOfPages = memo(() => {

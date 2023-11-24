@@ -4,11 +4,13 @@ export enum AppRoutes {
   FORBIDDEN = 'forbidden',
   READING = 'reading',
   INFOSURAH = 'infoSurah',
+  LISTEN = 'listining',
 }
 
 export const getRouteMain = () => '/';
 export const getRouteAbout = () => '/about';
 export const getRouteReading = () => '/reading';
+export const getRouteListening = () => '/listining';
 export const getRouteForbidden = () => '/forbidden';
 export const getRouteInfoSurah = () => '/infoSurah/:id';
 
@@ -24,6 +26,7 @@ export const AppRouteByPathPattern: Record<string, AppRoutes> = {
   [getRouteMain()]: AppRoutes.MAIN,
   [getRouteAbout()]: AppRoutes.ABOUT,
   [getRouteReading()]: AppRoutes.READING,
+  [getRouteListening()]: AppRoutes.LISTEN,
   [getRouteForbidden()]: AppRoutes.FORBIDDEN,
   [getRouteInfoSurah()]: AppRoutes.INFOSURAH,
 };
