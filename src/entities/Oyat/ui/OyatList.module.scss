@@ -8,7 +8,7 @@
     display: flex;
     margin: 1px 0;
     padding: 10px 13px;
-    border-radius: 5px;
+    border-radius: var(--suraList-item-border-radius);
     cursor: pointer;
 
     &:hover {
@@ -25,6 +25,10 @@
     font-family: var(--font-family-main);
     font-size: var(--font-size-m);
     font-weight: 400;
+  }
+
+  p {
+    color: var(--color-text);
   }
 
   .active {
