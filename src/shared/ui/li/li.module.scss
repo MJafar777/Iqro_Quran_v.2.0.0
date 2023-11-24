@@ -5,9 +5,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: #27272731 0.1px solid;
-  border-left: #27272731 0.1px solid;
-  border-top: #27272731 0.1px solid;
+  border-bottom: var(--border-line) 0.1px solid;
+  border-left: var(--border-line) 0.1px solid;
+  border-top: var(--border-line) 0.1px solid;
   padding: 6px 12px;
   gap: 16px;
 
@@ -24,11 +24,11 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  color: #272727;
+  color: var(--color-text);
 }
 
 .icon {
-  color: black;
+  color: var(--color-text);
   width: 20px;
   height: 20px;
   margin-right: 12px;
