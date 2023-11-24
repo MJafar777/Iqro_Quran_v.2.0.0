@@ -13,6 +13,8 @@ export interface OneSurahWhichLang {
 }
 
 export interface OneSuraInListSchema {
+  audio: any;
+  __v: any;
   _id: string;
   revelation_place: string;
   revelation_order: number;

@@ -10,10 +10,12 @@ import {
   getRouteForbidden,
   getRouteReading,
   getRouteInfoSurah,
+  getRouteListening,
 } from '@/shared/const/router';
 
 import { AppRoutesProps } from '@/shared/types/router';
 import { InfoSurahPage } from '@/pages/InformationPage';
+import { ListenParent } from '@/pages/listening';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -35,5 +37,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.INFOSURAH]: {
     path: getRouteInfoSurah(),
     element: <InfoSurahPage />,
+  },
+  [AppRoutes.LISTEN]: {
+    path: getRouteListening(),
+    element: <ListenParent />,
   },
 };
