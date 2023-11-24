@@ -35,8 +35,8 @@ export const Setting = memo((prop: SettingsProp) => {
           />
         </HStack>
         <VStack gap="32">
-          <p className={classNames(cls.title)}>Mavzular</p>
-          <HStack max className={classNames(cls.buttonWrapper)}>
+          <p className={cls.title}>Mavzular</p>
+          <HStack max className={cls.buttonWrapper}>
             <ThemeSwitcher />
           </HStack>
           <ChangeFontSize />

@@ -1,19 +1,35 @@
 .app_orange_theme {
-  --bg-color: #faf4fb;
+  --bg-color: #f8ead4;
+  --bg-widget: #fff7e9;
+  --color-text: #000000;
+  --color-placeholder: #666;
+  --color-hover: #2ba4ab;
+  --color-secondary: #666666;
+  --color-border-card: #464b4f;
+  --primary-color: #fbfefb;
+  --secondary-color: #f9fbf9;
+  --border-line: #91979c;
+  --bg-header: #b89f78;
+  --wrapper-number-surah:#F0E1CB;
+  --reading-navbar-progress: #fff;
+  --input-bg-color: #212529;
+  --text-primary-color: #84878a;
+  --icon-hover-bg-color: #464b4f;
+  --btn-3d-shadow: rgba(255, 255, 255, 0.4) 0px 2px 4px,
+    rgba(255, 255, 255, 0.3) 0px 7px 13px -3px,
+    rgba(255, 255, 255, 0.2) 0px -3px 0px inset;
   --inverted-bg-color: #bd5012;
-  // --primary-color: #9a1a0e;
-  // --secondary-color: #d01f0e;
   --inverted-primary-color: #dbd5dc;
   --inverted-secondary-color: #faf4fb;
 
-  // redesigned
-  --dark-bg-redesigned: #fff3d6;
-  --bg-redesigned: #f0c048;
-  --light-bg-redesigned: #f2d791;
-  --text-redesigned: #1b1311;
-  --hint-redesigned: #b8b2a2;
-  --cancel-redesigned: #ff5e5e;
-  --save-redesigned: #52fa81;
+  // // redesigned
+  // --dark-bg-redesigned: #fff3d6;
+  // --bg-redesigned: #f0c048;
+  // --light-bg-redesigned: #f2d791;
+  // --text-redesigned: #1b1311;
+  // --hint-redesigned: #b8b2a2;
+  // --cancel-redesigned: #ff5e5e;
+  // --save-redesigned: #52fa81;
 
   // skeleton
   --skeleton-color: #fff;

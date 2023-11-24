@@ -8,7 +8,7 @@
   margin-top: 20px;
   align-items: center;
   padding: 6px 12px;
-  border-bottom: #27272731 0.1px solid;
+  border-bottom: var(--border-line) 0.1px solid;
 }
 
 .closeBtn {
@@ -27,7 +27,7 @@
 }
 
 .titleOfHeader {
-  color: #272727;
+  color: var(--color-text);
   text-align: center;
   font-family: Proxima Vara;
   font-size: 20px;
@@ -37,7 +37,7 @@
 }
 
 .title {
-  color: #272727;
+  color: var(--color-text);
   text-align: center;
   font-family: Proxima Vara;
   font-size: 18px;
@@ -49,15 +49,15 @@
 
 .buttonTheme {
   padding: 6px 12px;
-  border: #272727 1px solid;
+  border: var(--border-line) 1px solid;
 }
 .button,
 .buttonTheme {
-  color: black;
+  color: var(--color-text);
 }
 
 .changeFiontSize {
-  border-top: #e1e0e0 solid 0.1px;
+  border-top: var(--border-line) solid 0.1px;
   border-bottom: #272727 solid 0.1px;
   padding-bottom: 20px;
 }
@@ -71,10 +71,10 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: #272727;
+  color: var(--color-text);
   text-align: center;
   font-family: Proxima Vara;
-  font-size: 24wpx;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

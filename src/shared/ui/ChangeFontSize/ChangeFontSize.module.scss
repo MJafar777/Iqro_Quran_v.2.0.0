@@ -1,8 +1,8 @@
-.changeFiontSize {
+.changeFontSize {
   display: flex;
   width: 100%;
-  border-top: #e1e0e0 solid 0.1px;
-  border-bottom: #272727 solid 0.1px;
+  border-top: var(--border-line) solid 0.1px;
+  border-bottom: var(--border-line) solid 0.1px;
   padding-bottom: 20px;
   align-items: center;
   margin-bottom: 20px;
@@ -17,7 +17,7 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: #272727;
+  color: var(--color-text);
   text-align: center;
   font-family: Proxima Vara;
   font-size: 24wpx;
@@ -27,7 +27,7 @@
 }
 
 .title {
-  color: #272727;
+  color: var(--color-text);
   text-align: center;
   font-family: Proxima Vara;
   font-size: 18px;
@@ -38,13 +38,13 @@
 }
 
 .wrapperSize {
-  color: black;
+  color: var(--color-text);
 }
 
 .restore {
   border-radius: 5px;
-  background: #272727 !important;
-  color: #fff !important;
+  background: var(--color-text) !important;
+  color: var(--bg-widget) !important;
   cursor: pointer;
   text-align: center;
   font-family: Proxima Vara;
@@ -54,13 +54,15 @@
   line-height: normal;
   display: flex;
   align-items: center;
-
+  .back {
+    color: var(--bg-widget);
+  }
   &:hover {
-    background-color: white !important;
-    border: solid 1px rgb(206, 204, 204);
-    color: black !important;
+    background-color: var(--bg-widget) !important;
+    border: solid 1px var(--border-line);
+    color: var(--color-text) !important;
     .back {
-      color: black;
+      color: var(--color-text) !important;
     }
   }
 }
