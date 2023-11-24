@@ -4,6 +4,7 @@
   gap: 20px;
   display: grid;
   align-items: center;
+  padding-bottom: 20px;
   grid-template-columns: repeat(3, 1fr);
 
   .CardsItems {
@@ -90,5 +91,13 @@
         }
       }
     }
+  }
+
+  .CardsItems:hover .SquareNumber {
+    background-color: #37d0d8;
+  }
+
+  .CardsItems:hover .RightItems .Button {
+    background-color: #37d0d8;
   }
 }

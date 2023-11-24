@@ -28,7 +28,6 @@ const CardItem = (prop: ListenerProp) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { info, index } = prop;
   const audio = audioRef.current;
-  console.log(audio, index);
 
   return (
     <div className={cls.CardsItems}>
@@ -67,7 +66,7 @@ const CardItem = (prop: ListenerProp) => {
             style={{ overflow: 'hidden', display: 'none' }}
             autoPlay
             ref={audioRef}
-            src={`https://server12.mp3quran.net/maher/00${info.quran_order}.mp3`}
+            src={`https://server12.mp3quran.net/afs/00${info.quran_order}.mp3`}
             controls
           />
         )}
