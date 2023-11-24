@@ -1,39 +1,40 @@
-import * as React from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Lang } from '@/shared/assets/icons/navbar';
 
 import cls from './LangSwitcher.module.scss';
 
-export const LangSwitcher = React.memo(() => {
+export const LangSwitcher = memo(() => {
   const { i18n } = useTranslation();
-  const [isOpenMenu, setIsOpenMenu] = React.useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const toggle = async (lang: string) => {
     i18n.changeLanguage(lang);
     setIsOpenMenu(false);
   };
 
-  const renderMenu = (
-    <div className={cls.menu}>
-      <div
-        className={cls.menuItem}
-        onClick={() => {
-          toggle('uz');
-        }}
-      >
-        Latin
+  const renderMenu = useMemo(() => {
+    return (
+      <div className={cls.menu}>
+        <div
+          className={cls.menuItem}
+          onClick={() => {
+            toggle('uz');
+          }}
+        >
+          Latin
+        </div>
+        <div
+          className={cls.menuItem}
+          onClick={() => {
+            toggle('kr');
+          }}
+        >
+          Крилл
+        </div>
       </div>
-      <div
-        className={cls.menuItem}
-        onClick={() => {
-          toggle('kr');
-        }}
-      >
-        Крилл
-      </div>
-    </div>
-  );
-
-  // const modalLangList=(<div></div>)
+    );
+  }, [toggle]);
 
   return (
     <div className={cls.containerLang}>
