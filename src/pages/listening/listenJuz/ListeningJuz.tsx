@@ -4,6 +4,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pause, Download } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 import cls from './listeningJuz.module.scss';
 import { Play } from '@/shared/assets/iconsListening';
 import { OneSuraInListSchema } from '@/pages/MainPage';
@@ -32,6 +33,8 @@ interface CardItemsvalue {
 }
 
 const CardItems = (props: CardItemsvalue) => {
+  const { t } = useTranslation();
+  const Juz = t('Juz');
   const { index, info } = props;
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -47,7 +50,7 @@ const CardItems = (props: CardItemsvalue) => {
         </div>
 
         <div className={cls.TextCard}>
-          <div className={cls.FirstText}>Juz</div>
+          <h3 className={cls.FirstText}>{Juz}</h3>
         </div>
       </div>
 

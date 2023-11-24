@@ -44,11 +44,11 @@ const CardItem = (prop: ListenerProp) => {
       <div className={cls.RightItems}>
         <button
           onClick={() => {
-            if (audio && index + 1 === info.quran_order) {
-              audio.play();
-            } else if (audio) {
-              audio.pause();
-            }
+            // if (audio && index + 1 === info.quran_order) {
+            //   audio.play();
+            // } else if (audio) {
+            //   audio.pause();
+            // }
             setIsPlaying(!isPlaying);
           }}
           className={cls.Button}
@@ -66,7 +66,7 @@ const CardItem = (prop: ListenerProp) => {
             style={{ overflow: 'hidden', display: 'none' }}
             autoPlay
             ref={audioRef}
-            src={`https://server12.mp3quran.net/afs/00${info.quran_order}.mp3`}
+            src={`https://server12.mp3quran.net/maher/00${info.quran_order}.mp3`}
             controls
           />
         )}

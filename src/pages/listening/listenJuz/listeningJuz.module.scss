@@ -1,8 +1,8 @@
 .ListenJuzWrapper {
-  width: 100%;
-  padding: 0 20px;
   gap: 20px;
+  width: 100%;
   display: grid;
+  padding: 0 20px;
   align-items: center;
   padding-bottom: 20px;
 
@@ -20,10 +20,10 @@
     align-items: center;
     justify-content: space-between;
 
-    background-color: #f8f9fa;
+    background-color: var(--color-border-card);
 
     border-radius: 5px;
-    border: 1px solid rgba(39, 39, 39, 0.2);
+    border: 1px solid var(--border-line);
 
     .LeftItems {
       display: flex;
@@ -42,7 +42,7 @@
       border-radius: 5px;
       font-weight: 600;
       transform: rotate(45deg);
-      background-color: #e7e7e7;
+      background-color: var(--wrapper-number-surah);
     }
 
     .Span {

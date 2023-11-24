@@ -1,16 +1,21 @@
 /* eslint-disable max-len */
 import { Suspense, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import ListeningJuz from './listenJuz/ListeningJuz';
 import ListeningSura from './listenSura/ListeningSura';
 import ListeningSwtichButton from '@/shared/ui/ListeningSwitchButton/ListeningSwtichButton';
 
 const ListenParent = () => {
   const [pageSuraOrJuz, setPageSuraOrJuz] = useState(true);
-  console.log(pageSuraOrJuz);
+  const { t } = useTranslation();
+
+  const Sura = t('Sura');
+  const Juz = t('Juz');
 
   return (
     <div
+      data-testid="Listening"
       style={{
         maxWidth: '1366px',
         margin: '60px auto',
@@ -35,7 +40,7 @@ const ListenParent = () => {
         <ListeningSwtichButton
           setPageSuraOrJuz={setPageSuraOrJuz}
           pageSuraOrJuz={pageSuraOrJuz}
-          buttonsNames={['Sura', 'Juz']}
+          buttonsNames={[Sura, Juz]}
         />
       </div>
 
