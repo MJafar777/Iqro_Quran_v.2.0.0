@@ -13,3 +13,7 @@ export { getSelectorSearch } from './model/selector/getSelectorSerach';
 export { Search } from './ui/Search/Search';
 
 export {useSetSearchActions} from './model/slice/sliceSearch'
+
+export {Virtual} from './ui/ListOfSurah/Virtual'
+
+export {OneItemSurahSkleton} from './ui/OneSurahItem/OneItemSurahSkleton'

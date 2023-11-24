@@ -123,7 +123,7 @@ export const Footer = () => {
       </HStack>
       <HStack justify="center">
         {' '}
-        <p>
+        <p className={cls.rights}>
           © 2023{' '}
           <Link className={cls.link} to="/">
             iqro-quran.uz.
