@@ -94,11 +94,16 @@
     }
   }
 
+  .CardsItems:hover {
+    background-color: #fff7e8;
+  }
+
   .CardsItems:hover .SquareNumber {
-    background-color: #37d0d8;
+    // background-color: #37d0d8;
+    background-color: #f6e7d3;
   }
 
   .CardsItems:hover .RightItems .Button {
-    background-color: #37d0d8;
+    background-color: #f6e7d3;
   }
 }
