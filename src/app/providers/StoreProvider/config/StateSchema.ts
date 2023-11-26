@@ -15,6 +15,7 @@ import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
+import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -32,6 +33,7 @@ export interface StateSchema {
   mainPage: SurahListSchema;
   timeData: DataTimeScheme;
   search: SearchData;
+  tafsirPage:ReduxSchemeForTafsir
 }
 
 export type StateSchemaKey = keyof StateSchema;
@@ -51,6 +53,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
 }
 
 export interface ThunkExtraArg {
+  get(arg0: string): unknown;
   api: AxiosInstance;
 }
 
