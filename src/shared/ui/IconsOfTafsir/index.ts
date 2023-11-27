@@ -1,0 +1,1 @@
+export {IconsOfTafsir} from './IconsOfTafsir'
