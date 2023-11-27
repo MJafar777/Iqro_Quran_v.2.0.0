@@ -49,7 +49,6 @@ const Tafsir = (prop: TafsirProp) => {
     () => (
       <div className={cls.tafsir}>
         <ListOfTafsir />
-        vgvssabh
       </div>
     ),
     [],

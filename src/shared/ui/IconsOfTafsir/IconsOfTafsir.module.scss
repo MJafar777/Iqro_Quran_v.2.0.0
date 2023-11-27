@@ -17,10 +17,11 @@
   cursor: pointer;
   transition: all 0.3s linear;
   border-radius: 50%;
+  color: var(--color-text);
 
   &:hover {
-    background-color: var(--bg-header);
-    color: white;
+    background-color: #2ca4ab;
+    // color: var(--color-text);
   }
 }
 
@@ -35,17 +36,17 @@
   border-radius: 50%;
 
   &:hover {
-    background-color: var(--bg-header);
+    background-color: #2ca4ab;
     .playIcon {
-      color: white;
+      color: var(--color-text);
     }
   }
 }
 
 .playIcon {
+  color: var(--color-text);
   width: 20px;
   height: 20px;
-  color: black;
   cursor: pointer;
   display: flex;
   justify-content: center;
