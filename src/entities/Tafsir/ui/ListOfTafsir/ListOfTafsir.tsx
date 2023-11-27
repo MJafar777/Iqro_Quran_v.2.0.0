@@ -1,11 +1,17 @@
 /* eslint-disable camelcase */
-/* eslint-disable react/jsx-curly-brace-presence */
 import React, { memo } from 'react';
+import { useSelector } from 'react-redux';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
-import { TafsirChapterData } from '@/pages/Tafsir';
+import { TafsirChapterData, isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
 import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
+import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
+import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
+// import 'react-virtualized/styles.css';
+// import {Column, Table} from 'react-virtualized';
+// import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+// import List from 'react-virtualized/dist/commonjs/List';
 
 interface ListOfTafsirProp {
   className?: string;
@@ -15,9 +21,28 @@ interface ListOfTafsirProp {
 
 export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
   const { listOfTafsir, quran_order } = prop;
-  console.log(listOfTafsir, 'listOfTafsir');
+  const isLoadingOfTafsir = useSelector(isLoading);
 
-  return (
+  // @ts-ignore
+  useQcfFont(listOfTafsir);
+
+  const content = isLoadingOfTafsir ? (
+    <div
+      style={{
+        paddingTop: '120px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '30px',
+      }}
+    >
+      <OneTafsirCardSkleton />
+      <OneTafsirCardSkleton />
+      <OneTafsirCardSkleton />
+      <OneTafsirCardSkleton />
+      <OneTafsirCardSkleton />
+      <OneTafsirCardSkleton />
+    </div>
+  ) : (
     <div className={cls.listOfTafsir}>
       <SurahInfoAndAudioForTafsir />
       {listOfTafsir?.map((oneVerse) => {
@@ -26,8 +51,9 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
       })}
 
       <AudioPlayerComp
-        src={`https://server6.mp3quran.net/thubti/00${quran_order}.mp3`}
+        src={`http://iqro-quran.uz/developmentBackend/suras/${quran_order}.mp3`}
       />
     </div>
   );
+  return content;
 });

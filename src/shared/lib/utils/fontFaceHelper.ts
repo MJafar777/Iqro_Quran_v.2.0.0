@@ -1,4 +1,3 @@
-
 // import { MushafLines, QuranFont } from 'types/QuranReader';
 // import Verse from 'types/Verse';
 
@@ -33,11 +32,13 @@ export const isQCFFont = (font: QuranFont) => QCFFontCodes.includes(font);
  */
 export const getV1OrV2FontFaceSource = (
   isV1: boolean,
-  pageNumber: number
+  pageNumber: number,
 ): string => {
   const woff2 = `./fonts/quran/hafs/v1/woff2/p${pageNumber}.woff2`;
   const woff = `./fonts/quran/hafs/v1/woff/p${pageNumber}.woff`;
   const ttf = `./fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`;
+  console.log(ttf);
+  
   return `local(p${pageNumber}-v1), url('${ttf}') format('truetype')`;
 };
 /**
@@ -51,7 +52,7 @@ export const getV1OrV2FontFaceSource = (
  */
 export const getFontFaceNameForPage = (
   isV1: boolean,
-  pageNumber: number
+  pageNumber: number,
 ): string => (isV1 ? `p${pageNumber}-v1` : `p${pageNumber}-v2`);
 
 /**
@@ -69,7 +70,7 @@ export const getFontClassName = (
   quranFont: QuranFont,
   fontScale: number,
   mushafLines: MushafLines,
-  isFallbackFont = false
+  isFallbackFont = false,
 ): string => {
   if (quranFont === QuranFont.IndoPak) {
     return `${quranFont}_${mushafLines}-font-size-${fontScale}`;
@@ -94,7 +95,7 @@ export const getLineWidthClassName = (
   quranFont: QuranFont,
   fontScale: number,
   mushafLines: MushafLines,
-  isFallbackFont = false
+  isFallbackFont = false,
 ): string => {
   if (quranFont === QuranFont.IndoPak) {
     return `${quranFont}_${mushafLines}-line-width-${fontScale}`;
