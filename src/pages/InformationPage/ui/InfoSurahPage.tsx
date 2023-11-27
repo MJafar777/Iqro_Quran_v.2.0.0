@@ -25,12 +25,16 @@ const InfoSurahPage = () => {
   }
 
   const data = useSelector((state: InformationPageSurah) => {
-    console.log(
-      state?.readingTranslateKril?.data[param?.id]?.data.data[0].chapter_id[0],
-      'vjvjvjvjvj',
-    );
+    if (state) {
+      console.log(
+        state?.readingTranslateKril?.data[param?.id]?.data.data[0]
+          .chapter_id[0],
+        'vjvjvjvjvj',
+      );
+    }
   });
 
+  
   console.log(data, 'info');
 
   return (
