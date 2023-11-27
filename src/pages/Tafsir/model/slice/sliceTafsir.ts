@@ -8,12 +8,17 @@ const initialState: ReduxSchemeForTafsir = {
   isLoading: false,
   data: [],
   error: undefined,
+  loadedFontFaces:['p1-v1']
 };
 
 const sliceTafsir = createSlice({
   name: 'TafsirPage',
   initialState,
-  reducers: {},
+  reducers: {
+    addLoadedFontFace: (state, action: PayloadAction<string>) => {
+      state.loadedFontFaces.push(action.payload);
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(fetchTafsirList.pending, (state) => {
@@ -43,3 +48,5 @@ const sliceTafsir = createSlice({
 
 export const { reducer: sliceTafsirReduce } = sliceTafsir;
 export const { actions: slicerTafserAction } = sliceTafsir;
+export const {addLoadedFontFace}=sliceTafsir.actions
+

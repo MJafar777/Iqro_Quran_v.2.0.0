@@ -34,7 +34,7 @@ const Tafsir = (prop: TafsirProp) => {
       dispatch(fetchTafsirList({ chapterId: surahId.quran_order }));
   }, [dataOfTafsir, dispatch, surahId]);
 
-  console.log(dataOfTafsir, 'parent', surahId?.quran_order);
+  console.log(dataOfTafsir?.[surahId.quran_order]);
 
   const content = useMemo(
     () => (
@@ -45,9 +45,7 @@ const Tafsir = (prop: TafsirProp) => {
         </Sidebar>
         <ListOfTafsir
           // @ts-ignore
-          listOfTafsir={
-            dataOfTafsir ? dataOfTafsir?.[surahId?.quran_order] : []
-          }
+          listOfTafsir={dataOfTafsir?.[surahId?.quran_order]}
         />
       </div>
     ),

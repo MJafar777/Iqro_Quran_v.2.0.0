@@ -16,6 +16,11 @@
     format('truetype');
 }
 
+@font-face {
+  font-family: 'p1-v1';
+  src: url('../../shared/assets/font/surah_name/p1.ttf') format('truetype');
+}
+
 // USAGE
 body {
   font-family: var(--font-family-main);

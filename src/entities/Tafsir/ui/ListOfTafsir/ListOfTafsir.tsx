@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
 import { TafsirChapterData } from '@/pages/Tafsir';
+import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
 
 interface ListOfTafsirProp {
   className?: string;
@@ -14,7 +15,11 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
 
   return (
     <div className={cls.listOfTafsir}>
-      <OneTafsirCard />
+      <SurahInfoAndAudioForTafsir/>
+      {listOfTafsir?.map((oneVerse) => {
+        // @ts-ignore
+        return <OneTafsirCard data={oneVerse} />;
+      })}
     </div>
   );
 });
