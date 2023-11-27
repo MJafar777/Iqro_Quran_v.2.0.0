@@ -95,8 +95,23 @@ export interface BackendResForTafsir {
   results: number;
 }
 
+export interface TafisrData {
+  quran_order: any;
+  status: string;
+  results: number;
+  data: OneVerseTafsirScheme[];
+  nextpage: boolean;
+}
+
+export interface TafsirChapterData {
+  [key: number]: {
+    quran_order: number;
+    data: TafisrData;
+  };
+}
+
 export interface ReduxSchemeForTafsir {
   isLoading?: boolean;
   error?: string;
-  data?: OneVerseTafsirScheme[];
+  data?: TafsirChapterData[];
 }

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable camelcase */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BackendResForTafsir, ReduxSchemeForTafsir } from '../types/typeTafsir';
 import { fetchTafsirList } from '../service/fetchTafsir/fetchTafsirList';
@@ -16,15 +18,18 @@ const sliceTafsir = createSlice({
     builder
       .addCase(fetchTafsirList.pending, (state) => {
         state.isLoading = true;
+        state.error = undefined;
       })
       .addCase(
         fetchTafsirList.fulfilled,
         (state, action: PayloadAction<BackendResForTafsir>) => {
           state.isLoading = false;
-          state.data = action.payload.data;
-          console.log(action.payload.data, 'redux');
-
-          state.error = undefined;
+          // @ts-ignore
+          if (!state?.data[action?.payload?.data[0]?.chapter_id?.quran_order]) {
+            // @ts-ignore
+            state.data[action?.payload?.data[0]?.chapter_id?.quran_order] =
+              action?.payload.data;
+          }
         },
       )
       .addCase(

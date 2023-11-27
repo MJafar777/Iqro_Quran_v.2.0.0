@@ -7,7 +7,6 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { krilLng, lotinLng } from '@/shared/config/i18n/i18n';
 
 // ---------- | | ---------- //
-import { Navbar } from '@/widgets/Nabar';
 import { Sidebar } from '@/widgets/Sidebar';
 import { getIsLoading } from '@/pages/MainPage';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
@@ -43,7 +42,6 @@ const ReadingPage = (props: ReadingPageProps) => {
       data-testid="ReadingPage"
       className={classNames(cls.ReadingPage, {}, [className])}
     >
-      <Navbar />
 
       <ReadingNavbar />
 
