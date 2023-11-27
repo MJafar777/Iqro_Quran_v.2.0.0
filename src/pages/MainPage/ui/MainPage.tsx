@@ -5,7 +5,7 @@ import {
   ListOfSurah,
   MobileAppView,
   Search,
-} from '@/entities/Main';
+ OneItemSurahSkleton } from '@/entities/Main';
 import {
   DynamicModuleLoader,
   ReducersList,
@@ -34,6 +34,10 @@ const MainPage = () => {
     if (!listOfSurah) dispatch(fetchSurahlesList({}));
   }, [dispatch, listOfSurah]);
 
+  const skeletonList = Array.from({ length: 18 }, () => (
+    <OneItemSurahSkleton />
+  ));
+
   const content = (
     <div data-testid="MainPage">
       <MainHeader />
@@ -43,6 +47,16 @@ const MainPage = () => {
         data={listOfSurah}
         error={error || ''}
       />
+      {/* {listOfSurah ? (
+        <Virtual
+          isLoading={isLoading || false}
+          data={listOfSurah}
+          error={error || ''}
+        />
+      ) : (
+        skeletonList
+      )} */}
+
       <MobileAppView />
     </div>
   );
