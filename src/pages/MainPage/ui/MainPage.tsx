@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
   MainHeader,
-  ListOfSurah,
+  // ListOfSurah,
   MobileAppView,
   Search,
+  OneItemSurahSkleton,
+  ListOfSurah,
 } from '@/entities/Main';
 import {
   DynamicModuleLoader,
@@ -34,7 +36,11 @@ const MainPage = () => {
     if (!listOfSurah) dispatch(fetchSurahlesList({}));
   }, [dispatch, listOfSurah]);
 
-  const content = (
+  const skeletonList = Array.from({ length: 18 }, () => (
+    <OneItemSurahSkleton />
+  ));
+
+  const content = useMemo(()=>(
     <div data-testid="MainPage">
       <MainHeader />
       <Search />
@@ -43,9 +49,10 @@ const MainPage = () => {
         data={listOfSurah}
         error={error || ''}
       />
+      {/* <Virtual data={listOfSurah} /> */}
       <MobileAppView />
     </div>
-  );
+  ),[error, isLoading, listOfSurah]) 
 
   return (
     <DynamicModuleLoader reducers={reducers}>{content}</DynamicModuleLoader>

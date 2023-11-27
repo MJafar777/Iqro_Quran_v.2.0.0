@@ -11,7 +11,7 @@ import React, {
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Li } from '@/shared/ui/li/li';
+import { Li } from '@/shared/ui/List/List';
 import cls from './Search.module.scss';
 import { SerchTile } from '@/shared/ui/SearchTitle';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';

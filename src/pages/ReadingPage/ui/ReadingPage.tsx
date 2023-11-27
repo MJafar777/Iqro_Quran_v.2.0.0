@@ -13,6 +13,7 @@ import { getIsLoading } from '@/pages/MainPage';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
+// import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { ReadingTranslateKril } from '@/entities/ReadingTranslateKril';
@@ -109,6 +110,7 @@ const ReadingPage = (props: ReadingPageProps) => {
           </>
         )}
       </div>
+      {/* <AudioPlayerComp /> */}
     </div>
   );
 };

@@ -64,6 +64,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-virtualized": "^9.21.21",
+    "@types/react-window": "^1.8.8",
     "@types/webpack": "^5.28.0",
     "@types/webpack-bundle-analyzer": "^4.4.1",
     "@types/webpack-dev-server": "^4.7.2",
@@ -137,10 +138,14 @@
     "react": "^18.2.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-h5-audio-player": "^3.9.0",
     "react-i18next": "^11.18.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.2.1",
-    "react-virtuoso": "^4.6.2"
+    "react-virtualized": "^9.22.5",
+    "react-virtualized-auto-sizer": "^1.0.20",
+    "react-virtuoso": "^4.6.2",
+    "react-window": "^1.8.10"
   },
   "loki": {
     "configurations": {

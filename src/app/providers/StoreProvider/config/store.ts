@@ -11,6 +11,7 @@ import { selectedPageReducer } from '@/entities/Page';
 import { SurahListSliceReducer } from '@/pages/MainPage';
 import { TimeDataReducer } from '@/widgets/Nabar';
 import { setSearchReducer } from '@/entities/Main';
+import { sliceTafsirReduce } from '@/pages/Tafsir';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -24,13 +25,15 @@ export function createReduxStore(
     mainPage: SurahListSliceReducer,
     timeData: TimeDataReducer,
     search: setSearchReducer,
+    tafsirPage:sliceTafsirReduce,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
   const reducerManager = createReducerManager(rootReducers);
-
+  // @ts-ignore
   const extraArg: ThunkExtraArg = {
     api: $api,
+   
   };
 
   const store = configureStore({

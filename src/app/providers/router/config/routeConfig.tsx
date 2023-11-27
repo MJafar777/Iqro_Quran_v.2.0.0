@@ -11,11 +11,13 @@ import {
   getRouteReading,
   getRouteInfoSurah,
   getRouteListening,
+  getRouteTafsir,
 } from '@/shared/const/router';
 
 import { AppRoutesProps } from '@/shared/types/router';
 import { InfoSurahPage } from '@/pages/InformationPage';
 import { ListenParent } from '@/pages/listening';
+import { Tafsir } from '@/pages/Tafsir';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -41,5 +43,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.LISTEN]: {
     path: getRouteListening(),
     element: <ListenParent />,
+  },
+  [AppRoutes.TAFSIR]: {
+    path: getRouteTafsir(),
+    element: <Tafsir />,
   },
 };
