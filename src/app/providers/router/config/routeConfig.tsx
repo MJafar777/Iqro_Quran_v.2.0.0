@@ -16,7 +16,7 @@ import {
 
 import { AppRoutesProps } from '@/shared/types/router';
 import { InfoSurahPage } from '@/pages/InformationPage';
-import { ListenParent } from '@/pages/listening';
+import { ListenParent } from '@/pages/ListeningPage';
 import { Tafsir } from '@/pages/Tafsir';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {

@@ -1,9 +1,7 @@
-/* eslint-disable max-len */
 import { Suspense, useState } from 'react';
-
 import { useTranslation } from 'react-i18next';
-import ListeningJuz from './listenJuz/ListeningJuz';
-import ListeningSura from './listenSura/ListeningSura';
+import { ListeningJuz } from '../../../entities/ListenJuz';
+import { ListeningSura } from '../../../entities/ListenSura';
 import ListeningSwtichButton from '@/shared/ui/ListeningSwitchButton/ListeningSwtichButton';
 
 const ListenParent = () => {
