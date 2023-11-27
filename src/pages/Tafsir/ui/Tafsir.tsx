@@ -46,6 +46,7 @@ const Tafsir = (prop: TafsirProp) => {
         <ListOfTafsir
           // @ts-ignore
           listOfTafsir={dataOfTafsir?.[surahId?.quran_order]}
+          quran_order={surahId.quran_order}
         />
       </div>
     ),
