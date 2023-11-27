@@ -76,8 +76,6 @@ const OyatList = memo(({ className }: OyatListProps) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentOyat.oyatNumber]);
 
   const handleSearchOyatInputChange = (
