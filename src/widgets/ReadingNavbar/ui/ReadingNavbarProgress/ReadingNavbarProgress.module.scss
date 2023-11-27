@@ -1,0 +1,10 @@
+.ReadingNavbarProgress {
+  width: 100%;
+  height: 5px;
+
+  &__bar {
+    height: 5px;
+    background: var(--reading-navbar-progress);
+    border-radius: 2px;
+  }
+}

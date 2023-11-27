@@ -1,0 +1,48 @@
+.MainHeader {
+  width: 100%;
+  margin-top: 50px;
+  height: fit-content;
+  background: var(--bg-header);
+  padding: 12px 0;
+}
+
+.icon {
+  width: 70%;
+  height: 80px;
+  margin: 20px 0;
+  color: white !important;
+}
+
+.containerOfIput {
+  width: 50%;
+  height: 50px;
+  position: relative;
+  border-radius: 50px !important;
+  background-color: white;
+  margin-bottom: 12px;
+  .input {
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: rgb(120, 118, 118);
+  }
+
+  .buttons {
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    margin-right: 12px;
+  }
+}
+
+.text {
+  color: white;
+  margin-bottom: 12px;
+}
+
+.search {
+  font-size: 34px;
+  width: 5%;
+  margin-left: 12px;
+}

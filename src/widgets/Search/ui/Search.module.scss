@@ -1,0 +1,55 @@
+.wrapperListSearch {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  color: var(--color-text) !important;
+  width: 20px;
+  height: 20px;
+}
+
+.headerOfSidebar {
+  position: relative;
+  height: 50px;
+  padding: 6px 12px;
+  border-bottom: #27272731 0.1px solid;
+  margin-top: 10px;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background-color: var(--bg-widget);
+  outline: none;
+  padding: 6px;
+  font-size: 20px;
+  color: var(--color-text);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  margin: 4px 0;
+
+  cursor: pointer;
+
+}
+
+.mostSearchButtonWrapper {
+  margin: 12px 0;
+  padding: 0 12px;
+  flex-wrap: wrap;
+}
+
+.buttonMostSearch {
+  background-color: var(--color-text) !important;
+  color: var(--bg-widget) !important;
+}

@@ -1,0 +1,41 @@
+.OyatList {
+  margin: 20px 0;
+  width: var(--oyatList-width);
+  height: calc(100vh - 200px);
+  overflow-y: scroll;
+
+  &__item {
+    display: flex;
+    margin: 1px 0;
+    padding: 10px 13px;
+    border-radius: var(--suraList-item-border-radius);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--input-bg-color);
+    }
+  }
+
+  &__oyatNumber {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    font-family: var(--font-family-main);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+  }
+
+  p {
+    color: var(--color-text);
+  }
+
+  .active {
+    background: var(--input-bg-color);
+
+    p {
+      font-weight: 600;
+    }
+  }
+}

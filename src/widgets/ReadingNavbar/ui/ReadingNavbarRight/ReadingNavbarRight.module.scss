@@ -1,0 +1,10 @@
+.ReadingNavbarRgiht {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  p {
+    font-size: var(--font-size-m);
+    color: var(--color-text);
+  }
+}

@@ -1,0 +1,55 @@
+.oneItemSura {
+  width: 30%;
+  height: 74px;
+  display: flex;
+  border: var(--color-border-card) 1px solid;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+
+  @media screen and (max-width: 992px) {
+    width: 40%;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+  }
+  &:hover {
+    border: #258c91 1px solid;
+    p {
+      color: #258c91;
+    }
+    .wrapper {
+      background-color: #258c91;
+    }
+  }
+}
+
+.numberOfOyat {
+  font-family: 'Helvetica Neue';
+  color: var(--color-text);
+}
+
+.hovered {
+  transition: all 0.5s linear;
+  background-color: #258c91;
+  color: white;
+}
+
+.text {
+  font-size: 24px;
+  text-align: left;
+  color: var(--color-text) !important;
+}
+
+.skeleton {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  border-radius: 12px;
+}
+
+.arabic {
+  font-family: 'surah_names';
+  font-size: 32px;
+  color: var(--color-text);
+}

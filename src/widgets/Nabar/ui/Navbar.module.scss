@@ -1,0 +1,66 @@
+.nabar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-widget);
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  color: var(--color-text);
+}
+
+.wrapperTime {
+  font-size: 24px;
+  font-weight: bold;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+}
+
+.logo {
+  width: 150px;
+  margin: 0;
+  margin-top: 6px;
+  color: var(--color-text);
+  @media screen and (max-width: 484px) {
+    display: none;
+  }
+}
+
+.burger {
+  justify-content: start !important;
+  margin-left: 40px;
+  @media screen and (max-width: 992px) {
+    width: 50%;
+  }
+}
+
+.iconWrapper {
+  @media screen and (max-width: 992px) {
+    width: 50%;
+  }
+}
+
+.icon {
+  color: var(--color-text);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.timeOfArrabic,
+.time {
+  color: var(--color-text);
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

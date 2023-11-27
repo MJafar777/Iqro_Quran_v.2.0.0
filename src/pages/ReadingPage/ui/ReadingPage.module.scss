@@ -1,0 +1,14 @@
+.ReadingPage {
+  width: 100%;
+
+  &__readingContainer {
+    width: 100%;
+    padding-top: calc(var(--navbar-height) * 2);
+    transition: all 0.5s;
+  }
+
+  .fullWidth {
+    width: calc(100% - var(--sidebar-width));
+    transform: translateX(var(--sidebar-width));
+  }
+}

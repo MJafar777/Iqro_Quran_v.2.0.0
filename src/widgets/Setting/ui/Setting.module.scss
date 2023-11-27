@@ -1,0 +1,82 @@
+.setting {
+  padding: 0 12px;
+}
+
+.headerOfSidebar {
+  position: relative;
+  height: 50px;
+  margin-top: 20px;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: var(--border-line) 0.1px solid;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.titleOfHeader {
+  color: var(--color-text);
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.title {
+  color: var(--color-text);
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 18px 12px 6px 12px;
+}
+
+.buttonTheme {
+  padding: 6px 12px;
+  border: var(--border-line) 1px solid;
+}
+.button,
+.buttonTheme {
+  color: var(--color-text);
+}
+
+.changeFiontSize {
+  border-top: var(--border-line) solid 0.1px;
+  border-bottom: #272727 solid 0.1px;
+  padding-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 12px 6px 12px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--color-text);
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.wrapperSize {
+  color: black;
+}

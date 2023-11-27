@@ -5,37 +5,52 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { createReducerManager } from './reducerManager';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 
+import { selectedSuraReducer } from '@/entities/Surah';
+import { selectedOyatReducer } from '@/entities/Oyat';
+import { selectedPageReducer } from '@/entities/Page';
+import { SurahListSliceReducer } from '@/pages/MainPage';
+import { TimeDataReducer } from '@/widgets/Nabar';
+import { setSearchReducer } from '@/entities/Main';
+import { sliceTafsirReduce } from '@/pages/Tafsir';
+
 export function createReduxStore(
-    initialState?: StateSchema,
-    asyncReducers?: ReducersMapObject<StateSchema>,
+  initialState?: StateSchema,
+  asyncReducers?: ReducersMapObject<StateSchema>,
 ) {
-    const rootReducers: ReducersMapObject<StateSchema> = {
-        ...asyncReducers,
-        [rtkApi.reducerPath]: rtkApi.reducer,
-    };
+  const rootReducers: ReducersMapObject<StateSchema> = {
+    ...asyncReducers,
+    currentSura: selectedSuraReducer,
+    currentOyat: selectedOyatReducer,
+    currentPage: selectedPageReducer,
+    mainPage: SurahListSliceReducer,
+    timeData: TimeDataReducer,
+    search: setSearchReducer,
+    tafsirPage:sliceTafsirReduce,
+    [rtkApi.reducerPath]: rtkApi.reducer,
+  };
 
-    const reducerManager = createReducerManager(rootReducers);
+  const reducerManager = createReducerManager(rootReducers);
+  // @ts-ignore
+  const extraArg: ThunkExtraArg = {
+    api: $api,
+   
+  };
 
-    const extraArg: ThunkExtraArg = {
-        api: $api,
-    };
+  const store = configureStore({
+    reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
+    devTools: __IS_DEV__,
+    preloadedState: initialState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      thunk: {
+        extraArgument: extraArg,
+      },
+    }).concat(rtkApi.middleware),
+  });
 
-    const store = configureStore({
-        reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
-        devTools: __IS_DEV__,
-        preloadedState: initialState,
-        middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware({
-                thunk: {
-                    extraArgument: extraArg,
-                },
-            }).concat(rtkApi.middleware),
-    });
+  // @ts-ignore
+  store.reducerManager = reducerManager;
 
-    // @ts-ignore
-    store.reducerManager = reducerManager;
-
-    return store;
+  return store;
 }
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

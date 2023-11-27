@@ -1,0 +1,130 @@
+.footer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: var(--bg-color);
+}
+.title {
+  color: var(--color-text);
+  text-align: left;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.firstRowOfFooter {
+  color: var(--color-text);
+
+  width: 30%;
+  text-align: start;
+  margin: 0;
+  @media screen and (max-width: 992px) {
+    width: 70%;
+    padding: 0 30px;
+    margin-bottom: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    padding: 0 30px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+  }
+}
+
+.secondRowOfFooter {
+  color: var(--color-text);
+
+  @media screen and (max-width: 992px) {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 0 30px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 40%;
+    align-items: start;
+    margin: 0;
+    margin-bottom: 12px;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}
+
+.thirdRowOfFooter {
+  color: var(--color-text);
+
+  @media screen and (max-width: 992px) {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 0 30px;
+    order: 4;
+  }
+  @media screen and (max-width: 768px) {
+    width: 40%;
+    padding: 0 30px;
+    margin: 0;
+    align-items: start;
+    order: 3;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}
+
+.fourthRowOfFooter {
+  color: var(--color-text);
+
+  @media screen and (max-width: 992px) {
+    width: 70%;
+    margin-bottom: 20px;
+    padding: 0 30px;
+    order: 3;
+  }
+  @media screen and (max-width: 768px) {
+    width: 40%;
+    padding: 0 30px;
+    margin: 0;
+    order: 4;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  transition: all 0.3s linear;
+  font-family: sans-serif;
+
+  &:hover {
+    color: #2ca4ab;
+    text-decoration-line: underline;
+  }
+}
+
+.iconOfFooter {
+  color: var(--color-text);
+}
+
+.rights {
+  color: var(--color-text);
+}
