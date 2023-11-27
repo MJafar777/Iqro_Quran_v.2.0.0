@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cls from './OyatList.module.scss';
@@ -20,7 +20,7 @@ interface OyatListProps {
   className?: string;
 }
 
-const OyatList = ({ className }: OyatListProps) => {
+const OyatList = memo(({ className }: OyatListProps) => {
   const { t } = useTranslation();
   const selectedSura = useSelectedSuraValue();
   const isLoading = useSelector(getIsLoading);
@@ -137,6 +137,6 @@ const OyatList = ({ className }: OyatListProps) => {
       </div>
     </>
   );
-};
+});
 
 export default OyatList;

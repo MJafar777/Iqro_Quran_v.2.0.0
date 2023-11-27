@@ -26,6 +26,7 @@ export interface StateSchema {
 
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
+  readingArabicBook?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;
   readingTranslateLotin?: ReadingArabicSchema;
