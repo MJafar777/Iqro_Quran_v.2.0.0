@@ -11,7 +11,10 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { SelectedSuraSchema } from '@/entities/Surah';
 import { SelectedOyatSchema } from '@/entities/Oyat';
 import { SelectedPageSchema } from '@/entities/Page';
-import { ReadingArabicSchema } from '@/entities/ReadingArabic';
+import {
+  ReadingArabicSchema,
+  ReadngArabicTextSchema,
+} from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
@@ -25,7 +28,7 @@ export interface StateSchema {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
-  readingArabic?: ReadingArabicSchema;
+  readingArabic?: ReadngArabicTextSchema;
   readingArabicBook?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;
@@ -34,7 +37,7 @@ export interface StateSchema {
   mainPage: SurahListSchema;
   timeData: DataTimeScheme;
   search: SearchData;
-  tafsirPage:ReduxSchemeForTafsir
+  tafsirPage: ReduxSchemeForTafsir;
 }
 
 export type StateSchemaKey = keyof StateSchema;

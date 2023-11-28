@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { ReadingQuranData } from '../types/readingSura';
+import { ReadngArabicText } from '../types/readingArabicSchema';
 
 export const fetchReadingArabic = createAsyncThunk<
-  ReadingQuranData,
+  ReadngArabicText,
   { suraId: number; pageNumber: number; limitOfPage: number },
   ThunkConfig<string>
 >(
@@ -16,8 +16,8 @@ export const fetchReadingArabic = createAsyncThunk<
     }
 
     try {
-      const response = await extra.api.get<ReadingQuranData>(
-        `/verse/by_chapter/page/quran/?chapter=${suraId}&verses=false&page=${pageNumber}&limit=${limitOfPage}`,
+      const response = await extra.api.get<ReadngArabicText>(
+        `verse/by_chapter/chapter?chapter=${suraId}&page=${pageNumber}&per_page=${limitOfPage}`,
       );
 
       if (!response.data) {
