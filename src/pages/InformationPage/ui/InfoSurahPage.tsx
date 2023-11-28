@@ -16,7 +16,7 @@ import { makkah, madinah } from '@/shared/assets/SuraInfo';
 //   info: SurahInfoReducer,
 // };
 
-// Ushbu Page Sura haqida ma'lumot olish uchun qo'laniladi!
+// ----- Ushbu Page Sura haqida ma'lumot olish uchun qo'laniladi! -----
 const InfoSurahPage: FC = () => {
   const [isLoading, setIsloading] = useState(false);
   const { t, i18n } = useTranslation();
@@ -62,16 +62,22 @@ const InfoSurahPage: FC = () => {
         <hr />
 
         <div className={classNames(cls.MainText)}>
-          <img
-            src={
-              data[0]?.chapter_id?.revelation_place === 'makkah'
-                ? makkah
-                : madinah
-            }
-            alt="#"
-            width={300}
-            className={classNames(cls.imgLeft)}
-          />
+          {data[0]?.chapter_id?.revelation_place ? (
+            <img
+              src={
+                data[0]?.chapter_id?.revelation_place === 'makkah'
+                  ? makkah
+                  : data[0]?.chapter_id?.revelation_place === 'madinah'
+                  ? madinah
+                  : ''
+              }
+              alt="#"
+              width={300}
+              className={classNames(cls.imgLeft)}
+            />
+          ) : (
+            ''
+          )}
 
           {/* Sura info paragraph */}
           <p className={classNames(cls.Block)}>
