@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 //
 import { Loader } from '@/widgets/Loader';
 import cls from './InformationPage.module.scss';
-import { getInfoSurahs } from '../model/selectors/InfoSurah';
+import { getInfoSurahs, getIsLoading } from '../model/selectors/InfoSurah';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { fetchInfoSurah } from '../model/service/fetchInfoSurah/fetchInfoSurah';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -18,7 +18,6 @@ import { makkah, madinah } from '@/shared/assets/SuraInfo';
 
 // ----- Ushbu Page Sura haqida ma'lumot olish uchun qo'laniladi! -----
 const InfoSurahPage: FC = () => {
-  const [isLoading, setIsloading] = useState(false);
   const { t, i18n } = useTranslation();
 
   const param: { id?: string } = useParams();
@@ -26,12 +25,15 @@ const InfoSurahPage: FC = () => {
 
   const dispatch = useAppDispatch();
 
+  const data = useSelector(getInfoSurahs);
+  const isLoadings = useSelector(getIsLoading);
+  const [isLoading, setIsloading] = useState(isLoadings);
+  console.log(data);
+
   useEffect(() => {
     dispatch(fetchInfoSurah({ id }));
     setIsloading(true);
   }, [dispatch, id]);
-
-  const data = useSelector(getInfoSurahs);
 
   const content = (
     <Suspense fallback={<Loader />}>

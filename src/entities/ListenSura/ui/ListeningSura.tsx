@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useRef, useState } from 'react';
@@ -22,12 +23,41 @@ interface ListenerProp {
   index: number;
 }
 
+interface AudioInfo {
+  id: number;
+  src: string;
+  isPlaying: boolean;
+}
+
 const CardItem = (prop: ListenerProp) => {
+  const { info, index } = prop;
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const [audioList, setAudioList] = useState<AudioInfo[]>([
+    {
+      id: index,
+      src: `https://server12.mp3quran.net/maher/00${info.quran_order}.mp3`,
+      isPlaying: false,
+    },
+  ]);
+
   const [isPlaying, setIsPlaying] = useState(false);
-  const { info, index } = prop;
+  const [quranOrder, setQuranOrder] = useState<number | null>(null);
+
   const audio = audioRef.current;
+
+  const playAudio = (id: number) => {
+    const updatedAudioList = audioList.map((audio) => {
+      return {
+        ...audio,
+        isPlaying: audio.id === id ? !audio.isPlaying : false,
+      };
+    });
+
+    setAudioList(updatedAudioList);
+    setQuranOrder(info.quran_order);
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <div className={cls.CardsItems}>
@@ -44,11 +74,15 @@ const CardItem = (prop: ListenerProp) => {
       <div className={cls.RightItems}>
         <button
           onClick={() => {
-            // if (audio && index + 1 === info.quran_order) {
-            //   audio.play();
-            // } else if (audio) {
-            //   audio.pause();
-            // }
+            playAudio(info.quran_order);
+            if (audio && quranOrder === info.quran_order) {
+              audio.play();
+            } else if (audio && quranOrder !== info.quran_order) {
+              audio.pause();
+            }
+            setQuranOrder(
+              quranOrder !== info.quran_order ? info.quran_order : quranOrder,
+            );
             setIsPlaying(!isPlaying);
           }}
           className={cls.Button}
@@ -60,13 +94,13 @@ const CardItem = (prop: ListenerProp) => {
             <Play style={{ fontSize: '22px' }} />
           )}
         </button>
-
-        {isPlaying && (
+        {isPlaying && quranOrder === info.quran_order && (
           <audio
             style={{ overflow: 'hidden', display: 'none' }}
+            id={`audio-${audioList[0].id}`}
             autoPlay
             ref={audioRef}
-            src={`https://server12.mp3quran.net/maher/00${info.quran_order}.mp3`}
+            src={audioList[0].src}
             controls
           />
         )}
@@ -98,7 +132,7 @@ const ListeningSura = () => {
   return (
     <div className={cls.ListenSuraWrapper}>
       {listOfSurah?.map((surah: OneSuraInListSchema, index) => (
-        <CardItem info={surah} index={index} />
+        <CardItem key={index + 1} info={surah} index={index} />
       ))}
     </div>
   );

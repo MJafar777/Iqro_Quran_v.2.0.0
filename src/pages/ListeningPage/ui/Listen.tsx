@@ -18,7 +18,7 @@ const ListenParent = () => {
       style={{
         maxWidth: '1366px',
         margin: '60px auto',
-        backgroundColor: '#fff',
+        backgroundColor: 'var(--bg-widget)',
         borderRadius: '8px',
         overflow: 'hidden',
         WebkitBoxShadow: '4px 4px 19px 0px rgba(34, 60, 80, 0.1)',
