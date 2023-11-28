@@ -36,15 +36,15 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
             return (
               <OneItemSurah
                 title={
-                  oneSurah?.translated_names?.filter(
-                    (lang) => lang?.lang_id?.iso_code === i18n?.language,
+                  oneSurah.translated_names.filter(
+                    (lang) => lang.lang_id.iso_code === i18n.language,
                   )[0]?.name
                 }
                 key={index}
                 oneSurah={oneSurah}
-                numberOfOyat={oneSurah?.count_verse}
-                orderOfSura={oneSurah?.quran_order}
-                arabic={`00${oneSurah?.quran_order}`}
+                numberOfOyat={oneSurah.count_verse}
+                orderOfSura={oneSurah.quran_order}
+                arabic={`00${oneSurah.quran_order}`}
                 className={classNames(cls.oneSurah)}
               />
             );

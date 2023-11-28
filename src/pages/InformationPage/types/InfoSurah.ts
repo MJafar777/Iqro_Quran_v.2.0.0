@@ -40,7 +40,7 @@ export interface ChapterData {
   telegram_file_id: string;
   translated_names: [];
   audio: [];
-  chapter_info: [];
+  chapter_id: [];
   id: string;
   number: number;
 }
@@ -57,7 +57,7 @@ export interface InformationPageSurah {
   currentPage: {};
   currentSura: {};
   mainPage: {};
-  readingTranslateKril: ReadingTranslateKril;
+  info: ReadingTranslateKril;
   search: {};
   timeData: {};
 }

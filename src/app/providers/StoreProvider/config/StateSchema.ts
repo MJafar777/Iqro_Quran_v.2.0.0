@@ -16,6 +16,7 @@ import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
 import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { SurahInfoSchema } from '@/pages/InformationPage';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -34,6 +35,7 @@ export interface StateSchema {
   timeData: DataTimeScheme;
   search: SearchData;
   tafsirPage: ReduxSchemeForTafsir;
+  info:SurahInfoSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

@@ -77,7 +77,10 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
     return (
       <HStack max align="center">
         <HStack style={{ width: '60%' }} align="center" justify="start">
-          <OrderWrapper className={classNames(cls.wrapper)} orderOfOyat={orderOfSura} />
+          <OrderWrapper
+            className={classNames(cls.wrapper)}
+            orderOfOyat={orderOfSura}
+          />
           <VStack style={{ margin: 0 }}>
             <p className={cls.text}>{title}</p>
             <p className={cls.numberOfOyat}>
