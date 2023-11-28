@@ -8,7 +8,7 @@ const initialState: ReduxSchemeForTafsir = {
   isLoading: false,
   data: [],
   error: undefined,
-  loadedFontFaces:['p1-v1']
+  loadedFontFaces: ['p1-v1'],
 };
 
 const sliceTafsir = createSlice({
@@ -48,5 +48,4 @@ const sliceTafsir = createSlice({
 
 export const { reducer: sliceTafsirReduce } = sliceTafsir;
 export const { actions: slicerTafserAction } = sliceTafsir;
-export const {addLoadedFontFace}=sliceTafsir.actions
-
+export const { addLoadedFontFace } = sliceTafsir.actions;

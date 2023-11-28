@@ -11,6 +11,13 @@ export interface ButtonsClickedProps {
   setFontSize: (pro: number) => void;
   readingPageTubBtn: number;
   setReadingPageTubBtn: (activeBtn: number) => void;
+
+  setIsPlay: (prop: boolean) => void;
+  isPlay: boolean;
+  setVerseNumber: (prop: string) => void;
+  verseNumber: string;
+  setAudioUrl: (prop: string) => void;
+  audioUrl: string;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -24,4 +31,10 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setFontSize: () => {},
   readingPageTubBtn: 1,
   setReadingPageTubBtn: () => {},
+  setIsPlay: (prop: boolean) => {},
+  isPlay: false,
+  setVerseNumber: () => {},
+  verseNumber: '1',
+  setAudioUrl: () => {},
+  audioUrl: '',
 });

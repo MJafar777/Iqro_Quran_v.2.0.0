@@ -9,6 +9,9 @@ interface IconsOfTafsirProp {
 
 export const IconsOfTafsir = memo((prop: IconsOfTafsirProp) => {
   const { verse } = prop;
+
+  // console.log(verse, 'ver');
+
   return (
     <div className={cls.iconsOfTafsir}>
       <p className={cls.verse}>{verse || '1:1'}</p>
