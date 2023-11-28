@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { BackendResForTafsir } from '../../types/typeTafsir';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 
@@ -12,15 +13,24 @@ export const fetchTafsirList = createAsyncThunk<
   ThunkConfig<string> // ThunkConfig type
 >(
   'tafsirpage/listOfTafsir', // Action type
-  async (prop, thunk) => {
-    const { extra, rejectWithValue } = thunk;
+  async (prop, thunkApi) => {
+    const { extra, rejectWithValue } = thunkApi;
     const { chapterId } = prop;
 
+    if (!chapterId) throw new Error('');
+
     try {
-      const response = await (extra.get(`/verse/by_chapter/chapter?chapter=${chapterId}`) as Promise<MyApiResponse>)
+      const response = await (axios.get(
+        `http://iqro-quran.uz/developmentBackend/api/v2/verse/by_chapter/chapter?chapter=${chapterId}`,
+      ) as Promise<MyApiResponse>);
+
+      if (!response.data) {
+        throw new Error();
+      }
+
       return response.data; // TypeScript should now recognize the type
     } catch (error) {
       return rejectWithValue('Failed to fetch tafsir list');
     }
-  }
+  },
 );

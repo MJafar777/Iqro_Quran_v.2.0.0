@@ -6,7 +6,7 @@ import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface SidebarProps {
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Sidebar = memo(({ className, children }: SidebarProps) => {
@@ -24,6 +24,7 @@ export const Sidebar = memo(({ className, children }: SidebarProps) => {
     >
       {readingSidebarActive ? (
         <CloseIcon
+          data-testid="sidebar-toggle"
           className={cls.closeBtn}
           onClick={() =>
             setReadingSidebarActive && setReadingSidebarActive(false)
