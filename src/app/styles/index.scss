@@ -3,7 +3,13 @@
 @import 'themes/normal';
 @import 'themes/dark';
 @import 'themes/orange';
-  @font-face {
+@import 'fonts';
+@import '_breakpoints';
+@import '_constants';
+@import '_shades';
+@import '_utility';
+
+@font-face {
   font-family: 'Helvetica Neue';
   src: url('../../shared/assets/font/HelveticaNeue/HelveticaNeueCyr-Italic.ttf')
   format('truetype');
