@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './Tafsir.module.scss';
 import {
@@ -28,12 +29,43 @@ const Tafsir = (prop: TafsirProp) => {
 
   const dispatch = useAppDispatch();
   const surahId = useSelector(getSelectedSura);
+  const [page, setPage] = useState(1);
+
+  const handleScroll = () => {
+    console.log(
+      window.innerHeight,
+      document.documentElement.scrollTop,
+      document.documentElement.offsetHeight,
+    );
+
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 100 >=
+      document.documentElement.offsetHeight
+    ) {
+      setPage((pro) => pro + 1);
+      dispatch(
+        fetchTafsirList({
+          chapterId: surahId.quran_order,
+          page_number: page + 1,
+        }),
+      ); // Assuming 10 items per page
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
 
   useEffect(() => {
     if (dataOfTafsir && !dataOfTafsir[surahId.quran_order])
-      dispatch(fetchTafsirList({ chapterId: surahId.quran_order }));
+      dispatch(
+        fetchTafsirList({ chapterId: surahId.quran_order, page_number: 1 }),
+      );
   }, [dataOfTafsir, dispatch, surahId]);
-
 
   const content = useMemo(
     () => (

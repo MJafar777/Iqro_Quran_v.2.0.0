@@ -5,13 +5,9 @@ import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
 import { TafsirChapterData, isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
-import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
+// import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
 import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
-// import 'react-virtualized/styles.css';
-// import {Column, Table} from 'react-virtualized';
-// import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
-// import List from 'react-virtualized/dist/commonjs/List';
 
 interface ListOfTafsirProp {
   className?: string;
@@ -50,9 +46,9 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
         return <OneTafsirCard data={oneVerse} />;
       })}
 
-      <AudioPlayerComp
+      {/* <AudioPlayerComp
         src={`http://iqro-quran.uz/developmentBackend/suras/${quran_order}.mp3`}
-      />
+      /> */}
     </div>
   );
   return content;
