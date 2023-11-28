@@ -1,91 +1,92 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { FC, Suspense, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-import { useSelector } from 'react-redux';
+//
 import { Loader } from '@/widgets/Loader';
 import cls from './InformationPage.module.scss';
 import { getInfoSurahs } from '../model/selectors/InfoSurah';
-import { SurahInfoReducer } from '../model/slice/sliceSuraInfo';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { fetchInfoSurah } from '../model/service/fetchInfoSurah/fetchInfoSurah';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+//
+import { makkah, madinah } from '@/shared/assets/SuraInfo';
 
-import {
-  ReducersList,
-  DynamicModuleLoader,
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+// const reducer: ReducersList = {
+//   info: SurahInfoReducer,
+// };
 
-const reducer: ReducersList = {
-  info: SurahInfoReducer,
-};
-
-const InfoSurahPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const param: any = useParams();
+// Ushbu Page Sura haqida ma'lumot olish uchun qo'laniladi!
+const InfoSurahPage: FC = () => {
+  const [isLoading, setIsloading] = useState(false);
   const { t, i18n } = useTranslation();
-  const id = param?.id;
-  const dispatch = useAppDispatch();
-  // const data = useSelector((state: InformationPageSurah) => {
-  //   return state?.readingTranslateKril.data[3].data.data[0];
-  // });
 
-  const datas = useSelector(getInfoSurahs);
-  const data = datas.data[i18n.language === 'uz' ? 0 : 1].chapter_id;
+  const param: { id?: string } = useParams();
+  const id = Number(param?.id);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchInfoSurah({ id }));
+    setIsloading(true);
   }, [dispatch, id]);
 
+  const data = useSelector(getInfoSurahs);
+
   const content = (
-    <div style={{ marginTop: '30px', padding: '20px' }}>
-      <Suspense fallback={<Loader />}>
-        <div>
-          <div className={classNames(cls.TitleData)}>
-            {/* Sura nomi */}
-            <div className={classNames(cls.DataName)}>
-              {i18n.language === 'uz' ? 'Sura nomi' : 'Сура номи'}:{' '}
-              {/* {i18n.language === 'uz'
-                ? data?.translated_names[1].name
-                : data?.translated_names[3].name} */}
-            </div>
-            {/* Oyatlar soni */}
-            <div className={classNames(cls.Data)}>
-              {i18n.language === 'uz' ? 'Oyatlar soni' : 'Оятлар сони'}:{' '}
-              {/* {data.count_verse} */}
-            </div>
-            {/* Vahiy joyi */}
-            <div className={classNames(cls.Data)}>
-              {i18n.language === 'uz' ? 'Vahiy joyi' : 'Ваҳий жойи'}:{' '}
-              {/* {t(data.revelation_place)} */}
-            </div>
+    <Suspense fallback={<Loader />}>
+      <div style={{ marginTop: '30px', padding: '20px' }}>
+        <div className={classNames(cls.TitleData)}>
+          {/* Sura nomi */}
+
+          <div className={classNames(cls.DataName)}>
+            {i18n.language === 'uz' ? 'Sura nomi' : 'Сура номи'}:{' '}
+            {i18n.language === 'uz'
+              ? data[0]?.chapter_id?.translated_names[1]?.name
+              : data[0]?.chapter_id?.translated_names[3].name}
           </div>
 
-          <hr />
+          {/* Oyatlar soni */}
+          <div className={classNames(cls.Data)}>
+            {i18n.language === 'uz' ? 'Oyatlar soni' : 'Оятлар сони'}:{' '}
+            {data[0]?.chapter_id?.count_verse}
+          </div>
 
-          <div className={classNames(cls.MainText)}>
-            <img
-              // src={data?.revelation_place === 'makkah' ? makkah : madinah}
-              width={300}
-              className={classNames(cls.imgLeft)}
-              alt="#"
-            />
-
-            {/* Sura info paragraph */}
-            <p className={classNames(cls.Block)}>
-              {/* {i18n.language === 'uz'
-                ? data.chapter_info[0].text
-                : data.chapter_info[1].text} */}
-            </p>
+          {/* Vahiy joyi */}
+          <div className={classNames(cls.Data)}>
+            {i18n.language === 'uz' ? 'Vahiy joyi' : 'Ваҳий жойи'}:{' '}
+            {t(data[0]?.chapter_id?.revelation_place)}
           </div>
         </div>
-      </Suspense>
-    </div>
+
+        <hr />
+
+        <div className={classNames(cls.MainText)}>
+          <img
+            src={
+              data[0]?.chapter_id?.revelation_place === 'makkah'
+                ? makkah
+                : madinah
+            }
+            alt="#"
+            width={300}
+            className={classNames(cls.imgLeft)}
+          />
+
+          {/* Sura info paragraph */}
+          <p className={classNames(cls.Block)}>
+            {i18n.language === 'uz' ? data[0].text : data[1].text}
+          </p>
+        </div>
+      </div>
+    </Suspense>
   );
 
-  <DynamicModuleLoader reducers={reducer}>
-    <div>{content}</div>
-  </DynamicModuleLoader>;
+  // <DynamicModuleLoader reducers={reducer}>
+  //   <div>{isLoading ? content : <Loader />}</div>
+  // </DynamicModuleLoader>;
+
+  return isLoading ? <div>{content}</div> : <Loader />;
 };
 
 export default InfoSurahPage;

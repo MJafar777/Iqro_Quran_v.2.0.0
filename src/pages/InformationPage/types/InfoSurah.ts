@@ -1,3 +1,5 @@
+import { ReactI18NextChild } from 'react-i18next';
+
 export interface Infor {
   audio: [];
   bismillah_pre: boolean;
@@ -24,7 +26,18 @@ export interface ChapterDataInData {
   };
 }
 
+interface Translated_names {
+  name: string;
+}
+
+interface Chapter_Id {
+  revelation_place: string;
+  count_verse: number | string;
+  translated_names: Translated_names[];
+}
+
 export interface ChapterData {
+  text: ReactI18NextChild | Iterable<ReactI18NextChild>;
   data: ChapterDataInData;
   _id: string;
   revelation_place: string;
@@ -40,7 +53,7 @@ export interface ChapterData {
   telegram_file_id: string;
   translated_names: [];
   audio: [];
-  chapter_id: [];
+  chapter_id: Chapter_Id;
   id: string;
   number: number;
 }
