@@ -10,11 +10,8 @@ interface OneTafsirCardProp {
 
 export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
   const { data } = prop;
-  console.log(data?.verse_key);
 
   const [fontLoaded, setFontLoaded] = useState(false);
-
-  console.log(data?.page_number, 'fsfs');
 
   useEffect(() => {
     const fontPromise = document.fonts.load(`16px "p${data?.page_number}-v1"`);
@@ -27,6 +24,7 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         // console.log("Done");
       });
   }, [data?.page_number]);
+  console.log(data?.page_number);
 
   return (
     <div className={cls.oneTafsirCard}>
@@ -36,6 +34,7 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         words={data?.words || []}
         text={data?.tafsir[0].more_text}
         arab={data?.text}
+        page_number={data?.page_number || 1}
       />
     </div>
   );
