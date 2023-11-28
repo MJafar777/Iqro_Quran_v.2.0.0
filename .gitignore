@@ -6,4 +6,5 @@ node_modules
 .loki/report.json
 /reports/unit
 package-lock.json
+public
 quran

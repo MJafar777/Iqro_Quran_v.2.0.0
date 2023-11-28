@@ -7,7 +7,6 @@ import ListeningSwtichButton from '@/shared/ui/ListeningSwitchButton/ListeningSw
 
 const ListenParent = () => {
   const [pageSuraOrJuz, setPageSuraOrJuz] = useState(true);
-  console.log(pageSuraOrJuz);
 
   return (
     <div

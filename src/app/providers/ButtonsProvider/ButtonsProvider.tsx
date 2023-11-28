@@ -18,6 +18,12 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [fontSize, setFontSize] = useState(3);
 
+  const [audioUrl, setAudioUrl] = useState('');
+
+  const [verseNumber, setVerseNumber] = useState('1');
+
+  const [isPlay, setIsPlay] = useState(false);
+
   const [readingPageTubBtn, setReadingPageTubBtn] = useState(1);
 
   const defaultProps = useMemo(
@@ -32,14 +38,22 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setFontSize,
       readingPageTubBtn,
       setReadingPageTubBtn,
+      isPlay,
+      setIsPlay,
+      audioUrl,
+      setAudioUrl,
+      verseNumber,
+      setVerseNumber,
     }),
     [
-      fontSize,
-      isRightsidebarActive,
-      isSidebarActive,
       readingSidebarActive,
+      isSidebarActive,
+      isRightsidebarActive,
+      fontSize,
       readingPageTubBtn,
-      setReadingPageTubBtn,
+      isPlay,
+      audioUrl,
+      verseNumber,
     ],
   );
 
