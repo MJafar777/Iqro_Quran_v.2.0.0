@@ -137,6 +137,7 @@ export interface Word {
   word: string;
   word_index: number;
   arab: string;
+  code_v2: string;
 }
 export interface Verse {
   data: any;
@@ -220,7 +221,6 @@ export interface DataFromLocalHook {
   isLoading: boolean;
   isSuccess: boolean;
 }
-
 
 export enum WordByWordType {
   Translation = 'translation',

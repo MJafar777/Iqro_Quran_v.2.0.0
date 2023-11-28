@@ -7,17 +7,22 @@ interface ContentOfTafsirProp {
   arab?: string;
   text?: string;
   words: Word[];
-  page_number:number;
+  page_number: number;
 }
 
 export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
-  const { arab, text, words ,page_number} = prop;
+  const { arab, text, words, page_number } = prop;
 
   return (
     <div className={cls.content}>
       <p className={cls.arab}>
         {words?.map((word) => {
-          return <span style={{fontFamily:`p${page_number}-v1`}}>{" "}{word.arab}</span>;
+          return (
+            <span style={{ fontFamily: `p${page_number}-v1` }}>
+              {' '}
+              {word.code_v2}
+            </span>
+          );
         })}
       </p>
       <p className={cls.text}>{text}</p>

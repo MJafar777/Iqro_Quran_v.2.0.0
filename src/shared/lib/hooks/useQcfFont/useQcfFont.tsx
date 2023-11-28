@@ -32,6 +32,7 @@ const useQcfFont = (verses: OneVerseTafsirScheme[]) => {
           !loadedFonts.includes(fontFaceName) &&
           !currentlyFetchingFonts.current.includes(fontFaceName)
         ) {
+          fontFace.display = 'block';
           currentlyFetchingFonts.current.push(fontFaceName);
 
           fontFace
