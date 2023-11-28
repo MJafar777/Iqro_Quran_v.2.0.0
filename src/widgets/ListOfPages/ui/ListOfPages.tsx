@@ -33,7 +33,6 @@ const listOfPage = [
     icon: <Book />,
   },
   { path: '/about', title: 'Biz haqimizda  ', icon: <Info /> },
-  { path: '/transcription', title: 'Transkripsiya', icon: <Book /> },
 ];
 
 export const ListOfPages = memo(() => {
