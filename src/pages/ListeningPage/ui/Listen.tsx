@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ListeningJuz } from '../../../entities/ListenJuz';
 import { ListeningSura } from '../../../entities/ListenSura';
 import ListeningSwtichButton from '@/shared/ui/ListeningSwitchButton/ListeningSwtichButton';
+import { Loader } from '@/widgets/Loader';
 
 const ListenParent = () => {
   const [pageSuraOrJuz, setPageSuraOrJuz] = useState(true);
@@ -42,7 +43,7 @@ const ListenParent = () => {
         />
       </div>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         {pageSuraOrJuz ? <ListeningSura /> : <ListeningJuz />}
       </Suspense>
       <hr />

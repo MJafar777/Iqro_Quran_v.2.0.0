@@ -15,6 +15,8 @@ import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
+// import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { SurahInfoSchema } from '@/pages/InformationPage';
 import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
 
 export interface StateSchema {
@@ -26,6 +28,7 @@ export interface StateSchema {
 
   // Asynchronous reducers
   readingArabic?: ReadingArabicSchema;
+  readingArabicBook?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;
   readingTranslateLotin?: ReadingArabicSchema;
@@ -34,6 +37,7 @@ export interface StateSchema {
   timeData: DataTimeScheme;
   search: SearchData;
   tafsirPage: ReduxSchemeForTafsir;
+  info: SurahInfoSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

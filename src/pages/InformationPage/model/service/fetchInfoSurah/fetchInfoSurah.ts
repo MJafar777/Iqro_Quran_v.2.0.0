@@ -4,14 +4,14 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 
 export const fetchInfoSurah = createAsyncThunk<
   SurahInfoOfBackend,
-  {},
+  { id: number },
   ThunkConfig<string>
 >('mainPage/surahList', async (prop, thunkApi) => {
   const { extra, rejectWithValue } = thunkApi;
-
+  const { id } = prop;
   try {
     const response = await extra.api.get<SurahInfoOfBackend>(
-      `/chapter/info/${1}`,
+      `/chapter/info/${id}`,
     );
 
     if (!response.data) {

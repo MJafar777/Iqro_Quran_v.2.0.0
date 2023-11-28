@@ -5,16 +5,13 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface AudioPlayerCompInterface {
   className?: string;
+  src?: string;
 }
 
-const AudioPlayerComp = ({ className }: AudioPlayerCompInterface) => {
+const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
   return (
     <div className={classNames(cls.AudioPlayerComp, {}, [className])}>
-      <AudioPlayer
-        autoPlay
-        src="http://example.com/audio.mp3"
-        onPlay={(e) => console.log('onPlay')}
-      />
+      <AudioPlayer autoPlay src={src} onPlay={(e) => console.log('onPlay')} />
     </div>
   );
 };

@@ -28,10 +28,13 @@
 
   "Sura": "Sura",
   "Juz": "Juz",
-  
+
   "searchSura": "Sura qidirish",
   "oyat": "Oyat",
   "page": "Sahifa",
   "nextSura": "Keyingi sura",
-  "prevSura": "Oldingi sura"
+  "prevSura": "Oldingi sura",
+
+  "makkah": "makkah",
+  "madinah": "madinah"
 }
