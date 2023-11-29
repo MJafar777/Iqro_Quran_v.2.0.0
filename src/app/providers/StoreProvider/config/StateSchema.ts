@@ -13,7 +13,7 @@ import { SelectedOyatSchema } from '@/entities/Oyat';
 import { SelectedPageSchema } from '@/entities/Page';
 import {
   ReadingArabicSchema,
-  ReadngArabicTextSchema,
+  ReadingArabicTextSchema,
 } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
@@ -28,7 +28,7 @@ export interface StateSchema {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
-  readingArabic?: ReadngArabicTextSchema;
+  readingArabic?: ReadingArabicTextSchema;
   readingArabicBook?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;

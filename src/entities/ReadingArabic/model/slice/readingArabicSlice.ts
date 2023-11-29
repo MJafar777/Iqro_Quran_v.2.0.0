@@ -1,20 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  ReadngArabicText,
-  ReadngArabicTextSchema,
-} from '../types/readingArabicSchema';
+import { ReadingArabicTextSchema } from '../types/readingArabicSchema';
 import { fetchReadingArabic } from '../services/fetchReadingArabic';
+import { QuranDataText } from '../types/readingSura';
 
-const initialState: ReadngArabicTextSchema = {
+const initialState: ReadingArabicTextSchema = {
   isLoading: false,
   error: undefined,
   data: undefined,
+  loadedFontFaces: [],
 };
 
 export const readingArabicSlice = createSlice({
   name: 'Reading Arabic',
   initialState,
-  reducers: {},
+  reducers: {
+    addLoadedFontFaceReadingArabic: (state, action: PayloadAction<string>) => {
+      state.loadedFontFaces.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchReadingArabic.pending, (state) => {
@@ -23,9 +26,15 @@ export const readingArabicSlice = createSlice({
       })
       .addCase(
         fetchReadingArabic.fulfilled,
-        (state, action: PayloadAction<ReadngArabicText>) => {
+        (state, action: PayloadAction<QuranDataText>) => {
           state.isLoading = false;
-          state.data = action.payload;
+
+          if (!state.data) state.data = {};
+
+          state.data[action.payload.data[0]?.chapter_id.quran_order] = {
+            quran_order: action.payload.data[0]?.chapter_id.quran_order,
+            data: action.payload,
+          };
         },
       )
       .addCase(fetchReadingArabic.rejected, (state, action) => {
@@ -37,3 +46,4 @@ export const readingArabicSlice = createSlice({
 
 export const { actions: readingArabicActions } = readingArabicSlice;
 export const { reducer: readingArabicReducer } = readingArabicSlice;
+export const { addLoadedFontFaceReadingArabic } = readingArabicSlice.actions;

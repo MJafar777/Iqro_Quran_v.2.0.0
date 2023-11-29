@@ -8,7 +8,7 @@ const initialState: ReduxSchemeForTafsir = {
   isLoading: false,
   data: [],
   error: undefined,
-  loadedFontFaces: ['p1-v1'],
+  loadedFontFaces: [],
 };
 
 const sliceTafsir = createSlice({

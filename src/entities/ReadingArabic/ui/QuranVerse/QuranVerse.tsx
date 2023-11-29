@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import cls from './QuranVerse.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Chapter, Word } from '../../model/types/readingArabicSchema';
 import VerseWords from '../VerseWords/VerseWords';
+import { Verse, Word } from '../../model/types/readingSura';
+import useQcfFontRead from '../../../../shared/lib/hooks/useQcfFontRead/useQcfFontRead';
 
 interface QuranVerseProps {
   className?: string;
-  verseData: Chapter[];
+  verseData: Verse[];
 }
 
 interface rowType {
@@ -32,8 +33,10 @@ const QuranVerse = memo(({ className, verseData }: QuranVerseProps) => {
     15: [],
   };
 
-  verseData.forEach((verse) => {
-    verse.words.forEach((word) => {
+  useQcfFontRead(verseData);
+
+  verseData?.forEach((verse) => {
+    verse.words?.forEach((word) => {
       rows[word.line_number].unshift(word);
     });
   });

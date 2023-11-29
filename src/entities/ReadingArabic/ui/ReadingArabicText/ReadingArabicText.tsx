@@ -20,7 +20,7 @@ import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranVerse from '../QuranVerse/QuranVerse';
-// import { WordInfo } from '../model/types/readingArabicSchema';
+// import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
 
 interface ReadingArabicProps {
   className?: string;
@@ -78,7 +78,9 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       return <BookBoxSkeleton />;
     }
     if (data) {
-      return <QuranVerse verseData={data.data} />;
+      return (
+        <QuranVerse verseData={data[currentSura?.quran_order]?.data?.data} />
+      );
       // eslint-disable-next-line no-else-return
     } else if (isError) {
       return (
@@ -87,7 +89,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     } else {
       return null;
     }
-  }, [isLoading, data, isError]);
+  }, [isLoading, data, isError, currentSura?.quran_order]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
