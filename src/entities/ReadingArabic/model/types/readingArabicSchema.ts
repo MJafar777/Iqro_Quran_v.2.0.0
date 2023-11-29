@@ -49,6 +49,7 @@ interface Tafsir {
 }
 
 export interface Chapter {
+  forEach(arg0: (word: any) => void): unknown;
   map(arg0: (word: any) => void): unknown;
   _id: string;
   chapter_id: {

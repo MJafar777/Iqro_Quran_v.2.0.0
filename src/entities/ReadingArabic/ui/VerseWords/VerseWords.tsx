@@ -11,11 +11,9 @@ interface QuranWordsProps {
 
 const QuranWords = memo(({ className, WordsInfo }: QuranWordsProps) => {
   return (
-    <div className={classNames(cls.QuranWords, {}, [className])}>
+    <div className={classNames(cls.QuranWords, {}, [])}>
       {WordsInfo
-        ? WordsInfo.map((word) => {
-            return <VerseWord key={word._id} Word={word} />;
-          })
+        ? WordsInfo.map((word) => <VerseWord key={word._id} Word={word} />)
         : ''}
     </div>
   );

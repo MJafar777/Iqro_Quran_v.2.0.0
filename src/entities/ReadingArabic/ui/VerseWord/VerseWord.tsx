@@ -13,10 +13,10 @@ const QuranWord = memo(({ className, Word }: QuranWordsProp) => {
     <div className={classNames(cls.QuranWord, {}, [className])}>
       {Word ? (
         <div
-          className={classNames(cls.QuranWordText, {}, [className])}
+          className={classNames(cls.QuranWord__text, {}, [className])}
           style={{ fontSize: '40px' }}
         >
-          {Word.text_uthmani}
+          {Word.arab}
         </div>
       ) : (
         ''

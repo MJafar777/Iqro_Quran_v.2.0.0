@@ -1,3 +1,5 @@
-.QuranWordText {
-  font-family: 'UthmanicHafs';
+.QuranWord {
+  &__text {
+    font-family: 'UthmanicHafs';
+  }
 }
