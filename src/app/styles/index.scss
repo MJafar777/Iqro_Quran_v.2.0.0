@@ -26,15 +26,15 @@
   src: url('../../shared/assets/font/surah_name/p1.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'UthmanicHafs';
-  src: local('KFGQPC HAFS Uthmanic Script'),
-    url('../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2')
-      format('woff2'),
-    url('../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf')
-      format('truetype');
-  font-display: swap;
-}
+// @font-face {
+//   font-family: 'UthmanicHafs';
+//   src: local('KFGQPC HAFS Uthmanic Script'),
+//     url('../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2')
+//       format('woff2'),
+//     url('../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf')
+//       format('truetype');
+//   font-display: swap;
+// }
 
 // USAGE
 body {

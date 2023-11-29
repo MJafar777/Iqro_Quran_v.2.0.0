@@ -15,6 +15,8 @@ import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { getSelectedSura } from '@/entities/Surah';
+import { Page } from '@/widgets/Page';
+import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface TafsirProp {
   className?: string;
@@ -31,45 +33,39 @@ const Tafsir = (prop: TafsirProp) => {
   const surahId = useSelector(getSelectedSura);
   const [page, setPage] = useState(1);
 
-  const handleScroll = () => {
-    console.log(
-      window.innerHeight,
-      document.documentElement.scrollTop,
-      document.documentElement.offsetHeight,
-    );
-
-    if (
-      window.innerHeight + document.documentElement.scrollTop + 100 >=
-      document.documentElement.offsetHeight
-    ) {
-      setPage((pro) => pro + 1);
-      dispatch(
-        fetchTafsirList({
-          chapterId: surahId.quran_order,
-          page_number: page + 1,
-        }),
-      ); // Assuming 10 items per page
-    }
-  };
+  useEffect(() => {
+    setPage(1);
+  }, [surahId.quran_order]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
+    dispatch(
+      fetchTafsirList({
+        chapterId: surahId.quran_order,
+        page_number: page,
+      }),
+    );
+  }, [page]);
 
   useEffect(() => {
     if (dataOfTafsir && !dataOfTafsir[surahId.quran_order])
       dispatch(
-        fetchTafsirList({ chapterId: surahId.quran_order, page_number: 1 }),
+        fetchTafsirList({ chapterId: surahId.quran_order, page_number: page }),
       );
   }, [dataOfTafsir, dispatch, surahId]);
 
+  const onLoadNextPart = () => {
+    setPage((pre) => pre + 1);
+    console.log(page, 'page');
+  };
+
   const content = useMemo(
     () => (
-      <div className={cls.tafsir}>
+      <Page
+        data-testid="ArticlesPage"
+        onScrollEnd={onLoadNextPart}
+        className={classNames(cls.tafsir, {}, [])}
+      >
+        {/* <div className={cls.tafsir}> */}
         <ReadingNavbar />
         <Sidebar>
           <ReadingSidebar />
@@ -79,7 +75,8 @@ const Tafsir = (prop: TafsirProp) => {
           listOfTafsir={dataOfTafsir?.[surahId?.quran_order]}
           quran_order={surahId.quran_order}
         />
-      </div>
+        {/* </div> */}
+      </Page>
     ),
     [dataOfTafsir, surahId?.quran_order],
   );

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { memo, useEffect, useState } from 'react';
 import cls from './OneTafsirCard.module.scss';
 import { IconsOfTafsir } from '@/shared/ui/IconsOfTafsir';
@@ -24,7 +25,6 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         // console.log("Done");
       });
   }, [data?.page_number]);
-  console.log(data?.page_number);
 
   return (
     <div className={cls.oneTafsirCard}>

@@ -16,12 +16,14 @@ import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
 import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { UISchema } from '@/shared/lib/features/UI';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
   currentOyat: SelectedOyatSchema;
   currentPage: SelectedPageSchema;
 
+  ui: UISchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
@@ -34,7 +36,7 @@ export interface StateSchema {
   mainPage: SurahListSchema;
   timeData: DataTimeScheme;
   search: SearchData;
-  tafsirPage:ReduxSchemeForTafsir
+  tafsirPage: ReduxSchemeForTafsir;
 }
 
 export type StateSchemaKey = keyof StateSchema;

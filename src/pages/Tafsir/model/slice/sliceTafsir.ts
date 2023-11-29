@@ -1,12 +1,11 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable camelcase */
+/* eslint-disable array-callback-return */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BackendResForTafsir, ReduxSchemeForTafsir } from '../types/typeTafsir';
 import { fetchTafsirList } from '../service/fetchTafsir/fetchTafsirList';
 
 const initialState: ReduxSchemeForTafsir = {
   isLoading: false,
-  data: [],
+  data: {},
   error: undefined,
   loadedFontFaces: ['p1-v1'],
 };
@@ -34,6 +33,8 @@ const sliceTafsir = createSlice({
             // @ts-ignore
             state.data[action?.payload?.data[0]?.chapter_id?.quran_order] =
               action?.payload.data;
+          } else {
+            console.log(action?.payload.data);
           }
         },
       )
