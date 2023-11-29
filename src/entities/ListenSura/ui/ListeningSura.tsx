@@ -1,63 +1,36 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useRef, useState } from 'react';
-
-import { useSelector } from 'react-redux';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import cls from './listenSura.module.scss';
+import { useSelector } from 'react-redux';
+//
 import {
-  OneSuraInListSchema,
-  fetchSurahlesList,
   getListOfSurahs,
+  fetchSurahlesList,
+  OneSuraInListSchema,
 } from '@/pages/MainPage';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Download, Pause, Play } from '@/shared/assets/iconsListening';
-
-// http://iqro-quran.uz/backend/suras/${val?.quran_order}.mp3
-
-// https://server8.mp3quran.net/afs/1.mp3\
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+//
+import cls from './listenSura.module.scss';
+import { HStack } from '@/shared/ui/Stack';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface ListenerProp {
-  info: OneSuraInListSchema;
   index: number;
-}
-
-interface AudioInfo {
-  id: number;
-  src: string;
-  isPlaying: boolean;
+  info: OneSuraInListSchema;
 }
 
 const CardItem = (prop: ListenerProp) => {
+  const { surahOnEnded, setSurahOnEnded } = useContext(ButtonsContext);
+
   const { info, index } = prop;
-  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [audioList, setAudioList] = useState<AudioInfo[]>([
-    {
-      id: index,
-      src: `https://server12.mp3quran.net/maher/00${info.quran_order}.mp3`,
-      isPlaying: false,
-    },
-  ]);
+  const { setSurahListenNumber, surahListenNumber } =
+    useContext(ButtonsContext);
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [quranOrder, setQuranOrder] = useState<number | null>(null);
-
-  const audio = audioRef.current;
-
-  const playAudio = (id: number) => {
-    const updatedAudioList = audioList.map((audio) => {
-      return {
-        ...audio,
-        isPlaying: audio.id === id ? !audio.isPlaying : false,
-      };
-    });
-
-    setAudioList(updatedAudioList);
-    setQuranOrder(info.quran_order);
-    setIsPlaying(!isPlaying);
-  };
+  const srcDownload = `http://iqro-quran.uz/backend/suras/${info.quran_order}.mp3`;
 
   return (
     <div className={cls.CardsItems}>
@@ -73,47 +46,32 @@ const CardItem = (prop: ListenerProp) => {
 
       <div className={cls.RightItems}>
         <button
-          onClick={() => {
-            playAudio(info.quran_order);
-            if (audio && quranOrder === info.quran_order) {
-              audio.play();
-            } else if (audio && quranOrder !== info.quran_order) {
-              audio.pause();
-            }
-            setQuranOrder(
-              quranOrder !== info.quran_order ? info.quran_order : quranOrder,
-            );
-            setIsPlaying(!isPlaying);
-          }}
-          className={cls.Button}
           type="button"
+          className={cls.Button}
+          onClick={() => {
+            setSurahListenNumber(info.quran_order);
+
+            setSurahOnEnded(!surahOnEnded);
+          }}
         >
-          {isPlaying ? (
-            <Pause style={{ fontSize: '22px' }} />
+          {surahListenNumber !== info.quran_order && surahOnEnded ? (
+            <Play className={cls.ButtonIcon} />
+          ) : !surahOnEnded && surahListenNumber === info.quran_order ? (
+            <Pause className={cls.ButtonIcon} />
           ) : (
-            <Play style={{ fontSize: '22px' }} />
+            <Play className={cls.ButtonIcon} />
           )}
         </button>
-        {isPlaying && quranOrder === info.quran_order && (
-          <audio
-            style={{ overflow: 'hidden', display: 'none' }}
-            id={`audio-${audioList[0].id}`}
-            autoPlay
-            ref={audioRef}
-            src={audioList[0].src}
-            controls
-          />
-        )}
 
         <button className={cls.Button} type="button">
           <Link
-            to={`http://iqro-quran.uz/backend/suras/${info.quran_order}.mp3`}
             download
             target="_blank"
+            to={srcDownload}
             rel="noopener noreferrer"
-            style={{ listStyle: 'none', color: 'black', width: '100px' }}
+            className={cls.ButtonDownload}
           >
-            <Download style={{ fontSize: '22px' }} />
+            <Download className={cls.ButtonIcon} />
           </Link>
         </button>
       </div>
@@ -130,12 +88,22 @@ const ListeningSura = () => {
   }, [dispatch, listOfSurah]);
 
   return (
-    <div className={cls.ListenSuraWrapper}>
-      {listOfSurah?.map((surah: OneSuraInListSchema, index) => (
-        <CardItem key={index + 1} info={surah} index={index} />
-      ))}
+    <div>
+      <HStack
+        max
+        className={classNames(cls.ListenSuraWrapper, {}, [])}
+        gap="16"
+      >
+        {listOfSurah?.map((surah: OneSuraInListSchema, index) => (
+          <CardItem key={index + 1} info={surah} index={index} />
+        ))}
+      </HStack>
     </div>
   );
 };
 
 export default ListeningSura;
+
+// http://iqro-quran.uz/backend/suras/${val?.quran_order}.mp3
+
+// https://server8.mp3quran.net/afs/1.mp3\

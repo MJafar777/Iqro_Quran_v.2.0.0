@@ -1,14 +1,16 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+
 import React, { Suspense, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Download, Pause, Play } from '@/shared/assets/iconsListening';
-
-import cls from './listeningJuz.module.scss';
-import { OneSuraInListSchema } from '@/pages/MainPage';
+//
 import { Loader } from '@/widgets/Loader';
+import { OneSuraInListSchema } from '@/pages/MainPage';
+import { Download, Pause, Play } from '@/shared/assets/iconsListening';
+//
+import cls from './listeningJuz.module.scss';
 
 const ListeningJuz = () => {
   const salom: number = 30;
@@ -19,8 +21,8 @@ const ListeningJuz = () => {
 
   return (
     <div className={cls.ListenJuzWrapper}>
-      {arrayEmpty.map((item: number) => {
-        return <CardItems index={item} />;
+      {arrayEmpty.map((item: number, index: number) => {
+        return <CardItems key={index} index={item} />;
       })}
     </div>
   );

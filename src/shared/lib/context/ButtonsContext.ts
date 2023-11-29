@@ -11,6 +11,10 @@ export interface ButtonsClickedProps {
   setFontSize: (pro: number) => void;
   readingPageTubBtn: number;
   setReadingPageTubBtn: (activeBtn: number) => void;
+  surahListenNumber: number;
+  setSurahListenNumber: (num: number) => void;
+  surahOnEnded: boolean;
+  setSurahOnEnded: (onEnded: boolean) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -24,4 +28,8 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setFontSize: () => {},
   readingPageTubBtn: 1,
   setReadingPageTubBtn: () => {},
+  surahListenNumber: 0,
+  setSurahListenNumber: () => {},
+  surahOnEnded: false,
+  setSurahOnEnded: () => {},
 });
