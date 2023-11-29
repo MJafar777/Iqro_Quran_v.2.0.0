@@ -1,3 +1,5 @@
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,7 +12,10 @@ import { sliceTafsirReduce } from '../model/slice/sliceTafsir';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchTafsirList } from '../model/service/fetchTafsir/fetchTafsirList';
 import { ListOfTafsir } from '@/entities/Tafsir';
-import { getDataTafsir } from '../model/selector/selectorTafsir';
+import {
+  getDataTafsir,
+  getWindowHieght,
+} from '../model/selector/selectorTafsir';
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
@@ -28,34 +33,29 @@ const reducer: ReducersList = {
 
 const Tafsir = (prop: TafsirProp) => {
   const dataOfTafsir = useSelector(getDataTafsir);
-
   const dispatch = useAppDispatch();
   const surahId = useSelector(getSelectedSura);
   const [page, setPage] = useState(1);
+  const windowHeight = useSelector(getWindowHieght);
+  console.log(surahId.quran_order, 'surah');
+
+  // useEffect(() => {
+  //   setPage(1);
+  //   console.log(page, 'page');
+  // }, [surahId.quran_order]);
 
   useEffect(() => {
-    setPage(1);
-  }, [surahId.quran_order]);
-
-  useEffect(() => {
-    dispatch(
-      fetchTafsirList({
-        chapterId: surahId.quran_order,
-        page_number: page,
-      }),
-    );
-  }, [page]);
-
-  useEffect(() => {
-    if (dataOfTafsir && !dataOfTafsir[surahId.quran_order])
+    if (surahId.quran_order) {
       dispatch(
         fetchTafsirList({ chapterId: surahId.quran_order, page_number: page }),
       );
-  }, [dataOfTafsir, dispatch, surahId]);
+      console.log('dispatch');
+    }
+  }, [surahId.quran_order]);
 
   const onLoadNextPart = () => {
     setPage((pre) => pre + 1);
-    console.log(page, 'page');
+    console.log('hfhfh');
   };
 
   const content = useMemo(
@@ -65,17 +65,15 @@ const Tafsir = (prop: TafsirProp) => {
         onScrollEnd={onLoadNextPart}
         className={classNames(cls.tafsir, {}, [])}
       >
-        {/* <div className={cls.tafsir}> */}
         <ReadingNavbar />
         <Sidebar>
           <ReadingSidebar />
         </Sidebar>
         <ListOfTafsir
           // @ts-ignore
-          listOfTafsir={dataOfTafsir?.[surahId?.quran_order]}
+          listOfTafsir={dataOfTafsir?.[surahId?.quran_order]?.data}
           quran_order={surahId.quran_order}
         />
-        {/* </div> */}
       </Page>
     ),
     [dataOfTafsir, surahId?.quran_order],

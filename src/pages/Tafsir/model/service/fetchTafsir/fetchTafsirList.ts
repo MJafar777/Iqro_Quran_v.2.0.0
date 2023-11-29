@@ -1,23 +1,23 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BackendResForTafsir } from '../../types/typeTafsir';
+import { ApiResponse } from '../../types/typeTafsir';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { peekaboo } from '@/peekabo';
 
 interface MyApiResponse {
-  data: BackendResForTafsir;
+  data: ApiResponse;
 }
 
 export const fetchTafsirList = createAsyncThunk<
-  BackendResForTafsir, // Return type
+  ApiResponse, // Return type
   { chapterId: number; page_number: number },
   ThunkConfig<string> // ThunkConfig type
 >(
   'tafsirpage/listOfTafsir', // Action type
   async (prop, thunkApi) => {
     const { extra, rejectWithValue } = thunkApi;
-    const { chapterId ,page_number} = prop;
+    const { chapterId, page_number } = prop;
 
     if (!chapterId) throw new Error('');
 
