@@ -13,14 +13,13 @@ import {
   DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
-import { getSelectedSura } from '@/entities/Surah';
-import { getSelectedPage } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranVerse from '../QuranVerse/QuranVerse';
-// import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
+import { getSelectedPageRead } from '@/entities/PageRead';
+import { getSelectedSuraRead } from '@/entities/SurahRead';
 
 interface ReadingArabicProps {
   className?: string;
@@ -32,46 +31,43 @@ const reducers: ReducersList = {
 
 export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const dispatch = useAppDispatch();
-  const currentSura = useSelector(getSelectedSura);
-  const currentPage = useSelector(getSelectedPage);
+  const currentSuraRead = useSelector(getSelectedSuraRead);
+  const currentPageRead = useSelector(getSelectedPageRead);
 
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
   const isError = useSelector(getReadingArabicError);
 
   useEffect(() => {
-    if (currentSura?.quran_order && data) {
+    if (currentSuraRead?.quran_order && data) {
       dispatch(
         fetchReadingArabic({
-          suraId: currentSura?.quran_order,
-          pageNumber: currentPage.pageNumber,
-          limitOfPage: 10,
+          suraId: currentSuraRead?.quran_order,
+          pageNumber: currentPageRead.pageNumber,
         }),
       );
-    } else if (currentSura?.quran_order && !data) {
+    } else if (currentSuraRead?.quran_order && !data) {
       dispatch(
         fetchReadingArabic({
-          suraId: currentSura?.quran_order,
-          pageNumber: currentPage.pageNumber,
-          limitOfPage: 10,
+          suraId: currentSuraRead?.quran_order,
+          pageNumber: currentPageRead.pageNumber,
         }),
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSura?.quran_order, dispatch]);
+  }, [currentSuraRead?.quran_order, dispatch]);
 
   useEffect(() => {
-    if (currentSura?.quran_order) {
+    if (currentSuraRead?.quran_order) {
       dispatch(
         fetchReadingArabic({
-          suraId: currentSura?.quran_order,
-          pageNumber: currentPage.pageNumber,
-          limitOfPage: 10,
+          suraId: currentSuraRead?.quran_order,
+          pageNumber: currentPageRead.pageNumber,
         }),
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, dispatch]);
+  }, [currentPageRead, dispatch]);
 
   const renderContent = useMemo(() => {
     if (isLoading) {
@@ -79,7 +75,9 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     }
     if (data) {
       return (
-        <QuranVerse verseData={data[currentSura?.quran_order]?.data?.data} />
+        <QuranVerse
+          verseData={data[currentSuraRead?.quran_order]?.data?.data}
+        />
       );
       // eslint-disable-next-line no-else-return
     } else if (isError) {
@@ -89,7 +87,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     } else {
       return null;
     }
-  }, [isLoading, data, isError, currentSura?.quran_order]);
+  }, [isLoading, data, isError, currentSuraRead?.quran_order]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>

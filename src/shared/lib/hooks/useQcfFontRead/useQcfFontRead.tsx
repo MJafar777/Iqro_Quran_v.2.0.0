@@ -20,8 +20,6 @@ const useQcfFontRead = (verses: Verse[]) => {
     (state: StateSchema) => state.readingArabic?.loadedFontFaces,
   );
 
-  console.log(verses, 'verser');
-
   const onFontLoaded = useCallback(
     (fontFace: string) => {
       dispatch(addLoadedFontFaceReadingArabic(fontFace));
@@ -38,8 +36,7 @@ const useQcfFontRead = (verses: Verse[]) => {
           fontFaceName,
           getV1OrV2FontFaceSource(true, verse.page_number),
         );
-        console.log(loadedFonts);
-        console.log(fontFaceName);
+
         if (
           !loadedFonts?.includes(fontFaceName) &&
           !currentlyFetchingFonts.current.includes(fontFaceName)
@@ -49,7 +46,6 @@ const useQcfFontRead = (verses: Verse[]) => {
           fontFace
             .load()
             .then(() => {
-              console.log('Test');
               (document.fonts as any).add(fontFace); // Type assertion
               onFontLoaded(fontFaceName);
             })

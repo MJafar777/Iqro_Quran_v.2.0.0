@@ -4,11 +4,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './OyatReadList.module.scss';
 import clsSearch from '../../../shared/ui/searchInput/ui/Searchinput.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-  useSelectedSuraValue,
-  SurahPageOyah,
-  getSelectedSura,
-} from '@/entities/Surah';
+import { SurahPageOyah } from '@/entities/Surah';
 import { getSelectedOyatRead } from '../model/selectors/getSelectedOyatRead';
 import { useSelectedOyatReadActions } from '../model/slice/seletedOyatReadSlice';
 
@@ -16,6 +12,10 @@ import { Skeleton } from '@/shared/ui/Skeleton';
 import { getError, getIsLoading } from '@/pages/MainPage';
 import { getSelectedPage } from '@/entities/Page';
 import { useSelectedPageReadActions } from '@/entities/PageRead';
+import {
+  getSelectedSuraRead,
+  useSelectedSuraReadValue,
+} from '@/entities/SurahRead';
 
 interface OyatReadListProps {
   className?: string;
@@ -23,11 +23,11 @@ interface OyatReadListProps {
 
 const OyatReadList = memo(({ className }: OyatReadListProps) => {
   const { t } = useTranslation();
-  const selectedSura = useSelectedSuraValue();
+  const selectedSuraRead = useSelectedSuraReadValue();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
 
-  const currentSura = useSelector(getSelectedSura);
+  const currentSuraRead = useSelector(getSelectedSuraRead);
 
   const currentOyatRead = useSelector(getSelectedOyatRead);
   const { setSelectedReadOyat } = useSelectedOyatReadActions();
@@ -44,13 +44,13 @@ const OyatReadList = memo(({ className }: OyatReadListProps) => {
   useEffect(() => {
     setSelectedReadOyat(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSura]);
+  }, [selectedSuraRead]);
 
   useEffect(() => {
-    SurahPageOyah[currentSura.quran_order]?.forEach((element: any) => {
+    SurahPageOyah[currentSuraRead.quran_order]?.forEach((element: any) => {
       if (
         Number(element.page) ===
-        Number(currentSura.pages[0] + currentPageRead.pageNumber - 1)
+        Number(currentSuraRead.pages[0] + currentPageRead.pageNumber - 1)
       ) {
         setSelectedReadOyat(Number(element.start));
       }
@@ -59,12 +59,12 @@ const OyatReadList = memo(({ className }: OyatReadListProps) => {
   }, [currentPageRead]);
 
   // useEffect(() => {
-  //   SurahPageOyah[currentSura.quran_order]?.forEach((element: any) => {
+  //   SurahPageOyah[currentSuraRead.quran_order]?.forEach((element: any) => {
   //     if (
   //       Number(element.start) <= currentOyatRead.oyatNumber &&
   //       Number(element.end) >= currentOyatRead.oyatNumber
   //     ) {
-  //       setSelectedPageRead(element.page - currentSura.pages[0] + 1);
+  //       setSelectedPageRead(element.page - currentSuraRead.pages[0] + 1);
   //     }
   //   });
 
@@ -98,7 +98,7 @@ const OyatReadList = memo(({ className }: OyatReadListProps) => {
       <div className={classNames(cls.OyatReadList, {}, [className])}>
         {!isLoading && !error
           ? Array.from(
-              { length: selectedSura.count_verse },
+              { length: selectedSuraRead.count_verse },
               (_, index) => index + 1,
             )
               .filter((item) =>
