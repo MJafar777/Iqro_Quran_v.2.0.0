@@ -14,12 +14,12 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranVerse from '../QuranVerse/QuranVerse';
 import { getSelectedPageRead } from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
+import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
 
 interface ReadingArabicProps {
   className?: string;
@@ -71,7 +71,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
 
   const renderContent = useMemo(() => {
     if (isLoading) {
-      return <BookBoxSkeleton />;
+      return <ReadTextSkeleton />;
     }
     if (data) {
       return (
