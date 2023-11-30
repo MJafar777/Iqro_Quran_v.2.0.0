@@ -2,15 +2,18 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 //
 import { Loader } from '@/widgets/Loader';
+import { HStack } from '@/shared/ui/Stack';
 import { OneSuraInListSchema } from '@/pages/MainPage';
-import { Download, Pause, Play } from '@/shared/assets/iconsListening';
+import { Download, Play } from '@/shared/assets/iconsListening';
 //
 import cls from './listeningJuz.module.scss';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { ListenActive } from '@/shared/ui/ListenActive';
 
 const ListeningJuz = () => {
   const salom: number = 30;
@@ -20,10 +23,12 @@ const ListeningJuz = () => {
   );
 
   return (
-    <div className={cls.ListenJuzWrapper}>
-      {arrayEmpty.map((item: number, index: number) => {
-        return <CardItems key={index} index={item} />;
-      })}
+    <div>
+      <HStack max className={cls.ListenJuzWrapper} gap="16">
+        {arrayEmpty.map((item: number, index: number) => {
+          return <CardItems key={index} index={item} />;
+        })}
+      </HStack>
     </div>
   );
 };
@@ -40,10 +45,15 @@ const CardItems = (props: CardItemsvalue) => {
   const Juz = t('Juz');
   const { index, info } = props;
 
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const srcDownload = `http://iqro-quran.uz/developmentBackend/juzes/juz${index}.mp3`;
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audio = audioRef.current;
+  const {
+    surahOnEnded,
+    setSurahOnEnded,
+    setSurahListenNumber,
+    surahListenNumber,
+    setCloseAudio,
+  } = useContext(ButtonsContext);
 
   return (
     <Suspense fallback={<Loader />}>
@@ -62,43 +72,31 @@ const CardItems = (props: CardItemsvalue) => {
 
         <div className={cls.RightItems}>
           <button
-            onClick={() => {
-              if (audio && index + 1 === info?.quran_order) {
-                audio.play();
-              } else if (audio) {
-                audio.pause();
-              }
-              setIsPlaying(!isPlaying);
-            }}
-            className={cls.Button}
             type="button"
+            className={cls.Button}
+            onClick={() => {
+              setSurahListenNumber(index);
+              setCloseAudio(false);
+            }}
           >
-            {isPlaying ? (
-              <Pause style={{ fontSize: '22px' }} />
+            {surahListenNumber !== index && surahOnEnded ? (
+              <Play className={cls.ButtonIcon} />
+            ) : !surahOnEnded && surahListenNumber === index ? (
+              <ListenActive />
             ) : (
-              <Play style={{ fontSize: '22px' }} />
+              <Play className={cls.ButtonIcon} />
             )}
           </button>
 
-          {isPlaying && (
-            <audio
-              style={{ overflow: 'hidden', display: 'none' }}
-              autoPlay
-              ref={audioRef}
-              src={`https://server12.mp3quran.net/maher/00${info?.quran_order}.mp3`}
-              controls
-            />
-          )}
-
           <button className={cls.Button} type="button">
             <Link
-              to={`http://iqro-quran.uz/backend/suras/${info?.quran_order}.mp3`}
+              to={srcDownload}
               download
               target="_blank"
               rel="noopener noreferrer"
-              style={{ listStyle: 'none', color: 'black', width: '100px' }}
+              className={cls.ButtonDownload}
             >
-              <Download style={{ fontSize: '22px' }} />
+              <Download className={cls.ButtonIcon} />
             </Link>
           </button>
         </div>

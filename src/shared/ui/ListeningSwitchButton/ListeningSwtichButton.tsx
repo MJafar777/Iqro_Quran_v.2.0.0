@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 
 import cls from './ListeningSwitchButton.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface ButtonsNames {
   buttonsNames: string[];
@@ -12,6 +13,7 @@ interface ButtonsNames {
 const ListeningSwtichButton = (props: ButtonsNames) => {
   const { buttonsNames, setPageSuraOrJuz, pageSuraOrJuz } = props;
   const divRef = useRef<HTMLDivElement>(null);
+  const { setCloseAudio, setSurahOnEnded } = useContext(ButtonsContext);
 
   const clickBtn = (index: number) => {
     if (setPageSuraOrJuz && index === 1) {
@@ -48,6 +50,8 @@ const ListeningSwtichButton = (props: ButtonsNames) => {
               type="submit"
               onClick={() => {
                 clickBtn(index + 1);
+                setCloseAudio(true);
+                setSurahOnEnded(true);
               }}
               className={classNames(cls.toggleBtn, {}, [])}
             >

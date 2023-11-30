@@ -20,6 +20,7 @@ const ListenParent = () => {
   const Juz = t('Juz');
 
   const srcSuraListen = `http://iqro-quran.uz/backend/suras/${surahListenNumber}.mp3`;
+  const srcJuzsListen = `http://iqro-quran.uz/developmentBackend/juzes/juz${surahListenNumber}.mp3`;
 
   return (
     <div className={cls.ParentListener}>
@@ -31,15 +32,24 @@ const ListenParent = () => {
             buttonsNames={[Sura, Juz]}
           />
         </div>
-        
+
         <Suspense fallback={<Loader />}>
           {pageSuraOrJuz ? <ListeningSura /> : <ListeningJuz />}
         </Suspense>
         <hr />
       </div>
-      {surahListenNumber > 0 ? (
+      {pageSuraOrJuz && surahListenNumber > 0 && surahListenNumber < 115 ? (
         <ListenSurahAudioPlayer
           src={surahListenNumber > 0 ? srcSuraListen : ''}
+        />
+      ) : (
+        ''
+      )}
+      {!pageSuraOrJuz && surahListenNumber > 0 && surahListenNumber < 31 ? (
+        <ListenSurahAudioPlayer
+          src={
+            surahListenNumber > 0 && surahListenNumber < 31 ? srcJuzsListen : ''
+          }
         />
       ) : (
         ''
