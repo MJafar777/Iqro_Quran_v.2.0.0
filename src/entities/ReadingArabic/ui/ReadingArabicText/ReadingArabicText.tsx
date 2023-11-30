@@ -20,7 +20,12 @@ import QuranVerse from '../QuranVerse/QuranVerse';
 import { getSelectedPageRead } from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
 import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
+import SuraNameContainer, {
+  SuraNameSize,
+} from '@/shared/ui/SuraName/SuraNameContainer';
+import Bismillah from '@/shared/ui/Bismillah/Bismillah';
 
+const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
   className?: string;
 }
@@ -98,6 +103,17 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
         <div
           className={classNames(cls.ReadingArabic__readBox, {}, [className])}
         >
+          {data && (
+            <SuraNameContainer
+              suraId={`00${currentSuraRead.quran_order}`}
+              hasSurahPrefix
+              size={SuraNameSize.Large}
+            />
+          )}
+
+          {!CHAPTERS_WITHOUT_BISMILLAH.includes(
+            String(currentSuraRead.quran_order),
+          ) && <Bismillah />}
           {renderContent}
         </div>
       </div>
