@@ -31,6 +31,7 @@ const ListenParent = () => {
             buttonsNames={[Sura, Juz]}
           />
         </div>
+        
         <Suspense fallback={<Loader />}>
           {pageSuraOrJuz ? <ListeningSura /> : <ListeningJuz />}
         </Suspense>

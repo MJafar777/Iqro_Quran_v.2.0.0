@@ -24,6 +24,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [surahOnEnded, setSurahOnEnded] = useState(false);
 
+  const [closeAudio, setCloseAudio] = useState(false);
+
   const defaultProps = useMemo(
     () => ({
       readingSidebarActive,
@@ -40,6 +42,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setSurahListenNumber,
       surahOnEnded,
       setSurahOnEnded,
+      closeAudio,
+      setCloseAudio,
     }),
     [
       fontSize,
@@ -52,6 +56,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setReadingPageTubBtn,
       surahOnEnded,
       setSurahOnEnded,
+      closeAudio,
+      setCloseAudio,
     ],
   );
 

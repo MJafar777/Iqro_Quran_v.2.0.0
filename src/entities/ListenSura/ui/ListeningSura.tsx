@@ -9,13 +9,14 @@ import {
   fetchSurahlesList,
   OneSuraInListSchema,
 } from '@/pages/MainPage';
-import { Download, Pause, Play } from '@/shared/assets/iconsListening';
+import { Download, Play } from '@/shared/assets/iconsListening';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 //
 import cls from './listenSura.module.scss';
 import { HStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { ListenActive } from '@/shared/ui/ListenActive';
 
 interface ListenerProp {
   index: number;
@@ -27,7 +28,7 @@ const CardItem = (prop: ListenerProp) => {
 
   const { info, index } = prop;
 
-  const { setSurahListenNumber, surahListenNumber } =
+  const { setSurahListenNumber, surahListenNumber, setCloseAudio } =
     useContext(ButtonsContext);
 
   const srcDownload = `http://iqro-quran.uz/backend/suras/${info.quran_order}.mp3`;
@@ -50,19 +51,19 @@ const CardItem = (prop: ListenerProp) => {
           className={cls.Button}
           onClick={() => {
             setSurahListenNumber(info.quran_order);
-
-            setSurahOnEnded(!surahOnEnded);
+            setCloseAudio(false);
+            // setSurahOnEnded(!surahOnEnded);
           }}
         >
           {surahListenNumber !== info.quran_order && surahOnEnded ? (
             <Play className={cls.ButtonIcon} />
           ) : !surahOnEnded && surahListenNumber === info.quran_order ? (
-            <Pause className={cls.ButtonIcon} />
+            <ListenActive />
           ) : (
+            // <Pause className={cls.ButtonIcon} />
             <Play className={cls.ButtonIcon} />
           )}
         </button>
-
         <button className={cls.Button} type="button">
           <Link
             download

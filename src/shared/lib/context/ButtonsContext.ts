@@ -15,6 +15,8 @@ export interface ButtonsClickedProps {
   setSurahListenNumber: (num: number) => void;
   surahOnEnded: boolean;
   setSurahOnEnded: (onEnded: boolean) => void;
+  closeAudio: boolean;
+  setCloseAudio: (onEnded: boolean) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -32,4 +34,6 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setSurahListenNumber: () => {},
   surahOnEnded: false,
   setSurahOnEnded: () => {},
+  closeAudio: false,
+  setCloseAudio: () => {},
 });
