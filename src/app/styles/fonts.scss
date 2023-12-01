@@ -1,0 +1,22 @@
+/*Fonts for rendering different Mushaf scripts*/
+@font-face {
+  font-family: 'IndoPak';
+  src: local('AlQuran IndoPak by QuranWBW'),
+    url('../../../public/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2')
+      format('woff2'),
+    url('../../../public/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff')
+      format('woff'),
+    url('../../../public/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf')
+      format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: local('KFGQPC HAFS Uthmanic Script'),
+    url('../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2')
+      format('woff2'),
+    url('../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf')
+      format('truetype');
+  font-display: swap;
+}

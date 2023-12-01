@@ -20,7 +20,6 @@ export const Virtual = memo((props: ListOfSurahProp) => {
   const itemsPerRow = 3;
   // eslint-disable-next-line no-unsafe-optional-chaining
   const rowCount = Math.ceil(data?.length / itemsPerRow);
-  console.log(rowCount);
 
   const skeletonList = Array.from({ length: 18 }, () => (
     <OneItemSurahSkleton />

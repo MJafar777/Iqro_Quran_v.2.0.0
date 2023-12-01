@@ -8,3 +8,4 @@ export type {
 export { addLoadedFontFace } from './model/slice/sliceTafsir';
 export type { Verse, Word } from './model/types/typeTafsir';
 export { MushafLines, QuranFont } from './model/types/typeTafsir';
+export { isLoading } from './model/selector/selectorTafsir';

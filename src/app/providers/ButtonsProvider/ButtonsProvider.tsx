@@ -20,6 +20,12 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [fontSize, setFontSize] = useState(3);
 
+  const [audioUrl, setAudioUrl] = useState('');
+
+  const [verseNumber, setVerseNumber] = useState('1');
+
+  const [isPlay, setIsPlay] = useState(false);
+
   const [readingPageTubBtn, setReadingPageTubBtn] = useState(1);
 
   const [surahListenNumber, setSurahListenNumber] = useState(0);
@@ -30,40 +36,52 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const defaultProps = useMemo(
     () => ({
-      readingSidebarActive,
-      setReadingSidebarActive,
+      isPlay,
+      fontSize,
+      audioUrl,
+      setIsPlay,
+      closeAudio,
+      TrackIndex,
+      setFontSize,
+      setAudioUrl,
+      verseNumber,
+      surahOnEnded,
+      setCloseAudio,
+      setTrackIndex,
+      setVerseNumber,
       isSidebarActive,
+      setSurahOnEnded,
+      readingPageTubBtn,
+      surahListenNumber,
       setIsSidebarActive,
       isRightsidebarActive,
-      setIsRightsidebarActive,
-      fontSize,
-      setFontSize,
-      readingPageTubBtn,
-      surahListenNumber,
+      readingSidebarActive,
       setReadingPageTubBtn,
       setSurahListenNumber,
-      surahOnEnded,
-      setSurahOnEnded,
-      closeAudio,
-      setCloseAudio,
-      TrackIndex,
-      setTrackIndex,
+      setReadingSidebarActive,
+      setIsRightsidebarActive,
     }),
     [
+      isPlay,
       fontSize,
-      isRightsidebarActive,
+      audioUrl,
+      setIsPlay,
+      closeAudio,
+      TrackIndex,
+      setAudioUrl,
+      verseNumber,
+      surahOnEnded,
+      setCloseAudio,
+      setTrackIndex,
+      setVerseNumber,
       isSidebarActive,
+      setSurahOnEnded,
       surahListenNumber,
       readingPageTubBtn,
+      isRightsidebarActive,
       setSurahListenNumber,
       readingSidebarActive,
       setReadingPageTubBtn,
-      surahOnEnded,
-      setSurahOnEnded,
-      closeAudio,
-      setCloseAudio,
-      TrackIndex,
-      setTrackIndex,
     ],
   );
 

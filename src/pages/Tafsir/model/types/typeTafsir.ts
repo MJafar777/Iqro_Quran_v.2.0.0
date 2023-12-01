@@ -96,8 +96,7 @@ export interface BackendResForTafsir {
 }
 
 export interface TafisrData {
-  quran_order: any;
-  status: string;
+  quran_order: number;
   results: number;
   data: OneVerseTafsirScheme[];
   nextpage: boolean;
@@ -105,15 +104,14 @@ export interface TafisrData {
 
 export interface TafsirChapterData {
   [key: number]: {
-    quran_order: number;
-    data: TafisrData;
+    data: OneVerseTafsirScheme[];
   };
 }
 
 export interface ReduxSchemeForTafsir {
   isLoading?: boolean;
   error?: string;
-  data?: TafsirChapterData[];
+  data?: TafsirChapterData;
   loadedFontFaces: string[];
 }
 
@@ -137,6 +135,7 @@ export interface Word {
   word: string;
   word_index: number;
   arab: string;
+  code_v2: string;
 }
 export interface Verse {
   data: any;
@@ -220,7 +219,6 @@ export interface DataFromLocalHook {
   isLoading: boolean;
   isSuccess: boolean;
 }
-
 
 export enum WordByWordType {
   Translation = 'translation',

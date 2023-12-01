@@ -19,6 +19,13 @@ export interface ButtonsClickedProps {
   setCloseAudio: (onEnded: boolean) => void;
   TrackIndex: number | any;
   setTrackIndex: (trackIndex: any) => void;
+
+  setIsPlay: (prop: boolean) => void;
+  isPlay: boolean;
+  setVerseNumber: (prop: string) => void;
+  verseNumber: string;
+  setAudioUrl: (prop: string) => void;
+  audioUrl: string;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -40,4 +47,10 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setCloseAudio: () => {},
   TrackIndex: 0,
   setTrackIndex: () => {},
+  setIsPlay: (prop: boolean) => {},
+  isPlay: false,
+  setVerseNumber: () => {},
+  verseNumber: '1',
+  setAudioUrl: () => {},
+  audioUrl: '',
 });
