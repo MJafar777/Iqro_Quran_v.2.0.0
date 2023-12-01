@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cls from './QuranPage.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Word } from '../../model/types/readingSura';
@@ -13,15 +13,21 @@ interface QuranPageProps {
   pageData: pageDataObjType;
 }
 
-const QuranPage = ({ className, pageData }: QuranPageProps) => {
+const QuranPage = memo(({ className, pageData }: QuranPageProps) => {
   return (
     <div className={classNames(cls.QuranPage, {}, [])}>
       {Object.values(pageData).map((word) => (
-        <QuranWords WordsInfo={word} />
+        <QuranWords
+          WordsInfo={word}
+          checkPageNumber={Object.values(pageData)[0][0].page_number}
+        />
       ))}
-      <h1>Shu yerda page ozgaradi</h1>
+      <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
+        {Object.values(pageData)[0][0].page_number}
+      </p>
+      <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
     </div>
   );
-};
+});
 
 export default QuranPage;
