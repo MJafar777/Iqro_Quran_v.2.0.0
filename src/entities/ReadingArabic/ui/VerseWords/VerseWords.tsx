@@ -1,26 +1,35 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import cls from './VerseWords.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import VerseWord from '../VerseWord/VerseWord';
 import { Word } from '../../model/types/readingSura';
+import isCenterAlignedPage from '@/shared/lib/hooks/usePageUtils/pageUtils';
 
 interface QuranWordsProps {
   className?: string;
   WordsInfo: Word[];
-  checkPageNumber: number;
+  pageNumber: number;
+  lineNumber: number;
 }
 
 const QuranWords = memo(
-  ({ className, checkPageNumber, WordsInfo }: QuranWordsProps) => {
+  ({ className, pageNumber, lineNumber, WordsInfo }: QuranWordsProps) => {
+    const centerAlignPage = useMemo(
+      () => isCenterAlignedPage(pageNumber, lineNumber),
+      [pageNumber, lineNumber],
+    );
+
+    // console.log(pageNumber, lineNumber);
     return (
       <div
-        style={{
-          justifyContent:
-            checkPageNumber === 1 || checkPageNumber === 2
-              ? 'center'
-              : 'space-between',
-        }}
-        className={classNames(cls.QuranWords, {}, [className])}
+        className={classNames(
+          cls.QuranWords,
+          {
+            [cls.verseTextCenterAlign]: centerAlignPage,
+            [cls.verseTextSpaceBetween]: !centerAlignPage,
+          },
+          [className],
+        )}
       >
         {WordsInfo
           ? Object.values(WordsInfo)

@@ -19,7 +19,8 @@ const QuranPage = memo(({ className, pageData }: QuranPageProps) => {
       {Object.values(pageData).map((word) => (
         <QuranWords
           WordsInfo={word}
-          checkPageNumber={Object.values(pageData)[0][0].page_number}
+          pageNumber={Object.values(pageData)[0][0].page_number}
+          lineNumber={Object.values(pageData)[0][0].line_number}
         />
       ))}
       <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
