@@ -40,7 +40,6 @@ export const getV1OrV2FontFaceSource = (
   const woff = `/fonts/quran/hafs/v2/woff/p${pageNumber}.woff`;
   // const ttf = `./fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`;
   const ttf = `/fonts/quran/hafs/v2/ttf/p${pageNumber}.ttf`;
-  console.log(ttf);
 
   return `local(p${pageNumber}-v1), url('${ttf}') format('truetype')`;
 };

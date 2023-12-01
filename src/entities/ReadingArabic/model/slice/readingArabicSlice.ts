@@ -29,12 +29,41 @@ export const readingArabicSlice = createSlice({
         (state, action: PayloadAction<QuranDataText>) => {
           state.isLoading = false;
 
-          if (!state.data) state.data = {};
+          if (
+            state.data &&
+            state.data[action.payload.data[0]?.chapter_id.quran_order]
+          ) {
+            if (
+              !state.data[
+                action.payload.data[0]?.chapter_id.quran_order
+              ].data.data.some(
+                (verse) =>
+                  verse.verse_number === action.payload.data[0].verse_number,
+              )
+            ) {
+              state.data[
+                action.payload.data[0]?.chapter_id.quran_order
+              ].data.data = [
+                ...state.data[action.payload.data[0]?.chapter_id.quran_order]
+                  .data.data,
+                ...action.payload.data,
+              ];
+            } else {
+              state.data[
+                action.payload.data[0]?.chapter_id.quran_order
+              ].data.data = [
+                ...state.data[action.payload.data[0]?.chapter_id.quran_order]
+                  .data.data,
+              ];
+            }
+          } else {
+            if (!state.data) state.data = {};
 
-          state.data[action.payload.data[0]?.chapter_id.quran_order] = {
-            quran_order: action.payload.data[0]?.chapter_id.quran_order,
-            data: action.payload,
-          };
+            state.data[action.payload.data[0]?.chapter_id.quran_order] = {
+              quran_order: action.payload.data[0]?.chapter_id.quran_order,
+              data: action.payload,
+            };
+          }
         },
       )
       .addCase(fetchReadingArabic.rejected, (state, action) => {
