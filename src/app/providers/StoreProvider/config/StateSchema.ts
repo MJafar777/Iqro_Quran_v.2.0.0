@@ -7,27 +7,38 @@ import {
 import { CombinedState } from 'redux';
 import { AxiosInstance } from 'axios';
 import { rtkApi } from '@/shared/api/rtkApi';
+import {
+  ReadingArabicSchema,
+  ReadingArabicTextSchema,
+} from '@/entities/ReadingArabic';
+
+// Now you can use ReadingArabicSchema in your code
 
 import { SelectedSuraSchema } from '@/entities/Surah';
 import { SelectedOyatSchema } from '@/entities/Oyat';
 import { SelectedPageSchema } from '@/entities/Page';
-import { ReadingArabicSchema } from '@/entities/ReadingArabic';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
 // import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
 import { SurahInfoSchema } from '@/pages/InformationPage';
 import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { SelectedPageReadSchema } from '@/entities/PageRead';
+import { SelectedOyatReadSchema } from '@/entities/OyatRead';
+import { SelectedSuraReadSchema } from '@/entities/SurahRead';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
+  currentSuraRead: SelectedSuraReadSchema;
   currentOyat: SelectedOyatSchema;
+  currentOyatRead: SelectedOyatReadSchema;
   currentPage: SelectedPageSchema;
+  currentPageRead: SelectedPageReadSchema;
 
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
-  readingArabic?: ReadingArabicSchema;
+  readingArabic?: ReadingArabicTextSchema;
   readingArabicBook?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;

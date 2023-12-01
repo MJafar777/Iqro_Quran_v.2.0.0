@@ -1,18 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReadingQuranData } from '../types/readingSura';
-import { ReadingArabicSchema } from '../types/readingArabicSchema';
+import { ReadingArabicTextSchema } from '../types/readingArabicSchema';
 import { fetchReadingArabic } from '../services/fetchReadingArabic';
+import { QuranDataText } from '../types/readingSura';
 
-const initialState: ReadingArabicSchema = {
+const initialState: ReadingArabicTextSchema = {
   isLoading: false,
   error: undefined,
   data: undefined,
+  loadedFontFaces: [],
 };
 
 export const readingArabicSlice = createSlice({
   name: 'Reading Arabic',
   initialState,
-  reducers: {},
+  reducers: {
+    addLoadedFontFaceReadingArabic: (state, action: PayloadAction<string>) => {
+      state.loadedFontFaces.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchReadingArabic.pending, (state) => {
@@ -21,38 +26,15 @@ export const readingArabicSlice = createSlice({
       })
       .addCase(
         fetchReadingArabic.fulfilled,
-        (state, action: PayloadAction<ReadingQuranData>) => {
+        (state, action: PayloadAction<QuranDataText>) => {
           state.isLoading = false;
 
-          if (state.data && state.data[action.payload.data[0]?.quran_order]) {
-            if (
-              !state.data[
-                action.payload.data[0]?.quran_order
-              ]?.data?.resourse?.includes(
-                action.payload?.resourse?.length > 0
-                  ? action.payload?.resourse[0]
-                  : '',
-              )
-            ) {
-              state.data[action.payload.data[0]?.quran_order].data.resourse = [
-                ...(state.data[action.payload.data[0]?.quran_order].data
-                  ?.resourse || []),
-                ...(action.payload.resourse || []),
-              ];
-            } else {
-              state.data[action.payload.data[0]?.quran_order].data.resourse = [
-                ...state.data[action.payload.data[0]?.quran_order].data
-                  .resourse,
-              ];
-            }
-          } else {
-            if (!state.data) state.data = {};
+          if (!state.data) state.data = {};
 
-            state.data[action.payload.data[0]?.quran_order] = {
-              quran_order: action.payload.data[0]?.quran_order,
-              data: action.payload,
-            };
-          }
+          state.data[action.payload.data[0]?.chapter_id.quran_order] = {
+            quran_order: action.payload.data[0]?.chapter_id.quran_order,
+            data: action.payload,
+          };
         },
       )
       .addCase(fetchReadingArabic.rejected, (state, action) => {
@@ -64,3 +46,4 @@ export const readingArabicSlice = createSlice({
 
 export const { actions: readingArabicActions } = readingArabicSlice;
 export const { reducer: readingArabicReducer } = readingArabicSlice;
+export const { addLoadedFontFaceReadingArabic } = readingArabicSlice.actions;

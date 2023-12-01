@@ -13,6 +13,9 @@ import { TimeDataReducer } from '@/widgets/Nabar';
 import { setSearchReducer } from '@/entities/Main';
 import { sliceTafsirReduce } from '@/pages/Tafsir';
 import { SurahInfoReducer } from '@/pages/InformationPage';
+import { selectedSuraReadReducer } from '@/entities/SurahRead';
+import { selectedOyatReadReducer } from '@/entities/OyatRead';
+import { selectedPageReadReducer } from '@/entities/PageRead';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -23,6 +26,9 @@ export function createReduxStore(
     currentSura: selectedSuraReducer,
     currentOyat: selectedOyatReducer,
     currentPage: selectedPageReducer,
+    currentSuraRead: selectedSuraReadReducer,
+    currentOyatRead: selectedOyatReadReducer,
+    currentPageRead: selectedPageReadReducer,
     mainPage: SurahListSliceReducer,
     timeData: TimeDataReducer,
     search: setSearchReducer,

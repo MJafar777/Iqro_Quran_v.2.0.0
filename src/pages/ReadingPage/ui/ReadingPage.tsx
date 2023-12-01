@@ -23,6 +23,7 @@ import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
+import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 
 interface ReadingPageProps {
   className?: string;
@@ -42,11 +43,10 @@ const ReadingPage = (props: ReadingPageProps) => {
       data-testid="ReadingPage"
       className={classNames(cls.ReadingPage, {}, [className])}
     >
-
       <ReadingNavbar />
 
       <Sidebar>
-        <ReadingSidebar />
+        {readingPageTubBtn === 3 ? <ReadingSidebarRead /> : <ReadingSidebar />}
       </Sidebar>
 
       <div

@@ -1,8 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import cls from './ReadingPrevNextBtn.module.scss';
 import { useSelectedPageActions } from '@/entities/Page';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { useSelectedPageReadActions } from '@/entities/PageRead';
 
 interface ReadingPrevNextBtnProps {
   className?: string;
@@ -14,16 +16,27 @@ interface ReadingPrevNextBtnProps {
 
 const ReadingPrevNextBtn = memo(
   ({ className, prevIcon, nextIcon, prev, next }: ReadingPrevNextBtnProps) => {
+    const { readingPageTubBtn } = useContext(ButtonsContext);
     const { incrementCurrentPage, decrementCurrentPage } =
       useSelectedPageActions();
+    const { incrementCurrentPageRead, decrementCurrentPageRead } =
+      useSelectedPageReadActions();
 
     const handlePageClick = () => {
       if (prev) {
-        incrementCurrentPage();
+        if (readingPageTubBtn === 3) {
+          incrementCurrentPageRead();
+        } else {
+          incrementCurrentPage();
+        }
       }
 
       if (next) {
-        decrementCurrentPage();
+        if (readingPageTubBtn === 3) {
+          decrementCurrentPageRead();
+        } else {
+          decrementCurrentPage();
+        }
       }
     };
 
