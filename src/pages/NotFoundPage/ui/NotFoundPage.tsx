@@ -17,7 +17,7 @@ export const NotFoundPage = ({ className }: NotFoundPageProps) => {
       <NotFound
         className={classNames(cls.NotFoundPageChild, {}, [className])}
       />
-      {t('Sahifa topilmadi!')}
+      {t('Sahifa topilmadi')}
     </div>
   );
 };
