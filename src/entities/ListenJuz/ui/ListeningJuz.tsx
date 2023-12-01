@@ -9,11 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { Loader } from '@/widgets/Loader';
 import { HStack } from '@/shared/ui/Stack';
 import { OneSuraInListSchema } from '@/pages/MainPage';
+import { ListenActive } from '@/shared/ui/ListenActive';
 import { Download, Play } from '@/shared/assets/iconsListening';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 //
 import cls from './listeningJuz.module.scss';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import { ListenActive } from '@/shared/ui/ListenActive';
 
 const ListeningJuz = () => {
   const salom: number = 30;

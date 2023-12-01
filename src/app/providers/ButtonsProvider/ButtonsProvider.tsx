@@ -14,6 +14,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
 
+  const [TrackIndex, setTrackIndex] = useState(0);
+
   const [isRightsidebarActive, setIsRightsidebarActive] = useState(true);
 
   const [fontSize, setFontSize] = useState(3);
@@ -44,6 +46,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setSurahOnEnded,
       closeAudio,
       setCloseAudio,
+      TrackIndex,
+      setTrackIndex,
     }),
     [
       fontSize,
@@ -58,6 +62,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setSurahOnEnded,
       closeAudio,
       setCloseAudio,
+      TrackIndex,
+      setTrackIndex,
     ],
   );
 

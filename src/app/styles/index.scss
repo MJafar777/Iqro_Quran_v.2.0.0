@@ -144,6 +144,7 @@ $rhap_font-family: inherit !default;
   display: flex;
   flex: 3 1 auto;
   align-items: center;
+  margin-top: 10px;
 }
 
 .rhap_progress-container {
@@ -163,8 +164,9 @@ $rhap_font-family: inherit !default;
 }
 
 .rhap_time {
-  color: $rhap_time-color;
-  font-size: 16px;
+  // color: $rhap_time-color;
+  color: var(--color-text);
+  font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
 }

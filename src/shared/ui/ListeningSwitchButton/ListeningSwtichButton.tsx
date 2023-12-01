@@ -1,8 +1,9 @@
 import React, { useContext, useRef } from 'react';
-
-import cls from './ListeningSwitchButton.module.scss';
+//
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+//
+import cls from './ListeningSwitchButton.module.scss';
 
 interface ButtonsNames {
   buttonsNames: string[];

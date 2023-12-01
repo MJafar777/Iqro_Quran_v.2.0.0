@@ -17,6 +17,8 @@ export interface ButtonsClickedProps {
   setSurahOnEnded: (onEnded: boolean) => void;
   closeAudio: boolean;
   setCloseAudio: (onEnded: boolean) => void;
+  TrackIndex: number | any;
+  setTrackIndex: (trackIndex: any) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -36,4 +38,6 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setSurahOnEnded: () => {},
   closeAudio: false,
   setCloseAudio: () => {},
+  TrackIndex: 0,
+  setTrackIndex: () => {},
 });

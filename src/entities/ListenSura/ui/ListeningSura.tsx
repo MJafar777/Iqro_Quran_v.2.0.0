@@ -9,14 +9,14 @@ import {
   fetchSurahlesList,
   OneSuraInListSchema,
 } from '@/pages/MainPage';
+import { HStack } from '@/shared/ui/Stack';
+import { ListenActive } from '@/shared/ui/ListenActive';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import { Download, Play } from '@/shared/assets/iconsListening';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 //
 import cls from './listenSura.module.scss';
-import { HStack } from '@/shared/ui/Stack';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import { ListenActive } from '@/shared/ui/ListenActive';
 
 interface ListenerProp {
   index: number;
@@ -24,7 +24,8 @@ interface ListenerProp {
 }
 
 const CardItem = (prop: ListenerProp) => {
-  const { surahOnEnded, setSurahOnEnded } = useContext(ButtonsContext);
+  const { surahOnEnded, setSurahOnEnded, TrackIndex, setTrackIndex } =
+    useContext(ButtonsContext);
 
   const { info, index } = prop;
 
@@ -50,9 +51,10 @@ const CardItem = (prop: ListenerProp) => {
           type="button"
           className={cls.Button}
           onClick={() => {
+            setTrackIndex(0);
+
             setSurahListenNumber(info.quran_order);
             setCloseAudio(false);
-            // setSurahOnEnded(!surahOnEnded);
           }}
         >
           {surahListenNumber !== info.quran_order && surahOnEnded ? (
@@ -60,7 +62,6 @@ const CardItem = (prop: ListenerProp) => {
           ) : !surahOnEnded && surahListenNumber === info.quran_order ? (
             <ListenActive />
           ) : (
-            // <Pause className={cls.ButtonIcon} />
             <Play className={cls.ButtonIcon} />
           )}
         </button>
