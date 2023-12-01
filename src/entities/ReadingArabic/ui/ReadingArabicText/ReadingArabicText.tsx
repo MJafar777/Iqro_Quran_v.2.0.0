@@ -44,7 +44,11 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const isError = useSelector(getReadingArabicError);
 
   useEffect(() => {
-    if (currentSuraRead?.quran_order && data) {
+    if (
+      currentSuraRead?.quran_order &&
+      data &&
+      !data[currentSuraRead?.quran_order]
+    ) {
       dispatch(
         fetchReadingArabic({
           suraId: currentSuraRead?.quran_order,
@@ -63,7 +67,12 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   }, [currentSuraRead?.quran_order, dispatch]);
 
   useEffect(() => {
-    if (currentSuraRead?.quran_order) {
+    if (
+      data &&
+      !data[currentSuraRead?.quran_order]?.data?.data?.some(
+        (verse) => verse.page_number === currentPageRead.pageNumber,
+      )
+    ) {
       dispatch(
         fetchReadingArabic({
           suraId: currentSuraRead?.quran_order,
@@ -72,7 +81,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageRead, dispatch]);
+  }, [currentPageRead?.pageNumber, dispatch]);
 
   const renderContent = useMemo(() => {
     if (isLoading) {

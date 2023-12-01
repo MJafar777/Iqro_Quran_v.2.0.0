@@ -30,7 +30,9 @@ const QuranWords = memo(({ className, WordsInfo }: QuranWordsProps) => {
       className={classNames(cls.QuranWords, {}, [])}
     >
       {WordsInfo
-        ? WordsInfo.map((word) => <VerseWord key={word._id} Word={word} />)
+        ? Object.values(WordsInfo).map((word) => (
+            <VerseWord key={word._id} Word={word} />
+          ))
         : ''}
     </div>
   );
