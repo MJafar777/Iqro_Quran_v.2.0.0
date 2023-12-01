@@ -1,41 +1,35 @@
 import React, { memo } from 'react';
-import { useSelector } from 'react-redux';
 import cls from './VerseWords.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import VerseWord from '../VerseWord/VerseWord';
 import { Word } from '../../model/types/readingSura';
 
-import { getSelectedSuraRead } from '@/entities/SurahRead';
-import { getSelectedPageRead } from '@/entities/PageRead';
-
 interface QuranWordsProps {
   className?: string;
   WordsInfo: Word[];
+  checkPageNumber: number;
 }
 
-const QuranWords = memo(({ className, WordsInfo }: QuranWordsProps) => {
-  const currentSuraRead = useSelector(getSelectedSuraRead);
-  const currentPageRead = useSelector(getSelectedPageRead);
-
-  return (
-    <div
-      style={{
-        justifyContent:
-          currentSuraRead.quran_order === 1 ||
-          (currentSuraRead.quran_order === 2 &&
-            currentPageRead.pageNumber === 2)
-            ? 'center'
-            : 'space-between',
-      }}
-      className={classNames(cls.QuranWords, {}, [])}
-    >
-      {WordsInfo
-        ? Object.values(WordsInfo).map((word) => (
-            <VerseWord key={word._id} Word={word} />
-          ))
-        : ''}
-    </div>
-  );
-});
+const QuranWords = memo(
+  ({ className, checkPageNumber, WordsInfo }: QuranWordsProps) => {
+    return (
+      <div
+        style={{
+          justifyContent:
+            checkPageNumber === 1 || checkPageNumber === 2
+              ? 'center'
+              : 'space-between',
+        }}
+        className={classNames(cls.QuranWords, {}, [className])}
+      >
+        {WordsInfo
+          ? Object.values(WordsInfo)
+              .reverse()
+              .map((word) => <VerseWord key={word._id} Word={word} />)
+          : ''}
+      </div>
+    );
+  },
+);
 
 export default QuranWords;
