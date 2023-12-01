@@ -12,12 +12,14 @@ import {
   getRouteInfoSurah,
   getRouteListening,
   getRouteTafsir,
+  getRouteNotFound,
 } from '@/shared/const/router';
 
 import { AppRoutesProps } from '@/shared/types/router';
 import { InfoSurahPage } from '@/pages/InformationPage';
 import { ListenParent } from '@/pages/ListeningPage';
 import { Tafsir } from '@/pages/Tafsir';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -47,5 +49,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.TAFSIR]: {
     path: getRouteTafsir(),
     element: <Tafsir />,
+  },
+  [AppRoutes.NOTFOUND]: {
+    path: getRouteNotFound(),
+    element: <NotFoundPage />,
   },
 };

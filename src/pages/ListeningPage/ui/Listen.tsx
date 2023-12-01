@@ -21,18 +21,8 @@ const ListenParent = () => {
   const Sura = t('Sura');
   const Juz = t('Juz');
 
-  // const numberOfDigits = surahListenNumber.toString().length;
-
-  // const modifiedValue =
-  //   numberOfDigits === 1
-  //     ? `00${numberOfDigits}`
-  //     : numberOfDigits === 2
-  //     ? `0${numberOfDigits}`
-  //     : numberOfDigits;
-
   const srcSuraListen = `http://iqro-quran.uz/backend/suras/${surahListenNumber}.mp3`;
   const srcJuzsListen = `http://iqro-quran.uz/developmentBackend/juzes/juz${surahListenNumber}.mp3`;
-  // const srcSuraListen = `https://server8.mp3quran.net/afs/${modifiedValue}.mp3`;
 
   return (
     <div className={cls.ParentListener}>

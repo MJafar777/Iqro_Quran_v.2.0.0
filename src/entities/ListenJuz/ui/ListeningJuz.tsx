@@ -1,7 +1,3 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable jsx-a11y/media-has-caption */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-
 import React, { Suspense, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -14,26 +10,6 @@ import { Download, Play } from '@/shared/assets/iconsListening';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 //
 import cls from './listeningJuz.module.scss';
-
-const ListeningJuz = () => {
-  const salom: number = 30;
-  const arrayEmpty: number[] = Array.from(
-    { length: salom },
-    (_, index) => index + 1,
-  );
-
-  return (
-    <div>
-      <HStack max className={cls.ListenJuzWrapper} gap="16">
-        {arrayEmpty.map((item: number, index: number) => {
-          return <CardItems key={index} index={item} />;
-        })}
-      </HStack>
-    </div>
-  );
-};
-
-export default ListeningJuz;
 
 interface CardItemsvalue {
   info?: OneSuraInListSchema;
@@ -88,7 +64,7 @@ const CardItems = (props: CardItemsvalue) => {
             )}
           </button>
 
-          <button className={cls.Button} type="button">
+          <button aria-label="save" className={cls.Button} type="button">
             <Link
               to={srcDownload}
               download
@@ -104,3 +80,23 @@ const CardItems = (props: CardItemsvalue) => {
     </Suspense>
   );
 };
+
+const ListeningJuz = () => {
+  const salom: number = 30;
+  const arrayEmpty: number[] = Array.from(
+    { length: salom },
+    (_, index) => index + 1,
+  );
+
+  return (
+    <div>
+      <HStack max className={cls.ListenJuzWrapper} gap="16">
+        {arrayEmpty.map((item: number, index: number) => {
+          return <CardItems key={index} index={item} />;
+        })}
+      </HStack>
+    </div>
+  );
+};
+
+export default ListeningJuz;

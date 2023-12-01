@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/media-has-caption */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -65,7 +63,7 @@ const CardItem = (prop: ListenerProp) => {
             <Play className={cls.ButtonIcon} />
           )}
         </button>
-        <button className={cls.Button} type="button">
+        <button aria-label="save" className={cls.Button} type="button">
           <Link
             download
             target="_blank"
