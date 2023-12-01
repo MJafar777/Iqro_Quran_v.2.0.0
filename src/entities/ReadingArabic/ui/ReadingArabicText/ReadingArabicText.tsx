@@ -1,4 +1,11 @@
-import { memo, useEffect, useMemo } from 'react';
+import {
+  MutableRefObject,
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingArabic.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -19,11 +26,13 @@ import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranVerse from '../QuranVerse/QuranVerse';
 import { getSelectedPageRead } from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
-import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
+// import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
 import SuraNameContainer, {
   SuraNameSize,
 } from '@/shared/ui/SuraName/SuraNameContainer';
 import Bismillah from '@/shared/ui/Bismillah/Bismillah';
+import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll/useInfiniteScroll';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -36,8 +45,11 @@ const reducers: ReducersList = {
 
 export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const dispatch = useAppDispatch();
+  const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const currentSuraRead = useSelector(getSelectedSuraRead);
   const currentPageRead = useSelector(getSelectedPageRead);
+  const { setFetchIsLoading } = useContext(ButtonsContext);
 
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
@@ -83,11 +95,23 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead?.pageNumber, dispatch]);
 
+  const handleInfiniteScroll = () => {
+    console.log('Load more items!');
+  };
+
+  useInfiniteScroll({
+    triggerRef,
+    wrapperRef,
+    callback: handleInfiniteScroll,
+  });
+
   const renderContent = useMemo(() => {
     if (isLoading) {
-      return <ReadTextSkeleton />;
+      setFetchIsLoading(isLoading);
+      // return <ReadTextSkeleton />;
     }
     if (data) {
+      setFetchIsLoading(isLoading);
       return (
         <QuranVerse
           verseData={data[currentSuraRead?.quran_order]?.data?.data}
@@ -101,11 +125,13 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     } else {
       return null;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, data, isError, currentSuraRead?.quran_order]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
       <div
+        ref={wrapperRef}
         data-testid="reading-arabic"
         className={classNames(cls.ReadingArabic, {}, [className])}
       >
@@ -124,6 +150,8 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
             String(currentSuraRead.quran_order),
           ) && <Bismillah />}
           {renderContent}
+
+          <div className={cls.trigger} ref={triggerRef} />
         </div>
       </div>
     </DynamicModuleLoader>

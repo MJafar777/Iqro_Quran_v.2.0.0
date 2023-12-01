@@ -30,7 +30,9 @@ export function useInfiniteScroll({
         }
       }, options);
 
-      observer.current.observe(triggerElement);
+      if (triggerElement) {
+        observer.current.observe(triggerElement);
+      }
     }
 
     return () => {
