@@ -18,6 +18,7 @@ const skeletonList = Array.from({ length: 18 }, () => <OneItemSurahSkleton />);
 
 export const ListOfSurah = memo((prop: ListOfSurahProp) => {
   const { data, className, isLoading, error } = prop;
+
   const { t, i18n } = useTranslation();
 
   return (
@@ -36,8 +37,8 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
             return (
               <OneItemSurah
                 title={
-                  oneSurah.translated_names.filter(
-                    (lang) => lang.lang_id.iso_code === i18n.language,
+                  oneSurah?.translated_names.filter(
+                    (lang) => lang?.lang_id?.iso_code === i18n.language,
                   )[0]?.name
                 }
                 key={index}

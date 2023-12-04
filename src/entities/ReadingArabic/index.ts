@@ -9,6 +9,7 @@ export type {
   Verse,
   ReadingSura,
   DataInReduxReadingQuranData,
+  QuranDataText
 } from './model/types/readingSura';
 
 export type {

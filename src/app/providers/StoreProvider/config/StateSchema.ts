@@ -20,12 +20,12 @@ import { SelectedPageSchema } from '@/entities/Page';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
-// import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
-import { SurahInfoSchema } from '@/pages/InformationPage';
-import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { UISchema } from '@/shared/lib/features/UI';
 import { SelectedPageReadSchema } from '@/entities/PageRead';
 import { SelectedOyatReadSchema } from '@/entities/OyatRead';
 import { SelectedSuraReadSchema } from '@/entities/SurahRead';
+// import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { SurahInfoSchema } from '@/pages/InformationPage';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -35,6 +35,7 @@ export interface StateSchema {
   currentPage: SelectedPageSchema;
   currentPageRead: SelectedPageReadSchema;
 
+  ui: UISchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
@@ -47,9 +48,12 @@ export interface StateSchema {
   mainPage: SurahListSchema;
   timeData: DataTimeScheme;
   search: SearchData;
-  tafsirPage: ReduxSchemeForTafsir;
+  tafsirPage: ReadingArabicTextSchema;
   info: SurahInfoSchema;
 }
+
+
+
 
 export type StateSchemaKey = keyof StateSchema;
 export type MountedReducers = OptionalRecord<StateSchemaKey, boolean>;

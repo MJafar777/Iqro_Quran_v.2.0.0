@@ -16,6 +16,7 @@ import { SurahInfoReducer } from '@/pages/InformationPage';
 import { selectedSuraReadReducer } from '@/entities/SurahRead';
 import { selectedOyatReadReducer } from '@/entities/OyatRead';
 import { selectedPageReadReducer } from '@/entities/PageRead';
+import { uiReducer } from '@/features/UI';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -34,7 +35,7 @@ export function createReduxStore(
     search: setSearchReducer,
     info: SurahInfoReducer,
     tafsirPage: sliceTafsirReduce,
-
+    ui: uiReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
