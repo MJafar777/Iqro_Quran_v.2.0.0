@@ -10,11 +10,13 @@ import { Close } from '@/shared/assets/iconsListening';
 interface AudioPlayerCompInterface {
   className?: string;
   src?: string;
+  id: number;
 }
 
 const ListenSurahAudioPlayer = ({
   className,
   src,
+  id,
 }: AudioPlayerCompInterface) => {
   const {
     closeAudio,
@@ -24,7 +26,7 @@ const ListenSurahAudioPlayer = ({
     setSurahOnEnded,
     surahListenNumber,
   } = useContext(ButtonsContext);
-
+  
   const playlist = [{ src: '/assets/one.mp3' }, { src }];
 
   const handleEnd = () => {
@@ -32,6 +34,13 @@ const ListenSurahAudioPlayer = ({
       currentTrack < playlist.length - 1 ? currentTrack + 1 : 0,
     );
   };
+
+  const srcId =
+    id && id !== 777
+      ? Number(surahListenNumber) === 9 || Number(surahListenNumber) === 1
+        ? src
+        : playlist[TrackIndex].src
+      : src;
 
   return closeAudio === false ? (
     <div className={classNames(cls.AudioPlayerComp, {}, [className])}>
@@ -54,11 +63,7 @@ const ListenSurahAudioPlayer = ({
           handleEnd();
           setSurahOnEnded(true);
         }}
-        src={
-          Number(surahListenNumber) === 9 || Number(surahListenNumber) === 1
-            ? src
-            : playlist[TrackIndex].src
-        }
+        src={srcId}
         onPlay={() => {
           setSurahOnEnded(false);
         }}

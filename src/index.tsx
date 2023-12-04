@@ -1,3 +1,4 @@
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
@@ -20,18 +21,20 @@ if (!container) {
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
-    <StoreProvider>
-      <ErrorBoundary>
-        <ForceUpdateProvider>
-          <ThemeProvider>
-            <ButtonsProvider>
-              <App />
-            </ButtonsProvider>
-          </ThemeProvider>
-        </ForceUpdateProvider>
-      </ErrorBoundary>
-    </StoreProvider>
-  </BrowserRouter>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <StoreProvider>
+        <ErrorBoundary>
+          <ForceUpdateProvider>
+            <ThemeProvider>
+              <ButtonsProvider>
+                <App />
+              </ButtonsProvider>
+            </ThemeProvider>
+          </ForceUpdateProvider>
+        </ErrorBoundary>
+      </StoreProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
 export { Theme } from '@/shared/const/theme';

@@ -22,7 +22,7 @@ export const LangSwitcher = memo(() => {
             toggle('uz');
           }}
         >
-          Latin
+          Lotincha
         </div>
         <div
           className={cls.menuItem}
@@ -30,7 +30,7 @@ export const LangSwitcher = memo(() => {
             toggle('kr');
           }}
         >
-          Крилл
+          Криллча
         </div>
       </div>
     );

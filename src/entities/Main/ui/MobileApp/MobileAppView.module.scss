@@ -4,6 +4,26 @@
   margin-top: 40px;
 }
 
+.IconsMobileAppView {
+  font-size: 28px;
+  color: var(--color-text);
+  opacity: 0.5;
+}
+
+.IconsMobileAppView:hover {
+  opacity: 1;
+}
+
+.textWithLogo {
+  width: 100px;
+}
+
+.IqroQuranMobileView {
+  font-size: 50px;
+  transform: scale(4);
+  color: var(--color-text);
+}
+
 .icon {
   width: 500px;
   height: 500px;
@@ -40,7 +60,14 @@
 }
 
 .rightHomeImg {
-  width: 50%;
+  width: 55%;
+  transform: scale(1.1);
+}
+
+.textofQuran {
+  font-size: 50px;
+  transform: scale(8);
+  color: var(--color-text);
 }
 
 .textofQuran {
