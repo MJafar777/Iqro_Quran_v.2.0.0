@@ -25,7 +25,7 @@ export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
           );
         })}
       </p>
-      <p className={cls.text}>{text}</p>
+      <p className={cls.text}>{text?.replace(/<sup[^>]*>1<\/sup>/g, '')}</p>
     </div>
   );
 });

@@ -1,11 +1,12 @@
+/* eslint-disable array-callback-return */
 import React, { memo, useEffect, useState } from 'react';
 import cls from './OneTafsirCard.module.scss';
 import { IconsOfTafsir } from '@/shared/ui/IconsOfTafsir';
 import { ContentOfTafsir } from '@/shared/ui/ContentOfTafsir';
-import { OneVerseTafsirScheme } from '@/pages/Tafsir';
+import { Chapter } from '@/pages/Tafsir';
 
 interface OneTafsirCardProp {
-  data?: OneVerseTafsirScheme;
+  data?: Chapter;
 }
 
 export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
@@ -24,13 +25,13 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         // console.log("Done");
       });
   }, [data?.page_number]);
-  console.log(data?.page_number);
 
   return (
     <div className={cls.oneTafsirCard}>
       <IconsOfTafsir verse={data?.verse_key} />
       <ContentOfTafsir
         // @ts-ignore
+
         words={data?.words || []}
         text={data?.tafsir[0].more_text}
         arab={data?.text}

@@ -6,10 +6,10 @@ import {
   getV1OrV2FontFaceSource,
 } from '../../utils/fontFaceHelper';
 import { removeItemFromArray } from '../../utils/arrry';
-import { OneVerseTafsirScheme, addLoadedFontFace } from '@/pages/Tafsir';
+import { Chapter, addLoadedFontFace } from '@/pages/Tafsir';
 import { StateSchema } from '@/app/providers/StoreProvider';
 
-const useQcfFont = (verses: OneVerseTafsirScheme[]) => {
+const useQcfFont = (verses: Chapter[]) => {
   const currentlyFetchingFonts = useRef<string[]>([]);
   const dispatch = useDispatch();
   const isFontQCF = true;

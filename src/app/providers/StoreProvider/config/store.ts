@@ -12,10 +12,12 @@ import { SurahListSliceReducer } from '@/pages/MainPage';
 import { TimeDataReducer } from '@/widgets/Nabar';
 import { setSearchReducer } from '@/entities/Main';
 import { sliceTafsirReduce } from '@/pages/Tafsir';
+import { SurahInfoReducer } from '@/pages/InformationPage';
 import { selectedSuraReadReducer } from '@/entities/SurahRead';
 import { selectedOyatReadReducer } from '@/entities/OyatRead';
 import { selectedPageReadReducer } from '@/entities/PageRead';
 import { selectedPageReadSelectReducer } from '@/entities/PageReadSelect';
+import { uiReducer } from '@/features/UI';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -33,7 +35,9 @@ export function createReduxStore(
     mainPage: SurahListSliceReducer,
     timeData: TimeDataReducer,
     search: setSearchReducer,
+    info: SurahInfoReducer,
     tafsirPage: sliceTafsirReduce,
+    ui: uiReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
