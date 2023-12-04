@@ -179,6 +179,8 @@ export interface Verse {
 interface Pagination {
   totalPages: number;
   currentPage: string;
+  nextpage: boolean;
+  prevpage: boolean;
 }
 
 export interface QuranDataText {
