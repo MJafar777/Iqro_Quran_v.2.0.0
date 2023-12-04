@@ -12,11 +12,16 @@ interface QuranPageProps {
   className?: string;
   pageData: pageDataObjType;
   isLoading: boolean;
+  // id: string;
 }
 
 const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
   return (
-    <div className={classNames(cls.QuranPage, {}, [])}>
+    <div
+      id={Object.values(pageData)[0][0].page_number}
+      data-testid="QuranPage"
+      className={classNames(cls.QuranPage, {}, [])}
+    >
       {!isLoading ? (
         <>
           {Object.values(pageData).map((word) => (
@@ -33,7 +38,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
           <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
         </>
       ) : (
-        <h1>Loading...</h1>
+        ''
       )}
     </div>
   );

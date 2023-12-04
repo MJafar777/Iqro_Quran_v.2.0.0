@@ -28,6 +28,7 @@ import SuraNameContainer, {
 import Bismillah from '@/shared/ui/Bismillah/Bismillah';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
+import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -44,6 +45,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const currentPageRead = useSelector(getSelectedPageRead);
   const { incrementCurrentPageRead } = useSelectedPageReadActions();
   const { setFetchIsLoading } = useContext(ButtonsContext);
+  const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
 
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
@@ -90,6 +92,8 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
         }),
       );
     }
+
+    setSelectedPageReadSelect(currentPageRead.pageNumber);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead?.pageNumber, dispatch]);
 
