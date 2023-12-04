@@ -1,15 +1,15 @@
 /* eslint-disable camelcase */
-import React, { memo } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
 import { isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
-// import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
+import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
-import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
 import { Verse } from '@/entities/ReadingArabic';
-// import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
+import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface ListOfTafsirProp {
   className?: string;
@@ -20,27 +20,22 @@ interface ListOfTafsirProp {
 export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
   const { listOfTafsir, quran_order } = prop;
   const isLoadingOfTafsir = useSelector(isLoading);
+  const { isPlay, setIsPlay } = useContext(ButtonsContext);
+
+  const [audio, setAudio] = useState(
+    'http://iqro-quran.uz/developmentBackend/suras/1.mp3',
+  );
+
+  useEffect(() => {
+    setAudio(
+      `http://iqro-quran.uz/developmentBackend/suras/${quran_order}.mp3`,
+    );
+  }, [quran_order]);
 
   // @ts-ignore
   useQcfFont(listOfTafsir);
 
-  const content = isLoadingOfTafsir ? (
-    <div
-      style={{
-        paddingTop: '120px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '30px',
-      }}
-    >
-      <OneTafsirCardSkleton />
-      <OneTafsirCardSkleton />
-      <OneTafsirCardSkleton />
-      <OneTafsirCardSkleton />
-      <OneTafsirCardSkleton />
-      <OneTafsirCardSkleton />
-    </div>
-  ) : (
+  const content = (
     <div className={cls.listOfTafsir}>
       <SurahInfoAndAudioForTafsir />
       {listOfTafsir?.map((oneVerse) => {
@@ -48,10 +43,11 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
         return <OneTafsirCard data={oneVerse} />;
       })}
 
-      {/* <AudioPlayerComp
-        src={`http://iqro-quran.uz/developmentBackend/suras/${quran_order}.mp3`}
-      /> */}
+      {isLoadingOfTafsir ? <OneTafsirCardSkleton /> : ''}
+
+      <AudioPlayerComp src={isPlay ? audio : ''} />
     </div>
   );
+
   return content;
 });

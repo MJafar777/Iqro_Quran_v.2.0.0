@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import cls from './AudioPlayerComp.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface AudioPlayerCompInterface {
   className?: string;
@@ -9,9 +10,16 @@ interface AudioPlayerCompInterface {
 }
 
 const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
+  const { isPlay, setIsPlay } = useContext(ButtonsContext);
+
   return (
     <div className={classNames(cls.AudioPlayerComp, {}, [className])}>
-      <AudioPlayer autoPlay src={src} onPlay={(e) => console.log('onPlay')} />
+      <AudioPlayer
+        autoPlayAfterSrcChange
+        src={src}
+        // onPlay={() => setIsPlay(true)}
+        // onPause={() => setIsPlay(false)}
+      />
     </div>
   );
 };
