@@ -39,23 +39,23 @@ const Tafsir = (prop: TafsirProp) => {
   const windowHeight = useSelector(getWindowHieght);
   console.log(surahId.quran_order, 'surah');
 
-  // useEffect(() => {
-  //   setPage(1);
-  //   console.log(page, 'page');
-  // }, [surahId.quran_order]);
+  useEffect(() => {
+    dispatch(fetchTafsirList({ chapterId: 1, page_number: 1 }));
+    console.log('dispatch');
+  }, []);
 
   useEffect(() => {
-    if (surahId.quran_order) {
-      dispatch(
-        fetchTafsirList({ chapterId: surahId.quran_order, page_number: page }),
-      );
-      console.log('dispatch');
-    }
+    dispatch(
+      fetchTafsirList({ chapterId: surahId.quran_order, page_number: page }),
+    );
+  }, [surahId.quran_order, page]);
+
+  useEffect(() => {
+    setPage(1);
   }, [surahId.quran_order]);
 
   const onLoadNextPart = () => {
     setPage((pre) => pre + 1);
-    console.log('hfhfh');
   };
 
   const content = useMemo(

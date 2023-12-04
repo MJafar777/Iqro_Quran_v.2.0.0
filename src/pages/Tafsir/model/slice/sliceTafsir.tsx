@@ -47,17 +47,10 @@ const sliceTafsir = createSlice({
               isNextPageHas: action.payload.results - 10 > 0,
             };
           } else if (chapterId && state.data[chapterId]?.data?.length! > 0) {
-            console.log(action.payload.data[0].verse_number);
-            if (
-              state.data[chapterId].data![state.data[chapterId].data?.length!]
-                ?.verse_number === action.payload.data[0].verse_number
-            ) {
-              console.log('Datra');
-              state.data[chapterId] = {
-                data: [...state.data[chapterId].data!, ...action.payload.data],
-                isNextPageHas: action.payload.results === 0,
-              };
-            }
+            state.data[chapterId] = {
+              data: [...state.data[chapterId].data!, ...action.payload.data],
+              isNextPageHas: action.payload.results === 0,
+            };
           }
         },
       )
