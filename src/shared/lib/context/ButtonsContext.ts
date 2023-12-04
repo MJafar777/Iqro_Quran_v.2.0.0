@@ -18,6 +18,9 @@ export interface ButtonsClickedProps {
   verseNumber: string;
   setAudioUrl: (prop: string) => void;
   audioUrl: string;
+
+  fetchIsLoading: boolean;
+  setFetchIsLoading: (prop: boolean) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -37,4 +40,6 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   verseNumber: '1',
   setAudioUrl: () => {},
   audioUrl: '',
+  fetchIsLoading: false,
+  setFetchIsLoading: () => {},
 });

@@ -26,6 +26,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [readingPageTubBtn, setReadingPageTubBtn] = useState(1);
 
+  const [fetchIsLoading, setFetchIsLoading] = useState(false);
+
   const defaultProps = useMemo(
     () => ({
       readingSidebarActive,
@@ -44,6 +46,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setAudioUrl,
       verseNumber,
       setVerseNumber,
+      fetchIsLoading,
+      setFetchIsLoading,
     }),
     [
       readingSidebarActive,
@@ -54,6 +58,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       isPlay,
       audioUrl,
       verseNumber,
+      fetchIsLoading,
+      setFetchIsLoading,
     ],
   );
 

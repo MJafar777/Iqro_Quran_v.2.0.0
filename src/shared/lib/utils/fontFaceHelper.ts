@@ -36,8 +36,8 @@ export const getV1OrV2FontFaceSource = (
   pageNumber: number,
 ): string => {
   const pageName = String(pageNumber).padStart(3, '0');
-  const woff2 = `/fonts/quran/hafs/v1/woff2/p${pageNumber}.woff2`;
-  const woff = `/fonts/quran/hafs/v1/woff/p${pageNumber}.woff`;
+  const woff2 = `/fonts/quran/hafs/v2/woff2/p${pageNumber}.woff2`;
+  const woff = `/fonts/quran/hafs/v2/woff/p${pageNumber}.woff`;
   // const ttf = `./fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`;
   const ttf = `/fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`;
   return `local(p${pageNumber}-v1), url('${ttf}') format('truetype')`;

@@ -1,10 +1,15 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { getListOfSurahs } from '@/pages/MainPage';
 import cls from './ReadingPrevNextSuraBtn.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import ArrowBottom from '@/shared/assets/icons/arrow-bottom.svg';
 import { getSelectedSura, useSelectedSuraActions } from '@/entities/Surah';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import {
+  getSelectedSuraRead,
+  useSelectedSuraReadActions,
+} from '@/entities/SurahRead';
 
 interface ReadingPrevNextSuraBtnProps {
   className?: string;
@@ -24,17 +29,28 @@ const ReadingPrevNexSuratBtn = memo(
     next,
     text,
   }: ReadingPrevNextSuraBtnProps) => {
+    const { readingPageTubBtn } = useContext(ButtonsContext);
     const { setSelectedSura } = useSelectedSuraActions();
     const currentSura = useSelector(getSelectedSura);
+    const { setSelectedSuraRead } = useSelectedSuraReadActions();
+    const currentSuraRead = useSelector(getSelectedSuraRead);
     const suraList = useSelector(getListOfSurahs);
 
     const handlePageClick = () => {
       if (prev && suraList) {
-        setSelectedSura(suraList[currentSura.quran_order]);
+        if (readingPageTubBtn === 3) {
+          setSelectedSuraRead(suraList[currentSuraRead.quran_order]);
+        } else {
+          setSelectedSura(suraList[currentSura.quran_order]);
+        }
       }
 
       if (next && suraList) {
-        setSelectedSura(suraList[currentSura.quran_order - 2]);
+        if (readingPageTubBtn === 3) {
+          setSelectedSuraRead(suraList[currentSuraRead.quran_order - 2]);
+        } else {
+          setSelectedSura(suraList[currentSura.quran_order - 2]);
+        }
       }
     };
 
