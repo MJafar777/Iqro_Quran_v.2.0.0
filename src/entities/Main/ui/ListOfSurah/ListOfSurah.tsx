@@ -36,9 +36,9 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
             return (
               <OneItemSurah
                 title={
-                  oneSurah?.translated_names.filter(
+                  oneSurah.translated_names.filter(
                     (lang) => lang.lang_id.iso_code === i18n.language,
-                  )[0].name
+                  )[0]?.name
                 }
                 key={index}
                 oneSurah={oneSurah}

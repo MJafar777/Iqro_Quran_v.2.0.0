@@ -14,6 +14,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
 
+  const [TrackIndex, setTrackIndex] = useState(0);
+
   const [isRightsidebarActive, setIsRightsidebarActive] = useState(true);
 
   const [fontSize, setFontSize] = useState(3);
@@ -26,40 +28,70 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [readingPageTubBtn, setReadingPageTubBtn] = useState(1);
 
+  const [surahListenNumber, setSurahListenNumber] = useState(0);
+
+  const [surahOnEnded, setSurahOnEnded] = useState(false);
+
+  const [closeAudio, setCloseAudio] = useState(false);
+
   const [fetchIsLoading, setFetchIsLoading] = useState(false);
 
   const defaultProps = useMemo(
     () => ({
-      readingSidebarActive,
-      setReadingSidebarActive,
-      isSidebarActive,
-      setIsSidebarActive,
-      isRightsidebarActive,
-      setIsRightsidebarActive,
-      fontSize,
-      setFontSize,
-      readingPageTubBtn,
-      setReadingPageTubBtn,
       isPlay,
-      setIsPlay,
+      fontSize,
       audioUrl,
+      setIsPlay,
+      closeAudio,
+      TrackIndex,
+      setFontSize,
       setAudioUrl,
       verseNumber,
-      setVerseNumber,
+      surahOnEnded,
+      setCloseAudio,
+      setTrackIndex,
       fetchIsLoading,
+      setVerseNumber,
+      isSidebarActive,
+      setSurahOnEnded,
+      readingPageTubBtn,
+      surahListenNumber,
       setFetchIsLoading,
+      setIsSidebarActive,
+      isRightsidebarActive,
+      readingSidebarActive,
+      setReadingPageTubBtn,
+      setSurahListenNumber,
+      setReadingSidebarActive,
+      setIsRightsidebarActive,
     }),
     [
-      readingSidebarActive,
-      isSidebarActive,
-      isRightsidebarActive,
-      fontSize,
-      readingPageTubBtn,
       isPlay,
+      fontSize,
       audioUrl,
+      setIsPlay,
+      closeAudio,
+      TrackIndex,
+      setFontSize,
+      setAudioUrl,
       verseNumber,
+      surahOnEnded,
+      setCloseAudio,
+      setTrackIndex,
+      setVerseNumber,
       fetchIsLoading,
+      isSidebarActive,
+      setSurahOnEnded,
+      readingPageTubBtn,
+      surahListenNumber,
       setFetchIsLoading,
+      setIsSidebarActive,
+      isRightsidebarActive,
+      setSurahListenNumber,
+      readingSidebarActive,
+      setReadingPageTubBtn,
+      setReadingSidebarActive,
+      setIsRightsidebarActive,
     ],
   );
 

@@ -13,9 +13,11 @@
 
 .DataName {
   user-select: none;
+  color: var(--color-text);
 }
 
 .Data {
+  color: var(--color-text);
   margin: 0 1rem;
 }
 
@@ -35,6 +37,7 @@
 .Block {
   font-family: Arial, Helvetica, sans-serif;
   margin: 2rem 0;
+  color: var(--color-text);
 
   h4 {
     margin: 1rem 0;

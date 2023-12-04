@@ -12,6 +12,7 @@ import { SurahListSliceReducer } from '@/pages/MainPage';
 import { TimeDataReducer } from '@/widgets/Nabar';
 import { setSearchReducer } from '@/entities/Main';
 import { sliceTafsirReduce } from '@/pages/Tafsir';
+import { SurahInfoReducer } from '@/pages/InformationPage';
 import { selectedSuraReadReducer } from '@/entities/SurahRead';
 import { selectedOyatReadReducer } from '@/entities/OyatRead';
 import { selectedPageReadReducer } from '@/entities/PageRead';
@@ -31,7 +32,9 @@ export function createReduxStore(
     mainPage: SurahListSliceReducer,
     timeData: TimeDataReducer,
     search: setSearchReducer,
+    info: SurahInfoReducer,
     tafsirPage: sliceTafsirReduce,
+
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
