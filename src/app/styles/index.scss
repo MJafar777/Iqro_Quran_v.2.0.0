@@ -2,27 +2,27 @@
 /* stylelint-disable scss/dollar-variable-pattern */
 /* stylelint-disable declaration-colon-newline-after */
 /* stylelint-disable scss/at-import-no-partial-leading-underscore */
-@import "reset";
-@import "variables/global";
-@import "themes/normal";
-@import "themes/dark";
-@import "themes/orange";
-@import "fonts";
-@import "_breakpoints";
-@import "_constants";
-@import "_shades";
-@import "_utility";
+@import 'reset';
+@import 'variables/global';
+@import 'themes/normal';
+@import 'themes/dark';
+@import 'themes/orange';
+@import 'fonts';
+@import '_breakpoints';
+@import '_constants';
+@import '_shades';
+@import '_utility';
 
 @font-face {
-  font-family: "Helvetica Neue";
-  src: url("../../shared/assets/font/HelveticaNeue/HelveticaNeueCyr-Italic.ttf")
-    format("truetype");
+  font-family: 'Helvetica Neue';
+  src: url('../../shared/assets/font/HelveticaNeue/HelveticaNeueCyr-Italic.ttf')
+    format('truetype');
 }
 
 @font-face {
-  font-family: "surah_names";
-  src: url("../../shared/assets/font/surah_name/sura_names.ttf")
-    format("truetype");
+  font-family: 'surah_names';
+  src: url('../../shared/assets/font/surah_name/sura_names.ttf')
+    format('truetype');
 }
 
 // @font-face {
