@@ -17,7 +17,7 @@ import { makkah, madinah } from '@/shared/assets/SuraInfo';
 // };
 
 // ----- Ushbu Page Sura haqida ma'lumot olish uchun qo'laniladi! -----
-const InfoSurahPage: FC = () => {
+const InformationPage: FC = () => {
   const { t, i18n } = useTranslation();
 
   const param: { id?: string } = useParams();
@@ -97,4 +97,4 @@ const InfoSurahPage: FC = () => {
   return isLoading ? <div>{content}</div> : <Loader />;
 };
 
-export default InfoSurahPage;
+export default InformationPage;
