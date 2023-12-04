@@ -7,14 +7,16 @@ import {
 import { CombinedState } from 'redux';
 import { AxiosInstance } from 'axios';
 import { rtkApi } from '@/shared/api/rtkApi';
-
-import { SelectedSuraSchema } from '@/entities/Surah';
-import { SelectedOyatSchema } from '@/entities/Oyat';
-import { SelectedPageSchema } from '@/entities/Page';
 import {
   ReadingArabicSchema,
   ReadingArabicTextSchema,
 } from '@/entities/ReadingArabic';
+
+// Now you can use ReadingArabicSchema in your code
+
+import { SelectedSuraSchema } from '@/entities/Surah';
+import { SelectedOyatSchema } from '@/entities/Oyat';
+import { SelectedPageSchema } from '@/entities/Page';
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
@@ -22,6 +24,8 @@ import { UISchema } from '@/shared/lib/features/UI';
 import { SelectedPageReadSchema } from '@/entities/PageRead';
 import { SelectedOyatReadSchema } from '@/entities/OyatRead';
 import { SelectedSuraReadSchema } from '@/entities/SurahRead';
+// import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
+import { SurahInfoSchema } from '@/pages/InformationPage';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -45,7 +49,7 @@ export interface StateSchema {
   timeData: DataTimeScheme;
   search: SearchData;
   tafsirPage: ReadingArabicTextSchema;
-  
+  info: SurahInfoSchema;
 }
 
 

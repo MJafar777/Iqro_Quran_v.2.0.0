@@ -5,3 +5,7 @@ import { fetchReadingTranskriptKril } from './model/services/fetchReadingTranskr
 
 export type { ReadingQuranData, ReadingArabicSchema };
 export { ReadingTranskriptKril, fetchReadingTranskriptKril };
+
+export {getReadingTranskriptKrilData} from './model/selectors/readingTranskriptKril'
+
+

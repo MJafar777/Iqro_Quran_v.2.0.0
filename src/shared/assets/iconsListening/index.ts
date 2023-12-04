@@ -1,6 +1,6 @@
 export { default as more } from './more.svg';
 export { default as next } from './next.svg';
-export { default as close } from './close.svg';
+export { default as Close } from './close.svg';
 export { default as playSecond } from './playSecond.svg';
 export { default as pauseSecond } from './pouseSecond.svg';
 export { default as previous } from './previous.svg';

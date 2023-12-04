@@ -1,5 +1,5 @@
 .WrapperSurah {
-  // max-width: 700px;
+  max-width: 1300px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,13 +11,14 @@
     align-items: center;
     user-select: none;
     cursor: pointer;
+    color: var(--color-text);
   }
 }
 
 .InfoSurahPageWrapper {
   list-style: none !important;
   text-decoration: none !important;
-  color: black;
+  color: var(--color-text);
 
   .InfoSurahPage {
     width: 100%;
