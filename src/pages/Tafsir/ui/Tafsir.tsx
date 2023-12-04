@@ -1,8 +1,6 @@
-/* eslint-disable no-unsafe-optional-chaining */
-/* eslint-disable max-len */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import cls from './Tafsir.module.scss';
 import {
   DynamicModuleLoader,
@@ -22,6 +20,8 @@ import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { getSelectedSura } from '@/entities/Surah';
 import { Page } from '@/widgets/Page';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { getUIScrollByPath } from '@/features/UI';
+import { StateSchema } from '@/app/providers/StoreProvider';
 
 interface TafsirProp {
   className?: string;
@@ -37,47 +37,83 @@ const Tafsir = (prop: TafsirProp) => {
   const surahId = useSelector(getSelectedSura);
   const [page, setPage] = useState(1);
   const windowHeight = useSelector(getWindowHieght);
-  console.log(surahId.quran_order, 'surah');
+  const { pathname } = useLocation();
+
+  const scrollPosition = useSelector((state: StateSchema) =>
+    getUIScrollByPath(state, pathname),
+  );
 
   useEffect(() => {
-    dispatch(fetchTafsirList({ chapterId: 1, page_number: 1 }));
-    console.log('dispatch');
-  }, []);
+    if (
+      surahId?.quran_order &&
+      dataOfTafsir &&
+      !dataOfTafsir[surahId?.quran_order]
+    ) {
+      dispatch(
+        fetchTafsirList({
+          // @ts-ignore
+          chapterId: surahId?.quran_order,
+          page_number: surahId.pages[0],
+        }),
+      );
+    } else if (surahId.quran_order && !dataOfTafsir) {
+      dispatch(
+        // @ts-ignore
+        fetchTafsirList({ chapterId: surahId?.quran_order, page_number: page }),
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [surahId?.quran_order, dispatch]);
 
   useEffect(() => {
-    dispatch(
-      fetchTafsirList({ chapterId: surahId.quran_order, page_number: page }),
-    );
-  }, [surahId.quran_order, page]);
+    if (
+      dataOfTafsir &&
+      !dataOfTafsir[surahId?.quran_order]?.data?.data?.some(
+        (verse) => verse.page_number === page,
+      ) &&
+      // @ts-ignore
+      dataOfTafsir[surahId?.quran_order]?.data?.pagination?.nextpage
+    ) {
+      dispatch(
+        // @ts-ignore
+        fetchTafsirList({ chapterId: surahId?.quran_order, page_number: page }),
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, page]);
 
   useEffect(() => {
-    setPage(1);
+    setPage(surahId?.pages[0]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [surahId.quran_order]);
 
   const onLoadNextPart = () => {
     setPage((pre) => pre + 1);
   };
 
-  const content = useMemo(
-    () => (
+  // eslint-disable-next-line consistent-return
+  const content = useMemo(() => {
+    return (
       <Page
-        data-testid="ArticlesPage"
         onScrollEnd={onLoadNextPart}
+        data-testid="ArticlesPage"
         className={classNames(cls.tafsir, {}, [])}
       >
         <ReadingNavbar />
         <Sidebar>
           <ReadingSidebar />
         </Sidebar>
-        <ListOfTafsir
-          // @ts-ignore
-          listOfTafsir={dataOfTafsir?.[surahId?.quran_order]?.data}
-          quran_order={surahId.quran_order}
-        />
+        {dataOfTafsir ? (
+          <ListOfTafsir
+            listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
+            quran_order={surahId.quran_order}
+          />
+        ) : (
+          ''
+        )}
       </Page>
-    ),
-    [dataOfTafsir, surahId?.quran_order],
-  );
+    );
+  }, [dataOfTafsir, surahId?.quran_order]);
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>

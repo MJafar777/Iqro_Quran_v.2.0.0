@@ -2,19 +2,18 @@
 /* eslint-disable max-len */
 /* eslint-disable array-callback-return */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ApiResponse, ReduxSchemeForTafsir } from '../types/typeTafsir';
+// import { ApiResponse, ReduxSchemeForTafsir } from '../types/typeTafsir';
 import { fetchTafsirList } from '../service/fetchTafsir/fetchTafsirList';
+import {
+  QuranDataText,
+  ReadingArabicTextSchema,
+} from '@/entities/ReadingArabic';
 
-const initialState: ReduxSchemeForTafsir = {
-  error: undefined,
-  loadedFontFaces: ['p1-v1'],
-  data: {
-    1: {
-      data: [],
-      isNextPageHas: true,
-    },
-  },
+const initialState: ReadingArabicTextSchema = {
   isLoading: false,
+  error: undefined,
+  data: undefined,
+  loadedFontFaces: [],
 };
 
 const sliceTafsir = createSlice({
@@ -33,23 +32,42 @@ const sliceTafsir = createSlice({
       })
       .addCase(
         fetchTafsirList.fulfilled,
-        (state, action: PayloadAction<ApiResponse>) => {
+        (state, action: PayloadAction<QuranDataText>) => {
           state.isLoading = false;
           const chapterId = action.payload?.data[0]?.chapter_id?.quran_order;
-          console.log(state.data[chapterId]?.data?.length);
           if (
-            chapterId &&
-            (state.data[chapterId]?.data?.length === 0 ||
-              state.data[chapterId]?.data?.length === undefined)
+            state.data &&
+            state.data[action.payload.data[0]?.chapter_id.quran_order]
           ) {
-            state.data[chapterId] = {
-              data: action.payload.data,
-              isNextPageHas: action.payload.results - 10 > 0,
-            };
-          } else if (chapterId && state.data[chapterId]?.data?.length! > 0) {
-            state.data[chapterId] = {
-              data: [...state.data[chapterId].data!, ...action.payload.data],
-              isNextPageHas: action.payload.results === 0,
+            if (
+              !state.data[
+                action.payload.data[0]?.chapter_id.quran_order
+              ].data.data.some(
+                (verse) =>
+                  verse.verse_number === action.payload.data[0].verse_number,
+              )
+            ) {
+              state.data[
+                action.payload.data[0]?.chapter_id.quran_order
+              ].data.data = [
+                ...state.data[action.payload.data[0]?.chapter_id.quran_order]
+                  .data.data,
+                ...action.payload.data,
+              ];
+            } else {
+              state.data[
+                action.payload.data[0]?.chapter_id.quran_order
+              ].data.data = [
+                ...state.data[action.payload.data[0]?.chapter_id.quran_order]
+                  .data.data,
+              ];
+            }
+          } else {
+            if (!state.data) state.data = {};
+
+            state.data[action.payload.data[0]?.chapter_id.quran_order] = {
+              quran_order: action.payload.data[0]?.chapter_id.quran_order,
+              data: action.payload,
             };
           }
         },

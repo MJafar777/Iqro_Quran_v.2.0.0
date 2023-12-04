@@ -18,7 +18,6 @@ import {
 import { SurahListSchema } from '@/pages/MainPage';
 import { DataTimeScheme } from '@/widgets/Nabar';
 import { SearchData } from '@/entities/Main';
-import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
 import { UISchema } from '@/shared/lib/features/UI';
 import { SelectedPageReadSchema } from '@/entities/PageRead';
 import { SelectedOyatReadSchema } from '@/entities/OyatRead';
@@ -45,7 +44,7 @@ export interface StateSchema {
   mainPage: SurahListSchema;
   timeData: DataTimeScheme;
   search: SearchData;
-  tafsirPage: ReduxSchemeForTafsir;
+  tafsirPage: ReadingArabicTextSchema;
   
 }
 

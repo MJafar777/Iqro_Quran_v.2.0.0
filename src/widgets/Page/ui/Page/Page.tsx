@@ -1,6 +1,4 @@
-import {
-  memo, MutableRefObject, ReactNode, UIEvent, useRef,
-} from 'react';
+import { memo, MutableRefObject, ReactNode, UIEvent, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -15,9 +13,9 @@ import { TestProps } from '@/shared/types/tests';
 import { toggleFeatures } from '@/shared/lib/features';
 
 interface PageProps extends TestProps {
-    className?: string;
-    children: ReactNode;
-    onScrollEnd?: () => void;
+  className?: string;
+  children: ReactNode;
+  onScrollEnd?: () => void;
 }
 
 export const PAGE_ID = 'PAGE_ID';
@@ -28,7 +26,10 @@ export const Page = memo((props: PageProps) => {
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
-  const scrollPosition = useSelector((state: StateSchema) => getUIScrollByPath(state, pathname));
+  const scrollPosition = useSelector((state: StateSchema) =>
+    getUIScrollByPath(state, pathname),
+  );
+  console.log(scrollPosition, 'kk');
 
   useInfiniteScroll({
     triggerRef,
@@ -54,25 +55,23 @@ export const Page = memo((props: PageProps) => {
   }, 500);
 
   return (
-      <main
-            ref={wrapperRef}
-            className={classNames(
-              toggleFeatures({
-                name: 'isAppRedesigned',
-                on: () => cls.PageRedesigned,
-                off: () => cls.Page,
-              }),
-              {},
-              [className],
-            )}
-            onScroll={onScroll}
-            id={PAGE_ID}
-            data-testid={props['data-testid'] ?? 'Page'}
-        >
-          {children}
-          {onScrollEnd ? (
-              <div className={cls.trigger} ref={triggerRef} />
-          ) : null}
-      </main>
+    <main
+      ref={wrapperRef}
+      className={classNames(
+        toggleFeatures({
+          name: 'isAppRedesigned',
+          on: () => cls.PageRedesigned,
+          off: () => cls.Page,
+        }),
+        {},
+        [className],
+      )}
+      onScroll={onScroll}
+      id={PAGE_ID}
+      data-testid={props['data-testid'] ?? 'Page'}
+    >
+      {children}
+      {onScrollEnd ? <div className={cls.trigger} ref={triggerRef} /> : null}
+    </main>
   );
 });

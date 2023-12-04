@@ -3,16 +3,17 @@ import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
-import { Chapter , isLoading } from '@/pages/Tafsir';
+import { isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
 // import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
 import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
+import { Verse } from '@/entities/ReadingArabic';
 // import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 
 interface ListOfTafsirProp {
   className?: string;
-  listOfTafsir?: Chapter[];
+  listOfTafsir?: Verse[];
   quran_order: number;
 }
 
