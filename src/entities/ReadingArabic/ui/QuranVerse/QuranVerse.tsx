@@ -44,8 +44,6 @@ const QuranVerse = memo(({ className, verseData }: QuranVerseProps) => {
     }),
   );
 
-  console.log(rowObj[currentPageRead.pageNumber]);
-
   return (
     <div className={classNames(cls.QuranVerse, {}, [className])}>
       {fetchIsLoading ? (
