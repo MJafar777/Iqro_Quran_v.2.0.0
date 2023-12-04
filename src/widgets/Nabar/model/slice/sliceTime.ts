@@ -22,7 +22,7 @@ export const DataTimeSlice = createSlice({
         fetchTime.fulfilled,
         (state, action: PayloadAction<DataTime>) => {
           state.isLoading = false;
-          state.data = action.payload.data;
+          state.data = action?.payload?.data;
         },
       )
       .addCase(fetchTime.rejected, (state) => {
