@@ -11,22 +11,30 @@ interface pageDataObjType {
 interface QuranPageProps {
   className?: string;
   pageData: pageDataObjType;
+  isLoading: boolean;
 }
 
-const QuranPage = memo(({ className, pageData }: QuranPageProps) => {
+const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
   return (
     <div className={classNames(cls.QuranPage, {}, [])}>
-      {Object.values(pageData).map((word) => (
-        <QuranWords
-          WordsInfo={word}
-          pageNumber={Object.values(pageData)[0][0].page_number}
-          lineNumber={Object.values(pageData)[0][0].line_number}
-        />
-      ))}
-      <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-        {Object.values(pageData)[0][0].page_number}
-      </p>
-      <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
+      {!isLoading ? (
+        <>
+          {Object.values(pageData).map((word) => (
+            <QuranWords
+              WordsInfo={word}
+              pageNumber={Object.values(pageData)[0][0].page_number}
+              lineNumber={Object.values(pageData)[0][0].line_number}
+            />
+          ))}
+
+          <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
+            {Object.values(pageData)[0][0].page_number}
+          </p>
+          <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
+        </>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   );
 });
