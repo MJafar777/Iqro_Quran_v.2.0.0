@@ -34,6 +34,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [closeAudio, setCloseAudio] = useState(false);
 
+  const [fetchIsLoading, setFetchIsLoading] = useState(false);
+
   const defaultProps = useMemo(
     () => ({
       isPlay,
@@ -48,11 +50,13 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       surahOnEnded,
       setCloseAudio,
       setTrackIndex,
+      fetchIsLoading,
       setVerseNumber,
       isSidebarActive,
       setSurahOnEnded,
       readingPageTubBtn,
       surahListenNumber,
+      setFetchIsLoading,
       setIsSidebarActive,
       isRightsidebarActive,
       readingSidebarActive,
@@ -68,20 +72,26 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setIsPlay,
       closeAudio,
       TrackIndex,
+      setFontSize,
       setAudioUrl,
       verseNumber,
       surahOnEnded,
       setCloseAudio,
       setTrackIndex,
       setVerseNumber,
+      fetchIsLoading,
       isSidebarActive,
       setSurahOnEnded,
-      surahListenNumber,
       readingPageTubBtn,
+      surahListenNumber,
+      setFetchIsLoading,
+      setIsSidebarActive,
       isRightsidebarActive,
       setSurahListenNumber,
       readingSidebarActive,
       setReadingPageTubBtn,
+      setReadingSidebarActive,
+      setIsRightsidebarActive,
     ],
   );
 

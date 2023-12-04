@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Suspense, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 //
@@ -38,7 +37,6 @@ const ListenParent = () => {
         <Suspense fallback={<Loader />}>
           {pageSuraOrJuz ? <ListeningSura /> : <ListeningJuz />}
         </Suspense>
-        <hr />
       </div>
       {pageSuraOrJuz && surahListenNumber > 0 && surahListenNumber < 115 ? (
         <ListenSurahAudioPlayer
