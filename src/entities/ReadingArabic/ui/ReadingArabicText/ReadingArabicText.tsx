@@ -1,11 +1,4 @@
-import {
-  MutableRefObject,
-  memo,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { memo, useContext, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingArabic.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -24,15 +17,18 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranVerse from '../QuranVerse/QuranVerse';
-import { getSelectedPageRead } from '@/entities/PageRead';
+import {
+  getSelectedPageRead,
+  useSelectedPageReadActions,
+} from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
-// import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
 import SuraNameContainer, {
   SuraNameSize,
 } from '@/shared/ui/SuraName/SuraNameContainer';
 import Bismillah from '@/shared/ui/Bismillah/Bismillah';
-import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll/useInfiniteScroll';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
+import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -45,17 +41,21 @@ const reducers: ReducersList = {
 
 export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const dispatch = useAppDispatch();
-  const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const currentSuraRead = useSelector(getSelectedSuraRead);
   const currentPageRead = useSelector(getSelectedPageRead);
+  const { incrementCurrentPageRead } = useSelectedPageReadActions();
   const { setFetchIsLoading } = useContext(ButtonsContext);
+  const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
 
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
   const isError = useSelector(getReadingArabicError);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+
     if (
       currentSuraRead?.quran_order &&
       data &&
@@ -92,17 +92,26 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
         }),
       );
     }
+
+    setSelectedPageReadSelect(currentPageRead.pageNumber);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead?.pageNumber, dispatch]);
 
   const handleInfiniteScroll = () => {
-    console.log('Load more items!');
+    // eslint-disable-next-line max-len
+    if (
+      data &&
+      data[currentSuraRead?.quran_order]?.data?.pagination.nextpage &&
+      currentPageRead.pageNumber >= currentSuraRead.pages[0] &&
+      currentPageRead.pageNumber < currentSuraRead.pages[1]
+    ) {
+      incrementCurrentPageRead();
+    }
   };
 
-  useInfiniteScroll({
-    triggerRef,
-    wrapperRef,
+  const triggerRef = useInfiniteScrollForRead({
     callback: handleInfiniteScroll,
+    threshold: 0,
   });
 
   const renderContent = useMemo(() => {
@@ -131,7 +140,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
       <div
-        ref={wrapperRef}
         data-testid="reading-arabic"
         className={classNames(cls.ReadingArabic, {}, [className])}
       >
