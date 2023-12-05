@@ -19,7 +19,6 @@ const QuranWords = memo(
       [pageNumber, lineNumber],
     );
 
-    // console.log(pageNumber, lineNumber);
     return (
       <div
         className={classNames(

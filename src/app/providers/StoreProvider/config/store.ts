@@ -16,6 +16,7 @@ import { SurahInfoReducer } from '@/pages/InformationPage';
 import { selectedSuraReadReducer } from '@/entities/SurahRead';
 import { selectedOyatReadReducer } from '@/entities/OyatRead';
 import { selectedPageReadReducer } from '@/entities/PageRead';
+import { selectedPageReadSelectReducer } from '@/entities/PageReadSelect';
 import { uiReducer } from '@/features/UI';
 
 export function createReduxStore(
@@ -30,6 +31,7 @@ export function createReduxStore(
     currentSuraRead: selectedSuraReadReducer,
     currentOyatRead: selectedOyatReadReducer,
     currentPageRead: selectedPageReadReducer,
+    currentPageReadSelect: selectedPageReadSelectReducer,
     mainPage: SurahListSliceReducer,
     timeData: TimeDataReducer,
     search: setSearchReducer,

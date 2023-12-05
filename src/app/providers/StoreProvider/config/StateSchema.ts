@@ -35,6 +35,7 @@ export interface StateSchema {
   currentOyatRead: SelectedOyatReadSchema;
   currentPage: SelectedPageSchema;
   currentPageRead: SelectedPageReadSchema;
+  currentPageReadSelect: SelectedPageReadSchema;
 
   ui: UISchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;

@@ -15,6 +15,7 @@ export const fetchReadingArabic = createAsyncThunk<
 
   try {
     const response = await extra.api.get<QuranDataText>(
+      // `verse/by_chapter/chapter?chapter=${suraId}`,
       `verse/by_chapter/for_text?chapter=${suraId}&page=${pageNumber}`,
     );
 

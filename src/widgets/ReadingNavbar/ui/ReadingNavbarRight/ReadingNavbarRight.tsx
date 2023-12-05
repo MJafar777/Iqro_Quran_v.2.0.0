@@ -6,6 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { getSelectedPage } from '@/entities/Page';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { getSelectedPageRead } from '@/entities/PageRead';
+import { getSelectedPageReadSelect } from '@/entities/PageReadSelect';
 
 interface ReadingNavbarRgihtProps {
   className?: string;
@@ -16,6 +17,7 @@ const ReadingNavbarRgiht = memo(({ className }: ReadingNavbarRgihtProps) => {
   const currentPage = useSelector(getSelectedPage);
   const currentPageRead = useSelector(getSelectedPageRead);
   const { readingPageTubBtn } = useContext(ButtonsContext);
+  const currentPageReadSelect = useSelector(getSelectedPageReadSelect);
 
   return (
     <div className={classNames(cls.ReadingNavbarRgiht, {}, [className])}>
@@ -23,7 +25,7 @@ const ReadingNavbarRgiht = memo(({ className }: ReadingNavbarRgihtProps) => {
 
       <p>
         {readingPageTubBtn === 3
-          ? currentPageRead.pageNumber
+          ? currentPageReadSelect.pageNumber
           : currentPage.pageNumber}
       </p>
     </div>
