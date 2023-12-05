@@ -29,7 +29,6 @@ export const Page = memo((props: PageProps) => {
   const scrollPosition = useSelector((state: StateSchema) =>
     getUIScrollByPath(state, pathname),
   );
-  console.log(scrollPosition, 'kk');
 
   useInfiniteScroll({
     triggerRef,

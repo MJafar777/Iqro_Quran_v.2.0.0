@@ -1,27 +1,33 @@
-import React, { useEffect, useMemo, useState } from 'react';
+/* eslint-disable import/no-duplicates */
+/* eslint-disable react/button-has-type */
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import cls from './Tafsir.module.scss';
+
 import {
   DynamicModuleLoader,
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+
 import { sliceTafsirReduce } from '../model/slice/sliceTafsir';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchTafsirList } from '../model/service/fetchTafsir/fetchTafsirList';
 import { ListOfTafsir } from '@/entities/Tafsir';
+
 import {
   getDataTafsir,
   getWindowHieght,
 } from '../model/selector/selectorTafsir';
+
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { getSelectedSura } from '@/entities/Surah';
 import { Page } from '@/widgets/Page';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { getUIScrollByPath } from '@/features/UI';
-import { StateSchema } from '@/app/providers/StoreProvider';
+import { dataFotiha } from '@/entities/Tafsir';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface TafsirProp {
   className?: string;
@@ -35,13 +41,84 @@ const Tafsir = (prop: TafsirProp) => {
   const dataOfTafsir = useSelector(getDataTafsir);
   const dispatch = useAppDispatch();
   const surahId = useSelector(getSelectedSura);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const windowHeight = useSelector(getWindowHieght);
   const { pathname } = useLocation();
 
-  const scrollPosition = useSelector((state: StateSchema) =>
-    getUIScrollByPath(state, pathname),
-  );
+  const [word, setWord] = useState(0);
+  const [ayah, setAyah] = useState(0);
+  const [sumAudio, setSumAudio] = useState(0);
+
+  const { audioTime, setAudioTime } = useContext(ButtonsContext);
+
+  useEffect(() => {
+    console.log(
+      audioTime * 1000,
+      'summa',
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      dataFotiha[ayah]?.segments[dataFotiha[ayah].segments.length - 1][3] +
+        sumAudio,
+      'chegara',
+    );
+    if (
+      audioTime * 1000 <
+      sumAudio +
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        dataFotiha[ayah]?.segments[dataFotiha[ayah].segments.length - 1][3]
+    ) {
+      console.log(word, ayah, 'tashqi');
+      console.log(
+        audioTime * 1000,
+        'ichkitime',
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        dataFotiha[ayah]?.segments[word]?.[2] + sumAudio,
+        'ichki summa',
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        dataFotiha[ayah]?.segments[word]?.[3] + sumAudio,
+        'ichki summa 3',
+      );
+
+      if (
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        audioTime * 1000 > dataFotiha[ayah]?.segments[word]?.[2] + sumAudio &&
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        audioTime * 1000 < dataFotiha[ayah]?.segments[word]?.[3] + sumAudio
+      ) {
+        console.log(word, ayah, 'ichki');
+        const element = document.getElementById(
+          `${surahId.quran_order}:${ayah + 1}:${word + 1}`,
+        );
+        // eslint-disable-next-line no-unused-expressions
+        element ? element.classList.add('activeWord') : '';
+        console.log(element);
+      } else {
+        setWord((pre) => pre + 1);
+      }
+    } else {
+      setAyah((pre) => pre + 1);
+
+      setWord(0);
+      setSumAudio(
+        (pre) =>
+          pre +
+          dataFotiha[ayah].segments[dataFotiha[ayah].segments.length - 1][3],
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audioTime]);
+
+  useEffect(() => {
+    dispatch(
+      fetchTafsirList({
+        // @ts-ignore
+        chapterId: 1,
+        page_number: 1,
+      }),
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(page, 'page');
 
   useEffect(() => {
     if (
@@ -62,6 +139,7 @@ const Tafsir = (prop: TafsirProp) => {
         fetchTafsirList({ chapterId: surahId?.quran_order, page_number: page }),
       );
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [surahId?.quran_order, dispatch]);
 
@@ -84,36 +162,36 @@ const Tafsir = (prop: TafsirProp) => {
 
   useEffect(() => {
     setPage(surahId?.pages[0]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [surahId.quran_order]);
+  }, [surahId.quran_order, surahId?.pages]);
 
   const onLoadNextPart = () => {
+    console.log(surahId?.pages[0], page);
+
     setPage((pre) => pre + 1);
   };
 
   // eslint-disable-next-line consistent-return
   const content = useMemo(() => {
-    return (
-      <Page
-        onScrollEnd={onLoadNextPart}
-        data-testid="ArticlesPage"
-        className={classNames(cls.tafsir, {}, [])}
-      >
-        <ReadingNavbar />
-        <Sidebar>
-          <ReadingSidebar />
-        </Sidebar>
-        {dataOfTafsir ? (
+    if (dataOfTafsir)
+      return (
+        <Page
+          onScrollEnd={onLoadNextPart}
+          data-testid="TafsirPage"
+          className={classNames(cls.tafsir, {}, [])}
+        >
+          <ReadingNavbar />
+          <Sidebar>
+            <ReadingSidebar />
+          </Sidebar>
+
           <ListOfTafsir
             listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
             quran_order={surahId.quran_order}
           />
-        ) : (
-          ''
-        )}
-      </Page>
-    );
-  }, [dataOfTafsir, surahId?.quran_order]);
+        </Page>
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataOfTafsir, surahId.quran_order]);
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>

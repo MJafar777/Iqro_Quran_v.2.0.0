@@ -16,11 +16,9 @@ export const fetchTafsirList = createAsyncThunk<
 >(
   'tafsirpage/listOfTafsir', // Action type
   async (prop, thunkApi) => {
-    console.log('fetch');
     const { extra, rejectWithValue } = thunkApi;
     const { chapterId, page_number } = prop;
 
-    console.log(chapterId);
     if (!chapterId) throw new Error('');
     try {
       const response = await (axios.get(
