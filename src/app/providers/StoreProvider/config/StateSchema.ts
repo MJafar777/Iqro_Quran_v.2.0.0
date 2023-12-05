@@ -26,6 +26,7 @@ import { SelectedOyatReadSchema } from '@/entities/OyatRead';
 import { SelectedSuraReadSchema } from '@/entities/SurahRead';
 // import { ReduxSchemeForTafsir } from '@/pages/Tafsir';
 import { SurahInfoSchema } from '@/pages/InformationPage';
+import { SegmentSchemeRedux } from '@/pages/Tafsir';
 
 export interface StateSchema {
   currentSura: SelectedSuraSchema;
@@ -50,6 +51,7 @@ export interface StateSchema {
   search: SearchData;
   tafsirPage: ReadingArabicTextSchema;
   info: SurahInfoSchema;
+  segment:SegmentSchemeRedux
 }
 
 
