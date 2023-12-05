@@ -38,6 +38,7 @@ const ThemeSwtichButton = (props: ButtonsNames) => {
     } else if (divRef.current && index === 4) {
       divRef.current.style.left = '340px';
     }
+    
     if (index === 1) {
       toggleTheme(Theme.ORANGE);
     } else if (index === 2) {

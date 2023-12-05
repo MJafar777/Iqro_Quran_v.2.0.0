@@ -22,7 +22,7 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [audioUrl, setAudioUrl] = useState('');
 
-  const [verseNumber, setVerseNumber] = useState('1');
+  const [audioTime, setAudioTime] = useState(0);
 
   const [isPlay, setIsPlay] = useState(false);
 
@@ -46,12 +46,12 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       TrackIndex,
       setFontSize,
       setAudioUrl,
-      verseNumber,
+      audioTime,
       surahOnEnded,
       setCloseAudio,
       setTrackIndex,
       fetchIsLoading,
-      setVerseNumber,
+      setAudioTime,
       isSidebarActive,
       setSurahOnEnded,
       readingPageTubBtn,
@@ -74,11 +74,11 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       TrackIndex,
       setFontSize,
       setAudioUrl,
-      verseNumber,
+      audioTime,
       surahOnEnded,
       setCloseAudio,
       setTrackIndex,
-      setVerseNumber,
+      setAudioTime,
       fetchIsLoading,
       isSidebarActive,
       setSurahOnEnded,

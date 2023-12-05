@@ -1,39 +1,32 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { ApiResponse } from '../../types/typeTafsir';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { peekaboo } from '@/peekabo';
-
-interface MyApiResponse {
-  data: ApiResponse;
-}
+import { QuranDataText } from '@/entities/ReadingArabic';
 
 export const fetchTafsirList = createAsyncThunk<
-  ApiResponse, // Return type
-  { chapterId: 1; page_number: 1 },
-  ThunkConfig<string> // ThunkConfig type
->(
-  'tafsirpage/listOfTafsir', // Action type
-  async (prop, thunkApi) => {
-    console.log('fetch');
-    const { extra, rejectWithValue } = thunkApi;
-    const { chapterId, page_number } = prop;
+  QuranDataText,
+  { chapterId: number; page_number: number },
+  ThunkConfig<string>
+>('readingArabic', async ({ chapterId = 1, page_number = 1 }, thunkApi) => {
+  const { extra, rejectWithValue } = thunkApi;
 
-    console.log(chapterId);
-    if (!chapterId) throw new Error('');
-    try {
-      const response = await (axios.get(
-        `${peekaboo}/verse/by_chapter/for_text?chapter=${chapterId}&page=${page_number}`,
-      ) as Promise<MyApiResponse>);
+  if (!chapterId) {
+    throw new Error('');
+  }
 
-      if (!response.data) {
-        throw new Error();
-      }
+  try {
+    const response = await extra.api.get<QuranDataText>(
+      `verse/by_chapter/for_text?chapter=${chapterId}&page=${page_number}`,
+    );
 
-      return response.data; // TypeScript should now recognize the type
-    } catch (error) {
-      return rejectWithValue('Failed to fetch tafsir list');
+    //
+
+    if (!response.data) {
+      throw new Error();
     }
-  },
-);
+
+    return response.data;
+  } catch (e) {
+    return rejectWithValue('error');
+  }
+});

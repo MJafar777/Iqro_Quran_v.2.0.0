@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import cls from './ListOfPages.module.scss';
 import {
@@ -8,6 +8,7 @@ import {
   Listining,
   Book2,
 } from '@/shared/assets/icons/SidebarListOfPages';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 const listOfPage = [
   {
@@ -36,15 +37,22 @@ const listOfPage = [
 ];
 
 export const ListOfPages = memo(() => {
+  const { isSidebarActive, setIsSidebarActive } = useContext(ButtonsContext);
+
   const itemListOfPage = useMemo(
     () =>
       listOfPage.map((item) => (
-        <Link className={cls.li} key={item.title} to={item.path}>
+        <Link
+          onClick={() => setIsSidebarActive(!isSidebarActive)}
+          className={cls.li}
+          key={item.title}
+          to={item.path}
+        >
           {item.icon}
           {item.title}
         </Link>
       )),
-    [],
+    [isSidebarActive, setIsSidebarActive],
   );
 
   return (
