@@ -14,7 +14,6 @@ interface AudioPlayerCompInterface {
 const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
   const { isPlay, setIsPlay, setAudioTime, audioTime } =
     useContext(ButtonsContext);
-  console.log(src, 'src');
 
   const [playTime, setCurrentTime] = useState(0);
 
