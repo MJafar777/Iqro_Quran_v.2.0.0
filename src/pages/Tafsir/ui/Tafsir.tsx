@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable import/no-duplicates */
 /* eslint-disable react/button-has-type */
 import React, { useContext, useEffect, useMemo, useState } from 'react';
@@ -55,7 +58,6 @@ const Tafsir = (prop: TafsirProp) => {
     console.log(
       audioTime * 1000,
       'summa',
-      // eslint-disable-next-line no-unsafe-optional-chaining
       dataFotiha[ayah]?.segments[dataFotiha[ayah].segments.length - 1][3] +
         sumAudio,
       'chegara',
@@ -63,32 +65,26 @@ const Tafsir = (prop: TafsirProp) => {
     if (
       audioTime * 1000 <
       sumAudio +
-        // eslint-disable-next-line no-unsafe-optional-chaining
         dataFotiha[ayah]?.segments[dataFotiha[ayah].segments.length - 1][3]
     ) {
       console.log(word, ayah, 'tashqi');
       console.log(
         audioTime * 1000,
         'ichkitime',
-        // eslint-disable-next-line no-unsafe-optional-chaining
         dataFotiha[ayah]?.segments[word]?.[2] + sumAudio,
         'ichki summa',
-        // eslint-disable-next-line no-unsafe-optional-chaining
         dataFotiha[ayah]?.segments[word]?.[3] + sumAudio,
         'ichki summa 3',
       );
 
       if (
-        // eslint-disable-next-line no-unsafe-optional-chaining
         audioTime * 1000 > dataFotiha[ayah]?.segments[word]?.[2] + sumAudio &&
-        // eslint-disable-next-line no-unsafe-optional-chaining
         audioTime * 1000 < dataFotiha[ayah]?.segments[word]?.[3] + sumAudio
       ) {
         console.log(word, ayah, 'ichki');
         const element = document.getElementById(
           `${surahId.quran_order}:${ayah + 1}:${word + 1}`,
         );
-        // eslint-disable-next-line no-unused-expressions
         element ? element.classList.add('activeWord') : '';
         console.log(element);
       } else {
@@ -104,7 +100,6 @@ const Tafsir = (prop: TafsirProp) => {
           dataFotiha[ayah].segments[dataFotiha[ayah].segments.length - 1][3],
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioTime]);
 
   useEffect(() => {
