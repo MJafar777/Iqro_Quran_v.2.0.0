@@ -20,6 +20,7 @@ import {
   getListOfSurahs,
 } from '../model/selectors/ListSurah';
 import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
+import { BugButton } from '@/app/providers/ErrorBoundary/ui/BugButton';
 
 const reducers: ReducersList = {
   mainPage: SurahListSliceReducer,
@@ -40,19 +41,23 @@ const MainPage = () => {
     <OneItemSurahSkleton />
   ));
 
-  const content = useMemo(()=>(
-    <div data-testid="MainPage">
-      <MainHeader />
-      <Search />
-      <ListOfSurah
-        isLoading={isLoading || false}
-        data={listOfSurah}
-        error={error || ''}
-      />
-      {/* <Virtual data={listOfSurah} /> */}
-      <MobileAppView />
-    </div>
-  ),[error, isLoading, listOfSurah]) 
+  const content = useMemo(
+    () => (
+      <div data-testid="MainPage">
+        <MainHeader />
+        <Search />
+        <ListOfSurah
+          isLoading={isLoading || false}
+          data={listOfSurah}
+          error={error || ''}
+        />
+        {/* <Virtual data={listOfSurah} /> */}
+        <MobileAppView />
+        <BugButton />
+      </div>
+    ),
+    [error, isLoading, listOfSurah],
+  );
 
   return (
     <DynamicModuleLoader reducers={reducers}>{content}</DynamicModuleLoader>

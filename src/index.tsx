@@ -23,8 +23,8 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <StoreProvider>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <StoreProvider>
           <ForceUpdateProvider>
             <ThemeProvider>
               <ButtonsProvider>
@@ -32,8 +32,8 @@ root.render(
               </ButtonsProvider>
             </ThemeProvider>
           </ForceUpdateProvider>
-        </ErrorBoundary>
-      </StoreProvider>
+        </StoreProvider>
+      </ErrorBoundary>
     </BrowserRouter>
   </React.StrictMode>,
 );
