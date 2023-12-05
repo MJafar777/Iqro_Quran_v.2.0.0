@@ -9,6 +9,7 @@ import { infosurah, playBtn } from '@/shared/assets/infoSurah';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { getSelectedSura } from '@/entities/Surah';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { Pause } from '@/shared/assets/iconsListening';
 
 const SurahInfoAndAudio = () => {
   const data = useSelector(getSelectedSura);
@@ -26,13 +27,11 @@ const SurahInfoAndAudio = () => {
         </div>
       </Link>
 
-      <div className={classNames(cls.listening, {}, [])}>
-        <Icon
-          Svg={playBtn}
-          width={20}
-          clickable
-          onClick={() => setIsPlay(!isPlay)}
-        />
+      <div
+        onClick={() => setIsPlay(!isPlay)}
+        className={classNames(cls.listening, {}, [])}
+      >
+        {isPlay ? <Pause /> : <Icon Svg={playBtn} width={20} />}
         <pre> </pre>Tinglash
       </div>
     </div>

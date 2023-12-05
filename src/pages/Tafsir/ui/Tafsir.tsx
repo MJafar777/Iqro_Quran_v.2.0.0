@@ -1,5 +1,6 @@
+/* eslint-disable import/no-duplicates */
 /* eslint-disable react/button-has-type */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import cls from './Tafsir.module.scss';
@@ -25,6 +26,8 @@ import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { getSelectedSura } from '@/entities/Surah';
 import { Page } from '@/widgets/Page';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { dataFotiha } from '@/entities/Tafsir';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface TafsirProp {
   className?: string;
@@ -41,6 +44,68 @@ const Tafsir = (prop: TafsirProp) => {
   const [page, setPage] = useState(0);
   const windowHeight = useSelector(getWindowHieght);
   const { pathname } = useLocation();
+
+  const [word, setWord] = useState(0);
+  const [ayah, setAyah] = useState(0);
+  const [sumAudio, setSumAudio] = useState(0);
+
+  const { audioTime, setAudioTime } = useContext(ButtonsContext);
+
+  useEffect(() => {
+    console.log(
+      audioTime * 1000,
+      'summa',
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      dataFotiha[ayah]?.segments[dataFotiha[ayah].segments.length - 1][3] +
+        sumAudio,
+      'chegara',
+    );
+    if (
+      audioTime * 1000 <
+      sumAudio +
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        dataFotiha[ayah]?.segments[dataFotiha[ayah].segments.length - 1][3]
+    ) {
+      console.log(word, ayah, 'tashqi');
+      console.log(
+        audioTime * 1000,
+        'ichkitime',
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        dataFotiha[ayah]?.segments[word]?.[2] + sumAudio,
+        'ichki summa',
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        dataFotiha[ayah]?.segments[word]?.[3] + sumAudio,
+        'ichki summa 3',
+      );
+
+      if (
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        audioTime * 1000 > dataFotiha[ayah]?.segments[word]?.[2] + sumAudio &&
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        audioTime * 1000 < dataFotiha[ayah]?.segments[word]?.[3] + sumAudio
+      ) {
+        console.log(word, ayah, 'ichki');
+        const element = document.getElementById(
+          `${surahId.quran_order}:${ayah + 1}:${word + 1}`,
+        );
+        // eslint-disable-next-line no-unused-expressions
+        element ? element.classList.add('activeWord') : '';
+        console.log(element);
+      } else {
+        setWord((pre) => pre + 1);
+      }
+    } else {
+      setAyah((pre) => pre + 1);
+
+      setWord(0);
+      setSumAudio(
+        (pre) =>
+          pre +
+          dataFotiha[ayah].segments[dataFotiha[ayah].segments.length - 1][3],
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audioTime]);
 
   useEffect(() => {
     dispatch(

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+/* eslint-disable no-unsafe-optional-chaining */
+import React, { useContext, useRef } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import cls from './AudioPlayerComp.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -10,13 +11,20 @@ interface AudioPlayerCompInterface {
 }
 
 const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
-  const { isPlay, setIsPlay } = useContext(ButtonsContext);
+  const { isPlay, setIsPlay, setAudioTime, audioTime } =
+    useContext(ButtonsContext);
+
+
+  const audioRef = useRef(null);
+
+ 
 
   return (
     <div className={classNames(cls.AudioPlayerComp, {}, [className])}>
       <AudioPlayer
-        autoPlayAfterSrcChange
         src={src}
+        // onListen={handleTime}
+        ref={audioRef}
         // onPlay={() => setIsPlay(true)}
         // onPause={() => setIsPlay(false)}
       />

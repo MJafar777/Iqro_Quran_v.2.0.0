@@ -22,8 +22,8 @@ export interface ButtonsClickedProps {
 
   setIsPlay: (prop: boolean) => void;
   isPlay: boolean;
-  setVerseNumber: (prop: string) => void;
-  verseNumber: string;
+  setAudioTime: (prop: number) => void;
+  audioTime: number;
   setAudioUrl: (prop: string) => void;
   audioUrl: string;
 
@@ -52,8 +52,8 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setTrackIndex: () => {},
   setIsPlay: (prop: boolean) => {},
   isPlay: false,
-  setVerseNumber: () => {},
-  verseNumber: '1',
+  setAudioTime: () => {},
+  audioTime: 0,
   setAudioUrl: () => {},
   audioUrl: '',
   fetchIsLoading: false,

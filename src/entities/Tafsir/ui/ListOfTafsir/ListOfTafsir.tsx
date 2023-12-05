@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { memo, useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { dataFotiha } from '../../model/const/fotihaSegment';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
 import { isLoading } from '@/pages/Tafsir';
@@ -34,6 +35,9 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
 
   // @ts-ignore
   useQcfFont(listOfTafsir);
+
+  
+  console.log(dataFotiha, 'dataFotiha');
 
   const content = (
     <div className={cls.listOfTafsir}>

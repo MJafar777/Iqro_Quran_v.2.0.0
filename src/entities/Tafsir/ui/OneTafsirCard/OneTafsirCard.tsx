@@ -37,7 +37,7 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
       <IconsOfTafsir verse={data?.verse_key} />
       <ContentOfTafsir
         // @ts-ignore
-
+        
         words={data?.words || []}
         text={data?.tafsir[0].more_text}
         arab={data?.text}
