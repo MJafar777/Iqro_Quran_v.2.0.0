@@ -47,6 +47,7 @@ const ReadingNavbarProgress = memo(
       currentSura._id,
       currentSuraRead._id,
       currentPageReadSelect.pageNumber,
+      readingPageTubBtn,
     ]);
 
     return (
