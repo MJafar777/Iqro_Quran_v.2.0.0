@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-curly-brace-presence */
-/* eslint-disable array-callback-return */
 import React, { memo, useEffect, useState } from 'react';
 import cls from './OneTafsirCard.module.scss';
 import { IconsOfTafsir } from '@/shared/ui/IconsOfTafsir';
@@ -37,7 +35,6 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
       <IconsOfTafsir verse={data?.verse_key} />
       <ContentOfTafsir
         // @ts-ignore
-        
         words={data?.words || []}
         text={data?.tafsir[0].more_text}
         arab={data?.text}

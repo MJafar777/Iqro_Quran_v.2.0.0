@@ -1,11 +1,11 @@
-export interface VerseTiming {
+export interface VerseTime {
   _id: string;
   verse_key: string;
   audio_url: string;
   timestamp_from: number;
   timestamp_to: number;
   duration: number;
-  segments: [number, number, number][];
+  segments: any;
   chapter_audio_id: string;
   __v: number;
   id: string;
@@ -27,7 +27,7 @@ export interface Data {
     id: string;
   };
   __v: number;
-  verse_timings: VerseTiming[];
+  verse_timings: VerseTime[];
   id: string;
 }
 

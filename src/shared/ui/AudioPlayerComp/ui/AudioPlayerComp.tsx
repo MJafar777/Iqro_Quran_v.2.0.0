@@ -25,9 +25,16 @@ const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
   //   setAudioTime(audioRef.current.audio.current.currentTime);
   // }
 
-  // useEffect(() => {
-  //   handleTimeUpdate();
-  // }, [audioTime, handleTimeUpdate]);
+  useEffect(() => {
+    console.log(isPlay);
+    if (isPlay) {
+      // @ts-ignore
+      audioRef.current.play();
+    } else {
+      // @ts-ignore
+      audioRef.current.pause();
+    }
+  }, [isPlay]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,18 +51,10 @@ const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [setAudioTime]); //
+  }, [setAudioTime]);
 
   return (
     <div className={classNames(cls.AudioPlayerComp, {}, [className])}>
-      {/* <AudioPlayer
-        src={src}
-        // eslint-disable-next-line react/jsx-no-bind
-        onListen={handleTimeUpdate}
-        ref={audioRef}
-        // onPlay={() => setIsPlay(true)}
-        // onPause={() => setIsPlay(false)}
-      /> */}
       <audio src={src} ref={audioRef} controls />
     </div>
   );

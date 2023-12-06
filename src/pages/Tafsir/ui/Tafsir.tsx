@@ -1,8 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unsafe-optional-chaining */
-/* eslint-disable import/no-duplicates */
-/* eslint-disable react/button-has-type */
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './Tafsir.module.scss';
@@ -14,7 +10,6 @@ import {
 
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchTafsirList } from '../model/service/fetchTafsir/fetchTafsirList';
-import { ListOfTafsir } from '@/entities/Tafsir';
 
 import { getDataTafsir } from '../model/selector/selectorTafsir';
 
@@ -24,12 +19,13 @@ import { ReadingNavbar } from '@/widgets/ReadingNavbar';
 import { getSelectedSura } from '@/entities/Surah';
 import { Page } from '@/widgets/Page';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { dataFotiha } from '@/entities/Tafsir';
+import { ListOfTafsir, dataFotiha } from '@/entities/Tafsir';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { fetchAudioSegments } from '../model/service/fetchAudioSegments/fetchAudioSegments';
 import { sliceTafsirReducer } from '../model/slice/sliceTafsir';
 import { sliceSegmentReduce } from '../model/slice/sliceSegment';
 import { getDataSegment } from '../model/selector/selectorSegment';
+import { VerseTime } from '../model/types/typeSegments';
 
 interface TafsirProp {
   className?: string;
@@ -52,6 +48,10 @@ const Tafsir = (prop: TafsirProp) => {
   const [page, setPage] = useState(0);
   const [word, setWord] = useState(0);
   const [ayah, setAyah] = useState(0);
+  const [wordNew, setWordNew] = useState<string>('1');
+  const [ayahNew, setAyahNew] = useState<string>('1');
+  const [segmentsVerse, setSegmentsVerse] = useState<VerseTime>();
+  const [lastPosition, setLastPosition] = useState('1:1:1');
 
   const [segmentsData, setSegmentsData] = useState(
     getSegmentData
@@ -65,15 +65,63 @@ const Tafsir = (prop: TafsirProp) => {
     if (getSegmentData) {
       setSegmentsData(getSegmentData[surahId.quran_order]?.data.verse_timings);
       setIsPlay(false);
-      // setWord(0);
       setAyah(0);
+      setWordNew('1');
+      setAyahNew('1');
     }
   }, [surahId.quran_order]);
 
+  const detectWord = (timeAudio: number) => {
+    const word = segmentsVerse?.segments?.find(
+      (segment: number[]) =>
+        segment[1] <= timeAudio * 1000 && segment[2] > timeAudio * 1000,
+    );
+    setLastPosition(`${ayahNew}:${wordNew}`);
+    setWordNew(word?.[0]);
+    console.log(`${ayahNew}:${wordNew}`);
+  };
+
+  const detectVerse = (timeOfAudio: number) => {
+    const verse = segmentsData?.find(
+      (segment) =>
+        segment.timestamp_from <= timeOfAudio * 1000 &&
+        segment.timestamp_to > timeOfAudio * 1000,
+    );
+    if (verse) {
+      setWordNew('1');
+      setAyahNew(verse?.verse_key);
+      setSegmentsVerse(verse);
+    }
+
+    detectWord(timeOfAudio);
+  };
+
+  const scrollToDiv = () => {
+    const targetDiv = document.getElementById(`${segmentsVerse?.verse_key}`);
+
+    if (targetDiv) {
+      targetDiv.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest',
+        duration: 1000,
+      } as any);
+    }
+  };
+  useEffect(() => {
+    scrollToDiv();
+  }, [segmentsVerse?.verse_key]);
+
+  useEffect(() => {
+    detectVerse(audioTime);
+  }, [audioTime, surahId.quran_order]);
+
+  useEffect(() => {
+    detectWord(audioTime);
+  }, [segmentsVerse?.segments]);
+
   useEffect(() => {
     if (segmentsData?.length > ayah) {
-      // console.log(segmentsData?.length);
-
       if (
         segmentsData[ayah]?.timestamp_from <= audioTime * 1000 &&
         segmentsData[ayah]?.timestamp_to > audioTime * 1000
@@ -82,26 +130,19 @@ const Tafsir = (prop: TafsirProp) => {
           segmentsData[ayah]?.segments[word]?.[1] <= audioTime * 1000 &&
           segmentsData[ayah]?.segments[word]?.[2] > audioTime * 1000
         ) {
-          const element = document.getElementById(
-            `${surahId.quran_order}:${ayah + 1}:${word + 1}`,
-          );
-          // console.log(element, audioTime, 'element');
+          const element = document.getElementById(`${ayahNew}:${wordNew}`);
 
           element?.classList.add('activeWord');
         } else {
-          const lastElement = document.getElementById(
-            `${surahId.quran_order}:${ayah + 1}:${word + 1}`,
-          );
+          const lastElement = document.getElementById(`${lastPosition}`);
           lastElement?.classList.remove('activeWord');
           setWord((pre) => pre + 1);
         }
       } else {
-        const lastAyahElement = document.getElementById(
-          `${surahId.quran_order}:${ayah + 1}:${word + 1}`,
-        );
+        const lastAyahElement = document.getElementById(`${lastPosition}`);
         lastAyahElement?.classList.remove('activeWord');
         setAyah((pre) => pre + 1);
-        setWord(0);
+        // setWord(0);
       }
     }
   }, [audioTime, surahId.quran_order]);
