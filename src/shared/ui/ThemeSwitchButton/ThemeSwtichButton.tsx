@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import cls from './ThemeSwitchButton.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { Theme } from '@/shared/const/theme';
 import { LOCAL_STORAGE_THEME_KEY } from '@/shared/const/localstorage';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface ButtonsNames {
   buttonsNames: string[];
@@ -12,7 +13,10 @@ interface ButtonsNames {
 
 const ThemeSwtichButton = (props: ButtonsNames) => {
   const { buttonsNames } = props;
-  // const { themes, setTheme } = useContext(ThemeContext);
+  const { BismillahNavbarImg, setBismillahNavbarImg } =
+    useContext(ButtonsContext);
+  console.log(BismillahNavbarImg, 'hello');
+
   const themeLocalstorage = localStorage.getItem(LOCAL_STORAGE_THEME_KEY);
 
   const divRef = useRef<HTMLDivElement>(null);
@@ -40,10 +44,13 @@ const ThemeSwtichButton = (props: ButtonsNames) => {
     }
     if (index === 1) {
       toggleTheme(Theme.ORANGE);
+      setBismillahNavbarImg(Theme.ORANGE);
     } else if (index === 2) {
       toggleTheme(Theme.LIGHT);
+      setBismillahNavbarImg(Theme.LIGHT);
     } else {
       toggleTheme(Theme.DARK);
+      setBismillahNavbarImg(Theme.DARK);
     }
   };
 

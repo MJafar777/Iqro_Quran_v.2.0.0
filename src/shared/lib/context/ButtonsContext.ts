@@ -29,6 +29,9 @@ export interface ButtonsClickedProps {
 
   fetchIsLoading: boolean;
   setFetchIsLoading: (prop: boolean) => void;
+
+  BismillahNavbarImg: string;
+  setBismillahNavbarImg: (src: string) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -58,5 +61,7 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   audioUrl: '',
   fetchIsLoading: false,
   setFetchIsLoading: () => {},
-  
+
+  BismillahNavbarImg: 'app_light_theme',
+  setBismillahNavbarImg: () => {},
 });

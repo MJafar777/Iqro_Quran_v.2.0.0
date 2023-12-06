@@ -62,6 +62,7 @@ export const MobileAppView = memo((prop: MobileApp) => {
             </HStack>
           </VStack>
         </HStack>
+
         <HStack gap="32" className={cls.MobileView}>
           <AppImage className={classNames(cls.leftHomeImg)} src={LeftHomeImg} />
           <AppImage

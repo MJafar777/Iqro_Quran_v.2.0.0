@@ -20,7 +20,6 @@ import {
   getListOfSurahs,
 } from '../model/selectors/ListSurah';
 import { SurahListSliceReducer } from '../model/slice/sliceSurahList';
-import { BugButton } from '@/app/providers/ErrorBoundary/ui/BugButton';
 
 const reducers: ReducersList = {
   mainPage: SurahListSliceReducer,
@@ -53,7 +52,6 @@ const MainPage = () => {
         />
         {/* <Virtual data={listOfSurah} /> */}
         <MobileAppView />
-        <BugButton />
       </div>
     ),
     [error, isLoading, listOfSurah],

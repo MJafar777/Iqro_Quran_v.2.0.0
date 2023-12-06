@@ -1,4 +1,6 @@
 {
+  "Menu": "Menu",
+
   "titleHeader": "Albatta, bu Qur'on eng to‘g‘ri yo‘lga hidoyat qilur va solih amallarni qiluvchi mo‘minlarga xushxabarini bеrurki, albatta, o‘shalarga ulug‘ ajr bordi  ",
   "placeholderMainSearch": "Qur’ondan qidiring!",
   "Qidirish": "Qidirish",
@@ -47,5 +49,11 @@
   "Paragraph_1_5": "Ayni damda respublikamizdagi “Turon” fan-ta’lim markazi tarmoqlarining rahbari hisoblanib, arab tili, Hadis va Qur’oni Karim yo'nalishida saboqlar berib kelmoqda. Shuningdek, Qur’oni Karim tafsiriga doir ilmiy izlanishlar olib bormoqda. Islomshunos va tilshunois olim Sardorxon Jahongir arab, fors, ingliz, rus va turk tillarini yaxshi o'zlashtirgan.",
   "Paragraph_2": "Milliy qadriyatlarimiz hamda maʼnaviy boy merosimizni tiklash va ularnipuxta oʼrganish, uning mazmun-mohiyati va ahamiyatini xalqimiz oʼrtasidatargʼib etish, ajdodlarimiz bo'lgan Imom Buxoriy, Nasafiy va Zamaxshariysingari ulamolar izidan borish, ulardan bizlarga meros bo'lib kelayotganva saqlanayotgan tarixiy hamda nodir qoʼlyozmalarni avlodlargayetkazish, ajdodlarimiz hayoti, axloqi va yuksak maʼnaviyatiniifodalovchi matnlarni xalqimizga yetkazib, yoshlarimiz qalbida ularqoldirgan merosga ehtirom, izzat va muhabbat tuygʼusini shakllantirishdir.",
 
-  "Sahifa topilmadi!": "Sahifa topilmadi!"
+  "Sahifa topilmadi!": "Sahifa topilmadi!",
+
+  "Qur’on o‘qish": "Qur’on o‘qish",
+  "Qur’on tinglash": "Qur’on tinglash",
+  "Qur’oning ma'nolar tarjimasi": "Qur’oning ma'nolar tarjimasi",
+  "Transkripsiya": "Transkripsiya",
+  "Biz haqimizda": "Biz haqimizda"
 }

@@ -1,6 +1,7 @@
 import { memo, ReactElement } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './MainLayout.module.scss';
+import { Footer } from '@/widgets/Footer';
 // import { Footer } from '@/widgets/Footer';
 
 interface MainLayoutProps {
@@ -20,9 +21,9 @@ export const MainLayout = memo((props: MainLayoutProps) => {
       {/* <div className={cls.sidebar}>{sidebar}</div> */}
       <div className={cls.rightbar}>
         <div className={cls.header}>{header}</div>
-        <div className={cls.toolbar}>{toolbar }</div>
+        <div className={cls.toolbar}>{toolbar}</div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 });

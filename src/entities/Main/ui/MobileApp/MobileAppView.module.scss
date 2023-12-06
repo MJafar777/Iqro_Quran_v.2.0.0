@@ -1,5 +1,6 @@
 .MobileApp {
   max-width: 1366px;
+  width: 100%;
   margin: 0 auto;
   margin-top: 40px;
 }
@@ -16,6 +17,10 @@
 
 .textWithLogo {
   width: 100px;
+
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
 }
 
 .IqroQuranMobileView {
@@ -38,6 +43,9 @@
 
 .MobileView {
   display: flex;
+  align-items: center;
+  justify-content: center;
+
   @media screen and (max-width: 1200px) {
     display: flex;
   }
@@ -54,35 +62,26 @@
 }
 
 .leftHomeImg {
-  padding-left: 40px;
-  width: 500px;
-  height: 500px;
+  max-width: 300px;
+  width: 100%;
 }
 
 .rightHomeImg {
-  width: 55%;
-  transform: scale(1.1);
+  max-width: 500px;
+  width: 100%;
 }
 
 .textofQuran {
   font-size: 50px;
   transform: scale(8);
   color: var(--color-text);
-}
 
-.textofQuran {
   @media screen and (max-width: 1200px) {
     display: none;
   }
 }
 
 .socialMedia {
-  @media screen and (max-width: 576px) {
-    display: none;
-  }
-}
-
-.textWithLogo {
   @media screen and (max-width: 576px) {
     display: none;
   }
