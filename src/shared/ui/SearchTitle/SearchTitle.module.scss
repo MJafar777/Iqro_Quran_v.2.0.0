@@ -1,7 +1,10 @@
+/* stylelint-disable shorthand-property-no-redundant-values */
 .searchTitle {
   color: var(--color-text);
   text-align: left;
-  font-family: Proxima Vara;
+  font-family: sans-serif;
+
+  // font-family: Proxima Vara;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

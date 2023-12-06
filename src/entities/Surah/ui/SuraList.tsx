@@ -96,18 +96,18 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
                 return (
                   suraNumber.includes(searchSuraNameText) ||
-                  suraName?.toLowerCase().includes(searchSuraNameText)
+                  suraName?.toLowerCase()?.includes(searchSuraNameText)
                 );
               })
               ?.map((oneSurah: OneSuraInListSchema, index: number) => (
                 <div
-                  id={`${oneSurah.quran_order}sura`}
-                  key={oneSurah.quran_order}
+                  id={`${oneSurah?.quran_order}sura`}
+                  key={oneSurah?.quran_order}
                   className={classNames(
                     cls.SuraList__item,
                     {
                       [cls.active]:
-                        oneSurah.quran_order === currentSura?.quran_order,
+                        oneSurah?.quran_order === currentSura?.quran_order,
                     },
                     [className],
                   )}
@@ -132,7 +132,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
                   </p>
                 </div>
               ))
-          : Array.from({ length: 20 }, (_, index) => index + 1).map(
+          : Array.from({ length: 20 }, (_, index) => index + 1)?.map(
               (el: number) => (
                 <div style={{ marginTop: '10px' }}>
                   <Skeleton

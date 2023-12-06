@@ -81,7 +81,7 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
             className={classNames(cls.wrapper)}
             orderOfOyat={orderOfSura}
           />
-          <VStack style={{ margin: 0 }}>
+          <VStack className={cls.TextWrapper} style={{ margin: 0 }}>
             <p className={cls.text}>{title}</p>
             <p className={cls.numberOfOyat}>
               {numberOfOyat} {t('Ayahs')}

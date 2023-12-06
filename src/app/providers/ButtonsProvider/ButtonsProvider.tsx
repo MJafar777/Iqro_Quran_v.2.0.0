@@ -36,6 +36,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [fetchIsLoading, setFetchIsLoading] = useState(false);
 
+  const [BismillahNavbarImg, setBismillahNavbarImg] = useState('');
+
   const defaultProps = useMemo(
     () => ({
       isPlay,
@@ -57,11 +59,13 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       readingPageTubBtn,
       surahListenNumber,
       setFetchIsLoading,
+      BismillahNavbarImg, // BismillahNavbar img
       setIsSidebarActive,
       isRightsidebarActive,
       readingSidebarActive,
       setReadingPageTubBtn,
       setSurahListenNumber,
+      setBismillahNavbarImg, // BismillahNavbar img
       setReadingSidebarActive,
       setIsRightsidebarActive,
     }),
@@ -85,11 +89,13 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       readingPageTubBtn,
       surahListenNumber,
       setFetchIsLoading,
+      BismillahNavbarImg, // BismillahNavbar img
       setIsSidebarActive,
       isRightsidebarActive,
       setSurahListenNumber,
       readingSidebarActive,
       setReadingPageTubBtn,
+      setBismillahNavbarImg, // BismillahNavbar img
       setReadingSidebarActive,
       setIsRightsidebarActive,
     ],

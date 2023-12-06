@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import React, { memo, useCallback, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import cls from './ChangeFontSize.module.scss';
 import { back } from '@/shared/assets/icons/sidebarSetting';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -9,6 +10,7 @@ import { Icon } from '../Icon/Icon';
 import { Button } from '../Button';
 
 export const ChangeFontSize = memo(() => {
+  const { t } = useTranslation();
   const {
     isRightsidebarActive,
     setFontSize,
@@ -31,7 +33,7 @@ export const ChangeFontSize = memo(() => {
   return (
     <VStack max align="center">
       <div className={cls.changeFontSize}>
-        <p className={cls.title}>Shrift hajmi</p>
+        <p className={cls.title}>{t('Shrift hajmi')}</p>
         <HStack className={classNames(cls.wrapperSize)} align="center">
           <button className={cls.button} onClick={decrease}>
             -
@@ -44,7 +46,7 @@ export const ChangeFontSize = memo(() => {
       </div>
       <HStack justify="center" align="center" max>
         <Button className={classNames(cls.restore)} onClick={backSize}>
-          <Icon Svg={back} className={cls.back} /> <p>Qaytarish</p>
+          <Icon Svg={back} className={cls.back} /> <p>{t('Qaytarish')}</p>
         </Button>
       </HStack>
     </VStack>

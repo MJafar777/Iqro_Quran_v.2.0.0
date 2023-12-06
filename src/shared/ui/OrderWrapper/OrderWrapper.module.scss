@@ -1,13 +1,28 @@
+.parentOrder {
+  transform: rotate(45deg);
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
 .orderWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
+
+  // clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
   background-color: var(--wrapper-number-surah);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  margin-right: 20px;
   margin-left: 0;
-  color: var(--color-text);
+  border-radius: 5px;
+
+  pre {
+    color: var(--color-text);
+    transform: rotate(-45deg);
+    z-index: 100;
+  }
 }
