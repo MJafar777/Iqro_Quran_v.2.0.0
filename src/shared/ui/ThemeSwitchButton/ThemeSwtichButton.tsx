@@ -15,7 +15,6 @@ const ThemeSwtichButton = (props: ButtonsNames) => {
   const { buttonsNames } = props;
   const { BismillahNavbarImg, setBismillahNavbarImg } =
     useContext(ButtonsContext);
-  console.log(BismillahNavbarImg, 'hello');
 
   const themeLocalstorage = localStorage.getItem(LOCAL_STORAGE_THEME_KEY);
 
@@ -42,7 +41,7 @@ const ThemeSwtichButton = (props: ButtonsNames) => {
     } else if (divRef.current && index === 4) {
       divRef.current.style.left = '340px';
     }
-    
+
     if (index === 1) {
       toggleTheme(Theme.ORANGE);
       setBismillahNavbarImg(Theme.ORANGE);

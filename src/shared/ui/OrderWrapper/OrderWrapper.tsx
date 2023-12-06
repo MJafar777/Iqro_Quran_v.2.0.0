@@ -10,8 +10,10 @@ export const OrderWrapper = (prop: OrderWrapperProp) => {
   const { className, orderOfOyat } = prop;
 
   return (
-    <div className={classNames(cls.orderWrapper, {}, [className])}>
-      {orderOfOyat}
+    <div className={classNames(cls.parentOrder, {}, [className])}>
+      <div className={classNames(cls.orderWrapper, {}, [className])}>
+        <pre>{orderOfOyat}</pre>
+      </div>
     </div>
   );
 };

@@ -101,11 +101,7 @@ export const MainHeader = memo((prop: MainHeaderComponentProps) => {
             placeholder={t('placeholderMainSearch')}
             onChange={(e) => getSearch(e)}
           />
-          <Button
-            style={{ backgroundColor: 'rgb(42, 156, 162)' }}
-            size={ButtonSize.M}
-            className={cls.buttons}
-          >
+          <Button size={ButtonSize.M} className={cls.buttons}>
             {t('Qidirish')}
           </Button>
         </HStack>
