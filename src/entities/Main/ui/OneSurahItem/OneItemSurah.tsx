@@ -38,6 +38,13 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
+  const modifiedValue =
+    arabic?.length === 1
+      ? `00${arabic}`
+      : arabic?.length === 2
+      ? `0${arabic}`
+      : arabic;
+
   const readLastSurahInLocalStorage = () => {
     const newRead = {
       ...oneSurah,
@@ -91,13 +98,13 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
         <HStack>
           <VStack gap="8">
             <p style={{}} className={cls.arabic}>
-              {arabic}
+              {modifiedValue}
             </p>
           </VStack>
         </HStack>
       </HStack>
     );
-  }, [arabic, numberOfOyat, orderOfSura, t, title]);
+  }, [modifiedValue, numberOfOyat, orderOfSura, t, title]);
 
   return (
     <div
