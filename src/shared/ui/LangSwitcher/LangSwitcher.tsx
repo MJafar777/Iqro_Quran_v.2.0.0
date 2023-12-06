@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Lang } from '@/shared/assets/icons/navbar';
 
@@ -12,6 +12,18 @@ export const LangSwitcher = memo(() => {
     i18n.changeLanguage(lang);
     setIsOpenMenu(false);
   };
+
+  useEffect(() => {
+    const handleWindowLoad = () => {
+      setIsOpenMenu(false);
+    };
+
+    window.addEventListener('click', handleWindowLoad);
+
+    return () => {
+      window.removeEventListener('click', handleWindowLoad);
+    };
+  }, []);
 
   const renderMenu = useMemo(() => {
     return (
@@ -38,7 +50,13 @@ export const LangSwitcher = memo(() => {
 
   return (
     <div className={cls.containerLang}>
-      <div onClick={() => setIsOpenMenu((pre) => !pre)} className={cls.icon}>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpenMenu((pre) => !pre);
+        }}
+        className={cls.icon}
+      >
         <Lang className={cls.icon} />
       </div>
       {isOpenMenu ? renderMenu : ''}
