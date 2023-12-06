@@ -1,13 +1,9 @@
-/* eslint-disable no-unsafe-optional-chaining */
-/* eslint-disable max-len */
-/* eslint-disable array-callback-return */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { ApiResponse, ReduxSchemeForTafsir } from '../types/typeTafsir';
-import { fetchTafsirList } from '../service/fetchTafsir/fetchTafsirList';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
   QuranDataText,
   ReadingArabicTextSchema,
 } from '@/entities/ReadingArabic';
+import { fetchTafsirList } from '../service/fetchTafsir/fetchTafsirList';
 
 const initialState: ReadingArabicTextSchema = {
   isLoading: false,
@@ -16,19 +12,19 @@ const initialState: ReadingArabicTextSchema = {
   loadedFontFaces: [],
 };
 
-const sliceTafsir = createSlice({
-  name: 'TafsirPage',
+export const sliceTafsir = createSlice({
+  name: 'sliceTafsir',
   initialState,
   reducers: {
     addLoadedFontFace: (state, action: PayloadAction<string>) => {
       state.loadedFontFaces.push(action.payload);
     },
   },
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder
       .addCase(fetchTafsirList.pending, (state) => {
-        state.isLoading = true;
         state.error = undefined;
+        state.isLoading = true;
       })
       .addCase(
         fetchTafsirList.fulfilled,
@@ -71,15 +67,13 @@ const sliceTafsir = createSlice({
           }
         },
       )
-      .addCase(
-        fetchTafsirList.rejected,
-        (state, action: PayloadAction<string | undefined, string>) => {
-          state.isLoading = false;
-          state.error = action.payload;
-        },
-      ),
+      .addCase(fetchTafsirList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+  },
 });
 
-export const { reducer: sliceTafsirReduce } = sliceTafsir;
-export const { actions: slicerTafserAction } = sliceTafsir;
+export const { actions: sliceTafsirActions } = sliceTafsir;
+export const { reducer: sliceTafsirReducer } = sliceTafsir;
 export const { addLoadedFontFace } = sliceTafsir.actions;

@@ -62,7 +62,6 @@ const QuranVerse = memo(({ className, verseData }: QuranVerseProps) => {
 
           // Check if the child div is visible
           if (childTop >= parentTop && childTop < window.innerHeight) {
-            console.log(childTop, childDiv);
             const childId = childDiv.getAttribute('id');
             setSelectedPageReadSelect(Number(childId));
           }
