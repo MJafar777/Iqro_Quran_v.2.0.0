@@ -15,6 +15,7 @@
   justify-content: start;
   align-items: start;
   transition: all 0.2s linear;
+
   &:hover {
     color: #74a2b2;
   }
@@ -34,7 +35,16 @@
   padding: 12px;
   align-items: center;
   border-bottom: var(--border-line) 0.1px solid;
+
+  opacity: 0.7;
+}
+
+.li:first-child {
   border-top: var(--border-line) 0.1px solid;
+}
+
+.li:hover {
+  opacity: 1;
 }
 
 .icon {

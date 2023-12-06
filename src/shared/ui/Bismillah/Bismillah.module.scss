@@ -1,0 +1,11 @@
+.bismillahContainer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: calc(1.5 * var(--spacing-mega));
+
+  .bismillahSVG {
+    width: 250px;
+    height: 50px;
+  }
+}

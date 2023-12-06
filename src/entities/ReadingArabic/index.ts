@@ -1,13 +1,18 @@
 import { fetchReadingArabic } from './model/services/fetchReadingArabic';
-import { ReadingArabic } from './ui/ReadingArabic';
+import { addLoadedFontFaceReadingArabic } from './model/slice/readingArabicSlice';
+import { ReadingArabic } from './ui/ReadingArabicText/ReadingArabicText';
 // import { getSelectedSura } from '../Surah';
 
-export { ReadingArabic, fetchReadingArabic };
+export { ReadingArabic, fetchReadingArabic, addLoadedFontFaceReadingArabic };
 
 export type {
+  Verse,
   ReadingSura,
   DataInReduxReadingQuranData,
+  QuranDataText
 } from './model/types/readingSura';
 
-export type { ReadingArabicSchema } from './model/types/readingArabicSchema';
-export { getReadingArabicData } from './model/selectors/readingArabic';
+export type {
+  ReadingArabicSchema,
+  ReadingArabicTextSchema,
+} from './model/types/readingArabicSchema';

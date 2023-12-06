@@ -1,31 +1,15 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable jsx-a11y/media-has-caption */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Pause, Download } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import cls from './listeningJuz.module.scss';
-import { Play } from '@/shared/assets/iconsListening';
+//
+import { Loader } from '@/widgets/Loader';
+import { HStack } from '@/shared/ui/Stack';
 import { OneSuraInListSchema } from '@/pages/MainPage';
-
-const ListeningJuz = () => {
-  const salom: number = 30;
-  const arrayEmpty: number[] = Array.from(
-    { length: salom },
-    (_, index) => index + 1,
-  );
-
-  return (
-    <div className={cls.ListenJuzWrapper}>
-      {arrayEmpty.map((item: number) => {
-        return <CardItems index={item} />;
-      })}
-    </div>
-  );
-};
-
-export default ListeningJuz;
+import { ListenActive } from '@/shared/ui/ListenActive';
+import { Download, Play } from '@/shared/assets/iconsListening';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+//
+import cls from './listeningJuz.module.scss';
 
 interface CardItemsvalue {
   info?: OneSuraInListSchema;
@@ -37,67 +21,82 @@ const CardItems = (props: CardItemsvalue) => {
   const Juz = t('Juz');
   const { index, info } = props;
 
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const srcDownload = `http://iqro-quran.uz/developmentBackend/juzes/juz${index}.mp3`;
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audio = audioRef.current;
+  const {
+    surahOnEnded,
+    setSurahOnEnded,
+    setSurahListenNumber,
+    surahListenNumber,
+    setCloseAudio,
+  } = useContext(ButtonsContext);
 
   return (
-    <div className={cls.CardsItems}>
-      <div className={cls.LeftItems}>
-        <div className={cls.SquareNumber}>
-          <span className={cls.Span}>{index}</span>
+    <Suspense fallback={<Loader />}>
+      <div className={cls.CardsItems}>
+        <div className={cls.LeftItems}>
+          <div className={cls.SquareNumber}>
+            <span className={cls.Span}>{index}</span>
+          </div>
+
+          <div className={cls.TextCard}>
+            <h3 className={cls.FirstText}>{Juz}</h3>
+          </div>
         </div>
 
-        <div className={cls.TextCard}>
-          <h3 className={cls.FirstText}>{Juz}</h3>
-        </div>
-      </div>
+        {/*  */}
 
-      {/*  */}
-
-      <div className={cls.RightItems}>
-        <button
-          onClick={() => {
-            if (audio && index + 1 === info?.quran_order) {
-              audio.play();
-            } else if (audio) {
-              audio.pause();
-            }
-            setIsPlaying(!isPlaying);
-          }}
-          className={cls.Button}
-          type="button"
-        >
-          {isPlaying ? (
-            <Pause style={{ fontSize: '22px' }} />
-          ) : (
-            <Play style={{ fontSize: '22px' }} />
-          )}
-        </button>
-
-        {isPlaying && (
-          <audio
-            style={{ overflow: 'hidden', display: 'none' }}
-            autoPlay
-            ref={audioRef}
-            src={`https://server12.mp3quran.net/maher/00${info?.quran_order}.mp3`}
-            controls
-          />
-        )}
-
-        <button className={cls.Button} type="button">
-          <Link
-            to={`http://iqro-quran.uz/backend/suras/${info?.quran_order}.mp3`}
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ listStyle: 'none', color: 'black', width: '100px' }}
+        <div className={cls.RightItems}>
+          <button
+            type="button"
+            className={cls.Button}
+            onClick={() => {
+              setSurahListenNumber(index);
+              setCloseAudio(false);
+            }}
           >
-            <Download style={{ fontSize: '22px' }} />
-          </Link>
-        </button>
+            {surahListenNumber !== index && surahOnEnded ? (
+              <Play className={cls.ButtonIcon} />
+            ) : !surahOnEnded && surahListenNumber === index ? (
+              <ListenActive />
+            ) : (
+              <Play className={cls.ButtonIcon} />
+            )}
+          </button>
+
+          <button aria-label="save" className={cls.Button} type="button">
+            <Link
+              to={srcDownload}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cls.ButtonDownload}
+            >
+              <Download className={cls.ButtonIcon} />
+            </Link>
+          </button>
+        </div>
       </div>
+    </Suspense>
+  );
+};
+
+const ListeningJuz = () => {
+  const salom: number = 30;
+  const arrayEmpty: number[] = Array.from(
+    { length: salom },
+    (_, index) => index + 1,
+  );
+
+  return (
+    <div>
+      <HStack max className={cls.ListenJuzWrapper} gap="16">
+        {arrayEmpty.map((item: number, index: number) => {
+          return <CardItems key={index} index={item} />;
+        })}
+      </HStack>
     </div>
   );
 };
+
+export default ListeningJuz;

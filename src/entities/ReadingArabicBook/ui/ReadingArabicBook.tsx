@@ -76,7 +76,7 @@ export const ReadingArabicBook = memo(
     return (
       <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
         <div
-          data-testid="reading-arabic"
+          data-testid="reading-book-arabic"
           className={classNames(cls.ReadingArabicBook, {}, [className])}
         >
           <div

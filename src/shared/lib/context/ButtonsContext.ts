@@ -11,6 +11,27 @@ export interface ButtonsClickedProps {
   setFontSize: (pro: number) => void;
   readingPageTubBtn: number;
   setReadingPageTubBtn: (activeBtn: number) => void;
+  surahListenNumber: number;
+  setSurahListenNumber: (num: number) => void;
+  surahOnEnded: boolean;
+  setSurahOnEnded: (onEnded: boolean) => void;
+  closeAudio: boolean;
+  setCloseAudio: (onEnded: boolean) => void;
+  TrackIndex: number | any;
+  setTrackIndex: (trackIndex: any) => void;
+
+  setIsPlay: (prop: boolean) => void;
+  isPlay: boolean;
+  setAudioTime: (prop: number) => void;
+  audioTime: number;
+  setAudioUrl: (prop: string) => void;
+  audioUrl: string;
+
+  fetchIsLoading: boolean;
+  setFetchIsLoading: (prop: boolean) => void;
+
+  BismillahNavbarImg: string;
+  setBismillahNavbarImg: (src: string) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -24,4 +45,23 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setFontSize: () => {},
   readingPageTubBtn: 1,
   setReadingPageTubBtn: () => {},
+  surahListenNumber: 0,
+  setSurahListenNumber: () => {},
+  surahOnEnded: false,
+  setSurahOnEnded: () => {},
+  closeAudio: false,
+  setCloseAudio: () => {},
+  TrackIndex: 0,
+  setTrackIndex: () => {},
+  setIsPlay: (prop: boolean) => {},
+  isPlay: false,
+  setAudioTime: () => {},
+  audioTime: 0,
+  setAudioUrl: () => {},
+  audioUrl: '',
+  fetchIsLoading: false,
+  setFetchIsLoading: () => {},
+
+  BismillahNavbarImg: 'app_light_theme',
+  setBismillahNavbarImg: () => {},
 });

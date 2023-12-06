@@ -20,7 +20,7 @@ export function useInfiniteScroll({
     if (callback) {
       const options = {
         root: wrapperElement,
-        rootMargin: '0px',
+        rootMargin: '300px',
         threshold: 1.0,
       };
 
@@ -30,7 +30,9 @@ export function useInfiniteScroll({
         }
       }, options);
 
-      observer.current.observe(triggerElement);
+      if (triggerElement) {
+        observer.current.observe(triggerElement);
+      }
     }
 
     return () => {

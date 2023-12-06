@@ -1,20 +1,21 @@
+/* eslint-disable react/jsx-curly-brace-presence */
+/* eslint-disable array-callback-return */
 import React, { memo, useEffect, useState } from 'react';
 import cls from './OneTafsirCard.module.scss';
 import { IconsOfTafsir } from '@/shared/ui/IconsOfTafsir';
 import { ContentOfTafsir } from '@/shared/ui/ContentOfTafsir';
-import { OneVerseTafsirScheme } from '@/pages/Tafsir';
+import { Chapter } from '@/pages/Tafsir';
+import { OneTafsirCardSkleton } from './OneTafsirCardSkleton';
 
 interface OneTafsirCardProp {
-  data?: OneVerseTafsirScheme;
+  data?: Chapter;
+  isLoading: boolean;
 }
 
 export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
-  const { data } = prop;
-  console.log(data?.verse_key);
+  const { data, isLoading } = prop;
 
   const [fontLoaded, setFontLoaded] = useState(false);
-
-  console.log(data?.page_number, 'fsfs');
 
   useEffect(() => {
     const fontPromise = document.fonts.load(`16px "p${data?.page_number}-v1"`);
@@ -27,15 +28,20 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         // console.log("Done");
       });
   }, [data?.page_number]);
+  if (isLoading) {
+    return <OneTafsirCardSkleton />;
+  }
 
   return (
-    <div className={cls.oneTafsirCard}>
+    <div className={cls.oneTafsirCard} id={`${data?.verse_key}`}>
       <IconsOfTafsir verse={data?.verse_key} />
       <ContentOfTafsir
         // @ts-ignore
+        
         words={data?.words || []}
         text={data?.tafsir[0].more_text}
         arab={data?.text}
+        page_number={data?.page_number || 1}
       />
     </div>
   );

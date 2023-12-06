@@ -1,23 +1,42 @@
 /* eslint-disable camelcase */
-/* eslint-disable react/jsx-curly-brace-presence */
-import React, { memo } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+// import { dataFotiha } from '../../model/const/fotihaSegment';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
-import { TafsirChapterData } from '@/pages/Tafsir';
+import { isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
 import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
+import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
+import { Verse } from '@/entities/ReadingArabic';
+import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface ListOfTafsirProp {
   className?: string;
-  listOfTafsir?: TafsirChapterData[];
+  listOfTafsir?: Verse[];
   quran_order: number;
 }
 
 export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
   const { listOfTafsir, quran_order } = prop;
-  console.log(listOfTafsir, 'listOfTafsir');
+  const isLoadingOfTafsir = useSelector(isLoading);
+  const { isPlay, setIsPlay } = useContext(ButtonsContext);
 
-  return (
+  const [audio, setAudio] = useState(
+    'http://iqro-quran.uz/developmentBackend/suras/1.mp3',
+  );
+
+  useEffect(() => {
+    setAudio(
+      `http://iqro-quran.uz/developmentBackend/suras/${quran_order}.mp3`,
+    );
+  }, [quran_order]);
+
+  // @ts-ignore
+  useQcfFont(listOfTafsir);
+
+  const content = (
     <div className={cls.listOfTafsir}>
       <SurahInfoAndAudioForTafsir />
       {listOfTafsir?.map((oneVerse) => {
@@ -25,9 +44,11 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
         return <OneTafsirCard data={oneVerse} />;
       })}
 
-      <AudioPlayerComp
-        src={`https://server6.mp3quran.net/thubti/00${quran_order}.mp3`}
-      />
+      {isLoadingOfTafsir ? <OneTafsirCardSkleton /> : ''}
+
+      <AudioPlayerComp src={isPlay ? audio : ''} />
     </div>
   );
+
+  return content;
 });

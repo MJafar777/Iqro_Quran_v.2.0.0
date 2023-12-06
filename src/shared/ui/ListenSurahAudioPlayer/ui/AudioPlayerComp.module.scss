@@ -1,0 +1,20 @@
+.AudioPlayerComp {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: var(--modal-z-index);
+
+  .closeCompoent {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transform: scale(0.7);
+  }
+}
+
+.rhap_time {
+  color: red !important;
+}

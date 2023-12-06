@@ -1,6 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable i18next/no-literal-string */
 import React, { memo, useContext, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import cls from './Setting.module.scss';
@@ -14,6 +15,7 @@ interface SettingsProp {
 }
 
 export const Setting = memo((prop: SettingsProp) => {
+  const { t } = useTranslation();
   const { isRightsidebarActive, setIsRightsidebarActive } =
     useContext(ButtonsContext);
 
@@ -26,7 +28,7 @@ export const Setting = memo((prop: SettingsProp) => {
     () => (
       <div className={classNames(cls.setting)}>
         <HStack className={cls.headerOfSidebar}>
-          <p className={cls.titleOfHeader}> Sozlamlar</p>
+          <p className={cls.titleOfHeader}>{t('Sozlamlar')}</p>
           {/* <Icon Svg={CloseIcon} height={0} clickable /> */}
           <CloseIcon
             data-testid="sidebar-toggle"
@@ -35,7 +37,7 @@ export const Setting = memo((prop: SettingsProp) => {
           />
         </HStack>
         <VStack gap="32">
-          <p className={cls.title}>Mavzular</p>
+          <p className={cls.title}>{t('Mavzular')}</p>
           <HStack max className={cls.buttonWrapper}>
             <ThemeSwitcher />
           </HStack>
@@ -43,7 +45,7 @@ export const Setting = memo((prop: SettingsProp) => {
         </VStack>
       </div>
     ),
-    [onToggle],
+    [onToggle, t],
   );
 
   return setting;

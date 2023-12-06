@@ -1,10 +1,11 @@
+/* stylelint-disable declaration-colon-newline-after */
 .app_orange_theme {
   --bg-color: #f8ead4;
   --bg-widget: #fff7e9;
-  --color-text: #000000;
+  --color-text: #000;
   --color-placeholder: #666;
   --color-hover: #2ba4ab;
-  --color-secondary: #666666;
+  --color-secondary: #666;
   --color-border-card: #dacdb3;
   --primary-color: #fbfefb;
   --secondary-color: #f9fbf9;
@@ -15,15 +16,25 @@
   --input-bg-color: #efe1cd;
   --text-primary-color: #272727;
   --icon-hover-bg-color: #efe1cd;
-  --btn-3d-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  --btn-3d-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px,
+    rgba(0, 0, 0, 0.3) 0 7px 13px -3px rgba(0, 0, 0, 0.2) 0 -3px 0 inset;
   --inverted-bg-color: #bd5012;
   --inverted-primary-color: #dbd5dc;
   --inverted-secondary-color: #faf4fb;
+
   // skeleton
   --skeleton-color: #fff;
   --skeleton-shadow: rgba(0 0 0 / 20%);
   --code-bg: #fff;
   --listbox-bg: #d5d5d7;
   --card-bg: #d5d5d7;
+
+  // reading
+  --bg-color-swetchreading: #b89f78;
+
+  ///
+  --bg-color-swetchbtn: #f8ead4;
+  --bg-btn-sear: #b89f78;
+  --bg-color-hover: #b89f78;
+  --color-text-hover: #b89f78;
 }

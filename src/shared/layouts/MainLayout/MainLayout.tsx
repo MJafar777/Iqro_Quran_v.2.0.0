@@ -2,6 +2,7 @@ import { memo, ReactElement } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './MainLayout.module.scss';
 import { Footer } from '@/widgets/Footer';
+// import { Footer } from '@/widgets/Footer';
 
 interface MainLayoutProps {
   className?: string;

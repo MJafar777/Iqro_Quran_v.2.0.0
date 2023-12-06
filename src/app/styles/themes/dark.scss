@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-colon-newline-after */
 .app_dark_theme {
   --bg-color: #1f2125;
   --bg-widget: #343a3f;
@@ -11,12 +12,17 @@
   --secondary-color: #f9fbf9;
   --border-line: #91979c;
   --bg-header: #1f2125;
-  --wrapper-number-surah: #343a3f;
+  --wrapper-number-surah: #91979c;
   --reading-navbar-progress: #fff;
   --input-bg-color: #212529;
   --text-primary-color: #84878a;
+  --bg-color-swetchbtn: #1f2125;
   --icon-hover-bg-color: #464b4f;
-  --btn-3d-shadow: rgba(255, 255, 255, 0.4) 0px 2px 4px,
-    rgba(255, 255, 255, 0.3) 0px 7px 13px -3px,
-    rgba(255, 255, 255, 0.2) 0px -3px 0px inset;
+  --bg-color-swetchreading: #343a3f;
+  --bg-btn-sear: #1f2125;
+  --bg-color-hover: #464b4f;
+  --color-text-hover: #fff;
+  --btn-3d-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px,
+    rgba(255, 255, 255, 0.3) 0 7px 13px -3px,
+    rgba(255, 255, 255, 0.2) 0 -3px 0 inset;
 }

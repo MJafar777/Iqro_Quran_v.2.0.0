@@ -1,8 +1,17 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable scss/dollar-variable-pattern */
+/* stylelint-disable declaration-colon-newline-after */
+/* stylelint-disable scss/at-import-no-partial-leading-underscore */
 @import 'reset';
 @import 'variables/global';
 @import 'themes/normal';
 @import 'themes/dark';
 @import 'themes/orange';
+@import 'fonts';
+@import '_breakpoints';
+@import '_constants';
+@import '_shades';
+@import '_utility';
 
 @font-face {
   font-family: 'Helvetica Neue';
@@ -16,10 +25,20 @@
     format('truetype');
 }
 
-@font-face {
-  font-family: 'p1-v1';
-  src: url('../../shared/assets/font/surah_name/p1.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: "p1-v1";
+//   src: url("../../shared/assets/font/surah_name/p1.ttf") format("truetype");
+// }
+
+// @font-face {
+//   font-family: "UthmanicHafs";
+//   src: local("KFGQPC HAFS Uthmanic Script"),
+//     url("../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2")
+//       format("woff2"),
+//     url("../../../public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf")
+//       format("truetype");
+//   font-display: swap;
+// }
 
 // USAGE
 body {
@@ -36,6 +55,10 @@ body {
 
 .content-page {
   display: flex;
+}
+
+.activeWord {
+  color: red;
 }
 
 *::-webkit-scrollbar {
@@ -72,7 +95,7 @@ body {
 // -----  | Audio player | ----- //
 $rhap_theme-color: #868686 !default;
 $rhap_background-color: #fff !default;
-$rhap_bar-color: #dddddd !default;
+$rhap_bar-color: #ddd !default;
 $rhap_time-color: #333 !default;
 $rhap_font-family: inherit !default;
 
@@ -144,6 +167,7 @@ $rhap_font-family: inherit !default;
   display: flex;
   flex: 3 1 auto;
   align-items: center;
+  margin-top: 10px;
 }
 
 .rhap_progress-container {
@@ -163,8 +187,9 @@ $rhap_font-family: inherit !default;
 }
 
 .rhap_time {
-  color: $rhap_time-color;
-  font-size: 16px;
+  // color: $rhap_time-color;
+  color: var(--color-text);
+  font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
 }
