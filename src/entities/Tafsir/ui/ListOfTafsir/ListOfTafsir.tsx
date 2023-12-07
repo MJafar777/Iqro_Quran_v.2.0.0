@@ -46,7 +46,7 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
 
       {isLoadingOfTafsir ? <OneTafsirCardSkleton /> : ''}
 
-      <AudioPlayerComp src={isPlay ? audio : ''} />
+      <AudioPlayerComp src={audio} />
     </div>
   );
 

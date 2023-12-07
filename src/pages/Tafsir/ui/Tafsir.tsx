@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -37,7 +38,8 @@ const reducer: ReducersList = {
 };
 
 const Tafsir = (prop: TafsirProp) => {
-  const { setIsPlay, setAudioTime, audioTime } = useContext(ButtonsContext);
+  const { setIsPlay, isPlay, setAudioTime, audioTime } =
+    useContext(ButtonsContext);
 
   const dataOfTafsir = useSelector(getDataTafsir);
   const getSegmentData = useSelector(getDataSegment);
@@ -46,12 +48,13 @@ const Tafsir = (prop: TafsirProp) => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(0);
-  const [word, setWord] = useState(0);
-  const [ayah, setAyah] = useState(0);
-  const [wordNew, setWordNew] = useState<string>('1');
-  const [ayahNew, setAyahNew] = useState<string>('1');
+  const [wordNew, setWordNew] = useState<number>(1);
+  const [ayahNew, setAyahNew] = useState<number>(1);
   const [segmentsVerse, setSegmentsVerse] = useState<VerseTime>();
-  const [lastPosition, setLastPosition] = useState('1:1:1');
+
+  const [lastPosition, setLastPosition] = useState(
+    `${surahId.quran_order}:${wordNew}:${ayahNew}`,
+  );
 
   const [segmentsData, setSegmentsData] = useState(
     getSegmentData
@@ -59,26 +62,13 @@ const Tafsir = (prop: TafsirProp) => {
       : dataFotiha,
   );
 
-  useEffect(() => {
-    dispatch(fetchAudioSegments({ chapterId: surahId.quran_order }));
-
-    if (getSegmentData) {
-      setSegmentsData(getSegmentData[surahId.quran_order]?.data.verse_timings);
-      setIsPlay(false);
-      setAyah(0);
-      setWordNew('1');
-      setAyahNew('1');
-    }
-  }, [surahId.quran_order]);
-
   const detectWord = (timeAudio: number) => {
     const word = segmentsVerse?.segments?.find(
       (segment: number[]) =>
         segment[1] <= timeAudio * 1000 && segment[2] > timeAudio * 1000,
     );
-    setLastPosition(`${ayahNew}:${wordNew}`);
+    setLastPosition(`${surahId.quran_order}:${ayahNew}:${wordNew}`);
     setWordNew(word?.[0]);
-    console.log(`${ayahNew}:${wordNew}`);
   };
 
   const detectVerse = (timeOfAudio: number) => {
@@ -88,12 +78,11 @@ const Tafsir = (prop: TafsirProp) => {
         segment.timestamp_to > timeOfAudio * 1000,
     );
     if (verse) {
-      setWordNew('1');
-      setAyahNew(verse?.verse_key);
+      setWordNew(0);
+      const ayah = parseInt(verse.verse_key.split(':')[1], 10);
+      setAyahNew(ayah);
       setSegmentsVerse(verse);
     }
-
-    detectWord(timeOfAudio);
   };
 
   const scrollToDiv = () => {
@@ -108,55 +97,54 @@ const Tafsir = (prop: TafsirProp) => {
       } as any);
     }
   };
+
+  // useEffect(() => {
+  //   const element = document.getElementById(
+  //     `${surahId.quran_order}:${ayahNew ? ayahNew : 1}:${
+  //       wordNew ? wordNew : 1
+  //     }`,
+  //   );
+  //   if (isPlay) {
+  //     element?.classList.add('activeWord');
+  //   }
+  // }, [isPlay]);
+
   useEffect(() => {
     scrollToDiv();
   }, [segmentsVerse?.verse_key]);
 
   useEffect(() => {
-    detectVerse(audioTime);
-  }, [audioTime, surahId.quran_order]);
-
-  useEffect(() => {
-    detectWord(audioTime);
-  }, [segmentsVerse?.segments]);
-
-  useEffect(() => {
-    if (segmentsData?.length > ayah) {
-      if (
-        segmentsData[ayah]?.timestamp_from <= audioTime * 1000 &&
-        segmentsData[ayah]?.timestamp_to > audioTime * 1000
-      ) {
-        if (
-          segmentsData[ayah]?.segments[word]?.[1] <= audioTime * 1000 &&
-          segmentsData[ayah]?.segments[word]?.[2] > audioTime * 1000
-        ) {
-          const element = document.getElementById(`${ayahNew}:${wordNew}`);
-
-          element?.classList.add('activeWord');
-        } else {
-          const lastElement = document.getElementById(`${lastPosition}`);
-          lastElement?.classList.remove('activeWord');
-          setWord((pre) => pre + 1);
-        }
-      } else {
-        const lastAyahElement = document.getElementById(`${lastPosition}`);
-        lastAyahElement?.classList.remove('activeWord');
-        setAyah((pre) => pre + 1);
-        // setWord(0);
-      }
+    if (getSegmentData) {
+      setSegmentsData(getSegmentData[surahId.quran_order]?.data.verse_timings);
+      detectVerse(audioTime);
+      detectWord(audioTime);
     }
   }, [audioTime, surahId.quran_order]);
 
   useEffect(() => {
+    const element = document.getElementById(
+      `${surahId.quran_order}:${ayahNew}:${wordNew}`,
+    );
+    element?.classList.add('activeWord');
+    const lastElement = document.getElementById(`${lastPosition}`);
+    lastElement?.classList.remove('activeWord');
+  }, [wordNew, segmentsVerse]);
+
+  // fetch data save data in redux
+  useEffect(() => {
+    dispatch(fetchAudioSegments({ chapterId: surahId.quran_order }));
+    setIsPlay(false);
+    setAyahNew(1);
+    setWordNew(1);
+  }, [surahId.quran_order]);
+
+  useEffect(() => {
     dispatch(
       fetchTafsirList({
-        // @ts-ignore
         chapterId: 1,
         page_number: 1,
       }),
     );
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -167,19 +155,15 @@ const Tafsir = (prop: TafsirProp) => {
     ) {
       dispatch(
         fetchTafsirList({
-          // @ts-ignore
           chapterId: surahId?.quran_order,
           page_number: surahId.pages[0],
         }),
       );
     } else if (surahId.quran_order && !dataOfTafsir) {
       dispatch(
-        // @ts-ignore
         fetchTafsirList({ chapterId: surahId?.quran_order, page_number: page }),
       );
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [surahId?.quran_order, dispatch]);
 
   useEffect(() => {
@@ -196,12 +180,14 @@ const Tafsir = (prop: TafsirProp) => {
         fetchTafsirList({ chapterId: surahId?.quran_order, page_number: page }),
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, page]);
 
+  // fetch data save data in redux
+
   useEffect(() => {
-    setPage(surahId?.pages[0]);
-  }, [surahId.quran_order, surahId?.pages]);
+    // eslint-disable-next-line no-unsafe-optional-chaining
+    setPage(surahId?.pages[0] - 1);
+  }, [surahId.quran_order]);
 
   const onLoadNextPart = () => {
     setPage((pre) => pre + 1);
@@ -227,7 +213,6 @@ const Tafsir = (prop: TafsirProp) => {
           />
         </Page>
       );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataOfTafsir, surahId.quran_order]);
 
   return (
