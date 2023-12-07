@@ -131,7 +131,7 @@ export const AudioPlayer = memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timestampFrom, verseKey]);
 
-    const nextVerse = (verse: string) => {
+    const nextVerseFunc = (verse: string) => {
       if (
         parseInt(verse.split(':')[1], 10) > 0 &&
         segmentsData &&
@@ -145,7 +145,7 @@ export const AudioPlayer = memo(
       }
     };
 
-    const privious = (verse: string) => {
+    const priviousFunc = (verse: string) => {
       if (parseInt(verse.split(':')[1], 10) > 0) {
         const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
           parseInt(verse.split(':')[1], 10) - 1
@@ -177,7 +177,7 @@ export const AudioPlayer = memo(
           {duration !== null && <p>{formatTime(currentTime)}</p>}
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div className={cls.play} onClick={() => privious(verseKey)}>
+            <div className={cls.play} onClick={() => priviousFunc(verseKey)}>
               <Previos />
             </div>
             {isPlay ? (
@@ -189,7 +189,7 @@ export const AudioPlayer = memo(
                 <Play />
               </div>
             )}
-            <div className={cls.play} onClick={() => nextVerse(verseKey)}>
+            <div className={cls.play} onClick={() => nextVerseFunc(verseKey)}>
               <Next />
             </div>
           </div>
