@@ -1,3 +1,4 @@
+/* stylelint-disable shorthand-property-no-redundant-values */
 .changeFontSize {
   display: flex;
   width: 100%;
@@ -19,8 +20,10 @@
   border: none;
   color: var(--color-text);
   text-align: center;
-  font-family: Proxima Vara;
-  font-size: 24wpx;
+  font-family: sans-serif;
+
+  // font-family: Proxima Vara;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -29,10 +32,12 @@
 .title {
   color: var(--color-text);
   text-align: center;
-  font-family: Proxima Vara;
+  font-family: sans-serif;
+
+  // font-family: Proxima Vara;
   font-size: 18px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
   padding: 18px 12px 6px 12px;
 }

@@ -38,8 +38,10 @@ const ListenParent = () => {
           {pageSuraOrJuz ? <ListeningSura /> : <ListeningJuz />}
         </Suspense>
       </div>
+
       {pageSuraOrJuz && surahListenNumber > 0 && surahListenNumber < 115 ? (
         <ListenSurahAudioPlayer
+          id={1}
           src={surahListenNumber > 0 ? srcSuraListen : ''}
         />
       ) : (
@@ -47,6 +49,7 @@ const ListenParent = () => {
       )}
       {!pageSuraOrJuz && surahListenNumber > 0 && surahListenNumber < 31 ? (
         <ListenSurahAudioPlayer
+          id={777}
           src={
             surahListenNumber > 0 && surahListenNumber < 31 ? srcJuzsListen : ''
           }

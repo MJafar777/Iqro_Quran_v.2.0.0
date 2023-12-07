@@ -11,6 +11,7 @@ import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
 import { Verse } from '@/entities/ReadingArabic';
 import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import AudioPlayer from '@/shared/ui/AudioPlayer/AudioPlayer';
 
 interface ListOfTafsirProp {
   className?: string;
@@ -45,6 +46,8 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
       })}
 
       {isLoadingOfTafsir ? <OneTafsirCardSkleton /> : ''}
+    
+      <AudioPlayer />
 
       <AudioPlayerComp src={audio} />
     </div>

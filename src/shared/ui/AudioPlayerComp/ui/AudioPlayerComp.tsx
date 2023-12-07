@@ -59,6 +59,7 @@ const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
         src={src}
         ref={audioRef}
         controls
+        style={{ display: 'none' }}
         onPause={() => setIsPlay(false)}
         onPlay={() => setIsPlay(true)}
         onEnded={endAudio}

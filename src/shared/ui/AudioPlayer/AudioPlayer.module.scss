@@ -1,0 +1,28 @@
+.audioPlayer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: fit-content;
+  width: 99%;
+  background-color: var(--bg-color);
+  margin-top: 500px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000 !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.range {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.bodyOfPlayer {
+  width: 100%;
+  height: 400px;
+  background-color: var(--bg-color);
+}

@@ -16,7 +16,7 @@ import {
 } from '@/shared/const/router';
 
 import { AppRoutesProps } from '@/shared/types/router';
-import { InfoSurahPage } from '@/pages/InformationPage';
+import { InformationPage } from '@/pages/InformationPage';
 import { ListenParent } from '@/pages/ListeningPage';
 import { Tafsir } from '@/pages/Tafsir';
 import { NotFoundPage } from '@/pages/NotFoundPage';
@@ -40,7 +40,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.INFOSURAH]: {
     path: getRouteInfoSurah(),
-    element: <InfoSurahPage />,
+    element: <InformationPage />,
   },
   [AppRoutes.LISTEN]: {
     path: getRouteListening(),

@@ -9,15 +9,13 @@ import { useTranslation } from 'react-i18next';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Footer.module.scss';
-import { AppImage } from '@/shared/ui/AppImage';
 import {
-  gmail,
-  instagram,
-  logo,
-  telegram,
-  youtobe,
-} from '@/shared/assets/icons/footer ';
-import { Icon } from '@/shared/ui/Icon';
+  Email,
+  Youtube,
+  Telegram,
+  Instagram,
+  FooterLogo,
+} from '@/shared/assets/icons/footer /newIcons';
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -25,11 +23,12 @@ export const Footer = () => {
   return (
     <>
       {' '}
-      <HStack align="start"  wrap="wrap" className={classNames(cls.footer)}>
+      <HStack align="start" wrap="wrap" className={classNames(cls.footer)}>
         <VStack className={classNames(cls.firstRowOfFooter)} gap="16">
           <p className={classNames(cls.title)}>{t('footerTitle')}</p>
           <p className="paraph">{t('footerSubtitle')}</p>
-          <AppImage src={logo} />
+          <FooterLogo className={cls.IconLogoFooter}/>
+
           <HStack max gap="32">
             <p>Sitemap</p>
             <p>Privacy</p>
@@ -72,12 +71,8 @@ export const Footer = () => {
             Quran.com
           </Link>
         </VStack>
-        <VStack
-          className={classNames(cls.fourthRowOfFooter)}
-          
-          gap="16"
-        >
-          <p className={classNames(cls.title)}>{t("contact")}</p>
+        <VStack className={classNames(cls.fourthRowOfFooter)} gap="16">
+          <p className={classNames(cls.title)}>{t('contact')}</p>
           <p>
             {t('Email')}:
             <Link to="https://mail.google.com/" className={cls.link}>
@@ -103,20 +98,20 @@ export const Footer = () => {
               target="_blank"
               className={cls.link}
             >
-              <Icon className={cls.iconOfFooter} Svg={youtobe} />
+              <Youtube className={cls.iconOfFooter} />
             </Link>
             <Link to={'https://www.'} target="_blank" className={cls.link}>
-              <Icon className={cls.iconOfFooter} Svg={gmail} />
+              <Email className={cls.iconOfFooter} />
             </Link>
             <Link to={'https://www.'} target="_blank" className={cls.link}>
-              <Icon className={cls.iconOfFooter} Svg={telegram} />
+              <Telegram className={cls.iconOfFooter} />
             </Link>
             <Link
               to={'https://www.instagram.com/'}
               target="_blank"
               className={cls.link}
             >
-              <Icon className={cls.iconOfFooter} Svg={instagram} />{' '}
+              <Instagram className={cls.iconOfFooter} />
             </Link>
           </HStack>
         </VStack>

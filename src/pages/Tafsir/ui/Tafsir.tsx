@@ -98,17 +98,6 @@ const Tafsir = (prop: TafsirProp) => {
     }
   };
 
-  // useEffect(() => {
-  //   const element = document.getElementById(
-  //     `${surahId.quran_order}:${ayahNew ? ayahNew : 1}:${
-  //       wordNew ? wordNew : 1
-  //     }`,
-  //   );
-  //   if (isPlay) {
-  //     element?.classList.add('activeWord');
-  //   }
-  // }, [isPlay]);
-
   useEffect(() => {
     scrollToDiv();
   }, [segmentsVerse?.verse_key]);
@@ -206,7 +195,6 @@ const Tafsir = (prop: TafsirProp) => {
           <Sidebar>
             <ReadingSidebar />
           </Sidebar>
-
           <ListOfTafsir
             listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
             quran_order={surahId.quran_order}

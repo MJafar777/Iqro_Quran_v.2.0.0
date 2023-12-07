@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    background-color: #e7e7e7;
+    background-color: var(--bg-color-swetchbtn);
     border-radius: 30px;
     padding: 5px;
     overflow: visible;
@@ -24,7 +24,7 @@
     width: 100px;
     height: 85%;
     border-radius: 30px;
-    background-color: #f0f0f0;
+    background-color: var(--wrapper-number-surah);
     transition: 0.5s;
     margin: 5px;
     -webkit-box-shadow: 0 0 10px 3px rgba(34, 60, 80, 0.2);
@@ -43,5 +43,6 @@
     text-align: center;
     user-select: none;
     font-size: 16px;
+    color: var(--color-text);
   }
 }
