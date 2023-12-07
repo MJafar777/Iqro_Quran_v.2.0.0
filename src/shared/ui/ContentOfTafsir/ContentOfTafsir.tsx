@@ -1,14 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable camelcase */
 import React, { memo, useContext, useState } from 'react';
-// import axios from 'axios';
 import cls from './ContentOfTafsir.module.scss';
 import { Word } from '@/pages/Tafsir';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-// import { classNames } from '@/shared/lib/classNames/classNames';
-// import { peekaboo } from '@/peekabo';
-// import axios from 'axios';
-// import { peekaboo } from '@/peekabo';
 
 interface ContentOfTafsirProp {
   arab?: string;
@@ -25,6 +18,7 @@ interface Data {
 }
 
 export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
+  // eslint-disable-next-line camelcase
   const { arab, text, words, page_number } = prop;
   const [data, setData] = useState<Data[]>([]);
   const { fontSize } = useContext(ButtonsContext);
@@ -38,6 +32,7 @@ export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
             <span
               style={{
                 fontSize: `${fontSize * 10}px`,
+                // eslint-disable-next-line camelcase
                 fontFamily: `p${page_number}-v1`,
               }}
               id={`${word.location}`}
