@@ -57,8 +57,8 @@ export const WordDetect = memo(() => {
   const detectVerse = (timeOfAudio: number) => {
     const verse = segmentsData?.find(
       (segment) =>
-        segment.timestamp_from <= timeOfAudio * 1000 &&
-        segment.timestamp_to > timeOfAudio * 1000,
+        segment?.timestamp_from <= timeOfAudio * 1000 &&
+        segment?.timestamp_to > timeOfAudio * 1000,
     );
     if (verse) {
       setWordNew(0);
@@ -83,7 +83,7 @@ export const WordDetect = memo(() => {
 
   useEffect(() => {
     setTimestampFrom(
-      segmentsData[parseInt(verseKey.split(':')[1], 10) - 1].timestamp_from,
+      segmentsData[parseInt(verseKey.split(':')[1], 10) - 1]?.timestamp_from,
     );
   }, [verseKey]);
 

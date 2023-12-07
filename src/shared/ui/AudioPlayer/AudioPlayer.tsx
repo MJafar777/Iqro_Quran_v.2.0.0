@@ -8,6 +8,7 @@ import { Pause, Play } from '@/shared/assets/iconsListening';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { getDataSegment } from '@/pages/Tafsir';
 import { getSelectedSura } from '@/entities/Surah';
+import { Next, Previos } from '@/shared/assets/audioPlayer';
 
 interface AudioPlayerCompInterface {
   className?: string;
@@ -16,7 +17,7 @@ interface AudioPlayerCompInterface {
 
 export const AudioPlayer = memo(
   ({ className, src }: AudioPlayerCompInterface) => {
-    const { verseKey, timestampFrom } = useContext(ButtonsContext);
+    const { verseKey, timestampFrom, setVerseKey } = useContext(ButtonsContext);
 
     const [sliderValue, setSliderValue] = useState<number>(0);
 
@@ -28,10 +29,11 @@ export const AudioPlayer = memo(
 
     const [segmentsData, setSegmentsData] = useState(getSegmentData);
 
+    const [lastVerse, setLastVerse] = useState(verseKey);
+
     useEffect(() => {
       setSegmentsData(getSegmentData);
       // @ts-ignore
-      console.log(segmentsData, verseKey);
     }, [getSegmentData, segmentsData, surahId.quran_order, verseKey]);
 
     const { isPlay, setIsPlay, setAudioTime, audioTime } =
@@ -115,17 +117,29 @@ export const AudioPlayer = memo(
       audioRef.current!.currentTime = 0;
     };
     useEffect(() => {
-      console.log(timestampFrom, 'tash');
-
       if (timestampFrom >= 0) {
-        console.log(timestampFrom, 'ichki');
-
         audioRef.current!.currentTime = timestampFrom / 1000;
         setIsPlay(true);
-        console.log(timestampFrom / 1000);
       }
+
+      setLastVerse(verseKey);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timestampFrom, verseKey]);
+
+    const nextVerse = (verse: string) => {
+      const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+        parseInt(verse.split(':')[1], 10) + 1
+      }`;
+      setVerseKey(nextVerse);
+    };
+
+    const privious = (verse: string) => {
+      const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+        parseInt(verse.split(':')[1], 10) - 1
+      }`;
+
+      setVerseKey(nextVerse);
+    };
 
     return (
       <div className={cls.audioPlayer}>
@@ -147,15 +161,24 @@ export const AudioPlayer = memo(
         />
         <div className={cls.bodyOfPlayer}>
           {duration !== null && <p>{formatTime(currentTime)}</p>}
-          {isPlay ? (
-            <div onClick={() => setIsPlay(false)} className={cls.pause}>
-              <Pause />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className={cls.play} onClick={() => privious(verseKey)}>
+              <Previos />
             </div>
-          ) : (
-            <div onClick={() => setIsPlay(true)} className={cls.play}>
-              <Play />
+            {isPlay ? (
+              <div onClick={() => setIsPlay(false)} className={cls.pause}>
+                <Pause />
+              </div>
+            ) : (
+              <div onClick={() => setIsPlay(true)} className={cls.play}>
+                <Play />
+              </div>
+            )}
+            <div className={cls.play} onClick={() => nextVerse(verseKey)}>
+              <Next />
             </div>
-          )}
+          </div>
           {duration !== null && <p>{formatTime(duration)}</p>}
         </div>
 
