@@ -19,15 +19,16 @@ const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
 
   const audioRef = useRef(null);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // function handleTimeUpdate() {
-  //   // @ts-ignore
-  //   setAudioTime(audioRef.current.audio.current.currentTime);
-  // }
-
-  // useEffect(() => {
-  //   handleTimeUpdate();
-  // }, [audioTime, handleTimeUpdate]);
+  useEffect(() => {
+    if (isPlay) {
+      // @ts-ignore
+      audioRef.current.play();
+    } else {
+      // @ts-ignore
+      audioRef.current.pause();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlay]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,19 +45,25 @@ const AudioPlayerComp = ({ className, src }: AudioPlayerCompInterface) => {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [setAudioTime]); //
+  }, [setAudioTime]);
+
+  const endAudio = () => {
+    setIsPlay(false);
+    // @ts-ignore
+    audioRef.current.currentTime = 0;
+  };
 
   return (
     <div className={classNames(cls.AudioPlayerComp, {}, [className])}>
-      {/* <AudioPlayer
+      <audio
         src={src}
-        // eslint-disable-next-line react/jsx-no-bind
-        onListen={handleTimeUpdate}
         ref={audioRef}
-        // onPlay={() => setIsPlay(true)}
-        // onPause={() => setIsPlay(false)}
-      /> */}
-      <audio src={src} ref={audioRef} controls />
+        controls
+        style={{ display: 'none' }}
+        onPause={() => setIsPlay(false)}
+        onPlay={() => setIsPlay(true)}
+        onEnded={endAudio}
+      />
     </div>
   );
 };
