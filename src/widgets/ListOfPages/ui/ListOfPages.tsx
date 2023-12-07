@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import cls from './ListOfPages.module.scss';
 import {
   Book,
-  Tarnslate,
   Info,
   Listining,
   Book2,
+  Tarnslate,
 } from '@/shared/assets/icons/SidebarListOfPages';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
@@ -28,15 +28,20 @@ export const ListOfPages = memo(() => {
       title: t('Qur’on tinglash'),
       icon: <Listining />,
     },
-    { path: '/tafsir', title: t('Tafsir'), icon: <Book /> },
     {
-      path: '/meaning',
+      path: '/tafsir',
       title: t("Qur’oning ma'nolar tarjimasi"),
       icon: <Tarnslate />,
     },
+    // {
+    //   path: '/meaning',
+    //   title: t("Qur’oning ma'nolar tarjimasi"),
+    //   icon: <Tarnslate />,
+    // },
 
     {
-      path: '/transcription',
+      // path: '/transcription',
+      path: '/reading',
       title: t('Transkripsiya'),
       icon: <Book />,
     },

@@ -7,7 +7,7 @@
   transition: all 0.3s linear;
 
   .CardsItems {
-    width: 30%;
+    width: 32.5%;
 
     // max-width: 25rem;
     // min-width: 400px;
@@ -150,15 +150,27 @@
   }
 
   .CardsItems:hover .SquareNumber {
-    // background-color: #37d0d8;
+    background-color: var(--bg-color-hover);
+
     // background-color: #f6e7d3;
+
     user-select: none;
+
+    color: var(--color-text-hover);
+  }
+
+  .CardsItems:hover .SquareNumber span {
+    color: #fff;
   }
 
   .CardsItems:hover .RightItems .Button {
     user-select: none;
 
-    // background-color: #f6e7d3;
+    background-color: var(--bg-color-hover);
+  }
+
+  .CardsItems:hover .RightItems .Button .ButtonIcon {
+    color: #fff;
   }
 }
 

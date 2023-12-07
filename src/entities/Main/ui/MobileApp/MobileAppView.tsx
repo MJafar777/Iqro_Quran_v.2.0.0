@@ -1,19 +1,23 @@
 /* eslint-disable i18next/no-literal-string */
-import React, { memo } from 'react';
+import React, { memo, useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import cls from './MobileAppView.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { AppImage } from '@/shared/ui/AppImage';
 import {
-  AppStore,
-  GooglePlay,
+  AppStoreDark,
+  AppStoreLight,
+  AppStoreOrange,
+  GooglePlayDark,
+  GooglePlayLight,
+  GooglePlayOrange,
   LeftHomeImg,
+  LogoIqro,
   RightHomeImg,
-  TextWithLogo,
   TextofQuran,
 } from '@/shared/assets/icons/main';
-import { ButtonForDownload } from '@/shared/ui/ButtonForDownload';
+
 import {
   Telegram,
   Instagram,
@@ -22,11 +26,34 @@ import {
   IqroQuranApp,
 } from '@/shared/assets/icons/footer /newIcons';
 
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { ButtonForDownload } from '@/shared/ui/ButtonForDownload';
+
 interface MobileApp {
   className?: string;
 }
 
 export const MobileAppView = memo((prop: MobileApp) => {
+  const [MobileView, setMobileView] = useState(AppStoreDark);
+  const [MobileViewGoogle, setMobileViewGoogle] = useState(GooglePlayDark);
+
+  const { BismillahNavbarImg } = useContext(ButtonsContext);
+
+  useEffect(() => {
+    if (BismillahNavbarImg === 'app_dark_theme') {
+      setMobileView(AppStoreDark);
+      setMobileViewGoogle(GooglePlayDark);
+    }
+    if (BismillahNavbarImg === 'app_orange_theme') {
+      setMobileView(AppStoreOrange);
+      setMobileViewGoogle(GooglePlayOrange);
+    }
+    if (BismillahNavbarImg === 'app_light_theme') {
+      setMobileView(AppStoreLight);
+      setMobileViewGoogle(GooglePlayLight);
+    }
+  }, [BismillahNavbarImg]);
+
   const { className } = prop;
   return (
     <div className={classNames(cls.MobileApp, {}, [])}>
@@ -34,13 +61,12 @@ export const MobileAppView = memo((prop: MobileApp) => {
         <HStack className={classNames(cls.AppLink)}>
           <TextofQuran className={classNames(cls.textofQuran)} />
           <VStack align="center" gap="8">
-            <AppImage
-              src={TextWithLogo}
-              className={classNames(cls.textWithLogo)}
-            />
+            <LogoIqro className={cls.IconLogoMobileView} />
+
             <IqroQuranApp className={cls.IqroQuranMobileView} />
-            <ButtonForDownload icon={`${GooglePlay}`} />
-            <ButtonForDownload icon={`${AppStore}`} />
+
+            <ButtonForDownload icon={MobileView} />
+            <ButtonForDownload icon={`${MobileViewGoogle}`} />
             <HStack
               align="center"
               justify="between"
