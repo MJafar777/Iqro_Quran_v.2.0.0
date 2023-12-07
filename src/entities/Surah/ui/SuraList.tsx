@@ -88,7 +88,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
                 const suraNumber: string = item.quran_order.toString();
 
-                const suraName = item.translated_names.find(
+                const suraName = item.translated_names?.find(
                   (name) => name.lang_id?.iso_code === i18n.language,
                 )?.name;
 
@@ -125,7 +125,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
                     )}
                   >
                     {
-                      oneSurah.translated_names.find(
+                      oneSurah.translated_names?.find(
                         (name) => name.lang_id?.iso_code === i18n.language,
                       )?.name
                     }
