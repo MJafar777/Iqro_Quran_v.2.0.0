@@ -10,7 +10,6 @@ import { krilLng, lotinLng } from '@/shared/config/i18n/i18n';
 import { Sidebar } from '@/widgets/Sidebar';
 import { getIsLoading } from '@/pages/MainPage';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
-import { ReadingArabic } from '@/entities/ReadingArabic';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 // import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 import SwtichButton from '@/shared/ui/SwitchButton/SwtichButton';
@@ -24,19 +23,24 @@ import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
+import { ReadingArabic } from '@/entities/ReadingArabic';
 
 interface ReadingPageProps {
   className?: string;
 }
 
 const ReadingPage = (props: ReadingPageProps) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { className } = props;
   const { readingSidebarActive, readingPageTubBtn } =
     useContext(ButtonsContext);
 
   const isLoading = useSelector(getIsLoading);
+
+  const read = t("O'qish");
+  const wordBuyWord = t("So'zma-so'z");
+  const Transcription = t('Transkripsiya');
 
   return (
     <div
@@ -56,7 +60,7 @@ const ReadingPage = (props: ReadingPageProps) => {
           [className],
         )}
       >
-        <SwtichButton buttonsNames={['Tarjimasi', "O'qilishi", 'Kitob']} />
+        <SwtichButton buttonsNames={[read, wordBuyWord, Transcription]} />
 
         {/* <ReadingTabBtn /> */}
 
@@ -76,31 +80,31 @@ const ReadingPage = (props: ReadingPageProps) => {
           </div>
         ) : (
           <>
-            {readingPageTubBtn === 1 && i18n.language === lotinLng ? (
+            {readingPageTubBtn === 1 ? <ReadingArabic /> : ''}
+
+            {readingPageTubBtn === 2 && i18n.language === lotinLng ? (
               <ReadingTranslateLotin />
             ) : (
               ''
             )}
 
-            {readingPageTubBtn === 1 && i18n.language === krilLng ? (
+            {readingPageTubBtn === 2 && i18n.language === krilLng ? (
               <ReadingTranslateKril />
             ) : (
               ''
             )}
 
-            {readingPageTubBtn === 2 && i18n.language === lotinLng ? (
+            {readingPageTubBtn === 3 && i18n.language === lotinLng ? (
               <ReadingTranskriptLotin />
             ) : (
               ''
             )}
 
-            {readingPageTubBtn === 2 && i18n.language === krilLng ? (
+            {readingPageTubBtn === 3 && i18n.language === krilLng ? (
               <ReadingTranskriptKril />
             ) : (
               ''
             )}
-
-            {readingPageTubBtn === 3 ? <ReadingArabic /> : ''}
 
             <ReadingPrevNextBtnGroup />
 

@@ -53,7 +53,8 @@
 
   "Qur’on o‘qish": "Qur’on o‘qish",
   "Qur’on tinglash": "Qur’on tinglash",
-  "Qur’oning ma'nolar tarjimasi": "Qur’oning ma'nolar tarjimasi",
+  "Qur’on ma'nolar tarjimasi": "Qur’on ma’nolar tarjimasi",
+  "Qur’on so'zma-so'z tarjimasi": "Qur’on so’zma-so’z tarjimasi",
   "Transkripsiya": "Transkripsiya",
   "Biz haqimizda": "Biz haqimizda",
 
@@ -64,5 +65,11 @@
 
   "Avto": "Avto",
   "Yorqin": "Yorqin",
-  "Qorong‘i": "Qorong‘i"
+  "Qorong‘i": "Qorong‘i",
+
+  "O'qish": "O’qish",
+  "So'zma-so'z": "So’zma-so’z",
+
+  "Sura haqida ma'lumot": "Sura haqida ma’lumot",
+  "Tinglash": "Tinglash"
 }
