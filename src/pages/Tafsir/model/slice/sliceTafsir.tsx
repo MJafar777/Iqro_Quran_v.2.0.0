@@ -34,6 +34,7 @@ const sliceTafsir = createSlice({
         fetchTafsirList.fulfilled,
         (state, action: PayloadAction<QuranDataText>) => {
           state.isLoading = false;
+
           if (
             state.data &&
             state.data[action.payload.data[0]?.chapter_id.quran_order]

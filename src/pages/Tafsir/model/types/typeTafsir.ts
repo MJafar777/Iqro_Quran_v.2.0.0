@@ -14,6 +14,7 @@ export interface Word {
   verse_id: string;
   page_number: number;
   line_number: number;
+  line_number2: number;
   audio: string | null;
   location: string;
   char_type_name: string;
@@ -103,8 +104,6 @@ export interface ApiResponse {
     currentPage: string;
   };
 }
-
-
 
 export enum QuranFont {
   MadaniV1 = 'code_v1',
