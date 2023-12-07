@@ -38,6 +38,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [BismillahNavbarImg, setBismillahNavbarImg] = useState('');
 
+  const [listOfPagesValuePath, setListOfPagesValuePath] = useState(1);
+
   const defaultProps = useMemo(
     () => ({
       isPlay,
@@ -68,6 +70,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setBismillahNavbarImg, // BismillahNavbar img
       setReadingSidebarActive,
       setIsRightsidebarActive,
+      listOfPagesValuePath,
+      setListOfPagesValuePath,
     }),
     [
       isPlay,
@@ -98,6 +102,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setBismillahNavbarImg, // BismillahNavbar img
       setReadingSidebarActive,
       setIsRightsidebarActive,
+      listOfPagesValuePath,
+      setListOfPagesValuePath,
     ],
   );
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Icon } from '../Icon';
 import cls from './SurahInfoAndAudio.module.scss';
 import { infosurah, playBtn } from '@/shared/assets/infoSurah';
@@ -11,6 +12,8 @@ import { getSelectedSura } from '@/entities/Surah';
 
 const SurahInfoAndAudio = () => {
   const data = useSelector(getSelectedSura);
+  const { t } = useTranslation();
+
   return (
     <div className={classNames(cls.WrapperSurah, {}, [])}>
       <Link
@@ -19,13 +22,15 @@ const SurahInfoAndAudio = () => {
       >
         <div className={classNames(cls.InfoSurahPage, {}, [])}>
           <Icon Svg={infosurah} width={20} />
-          <pre> </pre>Sura haqida ma'lumot
+          <pre> </pre>
+          {t("Sura haqida ma'lumot")}
         </div>
       </Link>
 
       <div className={classNames(cls.listening, {}, [])}>
         <Icon Svg={playBtn} width={20} />
-        <pre> </pre>Tinglash
+        <pre> </pre>
+        {t('Tinglash')}
       </div>
     </div>
   );
