@@ -1,0 +1,2 @@
+export  {WordDetect} from "./WordDetect";
+

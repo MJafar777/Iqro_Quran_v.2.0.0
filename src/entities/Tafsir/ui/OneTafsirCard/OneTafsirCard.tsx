@@ -26,6 +26,7 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         // console.log("Done");
       });
   }, [data?.page_number]);
+
   if (isLoading) {
     return <OneTafsirCardSkleton />;
   }

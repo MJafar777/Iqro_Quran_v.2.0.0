@@ -2,9 +2,13 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { Slider } from '@mui/material';
+import { useSelector } from 'react-redux';
 import cls from './AudioPlayer.module.scss';
 import { Pause, Play } from '@/shared/assets/iconsListening';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { getDataSegment } from '@/pages/Tafsir';
+import { getSelectedSura } from '@/entities/Surah';
+import { Next, Previos } from '@/shared/assets/audioPlayer';
 
 interface AudioPlayerCompInterface {
   className?: string;
@@ -13,9 +17,29 @@ interface AudioPlayerCompInterface {
 
 export const AudioPlayer = memo(
   ({ className, src }: AudioPlayerCompInterface) => {
+    const { verseKey, timestampFrom, setVerseKey } = useContext(ButtonsContext);
+
     const [sliderValue, setSliderValue] = useState<number>(0);
+
     const [duration, setDuration] = useState<number | null>(null);
     const [currentTime, setCurrentTime] = useState<number>(0);
+    const surahId = useSelector(getSelectedSura);
+
+    const getSegmentData = useSelector(getDataSegment);
+
+    const [segmentsData, setSegmentsData] = useState(getSegmentData);
+
+    // console.log(
+    //   segmentsData?.[surahId.quran_order]?.data?.verse_timings?.length,
+    //   'segmentsData',
+    // );
+
+    const [lastVerse, setLastVerse] = useState(verseKey);
+
+    useEffect(() => {
+      setSegmentsData(getSegmentData);
+      // @ts-ignore
+    }, [getSegmentData, segmentsData, surahId.quran_order, verseKey]);
 
     const { isPlay, setIsPlay, setAudioTime, audioTime } =
       useContext(ButtonsContext);
@@ -26,12 +50,10 @@ export const AudioPlayer = memo(
 
       const handleLoadedMetadata = () => {
         setDuration(audio?.duration ?? null);
-        console.log('Audio duration:', audio?.duration, 'seconds');
       };
 
       const handleCanPlayThrough = () => {
         setDuration(audio?.duration ?? null);
-        console.log('Audio duration:', audio?.duration, 'seconds');
       };
 
       if (audio) {
@@ -99,6 +121,39 @@ export const AudioPlayer = memo(
       setIsPlay(false);
       audioRef.current!.currentTime = 0;
     };
+    useEffect(() => {
+      if (timestampFrom >= 0) {
+        audioRef.current!.currentTime = timestampFrom / 1000;
+        setIsPlay(true);
+      }
+
+      setLastVerse(verseKey);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [timestampFrom, verseKey]);
+
+    const nextVerseFunc = (verse: string) => {
+      if (
+        parseInt(verse.split(':')[1], 10) > 0 &&
+        segmentsData &&
+        segmentsData?.[surahId.quran_order]?.data?.verse_timings?.length >
+          parseInt(verse.split(':')[1], 10)
+      ) {
+        const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+          parseInt(verse.split(':')[1], 10) + 1
+        }`;
+        setVerseKey(nextVerse);
+      }
+    };
+
+    const priviousFunc = (verse: string) => {
+      if (parseInt(verse.split(':')[1], 10) > 0) {
+        const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+          parseInt(verse.split(':')[1], 10) - 1
+        }`;
+
+        setVerseKey(nextVerse);
+      }
+    };
 
     return (
       <div className={cls.audioPlayer}>
@@ -120,15 +175,24 @@ export const AudioPlayer = memo(
         />
         <div className={cls.bodyOfPlayer}>
           {duration !== null && <p>{formatTime(currentTime)}</p>}
-          {isPlay ? (
-            <div onClick={() => setIsPlay(false)} className={cls.pause}>
-              <Pause />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className={cls.play} onClick={() => priviousFunc(verseKey)}>
+              <Previos />
             </div>
-          ) : (
-            <div onClick={() => setIsPlay(true)} className={cls.play}>
-              <Play />
+            {isPlay ? (
+              <div onClick={() => setIsPlay(false)} className={cls.pause}>
+                <Pause />
+              </div>
+            ) : (
+              <div onClick={() => setIsPlay(true)} className={cls.play}>
+                <Play />
+              </div>
+            )}
+            <div className={cls.play} onClick={() => nextVerseFunc(verseKey)}>
+              <Next />
             </div>
-          )}
+          </div>
           {duration !== null && <p>{formatTime(duration)}</p>}
         </div>
 

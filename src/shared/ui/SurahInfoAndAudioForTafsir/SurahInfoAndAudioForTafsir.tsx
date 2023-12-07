@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
@@ -13,7 +14,12 @@ import { Pause } from '@/shared/assets/iconsListening';
 
 const SurahInfoAndAudio = () => {
   const data = useSelector(getSelectedSura);
-  const { isPlay, setIsPlay } = useContext(ButtonsContext);
+  const { isPlay, setIsPlay, setAudioUrl } = useContext(ButtonsContext);
+  useEffect(() => {
+    setAudioUrl(
+      `http://iqro-quran.uz/developmentBackend/suras/${data?.quran_order}.mp3`,
+    );
+  }, [data?.quran_order, isPlay]);
 
   return (
     <div className={classNames(cls.WrapperSurah, {}, [])}>

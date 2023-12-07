@@ -13,7 +13,7 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
     useState<boolean>(true);
 
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
-
+  const [timestampFrom, setTimestampFrom] = useState<number>(0);
   const [TrackIndex, setTrackIndex] = useState(0);
 
   const [isRightsidebarActive, setIsRightsidebarActive] = useState(true);
@@ -25,6 +25,10 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
   const [audioTime, setAudioTime] = useState(0);
 
   const [isPlay, setIsPlay] = useState(false);
+
+  const [verseKey, setVerseKey] = useState('1:1');
+
+  const [isPlayVerse, setIsPlayVerse] = useState(false);
 
   const [readingPageTubBtn, setReadingPageTubBtn] = useState(1);
 
@@ -43,9 +47,13 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
   const defaultProps = useMemo(
     () => ({
       isPlay,
+      isPlayVerse,
+      verseKey,
       fontSize,
       audioUrl,
       setIsPlay,
+      setIsPlayVerse,
+      setVerseKey,
       closeAudio,
       TrackIndex,
       setFontSize,
@@ -70,34 +78,30 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setBismillahNavbarImg, // BismillahNavbar img
       setReadingSidebarActive,
       setIsRightsidebarActive,
+      timestampFrom,
+      setTimestampFrom,
       listOfPagesValuePath,
       setListOfPagesValuePath,
     }),
     [
       isPlay,
+      isPlayVerse,
+      verseKey,
       fontSize,
       audioUrl,
-      setIsPlay,
       closeAudio,
       TrackIndex,
-      setFontSize,
-      setAudioUrl,
       audioTime,
       surahOnEnded,
-      setCloseAudio,
-      setTrackIndex,
-      setAudioTime,
       fetchIsLoading,
       isSidebarActive,
-      setSurahOnEnded,
       readingPageTubBtn,
       surahListenNumber,
-      setFetchIsLoading,
-      BismillahNavbarImg, // BismillahNavbar img
-      setIsSidebarActive,
+      BismillahNavbarImg,
       isRightsidebarActive,
-      setSurahListenNumber,
       readingSidebarActive,
+      timestampFrom,
+      setTimestampFrom,
       setReadingPageTubBtn,
       setBismillahNavbarImg, // BismillahNavbar img
       setReadingSidebarActive,

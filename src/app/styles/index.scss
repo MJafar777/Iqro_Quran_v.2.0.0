@@ -58,7 +58,7 @@ body {
 }
 
 .activeWord {
-  color: red;
+  color: var(--word-color);
 }
 
 *::-webkit-scrollbar {
