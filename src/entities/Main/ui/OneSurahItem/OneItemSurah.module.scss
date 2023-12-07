@@ -1,3 +1,4 @@
+/* stylelint-disable string-quotes */
 /* stylelint-disable font-family-no-missing-generic-family-keyword */
 .oneItemSura {
   width: 30%;
@@ -24,6 +25,10 @@
       // color: #258c91;
 
       color: var(--color-text-hover);
+    }
+
+    pre {
+      color: #fff;
     }
 
     .wrapper {

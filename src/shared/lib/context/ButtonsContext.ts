@@ -29,6 +29,7 @@ export interface ButtonsClickedProps {
   isPlayVerse: boolean;
   setIsPlayVerse: (prop: boolean) => void;
   verseKey: string;
+  
   setVerseKey: (prop: string) => void;
 
   fetchIsLoading: boolean;
@@ -38,6 +39,9 @@ export interface ButtonsClickedProps {
   setBismillahNavbarImg: (src: string) => void;
   timestampFrom: number;
   setTimestampFrom: (prop: number) => void;
+
+  listOfPagesValuePath: number;
+  setListOfPagesValuePath: (val: number) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -76,4 +80,7 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setVerseKey: () => {},
   timestampFrom: 0,
   setTimestampFrom: () => {},
+
+  listOfPagesValuePath: 1,
+  setListOfPagesValuePath: () => {},
 });

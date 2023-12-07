@@ -5,49 +5,65 @@ import { useTranslation } from 'react-i18next';
 import cls from './ListOfPages.module.scss';
 import {
   Book,
-  Tarnslate,
   Info,
   Listining,
   Book2,
+  Tarnslate,
 } from '@/shared/assets/icons/SidebarListOfPages';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 export const ListOfPages = memo(() => {
-  const { isSidebarActive, setIsSidebarActive } = useContext(ButtonsContext);
+  const {
+    isSidebarActive,
+    setIsSidebarActive,
+    listOfPagesValuePath,
+    setListOfPagesValuePath,
+  } = useContext(ButtonsContext);
 
   const { t, i18n } = useTranslation();
 
   const listOfPage = [
+    { id: 1, path: '/reading', title: t('Qur’on o‘qish'), icon: <Book2 /> },
     {
-      path: '/reading',
-      title: t('Qur’on o‘qish'),
-      icon: <Book2 />,
-    },
-    {
+      id: 2,
       path: '/listining',
       title: t('Qur’on tinglash'),
       icon: <Listining />,
     },
-    { path: '/tafsir', title: t('Tafsir'), icon: <Book /> },
     {
-      path: '/meaning',
-      title: t("Qur’oning ma'nolar tarjimasi"),
+      id: 3,
+      path: '/tafsir',
+      title: t("Qur’on ma'nolar tarjimasi"),
       icon: <Tarnslate />,
     },
-
     {
-      path: '/transcription',
+      id: 4,
+      path: '/reading',
+      title: t("Qur’on so'zma-so'z tarjimasi"),
+      icon: <Book2 />,
+    },
+    {
+      // path: '/transcription',
+      id: 5,
+      path: '/reading',
       title: t('Transkripsiya'),
       icon: <Book />,
     },
-    { path: '/about', title: t('Biz haqimizda'), icon: <Info /> },
+    { id: 6, path: '/about', title: t('Biz haqimizda'), icon: <Info /> },
   ];
+
+  const setValuePath = (item: number) => {
+    setIsSidebarActive(!isSidebarActive);
+    setListOfPagesValuePath(item);
+  };
 
   const itemListOfPage = useMemo(
     () =>
       listOfPage.map((item) => (
         <Link
-          onClick={() => setIsSidebarActive(!isSidebarActive)}
+          onClick={() => {
+            setValuePath(item.id);
+          }}
           className={cls.li}
           key={item.title}
           to={item.path}
