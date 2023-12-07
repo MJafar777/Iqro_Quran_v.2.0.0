@@ -5,6 +5,20 @@
   margin-top: 40px;
 }
 
+.IconLogoMobileView {
+  font-size: 50px;
+  color: var(--color-text);
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  padding: 10px;
+
+  -webkit-box-shadow: 0 0 20px 3px rgba(172, 177, 177, 0.3);
+  -moz-box-shadow: 0 0 20px 3px rgba(172, 177, 177, 0.3);
+  box-shadow: 0 0 20px 3px rgba(172, 177, 177, 0.3);
+  background-color: rgba(135, 135, 135, 0.2);
+}
+
 .IconsMobileAppView {
   font-size: 28px;
   color: var(--color-text);

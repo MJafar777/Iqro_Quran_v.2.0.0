@@ -32,6 +32,9 @@ export interface ButtonsClickedProps {
 
   BismillahNavbarImg: string;
   setBismillahNavbarImg: (src: string) => void;
+
+  listOfPagesValuePath: number;
+  setListOfPagesValuePath: (val: number) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -64,4 +67,7 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
 
   BismillahNavbarImg: 'app_light_theme',
   setBismillahNavbarImg: () => {},
+
+  listOfPagesValuePath: 1,
+  setListOfPagesValuePath: () => {},
 });

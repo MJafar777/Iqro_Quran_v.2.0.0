@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import cls from './SwitchButton.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -12,7 +12,26 @@ const SwtichButton = (props: ButtonsNames) => {
   const { buttonsNames } = props;
   const divRef = useRef<HTMLDivElement>(null);
 
-  const { setReadingPageTubBtn } = useContext(ButtonsContext);
+  const {
+    listOfPagesValuePath,
+    setListOfPagesValuePath,
+    setReadingPageTubBtn,
+  } = useContext(ButtonsContext);
+
+  useEffect(() => {
+    if (divRef.current && listOfPagesValuePath === 1) {
+      divRef.current.style.left = '0';
+      setReadingPageTubBtn(1);
+    } else if (divRef.current && listOfPagesValuePath === 4) {
+      divRef.current.style.left = '130px';
+      setReadingPageTubBtn(2);
+    } else if (divRef.current && listOfPagesValuePath === 5) {
+      divRef.current.style.left = '260px';
+      setReadingPageTubBtn(3);
+    }
+  }, [listOfPagesValuePath, setReadingPageTubBtn]);
+
+  console.log(listOfPagesValuePath);
 
   const clickBtn = (index: number) => {
     if (divRef.current && index === 1) {

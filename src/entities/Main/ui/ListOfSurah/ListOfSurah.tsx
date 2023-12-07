@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-expressions */
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
@@ -45,7 +47,7 @@ export const ListOfSurah = memo((prop: ListOfSurahProp) => {
                 oneSurah={oneSurah}
                 numberOfOyat={oneSurah.count_verse}
                 orderOfSura={oneSurah.quran_order}
-                arabic={`00${oneSurah.quran_order}`}
+                arabic={`${oneSurah.quran_order}`}
                 className={classNames(cls.oneSurah)}
               />
             );

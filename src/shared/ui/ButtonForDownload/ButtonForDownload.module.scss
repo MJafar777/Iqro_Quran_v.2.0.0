@@ -1,11 +1,13 @@
 .ButtonForDownload {
-  background-color: #2ca4ab;
-  border-radius: 23px;
+  width: fit-content;
+  border-radius: 8px;
   outline: none;
   border: none;
   cursor: pointer;
-  transition: all 0.4s linear;
-  padding: 0 12px;
+  background-color: var(--background-color);
+
+  // transition: all 0.1s linear;
+
   &:hover {
     opacity: 0.5;
   }
