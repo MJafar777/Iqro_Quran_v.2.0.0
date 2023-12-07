@@ -27,7 +27,6 @@ const sliceSegment = createSlice({
           const quran_order = action.payload.data.audio_url
             ?.replace('/suras/', '')
             .replace('.mp3', '');
-          console.log(action.payload, quran_order);
 
           if (!state.data) {
             // @ts-ignore

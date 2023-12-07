@@ -102,7 +102,6 @@ const Tafsir = (prop: TafsirProp) => {
           </Sidebar>
           <ListOfTafsir
             listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
-            quran_order={surahId.quran_order}
           />
           <WordDetect />
         </Page>

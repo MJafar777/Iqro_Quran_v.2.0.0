@@ -26,11 +26,10 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
         // console.log("Done");
       });
   }, [data?.page_number]);
+
   if (isLoading) {
     return <OneTafsirCardSkleton />;
   }
-
-  console.log(data?.tafsir, 'data?.tafsir');
 
   return (
     <div className={cls.oneTafsirCard} id={`${data?.verse_key}`}>

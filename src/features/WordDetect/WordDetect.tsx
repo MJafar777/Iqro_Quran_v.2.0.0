@@ -23,7 +23,8 @@ const reducer: ReducersList = {
 };
 
 export const WordDetect = memo(() => {
-  const { setIsPlay, audioTime } = useContext(ButtonsContext);
+  const { setIsPlay, audioTime, verseKey, setTimestampFrom } =
+    useContext(ButtonsContext);
 
   const getSegmentData = useSelector(getDataSegment);
   const surahId = useSelector(getSelectedSura);
@@ -79,6 +80,12 @@ export const WordDetect = memo(() => {
       } as any);
     }
   };
+
+  useEffect(() => {
+    setTimestampFrom(
+      segmentsData[parseInt(verseKey.split(':')[1], 10) - 1].timestamp_from,
+    );
+  }, [verseKey]);
 
   useEffect(() => {
     scrollToDiv();

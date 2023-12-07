@@ -2,9 +2,12 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { Slider } from '@mui/material';
+import { useSelector } from 'react-redux';
 import cls from './AudioPlayer.module.scss';
 import { Pause, Play } from '@/shared/assets/iconsListening';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { getDataSegment } from '@/pages/Tafsir';
+import { getSelectedSura } from '@/entities/Surah';
 
 interface AudioPlayerCompInterface {
   className?: string;
@@ -13,9 +16,23 @@ interface AudioPlayerCompInterface {
 
 export const AudioPlayer = memo(
   ({ className, src }: AudioPlayerCompInterface) => {
+    const { verseKey, timestampFrom } = useContext(ButtonsContext);
+
     const [sliderValue, setSliderValue] = useState<number>(0);
+
     const [duration, setDuration] = useState<number | null>(null);
     const [currentTime, setCurrentTime] = useState<number>(0);
+    const surahId = useSelector(getSelectedSura);
+
+    const getSegmentData = useSelector(getDataSegment);
+
+    const [segmentsData, setSegmentsData] = useState(getSegmentData);
+
+    useEffect(() => {
+      setSegmentsData(getSegmentData);
+      // @ts-ignore
+      console.log(segmentsData, verseKey);
+    }, [getSegmentData, segmentsData, surahId.quran_order, verseKey]);
 
     const { isPlay, setIsPlay, setAudioTime, audioTime } =
       useContext(ButtonsContext);
@@ -26,12 +43,10 @@ export const AudioPlayer = memo(
 
       const handleLoadedMetadata = () => {
         setDuration(audio?.duration ?? null);
-        console.log('Audio duration:', audio?.duration, 'seconds');
       };
 
       const handleCanPlayThrough = () => {
         setDuration(audio?.duration ?? null);
-        console.log('Audio duration:', audio?.duration, 'seconds');
       };
 
       if (audio) {
@@ -99,6 +114,18 @@ export const AudioPlayer = memo(
       setIsPlay(false);
       audioRef.current!.currentTime = 0;
     };
+    useEffect(() => {
+      console.log(timestampFrom, 'tash');
+
+      if (timestampFrom >= 0) {
+        console.log(timestampFrom, 'ichki');
+
+        audioRef.current!.currentTime = timestampFrom / 1000;
+        setIsPlay(true);
+        console.log(timestampFrom / 1000);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [timestampFrom, verseKey]);
 
     return (
       <div className={cls.audioPlayer}>

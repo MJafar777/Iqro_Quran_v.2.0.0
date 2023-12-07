@@ -26,12 +26,18 @@ export interface ButtonsClickedProps {
   audioTime: number;
   setAudioUrl: (prop: string) => void;
   audioUrl: string;
+  isPlayVerse: boolean;
+  setIsPlayVerse: (prop: boolean) => void;
+  verseKey: string;
+  setVerseKey: (prop: string) => void;
 
   fetchIsLoading: boolean;
   setFetchIsLoading: (prop: boolean) => void;
 
   BismillahNavbarImg: string;
   setBismillahNavbarImg: (src: string) => void;
+  timestampFrom: number;
+  setTimestampFrom: (prop: number) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -53,7 +59,7 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
   setCloseAudio: () => {},
   TrackIndex: 0,
   setTrackIndex: () => {},
-  setIsPlay: (prop: boolean) => {},
+  setIsPlay: () => {},
   isPlay: false,
   setAudioTime: () => {},
   audioTime: 0,
@@ -64,4 +70,10 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
 
   BismillahNavbarImg: 'app_light_theme',
   setBismillahNavbarImg: () => {},
+  isPlayVerse: false,
+  setIsPlayVerse: () => {},
+  verseKey: '',
+  setVerseKey: () => {},
+  timestampFrom: 0,
+  setTimestampFrom: () => {},
 });
