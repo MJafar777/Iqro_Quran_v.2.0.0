@@ -1,17 +1,15 @@
 /* eslint-disable camelcase */
 import React, { memo, useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-// import { dataFotiha } from '../../model/const/fotihaSegment';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
 import { isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
-import { AudioPlayerComp } from '@/shared/ui/AudioPlayerComp';
 import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
 import { Verse } from '@/entities/ReadingArabic';
 import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import AudioPlayer from '@/shared/ui/AudioPlayer/AudioPlayer';
+import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 
 interface ListOfTafsirProp {
   className?: string;
@@ -46,10 +44,10 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
       })}
 
       {isLoadingOfTafsir ? <OneTafsirCardSkleton /> : ''}
-    
-      <AudioPlayer />
 
-      <AudioPlayerComp src={audio} />
+      <AudioPlayer src={audio} />
+
+      {/* <AudioPlayerComp src={audio} /> */}
     </div>
   );
 
