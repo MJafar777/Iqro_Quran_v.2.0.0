@@ -29,6 +29,11 @@ export const AudioPlayer = memo(
 
     const [segmentsData, setSegmentsData] = useState(getSegmentData);
 
+    // console.log(
+    //   segmentsData?.[surahId.quran_order]?.data?.verse_timings?.length,
+    //   'segmentsData',
+    // );
+
     const [lastVerse, setLastVerse] = useState(verseKey);
 
     useEffect(() => {
@@ -127,18 +132,27 @@ export const AudioPlayer = memo(
     }, [timestampFrom, verseKey]);
 
     const nextVerse = (verse: string) => {
-      const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
-        parseInt(verse.split(':')[1], 10) + 1
-      }`;
-      setVerseKey(nextVerse);
+      if (
+        parseInt(verse.split(':')[1], 10) > 0 &&
+        segmentsData &&
+        segmentsData?.[surahId.quran_order]?.data?.verse_timings?.length >
+          parseInt(verse.split(':')[1], 10)
+      ) {
+        const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+          parseInt(verse.split(':')[1], 10) + 1
+        }`;
+        setVerseKey(nextVerse);
+      }
     };
 
     const privious = (verse: string) => {
-      const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
-        parseInt(verse.split(':')[1], 10) - 1
-      }`;
+      if (parseInt(verse.split(':')[1], 10) > 0) {
+        const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+          parseInt(verse.split(':')[1], 10) - 1
+        }`;
 
-      setVerseKey(nextVerse);
+        setVerseKey(nextVerse);
+      }
     };
 
     return (

@@ -1,9 +1,7 @@
 /* eslint-disable camelcase */
 import React, { memo, useContext } from 'react';
-import { useSelector } from 'react-redux';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
-import { isLoading } from '@/pages/Tafsir';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
 import useQcfFont from '@/shared/lib/hooks/useQcfFont/useQcfFont';
 import { Verse } from '@/entities/ReadingArabic';
@@ -15,11 +13,11 @@ interface ListOfTafsirProp {
   className?: string;
   listOfTafsir?: Verse[];
   quran_order?: number;
+  isLoading: boolean;
 }
 
 export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
-  const { listOfTafsir } = prop;
-  const isLoadingOfTafsir = useSelector(isLoading);
+  const { listOfTafsir, isLoading } = prop;
   const { audioUrl } = useContext(ButtonsContext);
 
   // @ts-ignore
@@ -34,7 +32,7 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
         return <OneTafsirCard data={oneVerse} />;
       })}
 
-      {isLoadingOfTafsir ? <OneTafsirCardSkleton /> : ''}
+      {isLoading ? <OneTafsirCardSkleton /> : ''}
 
       <AudioPlayer src={audioUrl} />
     </div>
