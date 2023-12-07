@@ -30,6 +30,8 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
     return <OneTafsirCardSkleton />;
   }
 
+  console.log(data?.tafsir, 'data?.tafsir');
+
   return (
     <div className={cls.oneTafsirCard} id={`${data?.verse_key}`}>
       <IconsOfTafsir verse={data?.verse_key} />

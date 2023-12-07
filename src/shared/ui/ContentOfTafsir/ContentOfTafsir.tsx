@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable camelcase */
-import React, { memo, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 // import axios from 'axios';
 import cls from './ContentOfTafsir.module.scss';
 import { Word } from '@/pages/Tafsir';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 // import { classNames } from '@/shared/lib/classNames/classNames';
 // import { peekaboo } from '@/peekabo';
 // import axios from 'axios';
@@ -26,22 +27,8 @@ interface Data {
 export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
   const { arab, text, words, page_number } = prop;
   const [data, setData] = useState<Data[]>([]);
+  const { fontSize } = useContext(ButtonsContext);
 
-  // useEffect(() => {
-  //   // Axios GET request
-  //   axios
-  //     .get<Data[]>(`http://iqro-quran.uz/developmentBackend/api/v1/audioverse`)
-  //     .then((response) => {
-  //       console.log(response, 'response');
-
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []);
-
-  // console.log(data, 'data');
   return (
     <div className={cls.content}>
       <p className={cls.arab}>
@@ -50,6 +37,7 @@ export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
           return (
             <span
               style={{
+                fontSize: `${fontSize * 10}px`,
                 fontFamily: `p${page_number}-v1`,
               }}
               id={`${word.location}`}
@@ -60,7 +48,9 @@ export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
           );
         })}
       </p>
-      <p className={cls.text}>{text?.replace(/<sup[^>]*>1<\/sup>/g, '')}</p>
+      <p style={{ fontSize: `${fontSize * 10}px` }} className={cls.text}>
+        {text?.replace(/<sup[^>]*>1<\/sup>/g, '')}
+      </p>
     </div>
   );
 });

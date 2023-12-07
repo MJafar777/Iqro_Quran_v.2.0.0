@@ -47,7 +47,6 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
 
       <AudioPlayer src={audio} />
 
-      {/* <AudioPlayerComp src={audio} /> */}
     </div>
   );
 
