@@ -1,5 +1,6 @@
+/* eslint-disable no-sequences */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './Tafsir.module.scss';
 
@@ -19,6 +20,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { ListOfTafsir } from '@/entities/Tafsir';
 import { sliceTafsirReducer } from '../model/slice/sliceTafsir';
 import { WordDetect } from '@/features/WordDetect';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 
 interface TafsirProp {
   className?: string;
@@ -33,6 +35,9 @@ const Tafsir = (prop: TafsirProp) => {
   const surahId = useSelector(getSelectedSura);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(0);
+
+  const { readingSidebarActive, readingPageTubBtn } =
+    useContext(ButtonsContext);
 
   useEffect(() => {
     dispatch(
@@ -87,6 +92,8 @@ const Tafsir = (prop: TafsirProp) => {
     setPage((pre) => pre + 1);
   };
 
+  console.log(readingSidebarActive, 'readingSidebarActive');
+
   // eslint-disable-next-line consistent-return
   const content = useMemo(() => {
     if (dataOfTafsir)
@@ -100,11 +107,13 @@ const Tafsir = (prop: TafsirProp) => {
           <Sidebar>
             <ReadingSidebar />
           </Sidebar>
-          <ListOfTafsir />
+          <div className={readingSidebarActive ? cls.wrapperList : cls.collaps}>
+            <ListOfTafsir />
+          </div>
           <WordDetect />
         </Page>
       );
-  }, [dataOfTafsir, surahId.quran_order]);
+  }, [dataOfTafsir, surahId.quran_order, readingSidebarActive]);
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>

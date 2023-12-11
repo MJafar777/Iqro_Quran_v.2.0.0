@@ -1,9 +1,7 @@
 .oneTafsirCard {
-  width: 80%;
+  width: 100%;
   min-height: 300px;
   height: fit-content;
-
-  margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 2px;
   display: flex;
@@ -13,7 +11,7 @@
 }
 
 .skletonCard {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 2px;

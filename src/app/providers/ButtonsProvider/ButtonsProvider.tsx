@@ -44,6 +44,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
 
   const [listOfPagesValuePath, setListOfPagesValuePath] = useState(1);
 
+  const [page, setPage] = useState(1);
+
   const defaultProps = useMemo(
     () => ({
       isPlay,
@@ -82,6 +84,8 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setTimestampFrom,
       listOfPagesValuePath,
       setListOfPagesValuePath,
+      setPage,
+      page,
     }),
     [
       isPlay,
@@ -108,6 +112,7 @@ const ButtonsProvider = (props: ButtonsProviderProps) => {
       setIsRightsidebarActive,
       listOfPagesValuePath,
       setListOfPagesValuePath,
+      page,
     ],
   );
 
