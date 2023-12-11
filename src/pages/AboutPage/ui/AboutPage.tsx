@@ -7,7 +7,7 @@ const AboutPage = () => {
   const { t } = useTranslation();
 
   const muallif = t('muallif');
-  const maqsad = t('maqsadimiz');
+  const maqsad = t('Maqsadimiz');
   const paragraph_2 = t('Paragraph_2');
   const Paragraph_1_1 = t('Paragraph_1_1');
   const Paragraph_1_2 = t('Paragraph_1_2');
