@@ -14,9 +14,12 @@ export const IconsOfTafsir = (prop: IconsOfTafsirProp) => {
   const [chapter, verseNumber] = verse ? verse.split(':') : ['1', '1'];
 
   const handleAudioPlay = () => {
-    if (verse) setVerseKey(verse);
-    setIsPlay(true);
-    console.log(verse);
+    if (verse) {
+      setIsPlay(true);
+      setVerseKey(verse);
+      // console.log(verse);
+      // console.log(verse, 'verse');
+    }
   };
 
   return (

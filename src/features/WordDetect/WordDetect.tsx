@@ -23,7 +23,7 @@ const reducer: ReducersList = {
 };
 
 export const WordDetect = memo(() => {
-  const { setIsPlay, audioTime, verseKey, setTimestampFrom } =
+  const { setIsPlay, audioTime, verseKey, setVerseKey, setTimestampFrom } =
     useContext(ButtonsContext);
 
   const getSegmentData = useSelector(getDataSegment);
@@ -31,8 +31,8 @@ export const WordDetect = memo(() => {
 
   const dispatch = useAppDispatch();
 
-  const [wordNew, setWordNew] = useState<number>(1);
-  const [ayahNew, setAyahNew] = useState<number>(1);
+  const [wordNew, setWordNew] = useState<number>(0);
+  const [ayahNew, setAyahNew] = useState<number>(0);
   const [segmentsVerse, setSegmentsVerse] = useState<VerseTime>();
 
   const [lastPosition, setLastPosition] = useState(
@@ -48,7 +48,7 @@ export const WordDetect = memo(() => {
   const detectWord = (timeAudio: number) => {
     const word = segmentsVerse?.segments?.find(
       (segment: number[]) =>
-        segment[1] <= timeAudio * 1000 && segment[2] > timeAudio * 1000,
+        segment?.[1] <= timeAudio * 1000 && segment?.[2] > timeAudio * 1000,
     );
     setLastPosition(`${surahId.quran_order}:${ayahNew}:${wordNew}`);
     setWordNew(word?.[0]);
@@ -62,7 +62,7 @@ export const WordDetect = memo(() => {
     );
     if (verse) {
       setWordNew(0);
-      const ayah = parseInt(verse.verse_key.split(':')[1], 10);
+      const ayah = parseInt(verse.verse_key.split(':')?.[1], 10);
       setAyahNew(ayah);
       setSegmentsVerse(verse);
     }
@@ -82,18 +82,18 @@ export const WordDetect = memo(() => {
   };
 
   useEffect(() => {
-    setTimestampFrom(
-      segmentsData[parseInt(verseKey.split(':')[1], 10) - 1]?.timestamp_from,
-    );
-  }, [verseKey]);
-
-  useEffect(() => {
     scrollToDiv();
   }, [segmentsVerse?.verse_key]);
 
   useEffect(() => {
     if (getSegmentData) {
-      setSegmentsData(getSegmentData[surahId.quran_order]?.data.verse_timings);
+      const verseTiming =
+        getSegmentData?.[surahId.quran_order]?.data.verse_timings;
+      setSegmentsData(verseTiming);
+      setTimestampFrom(
+        verseTiming?.[parseInt(verseKey.split(':')?.[1], 10) - 1]
+          ?.timestamp_from,
+      );
       detectVerse(audioTime);
       detectWord(audioTime);
     }
@@ -112,9 +112,12 @@ export const WordDetect = memo(() => {
   useEffect(() => {
     dispatch(fetchAudioSegments({ chapterId: surahId.quran_order }));
     setIsPlay(false);
-    setAyahNew(1);
-    setWordNew(1);
+    setAyahNew(0);
+    setWordNew(0);
+    setVerseKey(`${surahId?.quran_order}:1`);
   }, [surahId.quran_order]);
+
+ 
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>

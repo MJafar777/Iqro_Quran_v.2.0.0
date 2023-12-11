@@ -29,12 +29,9 @@ export const AudioPlayer = memo(
 
     const [segmentsData, setSegmentsData] = useState(getSegmentData);
 
-    // console.log(
-    //   segmentsData?.[surahId.quran_order]?.data?.verse_timings?.length,
-    //   'segmentsData',
-    // );
+    // console.log(verseKey, 'verseKey');
 
-    const [lastVerse, setLastVerse] = useState(verseKey);
+    // const [lastVerse, setLastVerse] = useState(verseKey);
 
     useEffect(() => {
       setSegmentsData(getSegmentData);
@@ -73,11 +70,13 @@ export const AudioPlayer = memo(
       setSliderValue(audioTime);
     }, [audioTime]);
 
+    console.log(isPlay);
+
     useEffect(() => {
-      if (isPlay) {
-        audioRef.current?.play();
-      } else {
-        audioRef.current?.pause();
+      if (isPlay && audioRef.current) {
+        audioRef.current.play();
+      } else if (!isPlay && audioRef.current) {
+        audioRef.current.pause();
       }
     }, [isPlay]);
 
@@ -122,12 +121,12 @@ export const AudioPlayer = memo(
       audioRef.current!.currentTime = 0;
     };
     useEffect(() => {
-      if (timestampFrom >= 0) {
+      if (timestampFrom > 0) {
         audioRef.current!.currentTime = timestampFrom / 1000;
         setIsPlay(true);
       }
 
-      setLastVerse(verseKey);
+      // setLastVerse(verseKey);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timestampFrom, verseKey]);
 

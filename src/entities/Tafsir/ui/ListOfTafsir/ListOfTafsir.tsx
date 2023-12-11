@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React, { memo, useContext } from 'react';
+import { useSelector } from 'react-redux';
 import cls from './ListOfTafsir.module.scss';
 import { OneTafsirCard } from '../OneTafsirCard/OneTafsirCard';
 import SurahInfoAndAudioForTafsir from '@/shared/ui/SurahInfoAndAudioForTafsir/SurahInfoAndAudioForTafsir';
@@ -8,18 +9,18 @@ import { Verse } from '@/entities/ReadingArabic';
 import { OneTafsirCardSkleton } from '../OneTafsirCard/OneTafsirCardSkleton';
 import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { isLoading } from '@/pages/Tafsir';
 
 interface ListOfTafsirProp {
   className?: string;
   listOfTafsir?: Verse[];
   quran_order?: number;
-  isLoading: boolean;
 }
 
 export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
-  const { listOfTafsir, isLoading } = prop;
+  const { listOfTafsir } = prop;
   const { audioUrl } = useContext(ButtonsContext);
-
+  const getIsLoading = useSelector(isLoading);
   // @ts-ignore
   useQcfFont(listOfTafsir);
 
@@ -32,7 +33,7 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
         return <OneTafsirCard data={oneVerse} />;
       })}
 
-      {isLoading ? <OneTafsirCardSkleton /> : ''}
+      {getIsLoading ? <OneTafsirCardSkleton /> : ''}
 
       <AudioPlayer src={audioUrl} />
     </div>

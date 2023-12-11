@@ -36,6 +36,7 @@ export const ContentOfTafsir = memo((prop: ContentOfTafsirProp) => {
                 fontFamily: `p${page_number}-v1`,
               }}
               id={`${word.location}`}
+              key={`${word.location}`}
             >
               {' '}
               {word.code_v2}
