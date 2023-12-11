@@ -35,7 +35,7 @@
   &:hover {
     background-color: #2ca4ab;
     .playIcon {
-      color: var(--color-text);
+      color: white;
     }
   }
 }
@@ -48,8 +48,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  &:hover {
-    color: white !important;
-  }
 }

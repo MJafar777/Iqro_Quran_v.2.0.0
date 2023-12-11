@@ -100,9 +100,7 @@ const Tafsir = (prop: TafsirProp) => {
           <Sidebar>
             <ReadingSidebar />
           </Sidebar>
-          <ListOfTafsir
-            listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
-          />
+          <ListOfTafsir />
           <WordDetect />
         </Page>
       );
