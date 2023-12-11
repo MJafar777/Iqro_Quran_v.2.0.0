@@ -9,7 +9,7 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchTafsirList } from '../model/service/fetchTafsir/fetchTafsirList';
-import { getDataTafsir, isLoading } from '../model/selector/selectorTafsir';
+import { getDataTafsir } from '../model/selector/selectorTafsir';
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
@@ -31,7 +31,6 @@ const reducer: ReducersList = {
 const Tafsir = (prop: TafsirProp) => {
   const dataOfTafsir = useSelector(getDataTafsir);
   const surahId = useSelector(getSelectedSura);
-  const isLoadingTafsir=useSelector(isLoading)
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(0);
 
@@ -103,7 +102,6 @@ const Tafsir = (prop: TafsirProp) => {
           </Sidebar>
           <ListOfTafsir
             listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
-            isLoading={isLoadingTafsir}
           />
           <WordDetect />
         </Page>
