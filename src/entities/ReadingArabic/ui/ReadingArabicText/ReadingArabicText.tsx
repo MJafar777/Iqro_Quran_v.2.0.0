@@ -16,7 +16,7 @@ import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
-import QuranPages from '../QuranPages/QuranPages';
+// import QuranPages from '../QuranPages/QuranPages';
 import {
   getSelectedPageRead,
   useSelectedPageReadActions,
@@ -27,7 +27,7 @@ import SuraNameContainer, {
 } from '@/shared/ui/SuraName/SuraNameContainer';
 import Bismillah from '@/shared/ui/Bismillah/Bismillah';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
+// import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
