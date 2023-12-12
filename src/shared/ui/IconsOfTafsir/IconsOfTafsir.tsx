@@ -45,7 +45,7 @@ export const IconsOfTafsir = (prop: IconsOfTafsirProp) => {
   return (
     <div className={cls.iconsOfTafsir}>
       <p className={cls.verse}>{verse || '1:1'}</p>
-      <div className={cls.iconWrapper} onClick={handleAudioPlay}>
+      <div className={cls.iconWrapper} onClick={()=>handleAudioPlay()}>
         <Play className={cls.playIcon} />
       </div>
       <div

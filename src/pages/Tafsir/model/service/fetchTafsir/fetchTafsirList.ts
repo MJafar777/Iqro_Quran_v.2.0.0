@@ -1,7 +1,11 @@
 /* eslint-disable camelcase */
-import { createAsyncThunk } from '@reduxjs/toolkit';
+/* eslint-disable no-promise-executor-return */
+// service/fetchTafsir/fetchTafsirList.ts
+import { createAsyncThunk, AsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { QuranDataText } from '@/entities/ReadingArabic';
+
+let requestQueue: Promise<any> = Promise.resolve();
 
 export const fetchTafsirList = createAsyncThunk<
   QuranDataText,
@@ -14,19 +18,25 @@ export const fetchTafsirList = createAsyncThunk<
     throw new Error('');
   }
 
-  try {
-    const response = await extra.api.get<QuranDataText>(
-      `verse/by_chapter/for_text?chapter=${chapterId}&page=${page_number}`,
-    );
+  // Add a delay to simulate async requests
+  await new Promise(resolve => setTimeout(resolve, 1000));
 
-    //
+  const requestAction = async () => {
+    try {
+      const response = await extra.api.get<QuranDataText>(
+        `verse/by_chapter/for_text?chapter=${chapterId}&page=${page_number}`,
+      );
 
-    if (!response.data) {
-      throw new Error();
+      if (!response.data) {
+        throw new Error();
+      }
+
+      return response.data;
+    } catch (e) {
+      return rejectWithValue('error');
     }
+  };
 
-    return response.data;
-  } catch (e) {
-    return rejectWithValue('error');
-  }
-});
+  requestQueue = requestQueue.then(requestAction);
+  return requestQueue;
+}) as AsyncThunk<any, { chapterId: number; page_number: number }, ThunkConfig<string>>;

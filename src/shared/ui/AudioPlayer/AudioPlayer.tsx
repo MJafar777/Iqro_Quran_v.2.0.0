@@ -2,6 +2,7 @@
 import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { Slider } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import cls from './AudioPlayer.module.scss';
 import { Pause, Play } from '@/shared/assets/iconsListening';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
@@ -26,6 +27,14 @@ export const AudioPlayer = memo(
     const { isPlay, setIsPlay, setAudioTime, audioTime } =
       useContext(ButtonsContext);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const location = useLocation();
+
+    useEffect(() => {
+      setIsPlay(false);
+      console.log();
+      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname]);
 
     useEffect(() => {
       setSegmentsData(getSegmentData);
@@ -55,15 +64,17 @@ export const AudioPlayer = memo(
       };
     }, [audioRef]);
 
+    // console.log(isPlay, 'llllll');
+
     useEffect(() => {
       setSliderValue(audioTime);
     }, [audioTime]);
 
     useEffect(() => {
       if (isPlay && audioRef.current) {
-        audioRef.current.play();
+        audioRef?.current?.play();
       } else if (!isPlay && audioRef.current) {
-        audioRef.current.pause();
+        audioRef?.current?.pause();
       }
     }, [isPlay]);
 
@@ -87,7 +98,7 @@ export const AudioPlayer = memo(
     useEffect(() => {
       if (timestampFrom >= 0) {
         audioRef.current!.currentTime = timestampFrom / 1000;
-        setIsPlay(true);
+        // setIsPlay(true);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timestampFrom]);
@@ -97,12 +108,12 @@ export const AudioPlayer = memo(
       if (segmentsData) {
         const verseData = segmentsData[
           surahId.quran_order
-        ].data.verse_timings.find(
+        ]?.data?.verse_timings.find(
           (segment) =>
             segment?.timestamp_from <= audioTime * 1000 &&
             segment?.timestamp_to > audioTime * 1000,
         );
-        console.log(verseData, 'verseda');
+        // console.log(verseData, 'verseda');
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [audioTime]);
@@ -132,11 +143,29 @@ export const AudioPlayer = memo(
     };
 
     const nextVerseFunc = (verse: string) => {
-      console.log(verse, 'func');
+      if (
+        parseInt(verse.split(':')[1], 10) > 0 &&
+        segmentsData &&
+        segmentsData?.[surahId.quran_order]?.data?.verse_timings?.length >
+          parseInt(verse.split(':')[1], 10)
+      ) {
+        const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+          parseInt(verse.split(':')[1], 10) + 1
+        }`;
+        setVerseKey(nextVerse);
+      }
     };
 
     const priviousFunc = (verse: string) => {
-      console.log(verse, 'func');
+      console.log(verse);
+
+      if (parseInt(verse.split(':')[1], 10) > 1) {
+        const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
+          parseInt(verse.split(':')[1], 10) - 1
+        }`;
+
+        setVerseKey(nextVerse);
+      }
     };
 
     return (

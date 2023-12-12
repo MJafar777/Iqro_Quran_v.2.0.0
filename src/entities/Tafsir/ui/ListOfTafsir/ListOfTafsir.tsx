@@ -17,7 +17,7 @@ interface ListOfTafsirProp {
 }
 
 export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
-  const { audioUrl } = useContext(ButtonsContext);
+  const { audioUrl, isPlay } = useContext(ButtonsContext);
   const getIsLoading = useSelector(isLoading);
   const dataOfTafsir = useSelector(getDataTafsir);
   const surahId = useSelector(getSelectedSura);
@@ -35,7 +35,7 @@ export const ListOfTafsir = memo((prop: ListOfTafsirProp) => {
 
       {getIsLoading ? <OneTafsirCardSkleton /> : ''}
 
-      <AudioPlayer src={audioUrl} />
+      {audioUrl ? <AudioPlayer src={audioUrl} /> : ''}
     </div>
   );
 

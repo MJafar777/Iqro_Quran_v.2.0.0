@@ -62,11 +62,16 @@ export const WordDetect = memo(() => {
     );
     if (verse) {
       setWordNew(0);
+      // setVerseKey(verse.verse_key);
       const ayah = parseInt(verse.verse_key.split(':')?.[1], 10);
       setAyahNew(ayah);
       setSegmentsVerse(verse);
     }
   };
+
+  // useEffect(() => {
+  //   console.log(verseKey);
+  // }, [verseKey]);
 
   const scrollToDiv = () => {
     const targetDiv = document.getElementById(`${segmentsVerse?.verse_key}`);
