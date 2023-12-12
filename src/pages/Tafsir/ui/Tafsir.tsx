@@ -92,8 +92,6 @@ const Tafsir = (prop: TafsirProp) => {
     setPage((pre) => pre + 1);
   };
 
-  console.log(readingSidebarActive, 'readingSidebarActive');
-
   // eslint-disable-next-line consistent-return
   const content = useMemo(() => {
     if (dataOfTafsir)

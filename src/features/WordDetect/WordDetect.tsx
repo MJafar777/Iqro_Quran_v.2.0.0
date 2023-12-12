@@ -36,7 +36,7 @@ export const WordDetect = memo(() => {
   const [segmentsVerse, setSegmentsVerse] = useState<VerseTime>();
 
   const [lastPosition, setLastPosition] = useState(
-    `${surahId.quran_order}:${wordNew}:${ayahNew}`,
+    `${surahId.quran_order}:${ayahNew}:${wordNew}`,
   );
 
   const [segmentsData, setSegmentsData] = useState(
@@ -116,8 +116,6 @@ export const WordDetect = memo(() => {
     setWordNew(0);
     setVerseKey(`${surahId?.quran_order}:1`);
   }, [surahId.quran_order]);
-
- 
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>

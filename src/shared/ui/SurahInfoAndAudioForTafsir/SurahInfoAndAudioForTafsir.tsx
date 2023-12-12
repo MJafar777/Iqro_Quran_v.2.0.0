@@ -22,7 +22,7 @@ const SurahInfoAndAudio = () => {
       `http://iqro-quran.uz/developmentBackend/suras/${data?.quran_order}.mp3`,
     );
     setVerseKey(`${data.quran_order}:1`);
-  }, [data?.quran_order, isPlay]);
+  }, [data?.quran_order]);
 
   return (
     <div className={classNames(cls.WrapperSurah, {}, [])}>

@@ -26,6 +26,9 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
       });
   }, [data?.page_number]);
 
+
+  
+
   return (
     <div className={cls.oneTafsirCard} id={`${data?.verse_key}`}>
       <IconsOfTafsir verse={data?.verse_key} />

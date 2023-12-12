@@ -17,7 +17,6 @@ export const IconsOfTafsir = (prop: IconsOfTafsirProp) => {
 
   // eslint-disable-next-line no-unsafe-optional-chaining
   const chapterId = parseInt(verse?.split(':')[0] || "1", 10);
-  console.log(chapterId, 'verseeeee');
 
   const { setVerseKey, setIsPlay } = useContext(ButtonsContext);
 

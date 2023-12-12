@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { Slider } from '@mui/material';
@@ -30,7 +29,7 @@ export const AudioPlayer = memo(
 
     useEffect(() => {
       setSegmentsData(getSegmentData);
-    }, [getSegmentData, segmentsData, surahId.quran_order, verseKey]);
+    }, [getSegmentData, surahId.quran_order]);
 
     useEffect(() => {
       const audio = audioRef.current;
@@ -90,11 +89,23 @@ export const AudioPlayer = memo(
         audioRef.current!.currentTime = timestampFrom / 1000;
         setIsPlay(true);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timestampFrom]);
 
     useEffect(() => {
-      // console.log(verseKey, 'verseKey');
-    }, [verseKey, currentTime]);
+      // @ts-ignore
+      if (segmentsData) {
+        const verseData = segmentsData[
+          surahId.quran_order
+        ].data.verse_timings.find(
+          (segment) =>
+            segment?.timestamp_from <= audioTime * 1000 &&
+            segment?.timestamp_to > audioTime * 1000,
+        );
+        console.log(verseData, 'verseda');
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [audioTime]);
 
     const formatTime = (timeInSeconds: number) => {
       if (timeInSeconds === null) {
@@ -121,11 +132,11 @@ export const AudioPlayer = memo(
     };
 
     const nextVerseFunc = (verse: string) => {
-      console.log(verse ,'func');
+      console.log(verse, 'func');
     };
 
     const priviousFunc = (verse: string) => {
-      console.log(verse ,'func');
+      console.log(verse, 'func');
     };
 
     return (
