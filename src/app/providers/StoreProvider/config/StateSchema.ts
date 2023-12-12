@@ -10,6 +10,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import {
   ReadingArabicSchema,
   ReadingArabicTextSchema,
+  ReadingQuranSchema,
 } from '@/entities/ReadingArabic';
 
 // Now you can use ReadingArabicSchema in your code
@@ -41,7 +42,7 @@ export interface StateSchema {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
   // Asynchronous reducers
-  readingArabic?: ReadingArabicTextSchema;
+  readingArabic?: ReadingQuranSchema;
   readingArabicBook?: ReadingArabicSchema;
   readingTranskriptLotin?: ReadingArabicSchema;
   readingTranskriptKril?: ReadingArabicSchema;
@@ -54,9 +55,6 @@ export interface StateSchema {
   info: SurahInfoSchema;
   segment:SegmentSchemeRedux
 }
-
-
-
 
 export type StateSchemaKey = keyof StateSchema;
 export type MountedReducers = OptionalRecord<StateSchemaKey, boolean>;
