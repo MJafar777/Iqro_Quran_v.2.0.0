@@ -12,7 +12,6 @@ interface QuranPageProps {
   className?: string;
   pageData: pageDataObjType;
   isLoading: boolean;
-  // id: string;
 }
 
 const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
