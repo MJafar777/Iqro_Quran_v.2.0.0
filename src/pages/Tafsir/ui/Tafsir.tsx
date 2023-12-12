@@ -10,7 +10,7 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchTafsirList } from '../model/service/fetchTafsir/fetchTafsirList';
-import { getDataTafsir } from '../model/selector/selectorTafsir';
+import { getDataTafsir, isLoading } from '../model/selector/selectorTafsir';
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
@@ -21,6 +21,7 @@ import { ListOfTafsir } from '@/entities/Tafsir';
 import { sliceTafsirReducer } from '../model/slice/sliceTafsir';
 import { WordDetect } from '@/features/WordDetect';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { Loader } from '@/widgets/Loader';
 
 interface TafsirProp {
   className?: string;
@@ -35,7 +36,7 @@ const Tafsir = (prop: TafsirProp) => {
   const surahId = useSelector(getSelectedSura);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(0);
-
+  const getIsLoading = useSelector(isLoading);
   const { readingSidebarActive, readingPageTubBtn } =
     useContext(ButtonsContext);
 
@@ -95,7 +96,9 @@ const Tafsir = (prop: TafsirProp) => {
   // eslint-disable-next-line consistent-return
   const content = useMemo(() => {
     if (dataOfTafsir)
-      return (
+      return getIsLoading ? (
+        <Loader />
+      ) : (
         <Page
           onScrollEnd={onLoadNextPart}
           data-testid="TafsirPage"
