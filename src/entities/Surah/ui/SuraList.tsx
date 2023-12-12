@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import cls from './SuraList.module.scss';
 import clsSearch from '../../../shared/ui/searchInput/ui/Searchinput.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-
 import {
   getError,
   getIsLoading,
@@ -12,7 +11,6 @@ import {
   fetchSurahlesList,
   OneSuraInListSchema,
 } from '@/pages/MainPage';
-
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { useSelectedSuraActions } from '../model/slice/selectedSuraSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';

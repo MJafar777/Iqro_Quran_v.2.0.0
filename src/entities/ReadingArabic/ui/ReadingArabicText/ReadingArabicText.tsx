@@ -46,6 +46,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const { incrementCurrentPageRead } = useSelectedPageReadActions();
   const { setFetchIsLoading } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
+  console.log(currentSuraRead, 'setSelectedPageReadSelect');
 
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
@@ -162,12 +163,10 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
               size={SuraNameSize.Large}
             />
           )}
-
           {!CHAPTERS_WITHOUT_BISMILLAH.includes(
             String(currentSuraRead.quran_order),
           ) && <Bismillah />}
           {renderContent}
-
           {/* <div className={cls.trigger} ref={triggerRef} /> */}
         </div>
       </div>
