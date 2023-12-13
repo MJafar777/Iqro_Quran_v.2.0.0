@@ -37,6 +37,7 @@ export interface Audio {
 }
 
 export interface Word {
+  map: any;
   _id: string;
   id: string;
   position: number;

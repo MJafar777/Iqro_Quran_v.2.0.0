@@ -157,7 +157,7 @@ export const AudioPlayer = memo(
     };
 
     const priviousFunc = (verse: string) => {
-      console.log(verse);
+      // console.log(verse);
 
       if (parseInt(verse.split(':')[1], 10) > 1) {
         const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${

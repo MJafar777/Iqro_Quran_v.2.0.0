@@ -2,13 +2,15 @@ import React, { memo, useContext, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Page, Surah } from '../../model/types/readingSura';
-import useQcfFontRead from '../../../../shared/lib/hooks/useQcfFontRead/useQcfFontRead';
+import { Surah } from '../../model/types/readingSura';
 import QuranPage from '../QuranPage/QuranPage';
-import { getSelectedPageRead } from '@/entities/PageRead';
+import { useSelectedPageReadActions } from '@/entities/PageRead';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
+import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { getSelectedSura } from '@/entities/Surah';
 
 interface QuranPagesProps {
   className?: string;
@@ -17,14 +19,15 @@ interface QuranPagesProps {
 
 const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
-
-  console.log(suraData);
+  const currentSura = useSelector(getSelectedSura);
 
   const { fetchIsLoading } = useContext(ButtonsContext);
-  const currentPageRead = useSelector(getSelectedPageRead);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
-
-  // useQcfFontRead(verseData);
+  const { setSelectedPageRead } = useSelectedPageReadActions();
+  const { setSelectedPage } = useSelectedPageActions();
+  const currentPageRead = useSelector(getSelectedPage);
+  const dispatch = useAppDispatch();
+  console.log(currentPageRead, 'currentPage');
 
   useEffect(() => {
     // ...
@@ -42,6 +45,8 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
           // Check if the child div is visible
           if (childTop >= parentTop && childTop < window.innerHeight) {
             const childId = childDiv.getAttribute('id');
+            console.log(childId, 'childId');
+
             setSelectedPageReadSelect(Number(childId));
           }
         });
@@ -58,6 +63,11 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     };
   }, [setSelectedPageReadSelect]);
 
+  useEffect(() => {
+    dispatch(setSelectedPageRead(currentPageRead.pageNumber));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPageRead.pageNumber]);
+
   return (
     <div
       ref={parentRef}
@@ -65,11 +75,11 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
       style={{ height: '100%', overflowY: 'scroll' }}
       className={classNames(cls.QuranPages, {}, [className])}
     >
-      {/* {fetchIsLoading ? (
+      {fetchIsLoading ? (
         <>
-          {Object.values(rowObj).map((verse, index) => (
+          {/* {Object.values(suraData).map((verse, index) => (
             <QuranPage pageData={verse} key={index} isLoading={false} />
-          ))}
+          ))} */}
           <div
             className={classNames(cls.QuranPages__skeloton, {}, [className])}
           >
@@ -77,10 +87,10 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
           </div>
         </>
       ) : (
-        Object.values(rowObj).map((verse, index) => (
-          <QuranPage pageData={verse} key={index} isLoading={false} />
-        ))
-      )} */}
+        // Object.values(suraData)?.map((verse, index) => (
+        <QuranPage pageData={suraData?.linesV1} isLoading={false} />
+        // ))
+      )}
     </div>
   );
 });

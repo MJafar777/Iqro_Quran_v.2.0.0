@@ -19,7 +19,6 @@ interface SuraNameProps {
 const SuraNameContainer: React.FC<SuraNameProps> = memo(
   // eslint-disable-next-line react/prop-types
   ({ suraId, size = SuraNameSize.Medium, hasSurahPrefix = true }) => {
-    console.log('surah');
 
     return (
       <div

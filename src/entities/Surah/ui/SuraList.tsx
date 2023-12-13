@@ -16,6 +16,8 @@ import { useSelectedSuraActions } from '../model/slice/selectedSuraSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getSelectedSura } from '../model/selectors/getSelectedSura/getSelectedSura';
 import { useSelectedPageActions } from '@/entities/Page';
+import { useSelectedSuraReadActions } from '@/entities/SurahRead';
+import { useSelectedPageReadActions } from '@/entities/PageRead';
 
 interface SuraListProps {
   className?: string;
@@ -26,6 +28,8 @@ const SuraList = memo(({ className }: SuraListProps) => {
   const { t, i18n } = useTranslation();
   const currentSura = useSelector(getSelectedSura);
   const { setSelectedSura } = useSelectedSuraActions();
+  const { setSelectedSuraRead } = useSelectedSuraReadActions();
+  const { setSelectedPageRead } = useSelectedPageReadActions();
 
   const { setSelectedPage } = useSelectedPageActions();
 
@@ -49,9 +53,9 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
   useEffect(() => {
     setSelectedPage(1);
-
+    console.log(currentSura, 'currentSuras');
     const selectedElement = document.getElementById(
-      `${currentSura?.quran_order}sura`,
+      `${currentSura?.quran_order}sura1`,
     );
 
     if (selectedElement) {
@@ -101,7 +105,7 @@ const SuraList = memo(({ className }: SuraListProps) => {
               })
               ?.map((oneSurah: OneSuraInListSchema, index: number) => (
                 <div
-                  id={`${oneSurah?.quran_order}sura`}
+                  id={`${oneSurah?.quran_order}`}
                   key={oneSurah?.quran_order}
                   className={classNames(
                     cls.SuraList__item,
@@ -111,7 +115,12 @@ const SuraList = memo(({ className }: SuraListProps) => {
                     },
                     [className],
                   )}
-                  onClick={() => setSelectedSura(oneSurah)}
+                  onClick={() => {
+                    setSelectedPageRead(oneSurah.pages[0]);
+                    console.log(oneSurah, 'one');
+                    setSelectedSura(oneSurah);
+                    setSelectedSuraRead(oneSurah);
+                  }}
                 >
                   <p className={classNames(cls.SuraList__suraNumber, {}, [])}>
                     {oneSurah.quran_order}

@@ -1,4 +1,8 @@
 .QuranWord {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  direction: rtl;
   &__text {
   }
 }

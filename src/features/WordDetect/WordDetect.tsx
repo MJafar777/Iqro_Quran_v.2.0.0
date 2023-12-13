@@ -69,9 +69,6 @@ export const WordDetect = memo(() => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(verseKey);
-  // }, [verseKey]);
 
   const scrollToDiv = () => {
     const targetDiv = document.getElementById(`${segmentsVerse?.verse_key}`);
