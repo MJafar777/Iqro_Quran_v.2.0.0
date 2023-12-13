@@ -62,8 +62,10 @@ const SuraList = memo(({ className }: SuraListProps) => {
       selectedElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    dispatch(setSelectedPageRead(currentSura.pages[0]));
+    dispatch(setSelectedSuraRead(currentSura));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSura]);
+  }, [currentSura.quran_order]);
 
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -117,7 +119,6 @@ const SuraList = memo(({ className }: SuraListProps) => {
                   )}
                   onClick={() => {
                     setSelectedPageRead(oneSurah.pages[0]);
-                    console.log(oneSurah, 'one');
                     setSelectedSura(oneSurah);
                     setSelectedSuraRead(oneSurah);
                   }}
