@@ -48,6 +48,8 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const { setFetchIsLoading } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const surahId = useSelector(getSelectedSura);
+  // const currentPageRead = useSelector(getSelectedPage);
+  console.log(currentPageRead.pageNumber, 'currentPageRead');
 
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
@@ -144,7 +146,13 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       return null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, data, isError, currentSuraRead?.quran_order]);
+  }, [
+    isLoading,
+    data,
+    isError,
+    currentPageRead.pageNumber,
+    currentSuraRead?.quran_order,
+  ]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>

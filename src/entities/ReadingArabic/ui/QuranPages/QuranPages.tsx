@@ -64,7 +64,11 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   }, [setSelectedPageReadSelect]);
 
   useEffect(() => {
-    dispatch(setSelectedPageRead(currentPageRead.pageNumber));
+    dispatch(
+      setSelectedPageRead(
+        currentSura.pages[0] + currentPageRead.pageNumber - 1,
+      ),
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
 
