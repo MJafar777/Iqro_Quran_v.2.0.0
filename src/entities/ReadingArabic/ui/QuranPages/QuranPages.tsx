@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
@@ -42,9 +43,9 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  useEffect(() => {
-    setSurahPages([]);
-  }, [surahId.quran_order]);
+  // useEffect(() => {
+  //   setSurahPages([]);
+  // }, [surahId.quran_order]);
 
   useEffect(() => {
     // ...
@@ -86,6 +87,7 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
+  console.log(surahPages, 'QuranPages');
 
   return (
     <div
@@ -106,7 +108,12 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
           </div>
         </>
       ) : (
-        <QuranPage pageData={suraData?.linesV1} isLoading={false} />
+        // eslint-disable-next-line consistent-return
+        surahPages?.map((page) => {
+          if (page) {
+            return <QuranPage pageData={page?.linesV1} isLoading={false} />;
+          }
+        })
       )}
     </div>
   );
