@@ -32,7 +32,7 @@ export const AudioPlayer = memo(
     useEffect(() => {
       setIsPlay(false);
       console.log();
-      
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location.pathname]);
 
@@ -187,7 +187,7 @@ export const AudioPlayer = memo(
           className={cls.range}
         />
         <div className={cls.bodyOfPlayer}>
-          {duration !== null && <p>{formatTime(currentTime)}</p>}
+          <div>{duration !== null && <p>{formatTime(currentTime)}</p>}</div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div className={cls.play} onClick={() => priviousFunc(verseKey)}>
@@ -206,7 +206,7 @@ export const AudioPlayer = memo(
               <Next />
             </div>
           </div>
-          {duration !== null && <p>{formatTime(duration)}</p>}
+          <div>{duration !== null && <p>{formatTime(duration)}</p>}</div>
         </div>
 
         <audio

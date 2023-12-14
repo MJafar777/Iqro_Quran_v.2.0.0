@@ -24,6 +24,7 @@ import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
+import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 
 interface ReadingPageProps {
   className?: string;
@@ -33,7 +34,7 @@ const ReadingPage = (props: ReadingPageProps) => {
   const { t, i18n } = useTranslation();
 
   const { className } = props;
-  const { readingSidebarActive, readingPageTubBtn } =
+  const { readingSidebarActive, readingPageTubBtn, audioUrl } =
     useContext(ButtonsContext);
 
   const isLoading = useSelector(getIsLoading);
@@ -112,6 +113,8 @@ const ReadingPage = (props: ReadingPageProps) => {
           </>
         )}
       </div>
+      <AudioPlayer src={audioUrl} />
+
       {/* <AudioPlayerComp /> */}
     </div>
   );

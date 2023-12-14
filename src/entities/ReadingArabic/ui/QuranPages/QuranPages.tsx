@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useRef } from 'react';
+import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -11,6 +11,7 @@ import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getSelectedSura } from '@/entities/Surah';
+import { getReadingArabicData } from '../../model/selectors/readingArabic';
 
 interface QuranPagesProps {
   className?: string;
@@ -21,13 +22,29 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const currentSura = useSelector(getSelectedSura);
 
-  const { fetchIsLoading } = useContext(ButtonsContext);
+  const { fetchIsLoading, audioUrl } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const { setSelectedPageRead } = useSelectedPageReadActions();
   const { setSelectedPage } = useSelectedPageActions();
   const currentPageRead = useSelector(getSelectedPage);
+  const data = useSelector(getReadingArabicData);
   const dispatch = useAppDispatch();
-  console.log(currentPageRead, 'currentPage');
+  const surahId = useSelector(getSelectedSura);
+  const [surahPages, setSurahPages] = useState<Surah[]>();
+
+  useEffect(() => {
+    if (data) {
+      // @ts-ignore
+      setSurahPages(
+        Object.values(data).map((page) => page[surahId.quran_order]),
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  useEffect(() => {
+    setSurahPages([]);
+  }, [surahId.quran_order]);
 
   useEffect(() => {
     // ...
@@ -89,9 +106,7 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
           </div>
         </>
       ) : (
-        // Object.values(suraData)?.map((verse, index) => (
         <QuranPage pageData={suraData?.linesV1} isLoading={false} />
-        // ))
       )}
     </div>
   );

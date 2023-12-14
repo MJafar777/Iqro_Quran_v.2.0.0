@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useMemo } from 'react';
+import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingArabic.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -30,6 +30,8 @@ import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 // import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedSura } from '@/entities/Surah';
+import { WordDetect } from '@/features/WordDetect';
+import { Surah } from '../../model/types/readingSura';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -50,10 +52,28 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const surahId = useSelector(getSelectedSura);
   // const currentPageRead = useSelector(getSelectedPage);
   console.log(currentPageRead.pageNumber, 'currentPageRead');
-
+  const [surahPages, setSurahPages] = useState<Surah[]>();
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
   const isError = useSelector(getReadingArabicError);
+
+  useEffect(() => {
+    if (data) {
+      // @ts-ignore
+      setSurahPages(
+        Object.values(data).map((page) => page[surahId.quran_order]),
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  useEffect(() => {
+    setSurahPages([]);
+  }, [surahId.quran_order]);
+
+  useEffect(() => {
+    console.log(surahPages, 'surahPages');
+  }, [surahPages]);
 
   // useEffect(() => {
   //   window.scrollTo({
@@ -136,7 +156,12 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       const currentSura = currentSuraRead?.quran_order;
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
       if (dataOfCurrentPage) {
-        return <QuranPages suraData={dataOfCurrentPage} />;
+        return (
+          <>
+            <WordDetect />
+            <QuranPages suraData={dataOfCurrentPage} />;
+          </>
+        );
       }
     } else if (isError) {
       return (
