@@ -17,7 +17,6 @@ interface QuranPageProps {
 
 const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
   const [verse, setVerse] = useState([{ page_number: 1 }]);
-  console.log(pageData, 'pageData');
 
   // this for gather page of each verse and then give to font
   useEffect(() => {
@@ -37,7 +36,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
       data-testid="QuranPage"
       className={classNames(cls.QuranPage, {}, [])}
     >
-      {!isLoading && Object.values(pageData).length > 0 ? (
+      {!isLoading && Object.values(pageData).length >= 0 ? (
         <>
           {Object.values(pageData).map((wordInfo, index) => (
             <QuranWords

@@ -1,13 +1,24 @@
+/* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
-import React, { memo, useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Surah } from '../../model/types/readingSura';
 import QuranPage from '../QuranPage/QuranPage';
-import { useSelectedPageReadActions } from '@/entities/PageRead';
+import {
+  getSelectedPageRead,
+  useSelectedPageReadActions,
+} from '@/entities/PageRead';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
+// import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -32,6 +43,7 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const dispatch = useAppDispatch();
   const surahId = useSelector(getSelectedSura);
   const [surahPages, setSurahPages] = useState<Surah[]>();
+  const currentPageReadSurah = useSelector(getSelectedPageRead);
 
   useEffect(() => {
     if (data) {
@@ -41,7 +53,22 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, []);
+
+  useEffect(() => {
+    if (
+      surahPages &&
+      data &&
+      data[currentPageReadSurah.pageNumber] &&
+      currentPageReadSurah
+    ) {
+      setSurahPages([
+        ...surahPages,
+        ...Object.values(data[currentPageReadSurah.pageNumber]),
+      ]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPageReadSurah.pageNumber]);
 
   // useEffect(() => {
   //   setSurahPages([]);
@@ -87,7 +114,14 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
-  console.log(surahPages, 'QuranPages');
+
+  const pages = useMemo(() => {
+    return surahPages?.map((page) => {
+      if (page) {
+        return <QuranPage pageData={page?.linesV1} isLoading={false} />;
+      }
+    });
+  }, [surahPages]);
 
   return (
     <div
@@ -96,27 +130,29 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
       style={{ height: '100%', overflowY: 'scroll' }}
       className={classNames(cls.QuranPages, {}, [className])}
     >
-      {fetchIsLoading ? (
-        <>
-          {/* {Object.values(suraData).map((verse, index) => (
-            <QuranPage pageData={verse} key={index} isLoading={false} />
-          ))} */}
-          <div
-            className={classNames(cls.QuranPages__skeloton, {}, [className])}
-          >
-            <ReadTextSkeleton />
-          </div>
-        </>
-      ) : (
-        // eslint-disable-next-line consistent-return
-        surahPages?.map((page) => {
-          if (page) {
-            return <QuranPage pageData={page?.linesV1} isLoading={false} />;
-          }
-        })
-      )}
+      {pages}
     </div>
   );
 });
 
 export default QuranPages;
+
+// {fetchIsLoading ? (
+//   <>
+//     {/* {Object.values(suraData).map((verse, index) => (
+//       <QuranPage pageData={verse} key={index} isLoading={false} />
+//     ))} */}
+//     <div
+//       className={classNames(cls.QuranPages__skeloton, {}, [className])}
+//     >
+//       <ReadTextSkeleton />
+//     </div>
+//   </>
+// ) : (
+//   // eslint-disable-next-line consistent-return
+//   surahPages?.map((page) => {
+//     if (page) {
+//       return <QuranPage pageData={page?.linesV1} isLoading={false} />;
+//     }
+//   })
+// )}

@@ -50,8 +50,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const { setFetchIsLoading } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const surahId = useSelector(getSelectedSura);
-  // const currentPageRead = useSelector(getSelectedPage);
-  console.log(currentPageRead.pageNumber, 'currentPageRead');
   const [surahPages, setSurahPages] = useState<Surah[]>();
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
@@ -70,10 +68,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   useEffect(() => {
     setSurahPages([]);
   }, [surahId.quran_order]);
-
-  useEffect(() => {
-    console.log(surahPages, 'surahPages');
-  }, [surahPages]);
 
   // useEffect(() => {
   //   window.scrollTo({
@@ -146,12 +140,12 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
 
   // eslint-disable-next-line consistent-return
   const renderContent = useMemo(() => {
-    if (isLoading) {
-      setFetchIsLoading(isLoading);
-      // return <ReadTextSkeleton />;
-    }
+    // if (isLoading) {
+    //   setFetchIsLoading(isLoading);
+    //   // return <ReadTextSkeleton />;
+    // }
     if (data) {
-      setFetchIsLoading(isLoading);
+      // setFetchIsLoading(isLoading);
       const currentPage = currentPageRead?.pageNumber;
       const currentSura = currentSuraRead?.quran_order;
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
@@ -171,13 +165,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       return null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    isLoading,
-    data,
-    isError,
-    currentPageRead.pageNumber,
-    currentSuraRead?.quran_order,
-  ]);
+  }, [data, isError, currentPageRead.pageNumber, currentSuraRead?.quran_order]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>

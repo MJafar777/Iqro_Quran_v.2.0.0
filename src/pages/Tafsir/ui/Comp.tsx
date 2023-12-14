@@ -37,7 +37,6 @@ export const Comp = () => {
         });
 
         setData(response.data);
-        console.log('Response:', response.data);
         // Handle the response data as needed
       } catch (error) {
         console.error('Error:', error);

@@ -25,6 +25,8 @@ import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnG
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
 import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
+import { Page } from '@/widgets/Page';
+import { useSelectedPageReadActions } from '@/entities/PageRead';
 
 interface ReadingPageProps {
   className?: string;
@@ -38,14 +40,18 @@ const ReadingPage = (props: ReadingPageProps) => {
     useContext(ButtonsContext);
 
   const isLoading = useSelector(getIsLoading);
+  const { incrementCurrentPageRead } = useSelectedPageReadActions();
 
   const read = t("O'qish");
   const wordBuyWord = t("So'zma-so'z");
   const Transcription = t('Transkripsiya');
 
   return (
-    <div
+    <Page
       data-testid="ReadingPage"
+      onScrollEnd={() => {
+        // incrementCurrentPageRead();
+      }}
       className={classNames(cls.ReadingPage, {}, [className])}
     >
       <ReadingNavbar />
@@ -116,7 +122,7 @@ const ReadingPage = (props: ReadingPageProps) => {
       <AudioPlayer src={audioUrl} />
 
       {/* <AudioPlayerComp /> */}
-    </div>
+    </Page>
   );
 };
 
