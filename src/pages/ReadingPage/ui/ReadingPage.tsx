@@ -24,6 +24,8 @@ import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
+import { Page } from '@/widgets/Page';
+import { useSelectedPageReadActions } from '@/entities/PageRead';
 
 interface ReadingPageProps {
   className?: string;
@@ -41,9 +43,17 @@ const ReadingPage = (props: ReadingPageProps) => {
   const read = t("O'qish");
   const wordBuyWord = t("So'zma-so'z");
   const Transcription = t('Transkripsiya');
+  const { incrementCurrentPageRead } = useSelectedPageReadActions();
+
+  const handle = () => {
+    // incrementCurrentPageRead();
+  };
 
   return (
-    <div
+    <Page
+      onScrollEnd={() => {
+        handle();
+      }}
       data-testid="ReadingPage"
       className={classNames(cls.ReadingPage, {}, [className])}
     >
@@ -113,7 +123,7 @@ const ReadingPage = (props: ReadingPageProps) => {
         )}
       </div>
       {/* <AudioPlayerComp /> */}
-    </div>
+    </Page>
   );
 };
 

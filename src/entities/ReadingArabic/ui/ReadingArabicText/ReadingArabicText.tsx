@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useMemo } from 'react';
+import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingArabic.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -30,6 +30,8 @@ import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 // import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedSura } from '@/entities/Surah';
+import { WordDetect } from '@/features/WordDetect';
+import { Surah } from '../../model/types/readingSura';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -48,12 +50,48 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const { setFetchIsLoading } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const surahId = useSelector(getSelectedSura);
-  // const currentPageRead = useSelector(getSelectedPage);
-  console.log(currentPageRead.pageNumber, 'currentPageRead');
-
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
   const isError = useSelector(getReadingArabicError);
+  const [surahPages, setSurahPages] = useState<Surah[]>();
+
+  useEffect(() => {
+    if (data) {
+      const pageList = Object.values(data).map(
+        (page) => page[currentSuraRead.quran_order],
+      );
+      // @ts-ignore 
+      setSurahPages(pageList);
+      console.log(pageList);
+    }
+  }, [currentSuraRead.quran_order, data]);
+
+  useEffect(() => {
+    if (
+      !(
+        data &&
+        data[currentPageRead?.pageNumber] &&
+        data[currentPageRead?.pageNumber][currentSuraRead?.quran_order]
+      )
+    ) {
+      if (
+        currentSuraRead?.pages[0] <= currentPageRead.pageNumber &&
+        currentSuraRead?.pages[1] >= currentPageRead.pageNumber
+      ) {
+        dispatch(
+          fetchReadingArabic({
+            suraId: currentSuraRead?.quran_order,
+            pageNumber: currentPageRead.pageNumber,
+          }),
+        );
+      }
+    }
+
+    setSelectedPageReadSelect(currentPageRead.pageNumber);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPageRead.pageNumber, surahId?.quran_order, dispatch]);
+
+  const [page, setPage] = useState(1);
 
   // useEffect(() => {
   //   window.scrollTo({
@@ -81,31 +119,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   // }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [currentSuraRead?.quran_order, dispatch]);
-
-  useEffect(() => {
-    if (
-      !(
-        data &&
-        data[currentPageRead?.pageNumber] &&
-        data[currentPageRead?.pageNumber][currentSuraRead?.quran_order]
-      )
-    ) {
-      if (
-        currentSuraRead?.pages[0] <= currentPageRead.pageNumber &&
-        currentSuraRead?.pages[1] >= currentPageRead.pageNumber
-      ) {
-        dispatch(
-          fetchReadingArabic({
-            suraId: currentSuraRead?.quran_order,
-            pageNumber: currentPageRead.pageNumber,
-          }),
-        );
-      }
-    }
-
-    setSelectedPageReadSelect(currentPageRead.pageNumber);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageRead.pageNumber, surahId?.quran_order, dispatch]);
 
   // const handleInfiniteScroll = () => {
   //   // eslint-disable-next-line max-len
@@ -136,7 +149,12 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       const currentSura = currentSuraRead?.quran_order;
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
       if (dataOfCurrentPage) {
-        return <QuranPages suraData={dataOfCurrentPage} />;
+        return (
+          <>
+            <QuranPages suraData={surahPages || [] } />
+            <WordDetect />
+          </>
+        );
       }
     } else if (isError) {
       return (
@@ -174,7 +192,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
             String(currentSuraRead.quran_order),
           ) && <Bismillah />}
           {renderContent}
-          {/* <div className={cls.trigger} ref={triggerRef} /> */}
+          <div className={cls.trigger} id="bootomOfPage" />
         </div>
       </div>
     </DynamicModuleLoader>

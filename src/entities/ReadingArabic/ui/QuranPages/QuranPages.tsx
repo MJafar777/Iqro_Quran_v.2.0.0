@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useRef } from 'react';
+import React, { memo, useContext, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -11,23 +11,23 @@ import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getSelectedSura } from '@/entities/Surah';
+import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 
 interface QuranPagesProps {
   className?: string;
-  suraData: Surah;
+  suraData: Surah[];
 }
 
 const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const currentSura = useSelector(getSelectedSura);
 
-  const { fetchIsLoading } = useContext(ButtonsContext);
+  const { fetchIsLoading, audioUrl } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const { setSelectedPageRead } = useSelectedPageReadActions();
   const { setSelectedPage } = useSelectedPageActions();
   const currentPageRead = useSelector(getSelectedPage);
   const dispatch = useAppDispatch();
-  console.log(currentPageRead, 'currentPage');
 
   useEffect(() => {
     // ...
@@ -70,11 +70,17 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
 
+  const SurahPages = useMemo(() => {
+    return suraData?.map((page) => {
+      return <QuranPage pageData={page?.linesV1} isLoading={false} />;
+    });
+  }, [suraData]);
+
   return (
     <div
       ref={parentRef}
       data-testid="QuranPages"
-      style={{ height: '100%', overflowY: 'scroll' }}
+      // style={{ height: '100%', overflowY: 'scroll' }}
       className={classNames(cls.QuranPages, {}, [className])}
     >
       {fetchIsLoading ? (
@@ -90,7 +96,10 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
         </>
       ) : (
         // Object.values(suraData)?.map((verse, index) => (
-        <QuranPage pageData={suraData?.linesV1} isLoading={false} />
+        <>
+          {SurahPages}
+          {audioUrl ? <AudioPlayer src={audioUrl} /> : ''}
+        </>
         // ))
       )}
     </div>

@@ -1,9 +1,9 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import cls from './QuranPage.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Lines, Verse, Word } from '../../model/types/readingSura';
+import { Lines, Word } from '../../model/types/readingSura';
 import QuranWords from '../VerseWords/VerseWords';
-import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
+// import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
 
 interface pageDataObjType {
   [key: number]: Word[];
@@ -17,18 +17,19 @@ interface QuranPageProps {
 
 const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
   const [verse, setVerse] = useState([{ page_number: 1 }]);
-  
-  // this for gather page of each verse and then give to font
-  useEffect(() => {
-    if (Object.values(pageData).length > 0)
-      setVerse(
-        Object.values(pageData)?.map((obj) => {
-          return { page_number: obj.words[0]?.page_number };
-        }),
-      );
-  }, [pageData]);
+  console.log(pageData);
 
-  useQcfFontRead(verse as unknown as Verse[]);
+  // this for gather page of each verse and then give to font
+  // useEffect(() => {
+  //   if (pageData && Object.values(pageData).length > 0)
+  //     setVerse(
+  //       Object.values(pageData)?.map((obj) => {
+  //         return { page_number: obj.words[0]?.page_number };
+  //       }),
+  //     );
+  // }, [pageData]);
+
+  // useQcfFontRead(verse as unknown as Verse[]);
 
   return (
     <div
@@ -49,7 +50,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
           ))}
 
           <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-            {Object.values(pageData)?.[0]?.[0]?.page_number}
+            {/* {Object.values(pageData)?.[0]?.[0]?.page_number} */}
           </p>
           <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
         </>
