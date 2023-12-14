@@ -9,8 +9,6 @@ interface QuranWordsProp {
 }
 
 const QuranWord = memo(({ className, Word }: QuranWordsProp) => {
-  console.log(Word![0]);
-
   return (
     <div
       className={classNames(

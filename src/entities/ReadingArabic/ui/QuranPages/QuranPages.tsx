@@ -11,7 +11,6 @@ import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getSelectedSura } from '@/entities/Surah';
-import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 
 interface QuranPagesProps {
   className?: string;
@@ -22,14 +21,13 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const currentSura = useSelector(getSelectedSura);
 
-  const { fetchIsLoading, setAudioUrl, setVerseKey, audioUrl } =
-    useContext(ButtonsContext);
-
+  const { fetchIsLoading } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const { setSelectedPageRead } = useSelectedPageReadActions();
   const { setSelectedPage } = useSelectedPageActions();
   const currentPageRead = useSelector(getSelectedPage);
   const dispatch = useAppDispatch();
+  console.log(currentPageRead, 'currentPage');
 
   useEffect(() => {
     // ...
@@ -47,7 +45,6 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
           // Check if the child div is visible
           if (childTop >= parentTop && childTop < window.innerHeight) {
             const childId = childDiv.getAttribute('id');
-
             setSelectedPageReadSelect(Number(childId));
           }
         });
@@ -73,14 +70,6 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
 
-  useEffect(() => {
-    setAudioUrl(
-      `http://iqro-quran.uz/developmentBackend/suras/${currentSura?.quran_order}.mp3`,
-    );
-    setVerseKey(`${currentSura.quran_order}:1`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSura.quran_order]);
-
   return (
     <div
       ref={parentRef}
@@ -104,8 +93,6 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
         <QuranPage pageData={suraData?.linesV1} isLoading={false} />
         // ))
       )}
-
-      {audioUrl ? <AudioPlayer src={audioUrl} /> : ''}
     </div>
   );
 });

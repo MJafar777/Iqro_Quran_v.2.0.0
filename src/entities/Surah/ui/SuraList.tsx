@@ -53,7 +53,6 @@ const SuraList = memo(({ className }: SuraListProps) => {
 
   useEffect(() => {
     setSelectedPage(1);
-    console.log(currentSura, 'currentSuras');
     const selectedElement = document.getElementById(
       `${currentSura?.quran_order}sura1`,
     );
