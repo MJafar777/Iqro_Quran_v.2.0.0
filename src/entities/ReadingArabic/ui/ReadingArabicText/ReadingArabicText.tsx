@@ -30,6 +30,8 @@ import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 // import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedSura } from '@/entities/Surah';
+import { WordDetect } from '@/features/WordDetect';
+// import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -109,12 +111,15 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
 
   // const handleInfiniteScroll = () => {
   //   // eslint-disable-next-line max-len
+
   //   if (
   //     data &&
   //     data[currentSuraRead?.quran_order]?.data?.pagination.nextpage &&
   //     currentPageRead.pageNumber >= currentSuraRead.pages[0] &&
   //     currentPageRead.pageNumber < currentSuraRead.pages[1]
   //   ) {
+  //     console.log('scroll');
+
   //     incrementCurrentPageRead();
   //   }
   // };
@@ -136,7 +141,12 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       const currentSura = currentSuraRead?.quran_order;
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
       if (dataOfCurrentPage) {
-        return <QuranPages suraData={dataOfCurrentPage} />;
+        return (
+          <>
+            <QuranPages suraData={dataOfCurrentPage} />
+            <WordDetect />
+          </>
+        );
       }
     } else if (isError) {
       return (
