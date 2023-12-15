@@ -1,13 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
-import React, {
-  memo,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { memo, useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -18,7 +11,6 @@ import {
   useSelectedPageReadActions,
 } from '@/entities/PageRead';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-// import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -44,11 +36,12 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const surahId = useSelector(getSelectedSura);
   const [surahPages, setSurahPages] = useState<Surah[]>();
   const currentPageReadSurah = useSelector(getSelectedPageRead);
-  console.log(data, 'daata');
 
   useEffect(() => {
     setSurahPages([]);
   }, [surahId.quran_order]);
+
+  console.log(surahPages, 'surahPages');
 
   useEffect(() => {
     if (data) {
@@ -116,14 +109,12 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
 
-  const pages = useMemo(() => {
-    return surahPages?.map((page) => {
-      if (page) {
-        return <QuranPage pageData={page?.linesV1} isLoading={false} />;
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [surahPages, surahId.quran_order]);
+  const pages = surahPages?.map((page) => {
+    if (page) {
+      return <QuranPage pageData={page?.linesV1} isLoading={false} />;
+    }
+  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return (
     <div

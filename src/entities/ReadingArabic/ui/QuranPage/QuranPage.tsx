@@ -4,7 +4,6 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Lines, Verse, Word } from '../../model/types/readingSura';
 import QuranWords from '../VerseWords/VerseWords';
 import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
-// import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
 
 interface pageDataObjType {
   [key: number]: Word[];
@@ -29,10 +28,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
       );
   }, [pageData]);
 
-
   useQcfFontRead(verse as unknown as Verse[]);
-
-  // console.log(pageData, '');
 
   return (
     <div
@@ -43,17 +39,11 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
       {!isLoading && Object.values(pageData).length >= 0 ? (
         <>
           {Object.values(pageData).map((wordInfo, index) => (
-            <QuranWords
-              WordsInfo={wordInfo}
-              // pageNumber={Object.values(pageData)?.[0]?.[0]?.page_number}
-              // lineNumber={Object.values(pageData)?.[0]?.[0]?.line_number}
-              pageNumber={wordInfo.words?.page_number}
-              lineNumber={index}
-            />
+            <QuranWords WordsInfo={wordInfo} />
           ))}
 
           <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-            {/* {Object.values(pageData)[0]} */}
+            {pageData[5].words[0].page_number}{' '}
           </p>
           <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
         </>

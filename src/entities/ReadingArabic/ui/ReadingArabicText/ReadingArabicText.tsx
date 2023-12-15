@@ -62,7 +62,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       );
       // @ts-ignore
       setSurahPages(pageList);
-      console.log(pageList);
     }
   }, [currentSuraRead.quran_order, data]);
 
@@ -106,50 +105,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   useEffect(() => {
     setSurahPages([]);
   }, [surahId.quran_order]);
-
-  // useEffect(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //   });
-
-  // if (
-  //   currentSuraRead?.quran_order &&
-  //   data &&
-  //   !data[currentSuraRead?.quran_order]
-  // ) {
-  //   dispatch(
-  //     fetchReadingArabic({
-  //       suraId: currentSuraRead?.quran_order,
-  //       pageNumber: currentPageRead.pageNumber,
-  //     }),
-  //   );
-  // } else if (currentSuraRead?.quran_order && !data) {
-  // dispatch(
-  //   fetchReadingArabic({
-  //     suraId: currentSuraRead?.quran_order,
-  //     pageNumber: currentPageRead.pageNumber,
-  //   }),
-  // );
-  // }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [currentSuraRead?.quran_order, dispatch]);
-
-  // const handleInfiniteScroll = () => {
-  //   // eslint-disable-next-line max-len
-  //   if (
-  //     data &&
-  //     data[currentSuraRead?.quran_order]?.data?.pagination.nextpage &&
-  //     currentPageRead.pageNumber >= currentSuraRead.pages[0] &&
-  //     currentPageRead.pageNumber < currentSuraRead.pages[1]
-  //   ) {
-  //     incrementCurrentPageRead();
-  //   }
-  // };
-
-  // const triggerRef = useInfiniteScrollForRead({
-  //   callback: handleInfiniteScroll,
-  //   threshold: 0,
-  // });
 
   // eslint-disable-next-line consistent-return
   const renderContent = useMemo(() => {
