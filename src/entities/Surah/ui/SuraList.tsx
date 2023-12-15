@@ -40,6 +40,8 @@ const SuraList = memo(({ className }: SuraListProps) => {
   // | ---------- Input Filter (Sura name) ---------- | //
   const [searchSuraName, setSearchSuraName] = useState<string>('');
 
+  
+
   useEffect(() => {
     if (!listOfSurah) {
       dispatch(fetchSurahlesList({}));

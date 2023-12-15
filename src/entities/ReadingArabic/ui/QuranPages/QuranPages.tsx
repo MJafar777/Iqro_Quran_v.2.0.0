@@ -57,6 +57,7 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   }, []);
 
   useEffect(() => {
+    
     if (
       surahPages &&
       data &&

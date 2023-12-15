@@ -28,14 +28,11 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
       );
   }, [pageData]);
 
-
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
 
   useQcfFontRead(verse as unknown as Verse[]);
 
-  console.log(pageData, '');
+  // console.log(pageData, '');
 
   return (
     <div

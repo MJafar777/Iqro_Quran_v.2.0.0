@@ -11,7 +11,7 @@ interface QuranWordsProp {
 }
 
 const QuranWord = memo(({ className, Word }: QuranWordsProp) => {
-  console.log(Word![0], 'Word');
+  // console.log(Word![0], 'Word');
 
   const surahId = useSelector(getSelectedSura);
 
