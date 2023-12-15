@@ -40,14 +40,14 @@ const SuraList = memo(({ className }: SuraListProps) => {
   // | ---------- Input Filter (Sura name) ---------- | //
   const [searchSuraName, setSearchSuraName] = useState<string>('');
 
-  useEffect(() => {
-    if (listOfSurah) {
-      dispatch(setSelectedPageRead(1));
-      dispatch(setSelectedSura(listOfSurah[0]));
-      dispatch(setSelectedSuraRead(listOfSurah[0]));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listOfSurah]);
+  // useEffect(() => {
+  //   if (listOfSurah) {
+  //     dispatch(setSelectedPageRead(1));
+  //     dispatch(setSelectedSura(listOfSurah[0]));
+  //     dispatch(setSelectedSuraRead(listOfSurah[0]));
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [listOfSurah]);
 
   useEffect(() => {
     if (!listOfSurah) {
