@@ -4,6 +4,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Lines, Verse, Word } from '../../model/types/readingSura';
 import QuranWords from '../VerseWords/VerseWords';
 import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
+// import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
 
 interface pageDataObjType {
   [key: number]: Word[];
@@ -28,7 +29,6 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
       );
   }, [pageData]);
 
-  useEffect(() => {}, []);
 
   useQcfFontRead(verse as unknown as Verse[]);
 

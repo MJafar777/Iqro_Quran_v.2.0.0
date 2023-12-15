@@ -27,7 +27,7 @@ import { getReadingArabicData } from '../../model/selectors/readingArabic';
 
 interface QuranPagesProps {
   className?: string;
-  suraData: Surah;
+  suraData: Surah[];
 }
 
 const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
@@ -47,6 +47,10 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   console.log(data, 'daata');
 
   useEffect(() => {
+    setSurahPages([]);
+  }, [surahId.quran_order]);
+
+  useEffect(() => {
     if (data) {
       // @ts-ignore
       setSurahPages(
@@ -57,7 +61,6 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   }, []);
 
   useEffect(() => {
-    
     if (
       surahPages &&
       data &&
@@ -113,21 +116,20 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
 
-
-
   const pages = useMemo(() => {
     return surahPages?.map((page) => {
       if (page) {
         return <QuranPage pageData={page?.linesV1} isLoading={false} />;
       }
     });
-  }, [surahPages]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [surahPages, surahId.quran_order]);
 
   return (
     <div
       ref={parentRef}
       data-testid="QuranPages"
-      style={{ height: '100%', overflowY: 'scroll' }}
+      // style={{ height: '100%', overflowY: 'scroll' }}
       className={classNames(cls.QuranPages, {}, [className])}
     >
       {pages}

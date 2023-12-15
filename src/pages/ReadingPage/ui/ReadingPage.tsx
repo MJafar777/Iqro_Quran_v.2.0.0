@@ -40,11 +40,14 @@ const ReadingPage = (props: ReadingPageProps) => {
     useContext(ButtonsContext);
 
   const isLoading = useSelector(getIsLoading);
-  const { incrementCurrentPageRead } = useSelectedPageReadActions();
-
   const read = t("O'qish");
   const wordBuyWord = t("So'zma-so'z");
   const Transcription = t('Transkripsiya');
+  const { incrementCurrentPageRead } = useSelectedPageReadActions();
+
+  const handle = () => {
+    // incrementCurrentPageRead();
+  };
 
   return (
     <Page
