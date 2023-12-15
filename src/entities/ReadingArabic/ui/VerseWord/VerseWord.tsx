@@ -1,7 +1,9 @@
 import React, { memo } from 'react';
+import { useSelector } from 'react-redux';
 import cls from './VerseWord.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Word } from '../../model/types/readingSura';
+import { getSelectedSura } from '@/entities/Surah';
 
 interface QuranWordsProp {
   className?: string;
@@ -9,16 +11,20 @@ interface QuranWordsProp {
 }
 
 const QuranWord = memo(({ className, Word }: QuranWordsProp) => {
+  console.log(Word![0], 'Word');
+
+  const surahId = useSelector(getSelectedSura);
+
   return (
     <div
       className={classNames(
-        // @ts-ignore
-        Word[0]?.page_number === 1 || Word[0]?.page_number === 2
+        Word![0]?.page_number === 1 || Word![0]?.page_number === 2
           ? cls.QuranWordP1
           : cls.QuranWord,
         {},
         [className],
       )}
+      id={`${surahId.quran_order}:${Word![0].verse}`}
     >
       {Word?.map((word) => {
         return (

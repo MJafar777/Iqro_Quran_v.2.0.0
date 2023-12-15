@@ -44,6 +44,7 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   const surahId = useSelector(getSelectedSura);
   const [surahPages, setSurahPages] = useState<Surah[]>();
   const currentPageReadSurah = useSelector(getSelectedPageRead);
+  console.log(data, 'daata');
 
   useEffect(() => {
     if (data) {
@@ -69,10 +70,6 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageReadSurah.pageNumber]);
-
-  // useEffect(() => {
-  //   setSurahPages([]);
-  // }, [surahId.quran_order]);
 
   useEffect(() => {
     // ...
@@ -114,6 +111,8 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber]);
+
+
 
   const pages = useMemo(() => {
     return surahPages?.map((page) => {

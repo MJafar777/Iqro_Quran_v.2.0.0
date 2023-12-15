@@ -28,11 +28,18 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
       );
   }, [pageData]);
 
+
+  useEffect(()=>{
+
+  },[])
+
   useQcfFontRead(verse as unknown as Verse[]);
+
+  console.log(pageData, '');
 
   return (
     <div
-      // id={Object.values(pageData)?.[0]?.[0]?.page_number}
+      id={`${pageData[5].words[0].page_number}`}
       data-testid="QuranPage"
       className={classNames(cls.QuranPage, {}, [])}
     >
@@ -49,7 +56,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
           ))}
 
           <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-            {Object.values(pageData)?.[0]?.[0]?.page_number}
+            {/* {Object.values(pageData)[0]} */}
           </p>
           <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
         </>

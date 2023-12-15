@@ -69,19 +69,20 @@ export const WordDetect = memo(() => {
     }
   };
 
-
   const scrollToDiv = () => {
     const targetDiv = document.getElementById(`${segmentsVerse?.verse_key}`);
 
     if (targetDiv) {
       targetDiv.scrollIntoView({
         behavior: 'smooth',
-        block: 'end',
+        block: 'center',
         inline: 'nearest',
         duration: 1000,
       } as any);
     }
   };
+
+  console.log(segmentsVerse?.verse_key, 'segmentsVerse?.verse_key');
 
   useEffect(() => {
     scrollToDiv();
