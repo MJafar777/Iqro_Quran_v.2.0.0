@@ -19,14 +19,11 @@ import { ReadingTranslateLotin } from '@/entities/ReadingTranslateLotin';
 import { ReadingTranskriptKril } from '@/entities/ReadingTranskriptKril';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
-// import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
-// import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
 import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 import { Page } from '@/widgets/Page';
-import { useSelectedPageReadActions } from '@/entities/PageRead';
 
 interface ReadingPageProps {
   className?: string;
@@ -43,14 +40,10 @@ const ReadingPage = (props: ReadingPageProps) => {
   const read = t("O'qish");
   const wordBuyWord = t("So'zma-so'z");
   const Transcription = t('Transkripsiya');
-  const { incrementCurrentPageRead } = useSelectedPageReadActions();
 
   return (
     <Page
       data-testid="ReadingPage"
-      onScrollEnd={() => {
-        // incrementCurrentPageRead();
-      }}
       className={classNames(cls.ReadingPage, {}, [className])}
     >
       <ReadingNavbar />

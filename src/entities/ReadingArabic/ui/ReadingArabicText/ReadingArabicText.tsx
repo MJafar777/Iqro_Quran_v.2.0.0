@@ -17,10 +17,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranPages from '../QuranPages/QuranPages';
-import {
-  getSelectedPageRead,
-  useSelectedPageReadActions,
-} from '@/entities/PageRead';
+import { getSelectedPageRead, useSelectedPageReadActions } from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
 import SuraNameContainer, {
   SuraNameSize,
@@ -32,6 +29,8 @@ import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 import { getSelectedSura } from '@/entities/Surah';
 import { WordDetect } from '@/features/WordDetect';
 import { Surah } from '../../model/types/readingSura';
+import ReadTextSkeleton from '@/shared/ui/ReadTextSkeleton/ReadTextSkeleton';
+import { Page } from '@/widgets/Page';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -46,7 +45,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const dispatch = useAppDispatch();
   const currentSuraRead = useSelector(getSelectedSuraRead);
   const currentPageRead = useSelector(getSelectedPageRead);
-  const { incrementCurrentPageRead } = useSelectedPageReadActions();
   const { setFetchIsLoading } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const surahId = useSelector(getSelectedSura);
@@ -54,6 +52,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const data = useSelector(getReadingArabicData);
   const isLoading = useSelector(getReadingArabicIsLoading);
   const isError = useSelector(getReadingArabicError);
+  const { incrementCurrentPageRead } = useSelectedPageReadActions();
 
   useEffect(() => {
     if (data) {
@@ -95,19 +94,19 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const renderContent = useMemo(() => {
     if (isLoading) {
       setFetchIsLoading(isLoading);
-      // return <ReadTextSkeleton />;
+      return <ReadTextSkeleton />;
     }
     if (data) {
-      // setFetchIsLoading(isLoading);
+      setFetchIsLoading(isLoading);
       const currentPage = currentPageRead?.pageNumber;
       const currentSura = currentSuraRead?.quran_order;
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
       if (dataOfCurrentPage) {
         return (
-          <>
+          <Page onScrollEnd={() => incrementCurrentPageRead()}>
             <WordDetect />
             <QuranPages />;
-          </>
+          </Page>
         );
       }
     } else if (isError) {
