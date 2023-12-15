@@ -153,10 +153,10 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
 
   // eslint-disable-next-line consistent-return
   const renderContent = useMemo(() => {
-    // if (isLoading) {
-    //   setFetchIsLoading(isLoading);
-    //   // return <ReadTextSkeleton />;
-    // }
+    if (isLoading) {
+      setFetchIsLoading(isLoading);
+      // return <ReadTextSkeleton />;
+    }
     if (data) {
       // setFetchIsLoading(isLoading);
       const currentPage = currentPageRead?.pageNumber;
