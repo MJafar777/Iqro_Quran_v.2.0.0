@@ -65,6 +65,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     }
   }, [currentSuraRead.quran_order, data]);
 
+  // this useEffec to request get data which has suraId and pageNumber between  suraId.pages[0,1]
   useEffect(() => {
     if (
       !(
@@ -90,22 +91,6 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageRead.pageNumber, surahId?.quran_order, dispatch]);
 
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    if (data) {
-      // @ts-ignore
-      setSurahPages(
-        Object.values(data).map((page) => page[surahId.quran_order]),
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  useEffect(() => {
-    setSurahPages([]);
-  }, [surahId.quran_order]);
-
   // eslint-disable-next-line consistent-return
   const renderContent = useMemo(() => {
     if (isLoading) {
@@ -121,7 +106,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
         return (
           <>
             <WordDetect />
-            <QuranPages suraData={surahPages!} />;
+            <QuranPages />;
           </>
         );
       }

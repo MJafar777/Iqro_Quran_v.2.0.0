@@ -19,9 +19,9 @@ import { ReadingTranslateLotin } from '@/entities/ReadingTranslateLotin';
 import { ReadingTranskriptKril } from '@/entities/ReadingTranskriptKril';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
-import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
+// import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
-import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
+// import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
 import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
@@ -44,10 +44,6 @@ const ReadingPage = (props: ReadingPageProps) => {
   const wordBuyWord = t("So'zma-so'z");
   const Transcription = t('Transkripsiya');
   const { incrementCurrentPageRead } = useSelectedPageReadActions();
-
-  const handle = () => {
-    // incrementCurrentPageRead();
-  };
 
   return (
     <Page
@@ -116,9 +112,9 @@ const ReadingPage = (props: ReadingPageProps) => {
               ''
             )}
 
-            <ReadingPrevNextBtnGroup />
+            {/* <ReadingPrevNextBtnGroup /> */}
 
-            <ReadingPrevNextSuraBtnGroup />
+            {/* <ReadingPrevNextSuraBtnGroup /> */}
           </>
         )}
       </div>

@@ -32,7 +32,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
 
   return (
     <div
-      id={`${pageData[5].words[0].page_number}`}
+      id={`${pageData[3]?.words[0]?.page_number}`}
       data-testid="QuranPage"
       className={classNames(cls.QuranPage, {}, [])}
     >
@@ -43,7 +43,7 @@ const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
           ))}
 
           <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-            {pageData[5].words[0].page_number}{' '}
+            {pageData[3]?.words[0]?.page_number}{' '}
           </p>
           <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
         </>

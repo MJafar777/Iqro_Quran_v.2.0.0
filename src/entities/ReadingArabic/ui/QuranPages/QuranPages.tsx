@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
-import React, { memo, useContext, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './QuranPages.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -10,66 +10,33 @@ import {
   getSelectedPageRead,
   useSelectedPageReadActions,
 } from '@/entities/PageRead';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
-import { getSelectedPage, useSelectedPageActions } from '@/entities/Page';
+import { getSelectedPage } from '@/entities/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getSelectedSura } from '@/entities/Surah';
 import { getReadingArabicData } from '../../model/selectors/readingArabic';
+import { Page } from '@/widgets/Page';
 
 interface QuranPagesProps {
   className?: string;
-  suraData: Surah[];
 }
 
-const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
+const QuranPages = memo(({ className }: QuranPagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
-  const currentSura = useSelector(getSelectedSura);
+  const [surahPages, setSurahPages] = useState<Surah[]>();
+  const { incrementCurrentPageRead } = useSelectedPageReadActions();
 
-  const { fetchIsLoading, audioUrl } = useContext(ButtonsContext);
   const { setSelectedPageReadSelect } = useSelectedPageReadSelectActions();
   const { setSelectedPageRead } = useSelectedPageReadActions();
-  const { setSelectedPage } = useSelectedPageActions();
-  const currentPageRead = useSelector(getSelectedPage);
-  const data = useSelector(getReadingArabicData);
+
   const dispatch = useAppDispatch();
-  const surahId = useSelector(getSelectedSura);
-  const [surahPages, setSurahPages] = useState<Surah[]>();
-  const currentPageReadSurah = useSelector(getSelectedPageRead);
+
+  const data = useSelector(getReadingArabicData);
+  const currentSura = useSelector(getSelectedSura);
+  const currentPageReadInSurah = useSelector(getSelectedPage);
+  const currentPageReadInQuran = useSelector(getSelectedPageRead);
 
   useEffect(() => {
-    setSurahPages([]);
-  }, [surahId.quran_order]);
-
-  console.log(surahPages, 'surahPages');
-
-  useEffect(() => {
-    if (data) {
-      // @ts-ignore
-      setSurahPages(
-        Object.values(data).map((page) => page[surahId.quran_order]),
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (
-      surahPages &&
-      data &&
-      data[currentPageReadSurah.pageNumber] &&
-      currentPageReadSurah
-    ) {
-      setSurahPages([
-        ...surahPages,
-        ...Object.values(data[currentPageReadSurah.pageNumber]),
-      ]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageReadSurah.pageNumber]);
-
-  useEffect(() => {
-    // ...
     const handleScroll = () => {
       if (parentRef.current) {
         const parentTop = parentRef.current.getBoundingClientRect().top;
@@ -103,28 +70,32 @@ const QuranPages = memo(({ className, suraData }: QuranPagesProps) => {
   useEffect(() => {
     dispatch(
       setSelectedPageRead(
-        currentSura.pages[0] + currentPageRead.pageNumber - 1,
+        currentSura.pages[0] + currentPageReadInSurah.pageNumber - 1,
       ),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageRead.pageNumber]);
+  }, [currentPageReadInSurah.pageNumber]);
 
-  const pages = surahPages?.map((page) => {
-    if (page) {
-      return <QuranPage pageData={page?.linesV1} isLoading={false} />;
-    }
-  });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const pages = useMemo(() => {
+    // @ts-ignore
+    return Object.values(data)
+      .map((page) => page[currentSura.quran_order])
+      ?.map((page) => {
+        if (page) {
+          return <QuranPage pageData={page?.linesV1} isLoading={false} />;
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div
-      ref={parentRef}
+    <Page
       data-testid="QuranPages"
-      // style={{ height: '100%', overflowY: 'scroll' }}
+      onScrollEnd={() => incrementCurrentPageRead()}
       className={classNames(cls.QuranPages, {}, [className])}
     >
       {pages}
-    </div>
+    </Page>
   );
 });
 
