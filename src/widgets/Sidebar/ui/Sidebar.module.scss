@@ -1,0 +1,35 @@
+.Sidebar {
+  position: fixed;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height));
+  background: var(--bg-widget);
+  top: calc(var(--navbar-height) * 2);
+  border: 1.5px solid var(--color-border-card);
+  border-radius: 2px;
+  transition: all 0.5s;
+  z-index: var(--sidebar-z-index);
+
+  .closeBtn {
+    position: absolute;
+    cursor: pointer;
+    top: 22px;
+    right: -32px;
+    width: var(--sidebar-close-btn-width);
+    height: var(--sidebar-close-btn-height);
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--bg-color);
+    border: 1px solid var(--color-border-card);
+    transition: background-color 0.2s;
+    color: var(--color-text);
+
+    &:hover {
+      background-color: var(--icon-hover-bg-color);
+    }
+  }
+}
+
+.collapsed {
+  // width: var(--sidebar-width-collapsed);
+  transform: translateX(-100%);
+}

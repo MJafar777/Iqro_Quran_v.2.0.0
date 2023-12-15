@@ -1,0 +1,51 @@
+.iconsOfTafsir {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.verse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  border-radius: 50%;
+  color: var(--color-text);
+  &:hover {
+    background-color: #2ca4ab;
+    color: white;
+  }
+}
+
+.iconWrapper {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  &:hover {
+    background-color: #2ca4ab;
+    .playIcon {
+      color: white;
+    }
+  }
+}
+
+.playIcon {
+  color: var(--color-text);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

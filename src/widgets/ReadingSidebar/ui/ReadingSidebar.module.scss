@@ -1,0 +1,15 @@
+.ReadingSidebar {
+  padding: 20px;
+  display: flex;
+  gap: 12px;
+
+  &__selectionSura {
+    width: var(--suraList-width);
+    padding-right: 12px;
+    border-right: 2px solid var(--color-border-card);
+  }
+
+  &__selectionOyat {
+    width: var(--oyatList-width);
+  }
+}

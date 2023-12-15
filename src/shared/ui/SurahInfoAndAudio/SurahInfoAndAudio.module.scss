@@ -1,0 +1,30 @@
+.WrapperSurah {
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px auto;
+
+  .listening {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    color: var(--color-text);
+  }
+}
+
+.InfoSurahPageWrapper {
+  list-style: none !important;
+  text-decoration: none !important;
+  color: var(--color-text);
+
+  .InfoSurahPage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+  }
+}

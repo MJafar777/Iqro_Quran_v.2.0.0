@@ -1,0 +1,47 @@
+.ReadingPrevNextBtn {
+  position: fixed !important;
+  top: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-text);
+  cursor: pointer;
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  transition: all 0.2s;
+
+  &:hover {
+    border: none;
+    box-shadow: var(--btn-3d-shadow);
+  }
+
+  .PrevNextBtnIcon {
+    color: var(--color-text);
+  }
+
+  &:active {
+    transform: scale(1.08);
+  }
+
+  .prevIcon {
+    transform: scale(2.5) rotate(90deg);
+  }
+
+  .nextIcon {
+    transform: scale(2.5) rotate(-90deg);
+  }
+
+  .disabled {
+    opacity: 0.5;
+  }
+}
+
+.prev {
+  left: 40px;
+}
+
+.next {
+  right: 40px;
+}

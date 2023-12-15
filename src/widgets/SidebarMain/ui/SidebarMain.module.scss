@@ -1,0 +1,46 @@
+.mainSidebar {
+  width: 342px;
+  height: 100vh;
+  position: fixed;
+  background-color: var(--bg-widget);
+  top: 0;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: all 0.3s linear;
+}
+
+.wrapperLogo {
+  margin-bottom: 22px;
+  border-bottom: 0.1px solid var(--color-border-card);
+  padding-bottom: 15px;
+  padding-top: 8px;
+  align-items: center;
+}
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-left: 12px;
+  margin-top: 12px;
+  width: 150px;
+}
+
+.closebtn {
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  border-radius: 5px;
+  margin-right: 12px;
+  transition: background-color 0.2s;
+  // &:hover {
+  //   background-color: var(--icon-hover-bg-color);
+  // }
+}
+
+.collapsed {
+  transform: translateX(-100%);
+}

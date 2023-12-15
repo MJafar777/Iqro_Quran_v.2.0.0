@@ -1,0 +1,80 @@
+/* stylelint-disable shorthand-property-no-redundant-values */
+.changeFontSize {
+  display: flex;
+  width: 100%;
+  border-top: var(--border-line) solid 0.1px;
+  border-bottom: var(--border-line) solid 0.1px;
+  padding-bottom: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 12px 6px 12px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--color-text);
+  text-align: center;
+  font-family: sans-serif;
+
+  // font-family: Proxima Vara;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.title {
+  color: var(--color-text);
+  text-align: center;
+  font-family: sans-serif;
+
+  // font-family: Proxima Vara;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 18px 12px 6px 12px;
+}
+
+.wrapperSize {
+  color: var(--color-text);
+}
+
+.restore {
+  border-radius: 5px;
+  background: var(--color-text) !important;
+  color: var(--bg-widget) !important;
+  cursor: pointer;
+  text-align: center;
+  font-family: Proxima Vara;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  .back {
+    color: var(--bg-widget);
+  }
+  &:hover {
+    background-color: var(--bg-widget) !important;
+    border: solid 1px var(--border-line);
+    color: var(--color-text) !important;
+    .back {
+      color: var(--color-text) !important;
+    }
+  }
+}
+
+.back {
+  width: 24px;
+  height: 24px;
+  color: white;
+  margin-right: 12px;
+}

@@ -1,0 +1,44 @@
+.audioPlayer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: fit-content;
+  width: 99%;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000 !important;
+  align-items: center;
+  justify-content: start;
+  padding: 0 0 20px 0;
+}
+.range {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.bodyOfPlayer {
+  width: 100%;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.play,
+.pause {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  &:hover{
+    background-color: rgba(128, 128, 128, 0.616);
+  }
+}
