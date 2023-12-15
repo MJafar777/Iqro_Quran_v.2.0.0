@@ -155,6 +155,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const renderContent = useMemo(() => {
     if (isLoading) {
       setFetchIsLoading(isLoading);
+
       // return <ReadTextSkeleton />;
     }
     if (data) {
