@@ -50,42 +50,38 @@ const QuranPages = memo(({ className }: QuranPagesProps) => {
   const currentPageReadInQuran = useSelector(getSelectedPageRead);
   const isLoding = useSelector(getReadingArabicIsLoading);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     console.log('dfghjkl');
+  useEffect(() => {
+    const handleScroll = () => {
+      if (parentRef.current) {
+        const parentTop = parentRef.current.getBoundingClientRect().top;
 
-  //     if (parentRef.current) {
-  //       const parentTop = parentRef.current.getBoundingClientRect().top;
+        // Iterate through child divs to find the visible one
+        const childDivs = parentRef.current.querySelectorAll(
+          '[data-testid="QuranPage"]',
+        );
+        childDivs.forEach((childDiv) => {
+          const childTop = childDiv.getBoundingClientRect().top;
 
-  //       // Iterate through child divs to find the visible one
-  //       const childDivs = parentRef.current.querySelectorAll(
-  //         '[data-testid="QuranPage"]',
-  //       );
-  //       childDivs.forEach((childDiv) => {
-  //         const childTop = childDiv.getBoundingClientRect().top;
+          // Check if the child div is visible
+          if (childTop >= parentTop && childTop < window.innerHeight) {
+            const childId = childDiv.getAttribute('id');
+            setSelectedPageReadSelect(Number(childId));
+          }
+        });
+      }
+    };
+    // ...
 
-  //         // Check if the child div is visible
-  //         if (childTop >= parentTop && childTop < window.innerHeight) {
-  //           const childId = childDiv.getAttribute('id');
-  //           setSelectedPageReadSelect(Number(childId));
-  //         }
-  //       });
-  //     }
-  //   };
-  //   // ...
+    // Attach the scroll event listener
+    window.addEventListener('scroll', handleScroll);
 
-  //   // Attach the scroll event listener
-  //   window.addEventListener('scroll', handleScroll);
-
-  //   // Clean up the event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, [setSelectedPageReadSelect]);
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [setSelectedPageReadSelect]);
 
   useEffect(() => {
-    console.log('dfghjkl');
-
     dispatch(
       setSelectedPageRead(
         currentSura.pages[0] + currentPageReadInSurah.pageNumber - 1,
