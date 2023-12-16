@@ -20,6 +20,14 @@
   left: 0;
 }
 
+.audioSpeed {
+  width: 20px;
+  border: saddlebrown 1px solid;
+  position: absolute !important;
+  top: 20px;
+  right: 0px;
+}
+
 .bodyOfPlayer {
   width: 100%;
   background-color: var(--bg-color);
@@ -38,7 +46,7 @@
   align-items: center;
   cursor: pointer;
   border-radius: 50%;
-  &:hover{
+  &:hover {
     background-color: rgba(128, 128, 128, 0.616);
   }
 }

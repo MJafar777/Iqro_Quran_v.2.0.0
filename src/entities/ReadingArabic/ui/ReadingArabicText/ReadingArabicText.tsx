@@ -17,7 +17,10 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranPages from '../QuranPages/QuranPages';
-import { getSelectedPageRead, useSelectedPageReadActions } from '@/entities/PageRead';
+import {
+  getSelectedPageRead,
+  useSelectedPageReadActions,
+} from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
 import SuraNameContainer, {
   SuraNameSize,
@@ -93,17 +96,17 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   // eslint-disable-next-line consistent-return
   const renderContent = useMemo(() => {
     if (isLoading) {
-      setFetchIsLoading(isLoading);
+      // setFetchIsLoading(isLoading);
       return <ReadTextSkeleton />;
     }
     if (data) {
-      setFetchIsLoading(isLoading);
+      // setFetchIsLoading(isLoading);
       const currentPage = currentPageRead?.pageNumber;
       const currentSura = currentSuraRead?.quran_order;
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
       if (dataOfCurrentPage) {
         return (
-          <Page onScrollEnd={() => incrementCurrentPageRead()}>
+          <Page className='pagesSurah' onScrollEnd={() => incrementCurrentPageRead()}>
             <WordDetect />
             <QuranPages />;
           </Page>
@@ -118,6 +121,8 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isError, currentPageRead.pageNumber, currentSuraRead?.quran_order]);
+
+  console.log(currentSuraRead.quran_order);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
