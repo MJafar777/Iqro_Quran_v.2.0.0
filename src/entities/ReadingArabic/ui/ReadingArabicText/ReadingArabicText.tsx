@@ -17,7 +17,10 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
 import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
 import QuranPages from '../QuranPages/QuranPages';
-import { getSelectedPageRead, useSelectedPageReadActions } from '@/entities/PageRead';
+import {
+  getSelectedPageRead,
+  useSelectedPageReadActions,
+} from '@/entities/PageRead';
 import { getSelectedSuraRead } from '@/entities/SurahRead';
 import SuraNameContainer, {
   SuraNameSize,
@@ -97,6 +100,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       return <ReadTextSkeleton />;
     }
     if (data) {
+      // @ts-ignore
       setFetchIsLoading(isLoading);
       const currentPage = currentPageRead?.pageNumber;
       const currentSura = currentSuraRead?.quran_order;

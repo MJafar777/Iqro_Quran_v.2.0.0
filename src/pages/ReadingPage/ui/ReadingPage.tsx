@@ -112,8 +112,6 @@ const ReadingPage = (props: ReadingPageProps) => {
         )}
       </div>
       <AudioPlayer src={audioUrl} />
-
-      {/* <AudioPlayerComp /> */}
     </Page>
   );
 };

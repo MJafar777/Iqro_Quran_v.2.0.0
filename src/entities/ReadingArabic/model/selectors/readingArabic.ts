@@ -4,7 +4,7 @@ export const getReadingArabicData = (state: StateSchema) =>
   state.readingArabic?.data;
 
 export const getReadingArabicIsLoading = (state: StateSchema) =>
-  state.readingArabic?.isLoading || false;
+  state.readingArabic?.isLoading;
 
 export const getReadingArabicError = (state: StateSchema) =>
   state.readingArabic?.error;
