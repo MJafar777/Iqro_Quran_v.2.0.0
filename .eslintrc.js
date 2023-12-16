@@ -49,30 +49,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
     'i18next/no-literal-string': 'off',
-    // 'i18next/no-literal-string': [
-    //   'error',
-    //   {
-    //     markupOnly: true,
-    //     ignoreAttribute: [
-    //       'as',
-    //       'role',
-    //       'data-testid',
-    //       'to',
-    //       'target',
-    //       'justify',
-    //       'align',
-    //       'border',
-    //       'direction',
-    //       'gap',
-    //       'feature',
-    //       'color',
-    //       'variant',
-    //       'size',
-    //       'wrap',
-    //       'src',
-    //     ],
-    //   },
-    // ],
     'max-len': [
       'error',
       {

@@ -31,7 +31,7 @@ const SwtichButton = (props: ButtonsNames) => {
     }
   }, [listOfPagesValuePath, setReadingPageTubBtn]);
 
-  console.log(listOfPagesValuePath);
+  // console.log(listOfPagesValuePath);
 
   const clickBtn = (index: number) => {
     if (divRef.current && index === 1) {
