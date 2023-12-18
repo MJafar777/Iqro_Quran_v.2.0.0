@@ -24,7 +24,7 @@ import {
   Youtube,
   Email,
   IqroQuranApp,
-} from '@/shared/assets/icons/footer /newIcons';
+} from '@/shared/assets/icons/footer/newIcons';
 
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
 import { ButtonForDownload } from '@/shared/ui/ButtonForDownload';

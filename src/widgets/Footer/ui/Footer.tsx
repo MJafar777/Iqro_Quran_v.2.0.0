@@ -1,8 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/jsx-curly-brace-presence */
-/* eslint-disable max-len */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -11,11 +6,11 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Footer.module.scss';
 import {
   Email,
-  Youtube,
-  Telegram,
-  Instagram,
   FooterLogo,
-} from '@/shared/assets/icons/footer /newIcons';
+  Instagram,
+  Telegram,
+  Youtube,
+} from '@/shared/assets/icons/footer/newIcons';
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -27,7 +22,7 @@ export const Footer = () => {
         <VStack className={classNames(cls.firstRowOfFooter)} gap="16">
           <p className={classNames(cls.title)}>{t('footerTitle')}</p>
           <p className="paraph">{t('footerSubtitle')}</p>
-          <FooterLogo className={cls.IconLogoFooter}/>
+          <FooterLogo className={cls.IconLogoFooter} />
 
           <HStack max gap="32">
             <p>Sitemap</p>
@@ -41,22 +36,19 @@ export const Footer = () => {
           gap="16"
         >
           <p className={classNames(cls.title)}>{t('siteMap')}:</p>
-          <Link className={classNames(cls.link)} to={'/tafsir'}>
+          <Link className={classNames(cls.link)} to="/tafsir">
             {t('Tafsir')}
           </Link>
-          <Link className={classNames(cls.link)} to={'/qidirish'}>
+          <Link className={classNames(cls.link)} to="/qidirish">
             {t('Qidirish')}
           </Link>
-          <Link className={classNames(cls.link)} to={'about-us'}>
+          <Link className={classNames(cls.link)} to="about-us">
             {t('aboutUs')}
           </Link>
-          <Link className={classNames(cls.link)} to={'listining-quran'}>
+          <Link className={classNames(cls.link)} to="listining-quran">
             {t('listiningQuran')}
           </Link>
-          <Link
-            className={classNames(cls.link)}
-            to={'-reading-quran-tarnlation'}
-          >
+          <Link className={classNames(cls.link)} to="-reading-quran-tarnlation">
             {t('meaningQuran')}
           </Link>
         </VStack>
@@ -67,7 +59,7 @@ export const Footer = () => {
           gap="16"
         >
           <p className={classNames(cls.title)}>{t('Hamkorlar')}</p>
-          <Link target="_blank" to={'https://quran.com/'} className={cls.link}>
+          <Link target="_blank" to="https://quran.com/" className={cls.link}>
             Quran.com
           </Link>
         </VStack>
@@ -94,20 +86,20 @@ export const Footer = () => {
           </p>
           <HStack gap="32" justify="start" max>
             <Link
-              to={'https://www.youtobe.com/'}
+              to="https://www.youtobe.com/"
               target="_blank"
               className={cls.link}
             >
               <Youtube className={cls.iconOfFooter} />
             </Link>
-            <Link to={'https://www.'} target="_blank" className={cls.link}>
+            <Link to="https://www." target="_blank" className={cls.link}>
               <Email className={cls.iconOfFooter} />
             </Link>
-            <Link to={'https://www.'} target="_blank" className={cls.link}>
+            <Link to="https://www." target="_blank" className={cls.link}>
               <Telegram className={cls.iconOfFooter} />
             </Link>
             <Link
-              to={'https://www.instagram.com/'}
+              to="https://www.instagram.com/"
               target="_blank"
               className={cls.link}
             >

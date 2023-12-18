@@ -1,9 +1,8 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import cls from './QuranPage.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Lines, Verse, Word } from '../../model/types/readingSura';
+import { Word } from '../../model/types/readingSura';
 import QuranWords from '../VerseWords/VerseWords';
-import useQcfFontRead from '@/shared/lib/hooks/useQcfFontRead/useQcfFontRead';
 
 interface pageDataObjType {
   [key: number]: Word[];
@@ -11,50 +10,37 @@ interface pageDataObjType {
 
 interface QuranPageProps {
   className?: string;
-  pageData: Lines;
-  isLoading?: boolean;
+  pageData: pageDataObjType;
+  isLoading: boolean;
 }
 
-const QuranPage = memo(
-  ({ className, pageData, isLoading = false }: QuranPageProps) => {
-    const [verse, setVerse] = useState([{ page_number: 1 }]);
+const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
+  return (
+    <div
+      id={Object.values(pageData)[0][0].page_number}
+      data-testid="QuranPage"
+      className={classNames(cls.QuranPage, {}, [])}
+    >
+      {!isLoading ? (
+        <>
+          {Object.values(pageData).map((word) => (
+            <QuranWords
+              WordsInfo={word}
+              pageNumber={Object.values(pageData)[0][0].page_number}
+              lineNumber={Object.values(pageData)[0][0].line_number}
+            />
+          ))}
 
-    // this for gather page of each verse and then give to font
-    useEffect(() => {
-      if (Object.values(pageData).length > 0)
-        setVerse(
-          Object.values(pageData)?.map((obj) => {
-            return { page_number: obj.words[0]?.page_number };
-          }),
-        );
-    }, [pageData]);
-
-    useQcfFontRead(verse as unknown as Verse[]);
-    console.log(pageData, 'pageData');
-
-    return (
-      <div
-        id={`${pageData[3]?.words[0]?.page_number}`}
-        data-testid="QuranPage"
-        className={classNames(cls.QuranPage, {}, [])}
-      >
-        {!isLoading && Object.values(pageData).length > 0 ? (
-          <>
-            {Object.values(pageData).map((wordInfo, index) => (
-              <QuranWords WordsInfo={wordInfo} />
-            ))}
-
-            <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-              {pageData[3]?.words[0]?.page_number}{' '}
-            </p>
-            <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
-          </>
-        ) : (
-          ''
-        )}
-      </div>
-    );
-  },
-);
+          <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
+            {Object.values(pageData)[0][0].page_number}
+          </p>
+          <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
+        </>
+      ) : (
+        ''
+      )}
+    </div>
+  );
+});
 
 export default QuranPage;
