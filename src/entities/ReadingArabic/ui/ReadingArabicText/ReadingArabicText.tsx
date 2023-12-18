@@ -106,7 +106,10 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
       const dataOfCurrentPage = data?.[currentPage]?.[currentSura];
       if (dataOfCurrentPage) {
         return (
-          <Page className='pagesSurah' onScrollEnd={() => incrementCurrentPageRead()}>
+          <Page
+            className="pagesSurah"
+            onScrollEnd={() => incrementCurrentPageRead()}
+          >
             <WordDetect />
             <QuranPages />;
           </Page>

@@ -12,46 +12,49 @@ interface pageDataObjType {
 interface QuranPageProps {
   className?: string;
   pageData: Lines;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
-const QuranPage = memo(({ className, pageData, isLoading }: QuranPageProps) => {
-  const [verse, setVerse] = useState([{ page_number: 1 }]);
+const QuranPage = memo(
+  ({ className, pageData, isLoading = false }: QuranPageProps) => {
+    const [verse, setVerse] = useState([{ page_number: 1 }]);
 
-  // this for gather page of each verse and then give to font
-  useEffect(() => {
-    if (Object.values(pageData).length > 0)
-      setVerse(
-        Object.values(pageData)?.map((obj) => {
-          return { page_number: obj.words[0]?.page_number };
-        }),
-      );
-  }, [pageData]);
+    // this for gather page of each verse and then give to font
+    useEffect(() => {
+      if (Object.values(pageData).length > 0)
+        setVerse(
+          Object.values(pageData)?.map((obj) => {
+            return { page_number: obj.words[0]?.page_number };
+          }),
+        );
+    }, [pageData]);
 
-  useQcfFontRead(verse as unknown as Verse[]);
+    useQcfFontRead(verse as unknown as Verse[]);
+    console.log(pageData, 'pageData');
 
-  return (
-    <div
-      id={`${pageData[3]?.words[0]?.page_number}`}
-      data-testid="QuranPage"
-      className={classNames(cls.QuranPage, {}, [])}
-    >
-      {!isLoading && Object.values(pageData).length >= 0 ? (
-        <>
-          {Object.values(pageData).map((wordInfo, index) => (
-            <QuranWords WordsInfo={wordInfo} />
-          ))}
+    return (
+      <div
+        id={`${pageData[3]?.words[0]?.page_number}`}
+        data-testid="QuranPage"
+        className={classNames(cls.QuranPage, {}, [])}
+      >
+        {!isLoading && Object.values(pageData).length > 0 ? (
+          <>
+            {Object.values(pageData).map((wordInfo, index) => (
+              <QuranWords WordsInfo={wordInfo} />
+            ))}
 
-          <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
-            {pageData[3]?.words[0]?.page_number}{' '}
-          </p>
-          <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
-        </>
-      ) : (
-        ''
-      )}
-    </div>
-  );
-});
+            <p className={classNames(cls.QuranPage__pageNumber, {}, [])}>
+              {pageData[3]?.words[0]?.page_number}{' '}
+            </p>
+            <div className={classNames(cls.QuranPage__pageRow, {}, [])} />
+          </>
+        ) : (
+          ''
+        )}
+      </div>
+    );
+  },
+);
 
 export default QuranPage;
