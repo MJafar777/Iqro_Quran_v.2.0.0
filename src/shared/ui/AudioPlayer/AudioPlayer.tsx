@@ -1,8 +1,9 @@
-/* eslint-disable no-unneeded-ternary */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { memo, useContext, useEffect, useRef, useState } from 'react';
-import { Slider } from '@mui/material';
+import { Box, Slider, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { VolumeDown, VolumeUp } from '@mui/icons-material';
 import cls from './AudioPlayer.module.scss';
 import { Pause, Play } from '@/shared/assets/iconsListening';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
@@ -18,29 +19,48 @@ interface AudioPlayerCompInterface {
 export const AudioPlayer = memo(
   ({ className, src }: AudioPlayerCompInterface) => {
     const { verseKey, timestampFrom, setVerseKey } = useContext(ButtonsContext);
-
     const [sliderValue, setSliderValue] = useState<number>(0);
-
     const [duration, setDuration] = useState<number | null>(null);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const surahId = useSelector(getSelectedSura);
-
     const getSegmentData = useSelector(getDataSegment);
-
     const [segmentsData, setSegmentsData] = useState(getSegmentData);
-
-    // console.log(verseKey, 'verseKey');
-
-    // const [lastVerse, setLastVerse] = useState(verseKey);
-
-    useEffect(() => {
-      setSegmentsData(getSegmentData);
-      // @ts-ignore
-    }, [getSegmentData, segmentsData, surahId.quran_order, verseKey]);
-
     const { isPlay, setIsPlay, setAudioTime, audioTime } =
       useContext(ButtonsContext);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const location = useLocation();
+
+    const [playbackRate, setPlaybackRate] = React.useState<number>(50);
+
+    const handleChangeSpeed = (event: Event, newValue: number) => {
+      setPlaybackRate(newValue as number);
+      if (audioRef.current) {
+        if (newValue < 49) {
+          audioRef.current.playbackRate = 0.5;
+        } else if (newValue <= 50) {
+          audioRef.current.playbackRate = 1;
+        } else if (newValue > 50 && newValue <= 60) {
+          audioRef.current.playbackRate = 1.1;
+        } else if (newValue > 60 && newValue <= 70) {
+          audioRef.current.playbackRate = 1.2;
+        } else if (newValue > 70 && newValue <= 80) {
+          audioRef.current.playbackRate = 1.3;
+        } else if (newValue > 80 && newValue <= 90) {
+          audioRef.current.playbackRate = 1.4;
+        } else {
+          audioRef.current.playbackRate = 1.5;
+        }
+      }
+    };
+
+    useEffect(() => {
+      setIsPlay(false);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname]);
+
+    useEffect(() => {
+      setSegmentsData(getSegmentData);
+    }, [getSegmentData, surahId.quran_order]);
 
     useEffect(() => {
       const audio = audioRef.current;
@@ -66,17 +86,17 @@ export const AudioPlayer = memo(
       };
     }, [audioRef]);
 
+    // console.log(isPlay, 'llllll');
+
     useEffect(() => {
       setSliderValue(audioTime);
     }, [audioTime]);
 
-    console.log(isPlay);
-
     useEffect(() => {
       if (isPlay && audioRef.current) {
-        audioRef.current.play();
+        audioRef?.current?.play();
       } else if (!isPlay && audioRef.current) {
-        audioRef.current.pause();
+        audioRef?.current?.pause();
       }
     }, [isPlay]);
 
@@ -96,6 +116,29 @@ export const AudioPlayer = memo(
 
       return () => clearInterval(interval);
     }, [setAudioTime]);
+
+    useEffect(() => {
+      if (timestampFrom >= 0) {
+        audioRef.current!.currentTime = timestampFrom / 1000;
+        // setIsPlay(true);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [timestampFrom]);
+
+    useEffect(() => {
+      // @ts-ignore
+      if (segmentsData) {
+        const verseData = segmentsData[
+          surahId.quran_order
+        ]?.data?.verse_timings.find(
+          (segment) =>
+            segment?.timestamp_from <= audioTime * 1000 &&
+            segment?.timestamp_to > audioTime * 1000,
+        );
+        // console.log(verseData, 'verseda');
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [audioTime]);
 
     const formatTime = (timeInSeconds: number) => {
       if (timeInSeconds === null) {
@@ -120,15 +163,6 @@ export const AudioPlayer = memo(
       setIsPlay(false);
       audioRef.current!.currentTime = 0;
     };
-    useEffect(() => {
-      if (timestampFrom > 0) {
-        audioRef.current!.currentTime = timestampFrom / 1000;
-        setIsPlay(true);
-      }
-
-      // setLastVerse(verseKey);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [timestampFrom, verseKey]);
 
     const nextVerseFunc = (verse: string) => {
       if (
@@ -145,7 +179,9 @@ export const AudioPlayer = memo(
     };
 
     const priviousFunc = (verse: string) => {
-      if (parseInt(verse.split(':')[1], 10) > 0) {
+      // console.log(verse);
+
+      if (parseInt(verse.split(':')[1], 10) > 1) {
         const nextVerse = `${parseInt(verse.split(':')[0], 10)}:${
           parseInt(verse.split(':')[1], 10) - 1
         }`;
@@ -161,7 +197,7 @@ export const AudioPlayer = memo(
           // @ts-ignore
           onChange={handleSliderChange}
           min={0}
-          max={duration ? duration : 100}
+          max={duration || 100}
           step={1}
           sx={{
             '--Slider-trackSize': '6px',
@@ -173,9 +209,26 @@ export const AudioPlayer = memo(
           className={cls.range}
         />
         <div className={cls.bodyOfPlayer}>
-          {duration !== null && <p>{formatTime(currentTime)}</p>}
+          <div>{duration !== null && <p>{formatTime(currentTime)}</p>}</div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Box sx={{ width: 200 }}>
+              <Stack
+                spacing={2}
+                direction="row"
+                sx={{ mb: 1 }}
+                alignItems="center"
+              >
+                <VolumeDown />
+                <Slider
+                  aria-label="Playback Rate"
+                  value={playbackRate}
+                  // @ts-ignore
+                  onChange={handleChangeSpeed}
+                />
+                <VolumeUp />
+              </Stack>
+            </Box>
             <div className={cls.play} onClick={() => priviousFunc(verseKey)}>
               <Previos />
             </div>
@@ -192,7 +245,8 @@ export const AudioPlayer = memo(
               <Next />
             </div>
           </div>
-          {duration !== null && <p>{formatTime(duration)}</p>}
+
+          <div>{duration !== null && <p>{formatTime(duration)}</p>}</div>
         </div>
 
         <audio

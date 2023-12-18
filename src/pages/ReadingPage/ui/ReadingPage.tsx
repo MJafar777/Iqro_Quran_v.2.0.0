@@ -19,11 +19,11 @@ import { ReadingTranslateLotin } from '@/entities/ReadingTranslateLotin';
 import { ReadingTranskriptKril } from '@/entities/ReadingTranskriptKril';
 import BookBoxSkeleton from '@/shared/ui/BookBoxSkeleton/BookBoxSkeleton';
 import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
-import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
-import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
+import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
+import { Page } from '@/widgets/Page';
 
 interface ReadingPageProps {
   className?: string;
@@ -33,17 +33,16 @@ const ReadingPage = (props: ReadingPageProps) => {
   const { t, i18n } = useTranslation();
 
   const { className } = props;
-  const { readingSidebarActive, readingPageTubBtn } =
+  const { readingSidebarActive, readingPageTubBtn, audioUrl } =
     useContext(ButtonsContext);
 
   const isLoading = useSelector(getIsLoading);
-
   const read = t("O'qish");
   const wordBuyWord = t("So'zma-so'z");
   const Transcription = t('Transkripsiya');
 
   return (
-    <div
+    <Page
       data-testid="ReadingPage"
       className={classNames(cls.ReadingPage, {}, [className])}
     >
@@ -106,14 +105,14 @@ const ReadingPage = (props: ReadingPageProps) => {
               ''
             )}
 
-            <ReadingPrevNextBtnGroup />
+            {/* <ReadingPrevNextBtnGroup /> */}
 
-            <ReadingPrevNextSuraBtnGroup />
+            {/* <ReadingPrevNextSuraBtnGroup /> */}
           </>
         )}
       </div>
-      {/* <AudioPlayerComp /> */}
-    </div>
+      <AudioPlayer src={audioUrl} />
+    </Page>
   );
 };
 

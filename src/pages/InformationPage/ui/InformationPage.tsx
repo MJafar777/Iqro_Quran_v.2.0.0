@@ -28,7 +28,6 @@ const InformationPage: FC = () => {
   const data = useSelector(getInfoSurahs);
   const isLoadings = useSelector(getIsLoading);
   const [isLoading, setIsloading] = useState(isLoadings);
-  // console.log(data);
 
   useEffect(() => {
     dispatch(fetchInfoSurah({ id }));

@@ -50,6 +50,7 @@ export const readingArabicSlice = createSlice({
             };
           } else {
             // ----- Page Number -----
+            // @ts-ignore
             state.data[action.payload.data[0]?.page_number] = {
               // ----- Sura Number -----
               [action.payload.data[0]?.chapter_id.quran_order]: {

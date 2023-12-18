@@ -1,6 +1,6 @@
 .ReadingPage {
   width: 100%;
-
+  min-height: 100vh;
   &__readingContainer {
     width: 100%;
     padding-top: calc(var(--navbar-height) * 2);

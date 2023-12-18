@@ -14,12 +14,15 @@ import { Pause } from '@/shared/assets/iconsListening';
 
 const SurahInfoAndAudio = () => {
   const data = useSelector(getSelectedSura);
-  const { isPlay, setIsPlay, setAudioUrl } = useContext(ButtonsContext);
+  const { isPlay, setIsPlay, setAudioUrl, setVerseKey } =
+    useContext(ButtonsContext);
+
   useEffect(() => {
     setAudioUrl(
       `http://iqro-quran.uz/developmentBackend/suras/${data?.quran_order}.mp3`,
     );
-  }, [data?.quran_order, isPlay]);
+    setVerseKey(`${data.quran_order}:1`);
+  }, [data?.quran_order]);
 
   return (
     <div className={classNames(cls.WrapperSurah, {}, [])}>

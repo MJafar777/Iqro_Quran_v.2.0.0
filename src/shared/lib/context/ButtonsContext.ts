@@ -29,7 +29,7 @@ export interface ButtonsClickedProps {
   isPlayVerse: boolean;
   setIsPlayVerse: (prop: boolean) => void;
   verseKey: string;
-  
+
   setVerseKey: (prop: string) => void;
 
   fetchIsLoading: boolean;
@@ -42,6 +42,9 @@ export interface ButtonsClickedProps {
 
   listOfPagesValuePath: number;
   setListOfPagesValuePath: (val: number) => void;
+
+  page: number;
+  setPage: (pro: number) => void;
 }
 
 export const ButtonsContext = createContext<ButtonsClickedProps>({
@@ -83,4 +86,7 @@ export const ButtonsContext = createContext<ButtonsClickedProps>({
 
   listOfPagesValuePath: 1,
   setListOfPagesValuePath: () => {},
+
+  page: 1,
+  setPage: () => {},
 });

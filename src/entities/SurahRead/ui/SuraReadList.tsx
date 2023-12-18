@@ -101,7 +101,6 @@ const SuraReadList = memo(({ className }: SuraReadListProps) => {
               })
               ?.map((oneSurah: OneSuraInListSchema, index: number) => (
                 <div
-                  id={`${oneSurah.quran_order}sura`}
                   key={oneSurah.quran_order}
                   className={classNames(
                     cls.SuraReadList__item,

@@ -2,16 +2,15 @@ import React, { memo, useEffect, useState } from 'react';
 import cls from './OneTafsirCard.module.scss';
 import { IconsOfTafsir } from '@/shared/ui/IconsOfTafsir';
 import { ContentOfTafsir } from '@/shared/ui/ContentOfTafsir';
-import { Chapter } from '@/pages/Tafsir';
-import { OneTafsirCardSkleton } from './OneTafsirCardSkleton';
+import { Verse } from '@/entities/ReadingArabic';
 
 interface OneTafsirCardProp {
-  data?: Chapter;
-  isLoading: boolean;
+  data?: Verse;
+  isLoading?: boolean;
 }
 
 export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
-  const { data, isLoading } = prop;
+  const { data } = prop;
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -27,9 +26,8 @@ export const OneTafsirCard = memo((prop: OneTafsirCardProp) => {
       });
   }, [data?.page_number]);
 
-  if (isLoading) {
-    return <OneTafsirCardSkleton />;
-  }
+
+  
 
   return (
     <div className={cls.oneTafsirCard} id={`${data?.verse_key}`}>

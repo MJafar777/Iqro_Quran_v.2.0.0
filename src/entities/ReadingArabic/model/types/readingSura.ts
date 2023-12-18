@@ -37,6 +37,7 @@ export interface Audio {
 }
 
 export interface Word {
+  map: any;
   _id: string;
   id: string;
   position: number;
@@ -229,6 +230,7 @@ export interface Surah {
 }
 
 export interface Page {
+  data: any;
   [key: number]: Surah;
 }
 

@@ -1,5 +1,6 @@
+/* eslint-disable no-sequences */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './Tafsir.module.scss';
 
@@ -9,7 +10,7 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchTafsirList } from '../model/service/fetchTafsir/fetchTafsirList';
-import { getDataTafsir } from '../model/selector/selectorTafsir';
+import { getDataTafsir, isLoading } from '../model/selector/selectorTafsir';
 import { Sidebar } from '@/widgets/Sidebar';
 import { ReadingSidebar } from '@/widgets/ReadingSidebar';
 import { ReadingNavbar } from '@/widgets/ReadingNavbar';
@@ -19,6 +20,8 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { ListOfTafsir } from '@/entities/Tafsir';
 import { sliceTafsirReducer } from '../model/slice/sliceTafsir';
 import { WordDetect } from '@/features/WordDetect';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { Loader } from '@/widgets/Loader';
 
 interface TafsirProp {
   className?: string;
@@ -33,6 +36,9 @@ const Tafsir = (prop: TafsirProp) => {
   const surahId = useSelector(getSelectedSura);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(0);
+  const getIsLoading = useSelector(isLoading);
+  const { readingSidebarActive, readingPageTubBtn } =
+    useContext(ButtonsContext);
 
   useEffect(() => {
     dispatch(
@@ -90,7 +96,9 @@ const Tafsir = (prop: TafsirProp) => {
   // eslint-disable-next-line consistent-return
   const content = useMemo(() => {
     if (dataOfTafsir)
-      return (
+      return getIsLoading ? (
+        <Loader />
+      ) : (
         <Page
           onScrollEnd={onLoadNextPart}
           data-testid="TafsirPage"
@@ -100,13 +108,13 @@ const Tafsir = (prop: TafsirProp) => {
           <Sidebar>
             <ReadingSidebar />
           </Sidebar>
-          <ListOfTafsir
-            listOfTafsir={dataOfTafsir[surahId?.quran_order]?.data?.data}
-          />
+          <div className={readingSidebarActive ? cls.wrapperList : cls.collaps}>
+            <ListOfTafsir />
+          </div>
           <WordDetect />
         </Page>
       );
-  }, [dataOfTafsir, surahId.quran_order]);
+  }, [dataOfTafsir, surahId.quran_order, readingSidebarActive]);
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>

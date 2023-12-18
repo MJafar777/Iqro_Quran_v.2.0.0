@@ -36,7 +36,7 @@ export const WordDetect = memo(() => {
   const [segmentsVerse, setSegmentsVerse] = useState<VerseTime>();
 
   const [lastPosition, setLastPosition] = useState(
-    `${surahId.quran_order}:${wordNew}:${ayahNew}`,
+    `${surahId.quran_order}:${ayahNew}:${wordNew}`,
   );
 
   const [segmentsData, setSegmentsData] = useState(
@@ -62,6 +62,7 @@ export const WordDetect = memo(() => {
     );
     if (verse) {
       setWordNew(0);
+      // setVerseKey(verse.verse_key);
       const ayah = parseInt(verse.verse_key.split(':')?.[1], 10);
       setAyahNew(ayah);
       setSegmentsVerse(verse);
@@ -74,7 +75,7 @@ export const WordDetect = memo(() => {
     if (targetDiv) {
       targetDiv.scrollIntoView({
         behavior: 'smooth',
-        block: 'end',
+        block: 'center',
         inline: 'nearest',
         duration: 1000,
       } as any);
@@ -116,8 +117,6 @@ export const WordDetect = memo(() => {
     setWordNew(0);
     setVerseKey(`${surahId?.quran_order}:1`);
   }, [surahId.quran_order]);
-
- 
 
   return (
     <DynamicModuleLoader reducers={reducer} removeAfterUnmount={false}>
