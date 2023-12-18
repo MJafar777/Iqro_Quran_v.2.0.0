@@ -2,21 +2,11 @@ import { memo, useContext, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingArabic.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-  getReadingArabicData,
-  getReadingArabicError,
-  getReadingArabicIsLoading,
-} from '../../model/selectors/readingArabic';
 
-import {
-  ReducersList,
-  DynamicModuleLoader,
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
-import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
-// import QuranPages from '../QuranPages/QuranPages';
+import Bismillah from '@/shared/ui/Bismillah/Bismillah';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
+
 import {
   getSelectedPageRead,
   useSelectedPageReadActions,
@@ -25,10 +15,24 @@ import { getSelectedSuraRead } from '@/entities/SurahRead';
 import SuraNameContainer, {
   SuraNameSize,
 } from '@/shared/ui/SuraName/SuraNameContainer';
-import Bismillah from '@/shared/ui/Bismillah/Bismillah';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import {
+  ReducersList,
+  DynamicModuleLoader,
+} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+
+import QuranPages from '../QuranPages/QuranPages';
+
+import {
+  getReadingArabicData,
+  getReadingArabicError,
+  getReadingArabicIsLoading,
+} from '../../model/selectors/readingArabic';
+import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
+import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
+
 // import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
-import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -122,17 +126,11 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
 
   const renderContent = useMemo(() => {
     if (isLoading) {
-      // return <ReadTextSkeleton />;
+      setFetchIsLoading(isLoading);
     }
     if (data) {
-      return (
-        // <QuranPages
-        //   suraData={
-        //     data[currentPageRead?.pageNumber][currentSuraRead?.quran_order]
-        //   }
-        // />
-        ''
-      );
+      // setFetchIsLoading(isLoading);
+      return <QuranPages pagesData={data} />;
       // eslint-disable-next-line no-else-return
     } else if (isError) {
       return (
@@ -155,7 +153,13 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
         >
           {data && (
             <SuraNameContainer
-              suraId={`00${currentSuraRead.quran_order}`}
+              suraId={
+                String(currentSuraRead.quran_order)?.length === 1
+                  ? `00${currentSuraRead.quran_order}`
+                  : String(currentSuraRead.quran_order)?.length === 2
+                  ? `0${currentSuraRead.quran_order}`
+                  : String(currentSuraRead.quran_order)
+              }
               hasSurahPrefix
               size={SuraNameSize.Large}
             />

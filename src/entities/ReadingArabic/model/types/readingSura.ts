@@ -230,7 +230,6 @@ export interface Surah {
 }
 
 export interface Page {
-  data: any;
   [key: number]: Surah;
 }
 

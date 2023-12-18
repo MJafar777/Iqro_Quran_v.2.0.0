@@ -22,8 +22,10 @@ import { ReadingTranskriptLotin } from '@/entities/ReadingTranskriptLotin';
 import SurahInfoAndAudio from '@/shared/ui/SurahInfoAndAudio/SurahInfoAndAudio';
 import { ReadingSidebarRead } from '@/widgets/ReadingSidebarRead';
 import { ReadingArabic } from '@/entities/ReadingArabic';
-import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
+// import { AudioPlayer } from '@/shared/ui/AudioPlayer/AudioPlayer';
 import { Page } from '@/widgets/Page';
+import { ReadingPrevNextBtnGroup } from '@/shared/ui/ReadingPrevNextBtnGroup';
+import { ReadingPrevNextSuraBtnGroup } from '@/shared/ui/ReadingPrevNextSuraBtnGroup';
 
 interface ReadingPageProps {
   className?: string;
@@ -105,13 +107,13 @@ const ReadingPage = (props: ReadingPageProps) => {
               ''
             )}
 
-            {/* <ReadingPrevNextBtnGroup /> */}
+            <ReadingPrevNextBtnGroup />
 
-            {/* <ReadingPrevNextSuraBtnGroup /> */}
+            <ReadingPrevNextSuraBtnGroup />
           </>
         )}
       </div>
-      <AudioPlayer src={audioUrl} />
+      {/* <AudioPlayer src={audioUrl} /> */}
     </Page>
   );
 };
