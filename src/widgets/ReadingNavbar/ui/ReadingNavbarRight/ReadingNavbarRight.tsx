@@ -5,7 +5,6 @@ import cls from './ReadingNavbarRight.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { getSelectedPage } from '@/entities/Page';
 import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import { getSelectedPageRead } from '@/entities/PageRead';
 import { getSelectedPageReadSelect } from '@/entities/PageReadSelect';
 
 interface ReadingNavbarRgihtProps {
@@ -15,7 +14,6 @@ interface ReadingNavbarRgihtProps {
 const ReadingNavbarRgiht = memo(({ className }: ReadingNavbarRgihtProps) => {
   const { t } = useTranslation();
   const currentPage = useSelector(getSelectedPage);
-  const currentPageRead = useSelector(getSelectedPageRead);
   const { readingPageTubBtn } = useContext(ButtonsContext);
   const currentPageReadSelect = useSelector(getSelectedPageReadSelect);
 
@@ -24,7 +22,7 @@ const ReadingNavbarRgiht = memo(({ className }: ReadingNavbarRgihtProps) => {
       <p>{t('page')}</p>
 
       <p>
-        {readingPageTubBtn === 3
+        {readingPageTubBtn === 1
           ? currentPageReadSelect.pageNumber
           : currentPage.pageNumber}
       </p>
