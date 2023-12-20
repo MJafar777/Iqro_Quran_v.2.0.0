@@ -1,20 +1,29 @@
+interface LangIdForTranslatedName {
+  direction: string;
+  id: string;
+  iso_code: string;
+  name: string;
+  native: string;
+  __v: number;
+  _id: string;
+}
+
 interface TranslatedName {
   chapter_id: string;
-  lang_id: {
-    direction: string;
-    id: string;
-    iso_code: string;
-    name: string;
-    native: string;
-    __v: number;
-    _id: string;
-  };
+  lang_id: LangIdForTranslatedName;
   id: string;
   name: string;
   __v: number;
   _id: string;
 }
 
+interface Transliteration {
+  _id: string;
+  text: string;
+  language_name: string;
+  word_id: string;
+  __v: number;
+}
 export interface Audio {
   _id: string;
   chapter_id: string;
@@ -25,6 +34,33 @@ export interface Audio {
   qori_id: string;
   __v: number;
   id: string;
+}
+
+export interface Word {
+  map: any;
+  _id: string;
+  id: string;
+  position: number;
+  arab: string;
+  verse: number;
+  verse_id: string;
+  page_number: number;
+  line_number: number;
+  line_number2: number;
+  audio: string | null;
+  location: string;
+  char_type_name: string;
+  code_v1: string;
+  word_index: number;
+  __v: number;
+  code_v2: string;
+  text_imlaei: string;
+  text_indopak: string;
+  text_uthmani: string;
+  v1_page: number;
+  v2_page: number;
+  verse_key: string;
+  transliteration: Transliteration[];
 }
 
 export interface ReadingSura {
@@ -70,6 +106,7 @@ export interface ChapterData {
 export interface ImageResource {
   [key: number]: string;
 }
+
 export interface ReadingQuranData {
   quran_order: any;
   status: string;
@@ -89,39 +126,6 @@ export interface DataInReduxReadingQuranData {
 export interface ReadingQuranPayloadAction {
   quran_order: number;
   data: ReadingQuranData;
-}
-
-// ======= Rreading By Text ===========
-interface Transliteration {
-  _id: string;
-  text: string;
-  language_name: string;
-  word_id: string;
-  __v: number;
-}
-
-export interface Word {
-  _id: string;
-  position: number;
-  arab: string;
-  verse: number;
-  verse_id: string;
-  page_number: number;
-  line_number: number;
-  audio: string | null;
-  location: string;
-  char_type_name: string;
-  code_v1: string;
-  word_index: number;
-  __v: number;
-  code_v2: string;
-  text_imlaei: string;
-  text_indopak: string;
-  text_uthmani: string;
-  v1_page: number;
-  v2_page: number;
-  verse_key: string;
-  transliteration: Transliteration[];
 }
 
 interface Tafsir {
@@ -200,4 +204,35 @@ export interface DataInReduxReadingQuranTextData {
 export interface ReadingQuranTextPayloadAction {
   quran_order: number;
   data: QuranDataText;
+}
+
+// -------- Data storage structure in redux --------
+
+export interface Line {
+  words: Word[];
+  startOyat: number;
+  endOyat: number;
+}
+export interface Lines {
+  [key: number]: Line;
+}
+
+export interface Surah {
+  _id: string;
+  name_complex: string;
+  name_arabic: string;
+  pages: number[];
+  quran_order: number;
+  count_verse: number;
+  name_simple: string;
+  linesV1: Lines;
+  linesV2: Lines;
+}
+
+export interface Page {
+  [key: number]: Surah;
+}
+
+export interface Pages {
+  [key: number]: Page;
 }

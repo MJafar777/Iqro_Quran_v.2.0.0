@@ -7,13 +7,17 @@ import isCenterAlignedPage from '@/shared/lib/hooks/usePageUtils/pageUtils';
 
 interface QuranWordsProps {
   className?: string;
-  WordsInfo: Word[];
+  WordsData: {
+    startIyat: number;
+    endOyat: number;
+    words: Word[];
+  };
   pageNumber: number;
   lineNumber: number;
 }
 
 const QuranWords = memo(
-  ({ className, pageNumber, lineNumber, WordsInfo }: QuranWordsProps) => {
+  ({ className, pageNumber, lineNumber, WordsData }: QuranWordsProps) => {
     const centerAlignPage = useMemo(
       () => isCenterAlignedPage(pageNumber, lineNumber),
       [pageNumber, lineNumber],
@@ -30,8 +34,8 @@ const QuranWords = memo(
           [className],
         )}
       >
-        {WordsInfo
-          ? Object.values(WordsInfo)
+        {WordsData
+          ? Object.values(WordsData.words)
               .reverse()
               .map((word) => <VerseWord key={word._id} Word={word} />)
           : ''}

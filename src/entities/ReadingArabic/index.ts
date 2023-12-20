@@ -1,7 +1,6 @@
 import { fetchReadingArabic } from './model/services/fetchReadingArabic';
 import { addLoadedFontFaceReadingArabic } from './model/slice/readingArabicSlice';
 import { ReadingArabic } from './ui/ReadingArabicText/ReadingArabicText';
-// import { getSelectedSura } from '../Surah';
 
 export { ReadingArabic, fetchReadingArabic, addLoadedFontFaceReadingArabic };
 
@@ -9,10 +8,11 @@ export type {
   Verse,
   ReadingSura,
   DataInReduxReadingQuranData,
-  QuranDataText
+  QuranDataText,
 } from './model/types/readingSura';
 
 export type {
   ReadingArabicSchema,
   ReadingArabicTextSchema,
+  ReadingQuranSchema,
 } from './model/types/readingArabicSchema';

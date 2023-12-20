@@ -2,21 +2,11 @@ import { memo, useContext, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './ReadingArabic.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-  getReadingArabicData,
-  getReadingArabicError,
-  getReadingArabicIsLoading,
-} from '../../model/selectors/readingArabic';
 
-import {
-  ReducersList,
-  DynamicModuleLoader,
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
-import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
-import QuranVerse from '../QuranVerse/QuranVerse';
+import Bismillah from '@/shared/ui/Bismillah/Bismillah';
+import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
+import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
+
 import {
   getSelectedPageRead,
   useSelectedPageReadActions,
@@ -25,10 +15,24 @@ import { getSelectedSuraRead } from '@/entities/SurahRead';
 import SuraNameContainer, {
   SuraNameSize,
 } from '@/shared/ui/SuraName/SuraNameContainer';
-import Bismillah from '@/shared/ui/Bismillah/Bismillah';
-import { ButtonsContext } from '@/shared/lib/context/ButtonsContext';
-import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
-import { useSelectedPageReadSelectActions } from '@/entities/PageReadSelect';
+import {
+  ReducersList,
+  DynamicModuleLoader,
+} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import ReadingQuranErrorDialog from '@/shared/ui/ErrorDialog/ErrorDialog';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+
+import QuranPages from '../QuranPages/QuranPages';
+
+import {
+  getReadingArabicData,
+  getReadingArabicError,
+  getReadingArabicIsLoading,
+} from '../../model/selectors/readingArabic';
+import { readingArabicReducer } from '../../model/slice/readingArabicSlice';
+import { fetchReadingArabic } from '../../model/services/fetchReadingArabic';
+
+// import { useInfiniteScrollForRead } from '@/shared/lib/hooks/useInfiniteScrollForRead/useInfiniteScrollForRead';
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 interface ReadingArabicProps {
@@ -51,81 +55,82 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
   const isLoading = useSelector(getReadingArabicIsLoading);
   const isError = useSelector(getReadingArabicError);
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: 0,
+  //   });
 
-    if (
-      currentSuraRead?.quran_order &&
-      data &&
-      !data[currentSuraRead?.quran_order]
-    ) {
-      dispatch(
-        fetchReadingArabic({
-          suraId: currentSuraRead?.quran_order,
-          pageNumber: currentPageRead.pageNumber,
-        }),
-      );
-    } else if (currentSuraRead?.quran_order && !data) {
-      dispatch(
-        fetchReadingArabic({
-          suraId: currentSuraRead?.quran_order,
-          pageNumber: currentPageRead.pageNumber,
-        }),
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSuraRead?.quran_order, dispatch]);
+  // if (
+  //   currentSuraRead?.quran_order &&
+  //   data &&
+  //   !data[currentSuraRead?.quran_order]
+  // ) {
+  //   dispatch(
+  //     fetchReadingArabic({
+  //       suraId: currentSuraRead?.quran_order,
+  //       pageNumber: currentPageRead.pageNumber,
+  //     }),
+  //   );
+  // } else if (currentSuraRead?.quran_order && !data) {
+  // dispatch(
+  //   fetchReadingArabic({
+  //     suraId: currentSuraRead?.quran_order,
+  //     pageNumber: currentPageRead.pageNumber,
+  //   }),
+  // );
+  // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [currentSuraRead?.quran_order, dispatch]);
 
   useEffect(() => {
     if (
-      data &&
-      !data[currentSuraRead?.quran_order]?.data?.data?.some(
-        (verse) => verse.page_number === currentPageRead.pageNumber,
+      !(
+        data &&
+        data[currentPageRead?.pageNumber] &&
+        data[currentPageRead?.pageNumber][currentSuraRead?.quran_order]
       )
     ) {
-      dispatch(
-        fetchReadingArabic({
-          suraId: currentSuraRead?.quran_order,
-          pageNumber: currentPageRead.pageNumber,
-        }),
-      );
+      if (
+        currentSuraRead?.pages[0] <= currentPageRead.pageNumber &&
+        currentSuraRead?.pages[1] >= currentPageRead.pageNumber
+      ) {
+        dispatch(
+          fetchReadingArabic({
+            suraId: currentSuraRead?.quran_order,
+            pageNumber: currentPageRead.pageNumber,
+          }),
+        );
+      }
     }
 
     setSelectedPageReadSelect(currentPageRead.pageNumber);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageRead?.pageNumber, dispatch]);
+  }, [currentPageRead.pageNumber, currentSuraRead?.quran_order, dispatch]);
 
-  const handleInfiniteScroll = () => {
-    // eslint-disable-next-line max-len
-    if (
-      data &&
-      data[currentSuraRead?.quran_order]?.data?.pagination.nextpage &&
-      currentPageRead.pageNumber >= currentSuraRead.pages[0] &&
-      currentPageRead.pageNumber < currentSuraRead.pages[1]
-    ) {
-      incrementCurrentPageRead();
-    }
-  };
+  // const handleInfiniteScroll = () => {
+  //   // eslint-disable-next-line max-len
+  //   if (
+  //     data &&
+  //     data[currentSuraRead?.quran_order]?.data?.pagination.nextpage &&
+  //     currentPageRead.pageNumber >= currentSuraRead.pages[0] &&
+  //     currentPageRead.pageNumber < currentSuraRead.pages[1]
+  //   ) {
+  //     incrementCurrentPageRead();
+  //   }
+  // };
 
-  const triggerRef = useInfiniteScrollForRead({
-    callback: handleInfiniteScroll,
-    threshold: 0,
-  });
+  // const triggerRef = useInfiniteScrollForRead({
+  //   callback: handleInfiniteScroll,
+  //   threshold: 0,
+  // });
 
   const renderContent = useMemo(() => {
     if (isLoading) {
       setFetchIsLoading(isLoading);
-      // return <ReadTextSkeleton />;
     }
     if (data) {
-      setFetchIsLoading(isLoading);
-      return (
-        <QuranVerse
-          verseData={data[currentSuraRead?.quran_order]?.data?.data}
-        />
-      );
+      // setFetchIsLoading(isLoading);
+      return <QuranPages pagesData={data} />;
       // eslint-disable-next-line no-else-return
     } else if (isError) {
       return (
@@ -148,7 +153,13 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
         >
           {data && (
             <SuraNameContainer
-              suraId={`00${currentSuraRead.quran_order}`}
+              suraId={
+                String(currentSuraRead.quran_order)?.length === 1
+                  ? `00${currentSuraRead.quran_order}`
+                  : String(currentSuraRead.quran_order)?.length === 2
+                  ? `0${currentSuraRead.quran_order}`
+                  : String(currentSuraRead.quran_order)
+              }
               hasSurahPrefix
               size={SuraNameSize.Large}
             />
@@ -159,7 +170,7 @@ export const ReadingArabic = memo(({ className }: ReadingArabicProps) => {
           ) && <Bismillah />}
           {renderContent}
 
-          <div className={cls.trigger} ref={triggerRef} />
+          {/* <div className={cls.trigger} ref={triggerRef} /> */}
         </div>
       </div>
     </DynamicModuleLoader>

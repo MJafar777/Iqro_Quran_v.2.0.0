@@ -3,7 +3,7 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/self-closing-comp */
 import { useNavigate } from 'react-router-dom';
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -32,7 +32,7 @@ const OneItemSurah = memo((prop: OneItemSuraProp) => {
     className,
     oneSurah,
   } = prop;
-  const [whichOrderHovered, setWhichOrderHovered] = useState(0);
+
   const { setSelectedSura } = useSelectedSuraActions();
   const listOfSurahs = useSelector(getListOfSurahs);
   const navigate = useNavigate();

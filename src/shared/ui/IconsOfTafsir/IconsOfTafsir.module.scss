@@ -18,10 +18,9 @@
   transition: all 0.3s linear;
   border-radius: 50%;
   color: var(--color-text);
-
   &:hover {
     background-color: #2ca4ab;
-    // color: var(--color-text);
+    color: white;
   }
 }
 
@@ -32,13 +31,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s linear;
   border-radius: 50%;
-
   &:hover {
     background-color: #2ca4ab;
     .playIcon {
-      color: var(--color-text);
+      color: white;
     }
   }
 }
